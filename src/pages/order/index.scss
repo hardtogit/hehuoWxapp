@@ -1,0 +1,37 @@
+page{
+  background-color: #F0F1F3;
+}
+.order{
+  .tabs{
+    display: flex;
+    align-items: center;
+    .tab{
+      flex: 1;
+       text-align: center;
+       padding: 26px 0;
+       font-size: 29px;
+       color: #242424;
+       &.active{
+         font-size: 32px;
+         font-weight: bold;
+         position: relative;
+         .line{
+           width: 41px;
+           height: 5px;
+           background-color: #00A0E9;
+           border-radius: 2.5px;
+           position: absolute;
+           bottom: 0;
+           left: 50%;
+           transform: translate3d(-50%,0,0);
+         }
+       }
+    }
+  }
+  .container{
+    padding: 20px 30px;
+    .item{
+      margin-bottom: 20px;
+    }
+  }
+}

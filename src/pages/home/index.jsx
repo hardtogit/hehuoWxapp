@@ -1,9 +1,12 @@
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component ,useState} from "@tarojs/taro";
 import { View, Button, Text ,Image,Swiper,SwiperItem} from "@tarojs/components";
+import {AtFloatLayout} from 'taro-ui'
 import TeaCard from '../../components/TeaCard'
 import  "./index.scss";
 
+
 export default  function Index(){
+  const [visibleHelp,setVisibleHelp]=useState(false)
   return(
     <View>
     <View className='header'>
@@ -58,7 +61,7 @@ export default  function Index(){
          开门码
        </Text>
       </View>
-      <View className='function'>
+      <View className='function' onClick={()=>setVisibleHelp(true)}>
       <Image className='icon' src={require('../../assets/img/home/fn_three.png')}></Image>
        <Text className='text'>
          有事找我
@@ -93,11 +96,32 @@ export default  function Index(){
       <View className='store'>
       <TeaCard></TeaCard>
       </View>
-
     </View>
+
+    <AtFloatLayout isOpened={visibleHelp}  onClose={()=>{}}>
+      <View className='title'>服务中心</View>
+      <View className='funs'>
+        <View className='fun '>
+          <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
+           <Text className='text'>联系我们</Text>
+        </View>
+        <View className='fun'>
+          <Image className='icon two' src={require("../../assets/img/home/help2.png")}></Image>
+           <Text className='text'>关于我们</Text>
+        </View>
+        <View className='fun '>
+          <Image className='icon three' src={require("../../assets/img/home/help3.png")}></Image>
+           <Text className='text'> 常见问题</Text>
+        </View>
+      </View>
+      <View className='btn' onClick={()=>setVisibleHelp(false)}>
+        取消
+      </View>
+</AtFloatLayout>
     </View>
   )
 }
+
 Index.config = {
   navigationBarTitleText: '首页',
   navigationBarBackgroundColor:'#00A0E9',

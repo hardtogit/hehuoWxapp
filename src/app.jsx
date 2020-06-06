@@ -22,7 +22,7 @@ const store = {
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index","pages/col/index","pages/order/index","pages/me/index","pages/text/index"],
+    pages: ["pages/home/index","pages/col/index","pages/order/index","pages/me/index","pages/home/storeDetail/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",

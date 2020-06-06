@@ -1,3 +1,52 @@
+@import "~taro-ui/dist/style/components/float-layout.scss";
+.at-float-layout__container{
+  min-height: 418px;
+  height: 418px;
+  padding: 0;
+  border-radius: 16px 16px 0 0;
+  .layout-body{
+    padding: 0;
+    .title{
+      text-align: center;
+      font-size: 26px;
+      padding: 35px 0;
+    }
+    .funs{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: 20px;
+      .fun{
+        flex:1;
+        text-align: center;
+        .icon{
+          display: inline-block;
+          width: 82px;
+          height: 66px;
+        }
+        .text{
+          display: block;
+          margin-top: 28px;
+          font-size: 29px;
+        }
+      }
+    }
+    .btn{
+      width:691px;
+      height:80px;
+      background:rgba(0,160,233,0.08);
+      border-radius:40px;
+      margin: 40px auto 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #05A3EB;
+    }
+  }
+
+}
+
 .toolbar{
   display: flex;
   align-items: center;

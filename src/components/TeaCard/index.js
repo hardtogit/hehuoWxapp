@@ -4,7 +4,7 @@ import './index.scss'
 
 export default function Index(){
 return(
-   <View className='card'>
+   <View className='card' onClick={()=>Taro.navigateTo({url:'/pages/home/storeDetail/index'})}>
      <Image className='cover' src={require('../../assets/img/home/fn_one.png')}></Image>
      <Image className='tag' src={require('../../assets/img/home/tag.png')}></Image>
      <View className='time'>

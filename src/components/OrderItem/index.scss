@@ -1,0 +1,89 @@
+@import "~taro-ui/dist/style/components/flex.scss";
+.order_item{
+  width:690px;
+height:306px;
+background:rgba(255,255,255,1);
+border-radius:10px;
+.top{
+  padding: 0 24px;
+  height: 70px;
+  align-items: center;
+  border-bottom: 1px solid #EFEFEF;
+  .left{
+    font-size: 26px;
+    color: #4E4E4E;
+  }
+  .right{
+    text-align: right;
+    font-size: 26px;
+    color: #7A7A7A;
+  }
+}
+.body{
+  display: flex;
+  padding: 24px 30px;
+  .left{
+    width: 100px;
+    .cover{
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .right{
+    flex: 1;
+    padding-left: 18px;
+    .name{
+      font-size: 26px;
+      font-weight: bold;
+
+    }
+    .text{
+      color: #8D8D8D;
+      font-size: 22px;
+
+    }
+  }
+}
+
+.bottom{
+  padding: 0 30px;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  border-top: 1px solid #EFEFEF;
+  .left{
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    .label{
+      font-size: 20px;
+      color: #7A7A7A;
+    }
+    .unit{
+      font-size: 26px;
+      color: #C70001;
+    }
+    .num{
+      font-size: 30px;
+      color: #C70001;
+    }
+  }
+  .right{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    .btn{
+      width:156px;
+      height:60px;
+      background:rgba(0,160,233,1);
+      box-shadow:0px 7px 16px 0px rgba(15,88,177,0.18);
+      border-radius:30px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-size: 24px;
+      justify-content: center;
+    }
+  }
+}
+}

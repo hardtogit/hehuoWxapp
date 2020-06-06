@@ -1,14 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Button, Text } from "@tarojs/components";
+import { View, Button, Text, WebView} from "@tarojs/components";
 import "./index.scss";
 
 
 const Index= ()=>{
 
   return(
-    <View>
-ssdasd
-    </View>
+    <WebView src='http://webxr-qa.doctorwork.com/rapp/health-baas/bindPhone'>
+
+    </WebView>
   )
 }
 Index.config = {

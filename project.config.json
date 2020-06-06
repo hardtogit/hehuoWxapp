@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "hehuoWxapp",
 	"description": "hehuo小程序模板",
-	"appid": "touristappid",
+	"appid": "wxcb1c9dca3282e575",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -52,6 +52,33 @@
 					"id": -1,
 					"name": "pages/home/index",
 					"pathName": "pages/text/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index",
+					"pathName": "pages/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index",
+					"pathName": "pages/order/index",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/index",
+					"pathName": "pages/me/index",
 					"scene": null
 				}
 			]
