@@ -1,0 +1,61 @@
+.wallet{
+    .header{
+        color: #fff;
+        padding: 30px 30px 60px 30px;
+        background-color: #009FE9;
+        .detail{
+            font-size: 26px;
+            text-align: right
+        }
+        .money{
+            font-size: 89px;
+            text-align: center
+        }
+        .total{
+            font-size: 28px;
+            text-align: center                     
+        }
+    }
+    .content{
+        padding: 0 30px;
+        .cell{
+            height: 100px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #EFEFEF;
+            .left{
+                flex: 1;
+                font-size: 30px;
+                color: #575757;
+            }
+            .right{
+                .icon{
+                    width: 15px;
+                    height: 25px;
+                    display: block
+                }
+            }
+        }
+        .activity{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+            .item{
+                width:215px;
+                height:124px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background:rgba(0,159,233,.1);
+                border-radius:16px;
+                font-size: 28px;
+                color: #216483;
+                text-align: center;
+                .text{
+
+                }
+            }
+        }
+    }
+}

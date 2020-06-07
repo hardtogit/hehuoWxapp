@@ -50,7 +50,7 @@
 .toolbar{
   display: flex;
   align-items: center;
-  padding: 0 30px;
+  padding: 16px 30px;
   color: #fff;
   background-color: #00A0E9;
   .left{
@@ -60,13 +60,15 @@
     .location{
         width: 24px;
         height: 28px;
+        margin-right: 6px
     }
     .text{
       font-size: 28px;
     }
     .arrow_down{
-      width: 28px;
-      height: 16px;
+      width: 26px;
+      height: 14px;
+      margin-left: 10px
     }
   }
   .right{

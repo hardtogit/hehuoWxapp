@@ -1,0 +1,33 @@
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+.info{
+  padding: 30px;
+  .cell{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EFEFEF;
+    .left{
+        flex: 1;
+        font-size: 30px;
+        color: #232323;
+    }
+    .right{
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        color: #797979;
+        .icon{
+            width: 15px;
+            height: 25px;
+            display: block;
+            margin-left: 10px;
+        }
+        .cover{
+            display: block;
+            width: 76px;
+            height: 76px;
+        }
+    }
+}
+} 

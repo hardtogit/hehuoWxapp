@@ -7,7 +7,13 @@ apiconn.state_changed_handler = function() {
 };
 apiconn.response_received_handler = function(jo) {
   if (jo.ustr) {
-    wx.showToast({ icon: "none", content: jo.ustr });
+    if(jo.ustr=="未登录"){
+      wx.navigateTo({
+        url:'/pages/login/index'
+      })
+      return
+    }
+    wx.showToast({ icon: "none", title: jo.ustr });
     if (
       callBackFn[jo.obj + "_" + jo.act] &&
       callBackFn[jo.obj + "_" + jo.act].length
@@ -25,6 +31,7 @@ apiconn.response_received_handler = function(jo) {
 };
 
 const Fetch = params => {
+  params={sess:wx.getStorageSync('sess'),...params}
   if (params.xtype === "user") {
     return new Promise((resolve, reject) => {
       if (callBackFn["person_login"]) {
@@ -70,7 +77,7 @@ const Fetch = params => {
       ];
     }
     if (apiconn.conn_state === "IN_SESSION") {
-      window.apiconn.send_obj(params);
+      apiconn.send_obj(params);
     } else {
       setTimeout(() => {
         apiconn.send_obj(params);

@@ -22,53 +22,53 @@ const store = {
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index","pages/col/index","pages/order/index","pages/me/index","pages/home/storeDetail/index"],
+    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index","pages/login/index", "pages/home/storeDetail/index","pages/me/wallet/index","pages/me/recharge/index","pages/me/coupon/index","pages/me/info/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black"
     },
-	tabBar: {
-    color:"#C0C4CC",
-    selectedColor: "#004da0",
-    borderStyle: "black",
-    backgroundColor: "#ffffff",
-    list: [{
-      pagePath: "pages/home/index",
-      iconPath: "./assets/img/homeH.png",
-      selectedIconPath: "assets/img/homeH.png",
-      text:"首页"
-    },
+    tabBar: {
+      color: "#C0C4CC",
+      selectedColor: "#004da0",
+      borderStyle: "black",
+      backgroundColor: "#ffffff",
+      list: [{
+        pagePath: "pages/home/index",
+        iconPath: "./assets/img/home.png",
+        selectedIconPath: "assets/img/homeH.png",
+        text: "首页" 
+      },
       {
         pagePath: "pages/order/index",
         iconPath: "assets/img/order.png",
-        selectedIconPath: "assets/img/order.png",
-        text:"订单"
+        selectedIconPath: "assets/img/orderH.png",
+        text: "订单"
       },
       {
         pagePath: "pages/col/index",
         iconPath: "assets/img/col.png",
         selectedIconPath: "assets/img/col.png",
-        text:"收藏"
+        text: "收藏"
       },
       {
         pagePath: "pages/me/index",
         iconPath: "assets/img/me.png",
-        selectedIconPath: "assets/img/me.png",
-        text:"我的"
+        selectedIconPath: "assets/img/meH.png",
+        text: "我的"
       }
       ]
-  },
+    },
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
-  componentDidCatchError() {}
+  componentDidCatchError() { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
