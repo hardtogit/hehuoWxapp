@@ -1,31 +1,36 @@
-import Taro, { Component ,useEffect} from "@tarojs/taro";
-import { View, Button, Text, WebView, Image} from "@tarojs/components";
+import Taro, { Component, useEffect, useDidShow, useState } from "@tarojs/taro";
+import { View, Button, Text, WebView, Image } from "@tarojs/components";
+import network from '@/utils/network'
 import "./index.scss";
 
 
 const Index = () => {
-  useEffect(()=>{
-    wx.login({
-      success(res){
-        console.log(res)
-      }
+  const [person, setPerson] = useState({})
+  useDidShow(() => {
+    network.Fetch({
+      "obj": "user",
+      "act": "get_personal"
+    }).then((data) => {
+      setPerson(data.personal)
     })
-  },[])
+
+
+  }, [])
   return (
     <View className='me'>
       <View className='header'>
         <View className='top'>
           <View className='cover'>
-            <Image className='img'></Image>
+            <Image className='img' src={person.avatar_fid}></Image>
           </View>
-          <View className='name'>你好</View>
+          <View className='name'>{person.nickname}</View>
         </View>
         <View className='bottom'>
           <View className='item'>
             <View className='num'>22</View>
             <View className='text'>优惠券</View>
           </View>
-          <View className='item' onClick={()=>wx.navigateTo({url:'/pages/me/wallet/index'})}>
+          <View className='item' onClick={() => wx.navigateTo({ url: '/pages/me/wallet/index' })}>
             <View className='num'>22</View>
             <View className='text'>钱包</View>
           </View>
@@ -77,7 +82,6 @@ const Index = () => {
           </View>
         </View>
       </View>
-      <Button openType='getUserInfo'>ssss</Button> 
     </View>
   )
 }
