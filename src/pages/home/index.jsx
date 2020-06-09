@@ -1,4 +1,4 @@
-import Taro, { Component, useState,useEffect } from "@tarojs/taro";
+import Taro, { Component, useState,useEffect,useDidShow } from "@tarojs/taro";
 import { View, Button, Text, Image, Swiper, SwiperItem } from "@tarojs/components";
 import { AtFloatLayout } from 'taro-ui'
 import TeaCard from '@/components/TeaCard'
@@ -11,7 +11,7 @@ import "./index.scss";
 export default function Index() {
   const [visibleHelp, setVisibleHelp] = useState(false)
   const [banner,setBanner]=useState([])
-  useEffect(()=>{
+  useDidShow(()=>{
     network.Fetch({
         "obj":"user",
         "act":"list_advertising"
