@@ -4,7 +4,7 @@ import "./index.scss";
 let page=1;
 let limit=10;
 export default function Index(props) {
-  const [dataSource,setDataSource]=useState([])
+  const [dataSource,setDataSource]=useState([{},{},{}])
   const [noMore,setNoMore]=useState(false)
   const [empty,setEmpty]=useState(false)
   useEffect(()=>{
@@ -14,7 +14,7 @@ export default function Index(props) {
   },[])
   useReachBottom(() => {
     console.log('onReachBottom')
-  }) 
+  })
   const getData=()=>{
     props.fetchFn({page,limit}).then((data)=>{
       console.log(data)
@@ -26,10 +26,9 @@ export default function Index(props) {
       setNoMore(false)
       getData()
   }
-
   return (
     <View className='listTemplate'>
-      {props.renderItem()}
+      {props.renderItem(dataSource)}
    </View>
   );
 }

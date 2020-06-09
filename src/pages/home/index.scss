@@ -46,7 +46,12 @@
   }
 
 }
-
+.header{
+  background-image: url('../../assets/img/home/home_bg.png');
+  background-size: 100% 308px;
+  background-repeat: no-repeat;
+  background-position: top;
+}
 .toolbar{
   display: flex;
   align-items: center;
