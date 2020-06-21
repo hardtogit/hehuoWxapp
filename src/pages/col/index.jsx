@@ -1,18 +1,22 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Button, Text } from "@tarojs/components";
+import ColItem from '@/components/ColItem'
 import "./index.scss";
 
 
-const Index= ()=>{
-
+export default function Index(){
   return(
-    <View>
-ssdasd
+    <View className='col'>
+         <ColItem/> 
+         <ColItem/> 
+         <ColItem/> 
+         <ColItem/> 
+         <ColItem/> 
     </View>
   )
-}
+} 
 Index.config = {
-  navigationBarTitleText: '首页'
+  navigationBarTitleText: '我的收藏'
 }
 
 

@@ -3,6 +3,7 @@ import { View, Image } from "@tarojs/components";
 import "./index.scss";
 
 export default function Index() {
+  const status = 1
   return (
     <View className='order_item'>
       <View className='top at-row'>
@@ -31,7 +32,10 @@ export default function Index() {
           <View className='num'>826.00</View>
         </View>
         <View className='right'>
-        <View className='btn'>删除订单</View>
+          {status == 0 && <View className='btn'>去支付</View>}
+          {status == 1 && <View className='btn' onClick={() => Taro.navigateTo({ url: '/pages/home/openCode/index' })}>查看开门码</View>}
+          {status == 2 && <View className='btn'>续费</View>}
+          {status == 3 && <View className='btn'>删除订单</View>}
         </View>
       </View>
     </View>

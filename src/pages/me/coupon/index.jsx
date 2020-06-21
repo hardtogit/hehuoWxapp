@@ -2,7 +2,7 @@ import Taro, { Component ,useState} from "@tarojs/taro";
 import classNames from 'classnames'
 import { View, Button, Text ,Image} from "@tarojs/components";
 import ListTemplate from '@/components/ListTemplate'
-import OrderItem from '@/components/OrderItem'
+import CouponItem from '@/components/CouponItem'
 import   "./index.scss";
 import { isTemplateSpan } from "typescript";
 
@@ -25,7 +25,13 @@ export default  function Index(){
         </View>
         <View className='container'>
               <ListTemplate renderItem={()=>{
-                return <View>你喊杀的高科技股东卡</View>
+                return <View>
+                <CouponItem />
+                <CouponItem  use/>
+                <CouponItem  timeout/>
+                <CouponItem />
+                <CouponItem />
+                </View> 
               }}> 
               </ListTemplate>
           </View>

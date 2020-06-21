@@ -48,12 +48,13 @@ const Index = () => {
   }
   return (
     <View className='me'>
-      <Button openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>授权登陆</Button> 
+      <Image className='logo' src={require('../../assets/img/me/logo.png')}></Image>
+      <Button className='btn' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>授权登陆</Button> 
     </View>
   )
 }
 Index.config = {
-  navigationBarTitleText: '我的'
+  navigationBarTitleText: '登陆'
 }
 
 

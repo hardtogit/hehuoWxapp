@@ -1,34 +1,60 @@
-import Taro ,{useReachBottom,useState, useEffect}from "@tarojs/taro";
+import Taro, { useReachBottom, useState, useEffect, forw } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import "./index.scss";
-let page=1;
-let limit=10;
-export default function Index(props) {
-  const [dataSource,setDataSource]=useState([{},{},{}])
-  const [noMore,setNoMore]=useState(false)
-  const [empty,setEmpty]=useState(false)
-  useEffect(()=>{
-    if(props.preLoad){
-      initLoad()
+class Index extends Taro.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dataSource: [],
+      noMore: false,
+      empty: false
     }
-  },[])
-  useReachBottom(() => {
+    this.limit = 10;
+    this.page = 1
+
+  }
+  componentDidMount(){
+    this.props.renderItem('asdasdas')
+    if (this.props.preLoad) {
+      this.initLoad()
+     
+    }
+  }
+  onReachBottom(){
     console.log('onReachBottom')
-  })
-  const getData=()=>{
-    props.fetchFn({page,limit}).then((data)=>{
-      console.log(data)
+  }
+  getData = () => {
+    const {dataSource}=this.state
+    this.props.fetchFn({ page:this.page, limit:this.limit }).then((data) => {
+      let arr=[]
+      if(this.page===1){
+          arr=data.list
+      }else{
+        arr=[...dataSource,...data.list]
+      }
+      console.log(arr,data)
+      this.setState({
+        dataSource:arr
+      })
     })
   }
-  const initLoad=()=>{
-      page=1;
-      setEmpty(false)
-      setNoMore(false)
-      getData()
+  initLoad = () => {
+    this.page = 1;
+    this.setState({
+      noMore: false,
+      empty: false
+    })
+    this.getData()
   }
-  return (
-    <View className='listTemplate'>
-      {props.renderItem(dataSource)}
-   </View>
-  );
+  render() {
+    const {dataSource}=this.state
+    // const {renderItem}=this.props
+    return (
+      <View className='listTemplate'>
+        {this.props.renderItem('sdas')}
+      </View>
+    )
+  }
 }
+export default Index
+

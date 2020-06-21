@@ -38,7 +38,6 @@ export default  function Index(){
   )
 }
 Index.config = {
-  navigationBarTitleText: '首页',
-  navigationBarBackgroundColor:'#00A0E9',
-  navigationBarTextStyle:'white'
+  navigationBarTitleText: '订单列表',
+
 }

@@ -22,15 +22,16 @@ const Index = () => {
         <View className='top'>
           <View className='cover'>
             <Image className='img' src={person.avatar_fid}></Image>
+            <View className='edit' onClick={()=>Taro.navigateTo({url:'/pages/me/info/index'})}>编辑</View>
           </View>
           <View className='name'>{person.nickname}</View>
         </View>
         <View className='bottom'>
-          <View className='item'>
+          <View className='item' onClick={()=>Taro.navigateTo({url:'/pages/me/coupon/index'})}>
             <View className='num'>22</View>
             <View className='text'>优惠券</View>
           </View>
-          <View className='item' onClick={() => wx.navigateTo({ url: '/pages/me/wallet/index' })}>
+          <View className='item' onClick={() => Taro.navigateTo({ url: '/pages/me/wallet/index' })}>
             <View className='num'>22</View>
             <View className='text'>钱包</View>
           </View>
@@ -61,14 +62,14 @@ const Index = () => {
              </View>
           </View>
         </View>
-        <View className='item two'>
-          <View className='fun'>
+        <View className='item two' >
+          <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
             <Image className='img' src={require('../../assets/img/me/me4.png')}></Image>
             <View className='text'>
               关于我们
              </View>
           </View>
-          <View className='fun'>
+          <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
             <Image className='img' src={require('../../assets/img/me/me5.png')}></Image>
             <View className='text'>
               联系我们

@@ -20,7 +20,9 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
@@ -46,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -116,7 +118,93 @@
 				{
 					"id": -1,
 					"name": "s",
-					"pathName": "pages/me/info/index"
+					"pathName": "pages/me/info/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "s",
+					"pathName": "pages/me/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "s",
+					"pathName": "pages/me/bindPhone/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/me/info/index",
+					"pathName": "pages/me/info/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/me/info/index",
+					"pathName": "pages/me/info/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/me/info/index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/home/map/index",
+					"pathName": "pages/home/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/coupon/index",
+					"pathName": "pages/me/coupon/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/openCode/index",
+					"pathName": "pages/home/openCode/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/index",
+					"pathName": "pages/home/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/col/index",
+					"pathName": "pages/col/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/index",
+					"pathName": "pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/about/index",
+					"pathName": "pages/me/about/index",
+					"scene": null
 				}
 			]
 		}

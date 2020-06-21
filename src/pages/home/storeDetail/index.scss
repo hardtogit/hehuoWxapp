@@ -1,77 +1,134 @@
-page{
-  background-color: #F0F1F3;
+page {
+  background-color: #f0f1f3;
 }
-.store_detail{
-
-  .swiper_container{
+.store_detail {
+  .swiper_container {
     background-color: #fff;
-    padding:0 30px;
-    .swiper{
+    padding: 0 30px;
+    .swiper {
       height: 430px;
       border-radius: 16px;
       overflow: hidden;
-      .slide{
+      .slide {
         width: 100%;
         height: 100%;
       }
     }
   }
-  .content{
-    padding:40px 30px 6px 30px;
+  .content {
+    padding: 40px 30px 6px 30px;
     background-color: #fff;
-    .title{
+    .title {
       font-size: 32px;
     }
-    .address{
+    .address {
       font-size: 22px;
-      color: #D0D0D0;
+      color: #d0d0d0;
       align-items: center;
       display: flex;
-      .text{
-          flex: 1;
-          width: 0;
+      .text {
+        flex: 1;
+        width: 0;
       }
-      .icon{
+      .icon {
         width: 72px;
+        .img {
+          display: block;
+          width: 72px;
+          height: 72px;
+        }
       }
     }
-    .labels{
+    .labels {
       display: flex;
       margin-top: 14px;
-      .label{
+      .label {
         font-size: 20px;
         color: #fff;
         // height:26px;
         line-height: 26px;
         padding: 4px 16px;
-        background:rgba(0,160,233,1);
-        border-radius:16px;
+        background: rgba(0, 160, 233, 1);
+        border-radius: 16px;
         margin-right: 8px;
       }
     }
-    .dis{
-      color: #D0D0D0;
+    .bar {
+      width: 690px;
+      height: 80px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      padding: 0 24px;
+      margin-top: 20px;
+      &.one{
+        background: rgba(255, 234, 234, 1);
+        .center{
+          color: #F61212;
+          font-weight: bold;
+          flex: 1;
+        }  
+        .text{
+          color:#F61212;
+          font-size: 26px
+        } 
+      }
+      &.two{
+        background-color: #FEF7CE;
+        .center{
+          color: #EF8F0D;
+          font-weight: bold;
+          flex: 1;
+     
+        }  
+        .text{
+          color:#EF8F0D;
+          font-size: 26px
+        } 
+      }
+      .left{
+        width: 56px;
+        height: 55px;
+        display: block
+      }
+      .center{
+        
+      }
+     
+      .arrow{
+        width: 15px;
+        height: 25px;
+        margin-left: 6px
+      }
+    }
+
+    .dis {
+      color: #d0d0d0;
       margin-top: 8px;
       font-size: 22px;
     }
   }
-  .discription{
+  .rooms{
+    margin-top: 45px
+  }
+  .discription {
     margin-top: 20px;
     background-color: #fff;
     padding: 0 30px;
-    .sub_title{
-        color: #474747;
-        font-size: 32px;
-        padding: 30px 0;
+    .sub_title {
+      color: #474747;
+      font-size: 32px;
+      padding: 30px 0;
     }
   }
-  .bottom{
+  .bottom {
     position: fixed;
     display: flex;
     align-items: center;
     width: 100%;
-    height:97px;
-    background:rgba(255,255,255,1);
+    height: 97px;
+    background: rgba(255, 255, 255, 1);
     bottom: 0;
     left: 0;
   }

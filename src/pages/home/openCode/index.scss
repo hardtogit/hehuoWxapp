@@ -1,0 +1,56 @@
+page{
+    background-color: #00A0E9
+}
+.openCode{
+    padding: 20px 30px;
+    .tip{
+        text-align: center;
+        color: #fff;
+        font-size: 22px;
+    } 
+    .content{
+        width: 690px;
+        border-radius: 10px;
+        height: 855px;
+        margin-top: 30px;
+        .top{
+            height: 535px;
+            background-color: #fff;
+            padding-top: 48px;
+            .title{
+             
+                color: #8D8D8D;
+                font-size: 24px;
+                text-align: center
+            }
+            .qrcode{
+             
+                display: block;
+                width: 370px;
+                height: 370px;
+                margin: 28px auto 0 auto 
+            }
+
+        }
+        .bottom{
+            background-color: #F5F5F5;
+            .item{
+                height: 80px;
+                display: flex;
+                align-items: center;
+                .left{
+                    width: 110px;
+                    color: #8D8D8D;
+                    padding-left: 32px;
+                    font-size: 24px    
+                }
+                .right{ 
+                   flex: 1;
+                   padding-left: 20px;
+                   color: #242424;
+                   font-size: 28px     
+                }
+            }
+        }
+    }
+  }

@@ -1,24 +1,46 @@
-import Taro, { Component, useState,useEffect,useDidShow } from "@tarojs/taro";
+import Taro, { Component, useState, useEffect, createRef,useDidShow } from "@tarojs/taro";
 import { View, Button, Text, Image, Swiper, SwiperItem } from "@tarojs/components";
 import { AtFloatLayout } from 'taro-ui'
+import classNames from 'classnames'
 import TeaCard from '@/components/TeaCard'
 import network from '@/utils/network'
-import {downUrl} from '../../config'
+import { downUrl } from '../../config'
 import ListTemplate from '@/components/ListTemplate'
 import "./index.scss";
 
-
 export default function Index() {
+  const listRef=createRef()
   const [visibleHelp, setVisibleHelp] = useState(false)
-  const [banner,setBanner]=useState([])
-  useDidShow(()=>{
+  const [typeId,setTypeId]=useState()
+  const [banner, setBanner] = useState([])
+  const [type, setType] = useState([])
+  useDidShow(() => {
     network.Fetch({
-        "obj":"user",
-        "act":"list_advertising"
-    }).then((data)=>{
+      "obj": "user",
+      "act": "list_advertising"
+    }).then((data) => {
       setBanner(data.list)
     })
-  },[])
+    network.Fetch({
+      "obj": "user",
+      "act": "list_category"
+    }).then((ressult) => {
+      setType(ressult.list)
+      console.log(ressult.list)
+      setTypeId(ressult.list[0]._id) 
+      setTimeout(()=>{
+        listRef.current.initLoad()
+      },0)
+    })
+  })
+  // useEffect(()=>{
+  //   console.log(listRef)
+  //   console.log(typeId)
+  //   if(typeId){
+  //     console.log(listRef)
+  //     listRef.current.initLoad()
+  //   }
+  // },[typeId])
   return (
     <View>
       <View className='header'>
@@ -49,14 +71,14 @@ export default function Index() {
             indicatorDots
             autoplay
           >
-            {banner.map((item)=>{
-              return(
+            {banner.map((item) => {
+              return (
                 <SwiperItem>
-                <Image className='slide' src={downUrl+item.adv_cover}></Image>
-              </SwiperItem>
-              ) 
+                  <Image className='slide' src={downUrl + item.adv_cover}></Image>
+                </SwiperItem>
+              )
             })}
-        
+
           </Swiper>
         </View>
         <View className='functions'>
@@ -66,7 +88,7 @@ export default function Index() {
               我来续单
        </Text>
           </View>
-          <View className='function'>
+          <View className='function' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index' })}>
             <Image className='icon' src={require('../../assets/img/home/fn_two.png')}></Image>
             <Text className='text'>
               开门码
@@ -78,7 +100,7 @@ export default function Index() {
               有事找我
        </Text>
           </View>
-          <View className='function'>
+          <View className='function' onClick={() => { Taro.navigateTo({ url: '/pages/home/map/index' }) }}>
             <Image className='icon' src={require('../../assets/img/home/fn_four.png')}></Image>
             <Text className='text'>
               地图找店
@@ -88,36 +110,32 @@ export default function Index() {
       </View>
       <View className='body'>
         <View className='tabs'>
-          <View className='tab active'>
-            附近茶室
-        </View>
-          <View className='tab'>
-            优选XX
-        </View>
-          <View className='tab'>
-            优选XX
-        </View>
-        </View>
-        <ListTemplate preLoad renderItem={() => {
-          return (
-            <View className='store'>
-              <TeaCard></TeaCard>
+          {type.map((item) => (
+            <View className={classNames(['tab',item._id==typeId&&'active'])}>
+              {item.category_name}
             </View>
-          )
-        }} fetchFn={(params) => 
+          ))}
+
+        </View>
+        <ListTemplate ref={listRef} preLoad={false} renderItem={(res) => {
+          console.log(res,'ssssssssss')
+          // return ( 
+          //    <View>dasdasda</View>
+         
+          // )
+        }} 
+        fetchFn={(params) =>
           network.Fetch({
             ...params,
             obj: "user",
             act: "list_shops",
-            city: "",
-            longitude: "",
-            latitude: ""
-          })
+            category_id: typeId
+          })  
         }>
         </ListTemplate>
       </View>
 
-      <AtFloatLayout isOpened={visibleHelp} onClose={() => { }}>
+      <AtFloatLayout isOpened={visibleHelp} onClose={() => { setVisibleHelp(false) }}>
         <View className='title'>服务中心</View>
         <View className='funs'>
           <View className='fun '>

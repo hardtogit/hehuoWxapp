@@ -1,6 +1,7 @@
 import apiModel from "../assets/js/APIConnectionWX.min";
 let callBackFn = {};
 let apiconn = new apiModel.APIConnection();
+let loginFlag=false;
 apiconn.wsUri = "ws://47.114.62.134:51718/ckj2";
 apiconn.state_changed_handler = function() {
   console.log("state: " + apiconn.from_state + " => " + apiconn.conn_state);
@@ -8,10 +9,17 @@ apiconn.state_changed_handler = function() {
 apiconn.response_received_handler = function(jo) {
   if (jo.ustr) {
     if(jo.ustr=="未登录"){
-      wx.navigateTo({
-        url:'/pages/login/index'
-      })
-      return
+      if(loginFlag==false){
+        wx.navigateTo({
+          url:'/pages/login/index'
+        })
+        loginFlag=true
+        setTimeout(()=>{
+           loginFlag=false 
+        },20000)
+        return
+      }
+   
     }
     wx.showToast({ icon: "none", title: jo.ustr });
     if (

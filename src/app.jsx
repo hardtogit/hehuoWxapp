@@ -4,6 +4,7 @@ import network from './utils/network';
 import Index from "./pages/index";
 
 import counterStore from "./store/counter";
+import userInfoStore from "./store/userInfo"
 
 import "./app.scss";
 
@@ -17,17 +18,23 @@ import "./app.scss";
 network.apiconn.connect();
 
 const store = {
-  counterStore
+  counterStore,
+  userInfoStore
 };
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index","pages/login/index", "pages/home/storeDetail/index","pages/me/wallet/index","pages/me/recharge/index","pages/me/coupon/index","pages/me/info/index"],
-    window: {
+    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index", "pages/home/storeDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index"],
+    window: {  
       backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
+      navigationBarBackgroundColor: "#fff", 
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black"
+    },
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于为您提供便捷服务" // 高速公路行驶持续后台定位
+      }
     },
     tabBar: {
       color: "#C0C4CC",
@@ -38,7 +45,7 @@ class App extends Component {
         pagePath: "pages/home/index",
         iconPath: "./assets/img/home.png",
         selectedIconPath: "assets/img/homeH.png",
-        text: "首页" 
+        text: "首页"
       },
       {
         pagePath: "pages/order/index",
@@ -49,7 +56,7 @@ class App extends Component {
       {
         pagePath: "pages/col/index",
         iconPath: "assets/img/col.png",
-        selectedIconPath: "assets/img/col.png",
+        selectedIconPath: "assets/img/colH.png",
         text: "收藏"
       },
       {
@@ -62,7 +69,11 @@ class App extends Component {
     },
   };
 
-  componentDidMount() { }
+  componentDidMount() {
+    Taro.authorize({
+      scope: 'scope.userLocation'
+    })
+  }
 
   componentDidShow() { }
 
