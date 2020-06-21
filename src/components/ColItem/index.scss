@@ -1,0 +1,70 @@
+.colItem {
+  height: 336px;
+  width: 690px;
+  border-radius: 16px;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  .label{
+    color: #fff;
+    font-size: 20px;
+    height:46px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:rgba(0,0,0,0.4);
+    border-radius:16px 0px 16px 0px;
+    position: absolute;
+    left: 0;
+    top:0; 
+    border-radius:16px 0px 16px 0px;
+  }
+  .start{
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      display: block;
+      top:10px;
+      right:20px
+  }
+  .cover {
+    display: block;
+    width: 100%;
+    height: 242px;
+  }
+  .bottom {
+    height: 94px;
+    align-items: center;
+    display: flex;
+    padding: 0 20px;
+    .left {
+      flex: 1;
+      min-width: 0;
+      .title {
+        font-size: 26px;
+        color: #474747;
+      }
+      .detail{
+          font-size: 22px;
+          color: #7A7A7A;
+      }
+    }
+  }
+  .right{
+      display: flex;
+      font-size: 28px;
+      color: #A6A6A6;
+      align-items: baseline;
+      .price{
+          font-size: 48px;
+          color: #F0B70D;
+          &::before{
+              font-size: 28px;
+              color: #F0B70D;
+              content: '¥'
+          }
+      }
+  }
+}
