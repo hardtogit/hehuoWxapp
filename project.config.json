@@ -204,6 +204,272 @@
 					"id": -1,
 					"name": "pages/me/about/index",
 					"pathName": "pages/me/about/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/recharge/index",
+					"pathName": "pages/me/recharge/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/index",
+					"pathName": "pages/me/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/problem/index",
+					"pathName": "pages/me/problem/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/apply/index",
+					"pathName": "pages/me/apply/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/problem/index",
+					"pathName": "pages/me/problem/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/record/index",
+					"pathName": "pages/me/record/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "id= o15922333267360680103",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "id= o15922333267360680103",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/record/index",
+					"pathName": "pages/me/record/index",
+					"query": "id= o15922333267360680103",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "id= o15922333267360680103",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "id= o15922333267360680103",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/buyTimesCard/index",
+					"pathName": "pages/home/buyTimesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/buyTimesCard/index",
+					"pathName": "pages/home/buyTimesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/buyTimesCard/index",
+					"pathName": "pages/home/buyTimesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/success/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/wallet/index",
+					"pathName": "pages/me/wallet/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/record/index",
+					"pathName": "pages/me/record/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/recharge/index",
+					"pathName": "pages/me/recharge/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/record/index",
+					"pathName": "pages/me/record/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/recharge/index",
+					"pathName": "pages/me/recharge/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index",
+					"pathName": "pages/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/coupon/index",
+					"pathName": "pages/me/coupon/index",
 					"scene": null
 				}
 			]

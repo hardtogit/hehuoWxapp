@@ -1,0 +1,51 @@
+page{
+  background-color: #F0F1F3;
+}
+.card{
+  width: 714px;
+  height: 259px;
+  background-image: url('../../assets//img/me/timesCard.png');
+  background-size: 100% 100%;
+  padding: 0 10px;
+  margin: 20px auto 0 auto;
+  .active{
+    background-image: url('../../assets//img/me/timesCardH.png');
+  }
+  .top{
+    padding: 0 32px;
+    .inner{
+      display: flex;
+      align-items: center;
+      height: 194px;
+      color: #fff;
+      .left{
+        flex: 1;
+        .title{
+          font-size: 38px;
+          font-weight: bold;
+        }
+        .time{
+          font-size: 24px;
+        }
+      }
+      .btn{
+        width:120px;
+        height:70px;
+        background:rgba(255,255,255,1);
+        border-radius:35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size:24px;
+        font-family:PingFang SC;
+        font-weight:bold;
+        color:rgba(18,164,231,1);
+      }
+    }
+  }
+  .name{
+    color:#7B7B7B;
+    font-size: 22px;
+    line-height: 50px;
+  }
+}

@@ -1,3 +1,4 @@
+@import "~taro-ui/dist/style/components/float-layout.scss";
 page {
   background-color: #f0f1f3;
 }
@@ -68,11 +69,11 @@ page {
           color: #F61212;
           font-weight: bold;
           flex: 1;
-        }  
+        }
         .text{
           color:#F61212;
           font-size: 26px
-        } 
+        }
       }
       &.two{
         background-color: #FEF7CE;
@@ -80,12 +81,12 @@ page {
           color: #EF8F0D;
           font-weight: bold;
           flex: 1;
-     
-        }  
+
+        }
         .text{
           color:#EF8F0D;
           font-size: 26px
-        } 
+        }
       }
       .left{
         width: 56px;
@@ -93,9 +94,9 @@ page {
         display: block
       }
       .center{
-        
+
       }
-     
+
       .arrow{
         width: 15px;
         height: 25px;
@@ -131,5 +132,30 @@ page {
     background: rgba(255, 255, 255, 1);
     bottom: 0;
     left: 0;
+    .fn{
+      flex: 1;
+      text-align: center;
+      .shareBtn{
+        border: none;
+        padding: 0;
+        background-color: #fff;
+        line-height: 22px;
+        &::after{
+          border: none;
+        }
+      }
+      .img{
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+      }
+      .text{
+        font-size: 22px;
+        line-height: 22px;
+        color: #4E4E4E;
+        position: relative;
+        top:-4px
+      }
+    }
   }
 }

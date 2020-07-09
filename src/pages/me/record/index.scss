@@ -1,0 +1,21 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+.record{
+  padding: 30px;
+  .item{
+    display: flex;
+    height: 98px;
+    align-items: center;
+    border-bottom: 1px solid #EFEFEF;
+    .left{
+        flex: 1;
+        font-size: 28px;
+        color: #242424;
+    }
+    .right{
+      display: flex;
+      text-align: right;
+      font-size: 24px;
+      color: #8D8D8D;
+    }
+  }
+}

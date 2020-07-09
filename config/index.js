@@ -14,8 +14,14 @@ const config = {
     "@/components": path.resolve(__dirname, "..", "src/components"),
     "@/utils": path.resolve(__dirname, "..", "src/utils"),
     "@/package": path.resolve(__dirname, "..", "package.json"),
-    "@/project": path.resolve(__dirname, "..", "project.config.json")
+    "@/project": path.resolve(__dirname, "..", "project.config.json"),
+    "@/config": path.resolve(__dirname, "..", "src/config")
+
   },
+  plugins:[
+    '@tarojs/plugin-sass',
+    '@tarojs/plugin-terser'
+  ],
   babel: {
     sourceMap: true,
     presets: [

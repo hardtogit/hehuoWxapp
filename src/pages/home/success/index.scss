@@ -1,0 +1,31 @@
+.about{
+    .logo{
+        display: block;
+        width: 160px;
+        height: 160px;
+        margin: 90px auto 0 auto
+    }
+    .title{
+        margin-top: 50px;
+        font-size: 30px;
+        text-align: center;
+        color: #797979;
+    }
+    .btn{
+      width: 380px;
+      height:80px;
+      border: 1px solid #00A0E9;
+      border-radius:40px;
+      display: flex;
+      align-items: center;
+      color: #00A0E9;
+      margin: 26px auto 0 186px;
+      font-size: 30px;
+      justify-content: center;
+      &.active{
+        background:rgba(0,160,233,1);
+        margin: 150px auto 0 186px;
+        color: #fff;
+      }
+    }
+}

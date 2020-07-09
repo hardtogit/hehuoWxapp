@@ -1,0 +1,65 @@
+import Taro, { Component ,useEffect,useState} from "@tarojs/taro";
+import classNames from 'classnames'
+import {inject,observer} from '@tarojs/mobx'
+import { View, Button, Text, WebView, Image} from "@tarojs/components";
+import TimesCard from '@/components/TimesCard'
+import ListTemplate from '@/components/ListTemplate'
+
+import network from '../../../utils/network'
+import "./index.scss";
+
+const tabs=[{name:'未使用',id:1},{name:'已使用',id:2}]
+
+@inject('listDataStore')
+@observer
+class Index extends Component{
+  constructor(){
+    this.state={
+      tabIndex:1
+    }
+  }
+  render(){
+    const {tabIndex}=this.state
+    return (
+      <View className='card'>
+           <View className='tabs'>
+            {
+              tabs.map((tab)=>{
+                return(
+                  <View className={classNames(['tab' ,tab.id==tabIndex&&'active'])}  key={tab.id} onClick={()=>this.setState({tabIndex:tab.id} )}>
+                    {tab.name}
+                    <View className='line'></View>
+                  </View>
+                )
+              })
+            }
+          </View>
+          <ListTemplate
+          // ref={(listRef)=>{this.listRef=listRef}}
+            preLoad
+            listDataKey='teaList'
+            fetchFn={(params) =>
+            network.Fetch({
+              ...params,
+              "obj":"user",
+              "act":"list_card_user",
+              "user_memb_stat":"未使用"
+            })}
+          >
+          <TimesCard></TimesCard>
+
+          </ListTemplate>
+
+
+
+
+      </View>
+    )
+  }
+
+}
+Index.config = {
+  navigationBarTitleText: '我的优惠次卡'
+}
+
+

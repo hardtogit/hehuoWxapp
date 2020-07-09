@@ -43,13 +43,13 @@ const Index = () => {
       </View>
       <View className='funs'>
         <View className='item'>
-          <View className='fun'>
-            <Image className='img' src={require('../../assets/img/me/me1.png')}></Image>
+          <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/timesCard/index'})}>
+            <Image className='img' src={require('../../assets/img/me/me1.png')} ></Image>
             <View className='text'>
               优惠次卡
              </View>
           </View>
-          <View className='fun two'>
+          <View className='fun two' onClick={()=>Taro.navigateTo({url:'/pages/me/apply/index'})}>
             <Image className='img' src={require('../../assets/img/me/me2.png')}></Image>
             <View className='text'>
               加盟合作
@@ -75,7 +75,7 @@ const Index = () => {
               联系我们
              </View>
           </View>
-          <View className='fun'>
+          <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
             <Image className='img' src={require('../../assets/img/me/me6.png')}></Image>
             <View className='text'>
               常见问题

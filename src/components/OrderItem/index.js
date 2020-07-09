@@ -1,14 +1,16 @@
 import Taro from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
+import dayjs from 'dayjs'
 import "./index.scss";
 
-export default function Index() {
+export default function Index(props) {
+  const {order}=props
   const status = 1
   return (
     <View className='order_item'>
       <View className='top at-row'>
-        <View className='at-col at-col-8 left'>订单编号:152665482265055</View>
-        <View className='at-col right'>已使用</View>
+  <View className='at-col at-col-8 left'>订单编号:{order._id}</View>
+  <View className='at-col right'>{order.status}</View>
       </View>
       <View className='body'>
         <View className='left'>
@@ -18,9 +20,9 @@ export default function Index() {
           ></Image>
         </View>
         <View className='right'>
-          <View className='name'>测试茶室|大王峰</View>
-          <View className='text'>测试茶室|大王峰</View>
-          <View className='text'>测试茶室|大王峰</View>
+  <View className='name'>{order.room_name}</View>
+  <View className='text'>{dayjs(order.service_time&&order.service_time.begin_time*1000).format('MM月DD日 HH:ss')} - {dayjs(order.service_time&&order.service_time.end_time*1000).format('MM月DD日 HH:ss')}</View>
+  <View className='text'>共计{order.service_time&&order.service_time.total_time}小时</View>
         </View>
       </View>
       <View className='bottom'>
@@ -29,7 +31,7 @@ export default function Index() {
             合计：
           </View>
           <View className='unit'>¥</View>
-          <View className='num'>826.00</View>
+  <View className='num'>{order.payment_amount}</View>
         </View>
         <View className='right'>
           {status == 0 && <View className='btn'>去支付</View>}

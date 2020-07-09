@@ -5,6 +5,8 @@ import Index from "./pages/index";
 
 import counterStore from "./store/counter";
 import userInfoStore from "./store/userInfo"
+import listDataStore from "./store/listData"
+
 
 import "./app.scss";
 
@@ -19,15 +21,16 @@ network.apiconn.connect();
 
 const store = {
   counterStore,
-  userInfoStore
+  userInfoStore,
+  listDataStore
 };
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index", "pages/home/storeDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index"],
-    window: {  
+    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index","pages/home/buyTimesCard/index", "pages/home/storeDetail/index","pages/home/roomDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index","pages/me/problem/index","pages/me/apply/index","pages/me/timesCard/index","pages/me/record/index","pages/home/sureOrder/index","pages/home/success/index"],
+    window: {
       backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff", 
+      navigationBarBackgroundColor: "#fff",
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black"
     },

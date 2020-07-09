@@ -1,0 +1,50 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+page{
+  background-color: #F0F1F3;
+}
+.apply{
+  padding: 0 30px;
+  background-color: #fff;
+
+  .inputGroup{
+    border-bottom: 1px solid #efefef;
+    height: 100px;
+    align-items: center;
+    display: flex;
+    &.last{
+      border-bottom: none;
+    }
+    .label{
+      font-size: 30px;
+      color: #242424;
+      display: flex;
+      width: 410px;
+      .char{
+        color:#F30000 ;
+      }
+    }
+    .input{
+      font-size: 30px;
+      color: #242424;
+      flex: 1;
+      text-align: right;
+    }
+  }
+  .textarea{
+    width: 100%;
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:98px;
+    background:rgba(0,160,233,1);
+    font-size:32px;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+}

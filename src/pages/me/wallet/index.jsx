@@ -1,21 +1,30 @@
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component,useEffect ,useState,useDidShow} from "@tarojs/taro";
+import network from '@/utils/network'
 import { View, Button, Text } from "@tarojs/components";
 import "./index.scss";
 
 
 const Index = () => {
-
+  const [entity,setEntity]=useState({})
+  useDidShow(()=>{
+      network.Fetch({
+        "obj":"user",
+        "act":"details"
+      }).then((data)=>{
+          setEntity(data)
+      })
+    })
     return (
         <View className='wallet'>
             <View className='header'>
-                <View className='detail'>明细</View>
+                <View className='detail' onClick={()=>{Taro.navigateTo({url:'/pages/me/record/index'})}}>明细</View>
                 <View className='money'>
-                    0.00
+                    {entity.balance}
             </View>
                 <View className='total'>总额（元）</View>
             </View>
-            <View className='content'> 
-                <View className='cell' onClick={()=>{wx.navigateTo({url:',"/pages/me/recharge/index"'})}}>
+            <View className='content'>
+                <View className='cell' onClick={()=>{Taro.navigateTo({url:"/pages/me/recharge/index"})}}>
                     <View className='left'>
                         账户充值
                     </View>

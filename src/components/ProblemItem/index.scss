@@ -1,0 +1,45 @@
+.problem{
+   .title{
+     background-color: #fff;
+    padding: 0 30px;
+     .inner{
+      height: 108px;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      color: #242424;
+      border-bottom: 1px solid #efefef;
+      .text{
+        flex: 1;
+      }
+
+      .arrow{
+        position: relative;
+        top:15px;
+        width: 0;
+        height: 0;
+        border-width: 15px;
+        border-style: solid;
+        border-color: transparent;
+        border-top-color:#666 ;
+        &.up{
+          border-top-color:transparent ;
+          border-bottom-color: #666;
+          top:0
+        }
+      }
+     }
+
+   }
+   .answer{
+     padding: 30px;
+     color: #7A7A7A;
+     font-size: 26px;
+     background-color: #fff;
+     .inner{
+
+     }
+     margin-bottom: 14px;
+   }
+}
