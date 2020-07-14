@@ -1,7 +1,10 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
 page{
   background-color: #F0F1F3;
 }
 .sureOrder{
+  padding-bottom: 120px;
   .card{
     padding: 40px 30px;
     background-color: #fff;
@@ -30,6 +33,7 @@ page{
       }
       .name{
         flex: 1;
+        padding-left: 10px;
       }
     }
 

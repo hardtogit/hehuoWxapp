@@ -1,5 +1,6 @@
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component,useDidShow } from "@tarojs/taro";
 import { View, Button, Text } from "@tarojs/components";
+import network from '@/utils/network'
 import {inject,observer} from '@tarojs/mobx'
 import ColItem from '@/components/ColItem'
 import ListTemplate from '@/components/ListTemplate'
@@ -10,20 +11,29 @@ import "./index.scss";
 class Index extends Component{
   constructor(props){
     super(props)
+    this.listRef={}
+  }
+  componentDidMount(){
+    this.listRef.initLoad()
+  }
+  componentDidShow(){
+    if(this.listRef){
+      this.listRef.initLoad()
+    }
   }
   render(){
     const {colList}=this.props.listDataStore
     return(
       <View className='col'>
              <ListTemplate
-            preLoad
+            ref={(listRef)=>{this.listRef=listRef}}
+            preLoad={false}
             listDataKey='colList'
             fetchFn={(params) =>
             network.Fetch({
               ...params,
               "obj":"user",
-              "act":"list_card_user",
-              "user_memb_stat":"未使用"
+              "act":"list_shop_collect"
             })}
           >
           {colList.map((col)=>{

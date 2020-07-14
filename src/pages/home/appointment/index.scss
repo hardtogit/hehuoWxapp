@@ -1,0 +1,92 @@
+@import "~taro-ui/dist/style/components/float-layout.scss";
+.content{
+  padding: 0 30px;
+  padding-bottom: 120px;
+  position: relative;
+  .title{
+    text-align: center;
+    font-size: 34px;
+    color: #282828;
+    padding: 30px 0;
+  }
+  .tip{
+    font-size: 22px;
+    color: #888888;
+  }
+  .dates{
+    height: 94px;
+    border-radius: 47px;
+    background-color: #F6F6F6;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: #888888;
+    margin-top: 25px;
+    .date{
+      height: 94px;
+      flex: 1;
+      font-size: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &.active{
+        background-color: #00A0E9;
+        color: #fff;
+      }
+
+    }
+
+  }
+  .time{
+    margin-top: 50px;
+    .item{
+      width:150px;
+      height:60px;
+
+      border-radius:30px;
+      display: inline-block;
+      vertical-align: baseline;
+      text-align: center;
+      line-height: 60px;
+      margin-right: 30px;
+      margin-bottom: 10px;
+      &:nth-child(4n){
+        margin-right: 0;
+      }
+      &.active{
+        background:rgba(0,160,233,1);
+        color: #fff;
+      }
+    }
+  }
+}
+.buttom{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 96px;
+  align-items: center;
+  font-size: 32px;
+  .left{
+    height: 96px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E5E5E5;
+    color: #888;
+  }
+  .right{
+    flex: 1;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00A0E9;
+    color: #fff;
+  }
+}
+

@@ -28,7 +28,11 @@ class Index extends Taro.Component {
   }
   getData = () => {
     const {listDataStore,fetchFn,listDataKey}=this.props
+    Taro.showLoading({
+      title:'加载中...'
+    })
     fetchFn({ page: this.page, limit: this.limit }).then(data => {
+      Taro.hideLoading({})
       let arr = [];
       if (this.page === 1) {
         arr = data.list;
@@ -37,6 +41,8 @@ class Index extends Taro.Component {
       }
       this.page+=1;
       listDataStore.updateListData({key:listDataKey,listData:arr})
+    }).catch(()=>{
+      Taro.hideLoading({})
     });
   };
   initLoad = () => {

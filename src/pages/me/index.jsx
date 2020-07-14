@@ -1,11 +1,14 @@
 import Taro, { Component, useEffect, useDidShow, useState } from "@tarojs/taro";
 import { View, Button, Text, WebView, Image } from "@tarojs/components";
+import {AtModal} from 'taro-ui'
 import network from '@/utils/network'
 import "./index.scss";
 
 
 const Index = () => {
   const [person, setPerson] = useState({})
+  const [visible, setVisible] = useState(false)
+
   useDidShow(() => {
     network.Fetch({
       "obj": "user",
@@ -18,6 +21,14 @@ const Index = () => {
   }, [])
   return (
     <View className='me'>
+      <AtModal
+        isOpened={visible}
+        title='提示'
+        confirmText='确定'
+        onClose={()=>setVisible(false)}
+        onConfirm={()=>setVisible(false)}
+        content='正在开发中，请耐心等待...'
+      />
       <View className='header'>
         <View className='top'>
           <View className='cover'>
@@ -55,7 +66,7 @@ const Index = () => {
               加盟合作
              </View>
           </View>
-          <View className='fun'>
+          <View className='fun' onClick={()=>setVisible(true)}>
             <Image className='img' src={require('../../assets/img/me/me3.png')}></Image>
             <View className='text'>
               商城

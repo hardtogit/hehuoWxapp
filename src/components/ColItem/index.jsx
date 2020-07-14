@@ -1,26 +1,28 @@
 import Taro, { Component } from "@tarojs/taro";
 import classNames from 'classnames'
+import {downUrl} from '../../config/index'
 import { View, Button, Text } from "@tarojs/components";
 import "./index.scss";
-export default function Index (){
+export default function Index (props){
+  const {col}=props
     return(
-        <View className='colItem' onClick={()=>{Taro.navigateTo({url:'/pages/home/storeDetail/index'})}}>
-            <View className='label'>合作店铺 | 9:00-18:00</View>
+        <View className='colItem' onClick={()=>{Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${col.shops_id}`})}}>
+            <View className='label'>{col.shop_name} | {col.business_time}</View>
             <Image className='start' src={require('../../assets/img/me/start.png')}></Image>
-            <Image className='cover' src={require('../../assets/img/home/home_bg.png')}></Image>
-            <View className='bottom'> 
+            <Image className='cover' src={downUrl+col.home_fid}></Image>
+            <View className='bottom'>
                 <View className='left'>
-                    <View className='title'>茶空间|智能测试</View>
+    <View className='title'>{col.label} | {col.shop_name}</View>
                     <View className='detail'>
-                    上海市接单工业路中央第五街1楼22层22室某某小区... 
+                    {col.address}
                     </View>
 
                 </View>
                 <View className='right'>
                     <View className='price'>
-                        58
+                        {col.min_price}
                     </View>
-                    起
+                     起
                 </View>
             </View>
             </View>

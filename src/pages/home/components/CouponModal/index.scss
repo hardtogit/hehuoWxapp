@@ -1,0 +1,45 @@
+.modal{
+  .mask{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: #000;
+    z-index: 99;
+    opacity: .5;
+  }
+  .content{
+    height: 780px;
+    width: 616px;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top:50%;
+    transform: translate3d(-50%,-50%,0);
+    // background-color: #FFD02B;
+    .inner{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        .top{
+          height: 646px;
+          background-image: url('../../../../assets/img/home/coupon_index_bg.png');
+          background-size: 106% auto;
+          background-position:80% 80%;
+          background-repeat: no-repeat;
+          padding: 10px;
+          background-color: #FFD02B;
+          .topInner{
+            width: 100%;
+            height: 100%;
+            background-color: #FFD02B;
+          }
+        }
+
+
+    }
+
+
+  }
+}

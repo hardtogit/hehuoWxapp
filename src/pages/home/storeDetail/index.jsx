@@ -30,18 +30,20 @@ export default function Index() {
         address: entity.shop.address
       })
   }
-  const getCouponFn=(disc_id)=>{
+  const colStore=()=>{
     network.Fetch({
       "obj":"user",
-      "act":"add_discounts",
-      "disc_id":disc_id,
-      "shops_id":router.params.id||'o15937049856544559001',
-    }).then(()=>{
-      Taro.showToast({
-        title:'领取成功',
-        icon:'none'
-      })
+      "act":"add_shop_collect",
+      "shop_id":router.params.id||'o15937049856544559001',
+    }).then((res)=>{
+       Taro.showToast({
+         title:'收藏成功',
+         icon:'none'
+       })
     })
+
+
+
   }
   useEffect(() => {
     network.Fetch({
@@ -49,12 +51,14 @@ export default function Index() {
 	"act":"details_shops",
 	"shop_id":router.params.id||'o15937049856544559001',
     }).then((res)=>{
+      Taro.setNavigationBarTitle({
+        title:res.shop.shop_name
+      })
       setEntity(res)
     })
   }, [router.params.id])
   return (
     <View className='store_detail'>
-       <GetCoupon visible={visibleOne} coupons={entity.disc} onCancel={()=>setVisibleOne(false)} getCouponFn={getCouponFn}></GetCoupon>
       <View className='swiper_container'>
         <Swiper
           className='swiper'
@@ -88,7 +92,7 @@ export default function Index() {
           <View className='label'>充电宝</View>
         </View>
 
-        <View className='bar one' onClick={()=>setVisibleOne(true)}>
+        <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${router.params.id||'o15937049856544559001'}`})}>
           <Image className='left' src={require('../../../assets/img/home/item_one.png')}></Image>
           <View className='center'>限时优惠折扣</View>
           <View className='text'>我要领取</View>
@@ -116,9 +120,7 @@ export default function Index() {
           <View className='sub_title'>
               使用说明：
           </View>
-
         </View>
-
         <View className='bottom'>
               <View className='fn' onClick={()=>Taro.switchTab({url:'/pages/home/index'})}>
                 <Image className='img' src={require('../../../assets/img/home/sd1.png')}></Image>
@@ -134,7 +136,7 @@ export default function Index() {
                 </View>
                 </Button>
               </View>
-              <View className='fn'>
+              <View className='fn' onClick={colStore}>
                 <Image className='img' src={require('../../../assets/img/home/sd3.png')}></Image>
                 <View className='text'>
                   收藏
@@ -149,4 +151,8 @@ export default function Index() {
         </View>
     </View>
   );
+}
+
+Index.config = {
+  navigationBarTitleText: '店铺',
 }

@@ -1,3 +1,4 @@
+@import "~taro-ui/dist/style/components/modal.scss";
 .wallet{
     .header{
         color: #fff;
@@ -13,7 +14,7 @@
         }
         .total{
             font-size: 28px;
-            text-align: center                     
+            text-align: center
         }
     }
     .content{
@@ -41,6 +42,7 @@
             justify-content: space-around;
             align-items: center;
             margin-top: 30px;
+            flex-wrap: wrap;
             .item{
                 width:215px;
                 height:124px;
@@ -52,6 +54,7 @@
                 font-size: 28px;
                 color: #216483;
                 text-align: center;
+                margin-bottom: 20px;
                 .text{
 
                 }

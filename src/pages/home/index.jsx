@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import {inject,observer} from '@tarojs/mobx'
 import TeaCard from '@/components/TeaCard'
 import network from '@/utils/network'
+import CouponModal from './components/CouponModal'
 import { downUrl } from '../../config'
 
 import ListTemplate from '@/components/ListTemplate'
@@ -17,6 +18,7 @@ class Index extends Component{
     super(props)
     this.state={
       visibleHelp:false,
+      visibleCoupon:false,
       typeId:null,
       banner:[],
       type:[]
@@ -48,6 +50,7 @@ class Index extends Component{
   }
   render(){
     const {  visibleHelp,
+      visibleCoupon,
       typeId,
       banner,
       type}=this.state
@@ -102,13 +105,13 @@ class Index extends Component{
               <Image className='icon' src={require('../../assets/img/home/fn_two.png')}></Image>
               <Text className='text'>
                 开门码
-         </Text>
+              </Text>
             </View>
             <View className='function' onClick={() => this.setState({ visibleHelp:true})}>
               <Image className='icon' src={require('../../assets/img/home/fn_three.png')}></Image>
               <Text className='text'>
                 有事找我
-         </Text>
+              </Text>
             </View>
             <View className='function' onClick={() => { Taro.navigateTo({ url: '/pages/home/map/index' }) }}>
               <Image className='icon' src={require('../../assets/img/home/fn_four.png')}></Image>
@@ -151,7 +154,7 @@ class Index extends Component{
           </ListTemplate>
         </View>
 
-        <AtFloatLayout isOpened={visibleHelp} onClick={() => this.setState({ visibleHelp:false})}>
+        <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
           <View className='title'>服务中心</View>
           <View className='funs'>
             <View className='fun '>
@@ -171,6 +174,9 @@ class Index extends Component{
             取消
         </View>
         </AtFloatLayout>
+          {visibleCoupon&&
+          <CouponModal></CouponModal>
+          }
       </View>
     )
   }

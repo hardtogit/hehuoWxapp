@@ -1,0 +1,24 @@
+.item{
+  display: flex;
+  height: 80px;
+  align-items: center;
+  .label{
+    flex: 1;
+    .balance{
+      color: #F0B80D;
+    }
+  }
+  &.one{
+    border-bottom: 1px solid #eee;
+  }
+  &.disabled{
+    color: #ddd;
+  }
+  .tip{
+   color: #0096DA;
+   margin-left: 4px;
+  }
+}
+.price{
+  color: #F0B80D;
+}

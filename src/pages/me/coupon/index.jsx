@@ -52,7 +52,7 @@ class Index extends Component{
               {couponList.map((coupon)=>{
               return(
                 <View className='item'>
-                  <CouponItem coupon={coupon}/>
+                  <CouponItem coupon={coupon} status={status}/>
                 </View>
               )
               })

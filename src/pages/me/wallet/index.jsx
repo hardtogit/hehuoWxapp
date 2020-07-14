@@ -1,11 +1,16 @@
 import Taro, { Component,useEffect ,useState,useDidShow} from "@tarojs/taro";
 import network from '@/utils/network'
+import {AtModal} from 'taro-ui'
 import { View, Button, Text } from "@tarojs/components";
 import "./index.scss";
 
 
 const Index = () => {
   const [entity,setEntity]=useState({})
+  const [coupons,setCoupons]=useState([])
+  const [visible,setVisible]=useState(false)
+
+
   useDidShow(()=>{
       network.Fetch({
         "obj":"user",
@@ -13,9 +18,52 @@ const Index = () => {
       }).then((data)=>{
           setEntity(data)
       })
+      network.Fetch({
+        "obj":"user",
+        "act":"list_recharge_rule"
+      }).then((data)=>{
+          setCoupons(data.list)
+      })
+
     })
+    const rechange=(coupon)=>{
+      Taro.showLoading({
+        title:'处理中，请稍后...',
+        mask:true
+      })
+      network.Fetch({
+        "obj":"user",
+        "act":"recharge",
+        "payment_amount":coupon.rule_rech_amount,
+        rule_id:coupon._id
+      }).then((res)=>{
+          Taro.hideLoading({})
+          Taro.requestPayment({
+            ...res.pay_info,
+            success:()=>{
+                Taro.showToast({
+                  title:'充值成功',
+                  icon:'none'
+                })
+                setTimeout(()=>{
+                   Taro.navigateBack({})
+                },2000)
+            }
+          })
+      }).catch(()=>{
+        Taro.hideLoading({})
+      })
+  }
     return (
         <View className='wallet'>
+             <AtModal
+        isOpened={visible}
+        title='提示'
+        confirmText='确定'
+        onClose={()=>setVisible(false)}
+        onConfirm={()=>setVisible(false)}
+        content='如果需要开具发票，请联系门店负责人开具'
+      />
             <View className='header'>
                 <View className='detail' onClick={()=>{Taro.navigateTo({url:'/pages/me/record/index'})}}>明细</View>
                 <View className='money'>
@@ -32,7 +80,7 @@ const Index = () => {
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>
                     </View>
                 </View>
-                <View className='cell'>
+                <View className='cell' onClick={()=>setVisible(true)}>
                     <View className='left'>
                         申请发票
                     </View>
@@ -41,24 +89,21 @@ const Index = () => {
                     </View>
                 </View>
                 <View className='activity'>
-                    <View className='item'>
+                  {coupons.map((coupon)=>{
+                     return(
+                      <View className='item' onClick={()=>rechange(coupon)}>
                         <View className='text'>
-                            <View>充值满1000</View>
-                            <View>送100元</View>
+                     <View>充值满{coupon.rule_rech_amount}</View>
+                     <View>送{coupon.rule_handsel_amount}元</View>
                         </View>
                     </View>
-                    <View className='item'>
-                        <View className='text'>
-                            <View>充值满2000</View>
-                            <View>送200元</View>
-                        </View>
-                    </View>
-                    <View className='item'>
-                        <View className='text'>
-                            <View>充值满3000</View>
-                            <View>送300元</View>
-                        </View>
-                    </View>
+
+                     )
+
+
+
+                  })}
+
                 </View>
 
             </View>
