@@ -18,7 +18,7 @@ export default function Index (){
       "obj":"user",
       "act":"add_discounts",
       "disc_id":disc_id,
-      "shops_id":router.params.id||'o15937049856544559001',
+      "shop_id":router.params.id||'o15937049856544559001',
     }).then(()=>{
       Taro.showToast({
         title:'领取成功',
@@ -27,7 +27,7 @@ export default function Index (){
       network.Fetch({
         "obj":"user",
         "act":"list_shop_discounts",
-        "shops_id":router.params.id||'o15937049856544559001',
+        "shop_id":router.params.id||'o15937049856544559001',
         "user_disc_stat":"未领取",
         "page":1,
         "limit":100
@@ -44,7 +44,7 @@ export default function Index (){
     network.Fetch({
       "obj":"user",
       "act":"list_shop_discounts",
-      "shops_id":router.params.id||'o15937049856544559001',
+      "shop_id":router.params.id||'o15937049856544559001',
       "user_disc_stat":"未领取",
       "page":1,
       "limit":100
@@ -75,7 +75,7 @@ export default function Index (){
               <View className='unit'>¥</View> {coupon.disc_off_price}
             </View>
             <View className='text'>
-              {coupon.disc_use_price?`满${coupon.disc_use_price}可用`:'无门槛'}
+              {coupon.disc_use_price!=0?`满${coupon.disc_use_price}可用`:'无门槛'}
             </View>
           </View>
           <View className='center'>

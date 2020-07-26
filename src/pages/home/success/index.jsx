@@ -9,11 +9,12 @@ const Index = () => {
     <View className='about'>
       <Image className='logo' src={require('../../../assets/img/home/right.png')}></Image>
       <View className='title'>恭喜您预约成功</View>
-      <View className='btn active'>查看开门码</View>
+      <View className='btn active' onClick={()=>{
+        Taro.navigateTo({url:'/pages/home/openCode/index'})
+      }}>查看开门码</View>
       <View className='btn' onClick={()=>{
         Taro.switchTab({url:'/pages/home/index'})
       }}>返回首页</View>
-
     </View>
   )
 }

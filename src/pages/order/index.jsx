@@ -18,6 +18,15 @@ class Index extends Component{
           tabIndex:1
         }
   }
+  componentDidShow(){
+    this.listRef.initLoad()
+  }
+  componentDidMount(){
+    this.listRef.initLoad()
+  }
+  onReachBottom(){
+    this.listRef.getData()
+  }
   render(){
 
     const {tabIndex}=this.state
@@ -40,8 +49,9 @@ class Index extends Component{
             }
           </View>
           <View className='container'>
-          <ListTemplate  preLoad listDataKey='orderList'
+          <ListTemplate  preLoad={false} listDataKey='orderList'
           ref={(listRef)=>this.listRef=listRef}
+          emptyText="还没有任何相关订单"
           fetchFn={(params) =>
                         network.Fetch({
                           ...params,

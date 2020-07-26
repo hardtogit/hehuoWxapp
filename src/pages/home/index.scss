@@ -1,9 +1,26 @@
 @import "~taro-ui/dist/style/components/float-layout.scss";
+page{
+  background-color: #F0F1F3;
+}
 .at-float-layout__container{
   min-height: 418px;
-  height: 418px;
+  // height: 418px;
+  max-height: 1400px!important;
   padding: 0;
   border-radius: 16px 16px 0 0;
+  .head{
+    display: flex;
+    font-size: 34px;
+    padding: 40px 30px;
+    align-items: center;
+    .icon{
+      width: 28px;
+      height: 28px;
+    }
+    .text{
+      flex: 1;
+    }
+  }
   .layout-body{
     padding: 0;
     .title{
@@ -11,11 +28,13 @@
       font-size: 26px;
       padding: 35px 0;
     }
+
     .funs{
       display: flex;
       align-items: center;
       justify-content: space-around;
       margin-top: 20px;
+      white-space: pre-wrap;
       .fun{
         flex:1;
         text-align: center;
@@ -28,6 +47,21 @@
           display: block;
           margin-top: 28px;
           font-size: 29px;
+        }
+      }
+      .pfun{
+        width: 187.5px;
+        text-align: center;
+        .icon{
+          width: 72px;
+          height: 72px;
+          display: inline-block;
+        }
+        .text{
+          display: block;
+          color: #282828;
+          margin-top: 6px;
+          font-size: 28px;
         }
       }
     }
@@ -48,9 +82,11 @@
 }
 .header{
   background-image: url('../../assets/img/home/home_bg.png');
+  background-color: #fff;
   background-size: 100% 308px;
   background-repeat: no-repeat;
   background-position: top;
+  border-radius: 0 0 20px 20px;
 }
 .toolbar{
   display: flex;
@@ -133,15 +169,47 @@
 .body{
   padding: 30px;
   .tabs{
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
+    white-space: nowrap;
+    position: relative;
+    .more{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      right:30px;
+      top:10px;
+      color: #848080;
+      .icon{
+        width: 13px;
+        height: 24px;
+        display: block;
+        margin-left: 4px;
+        position: relative;
+        top:-1px
+      }
+    }
     .tab{
       margin-right: 40px;
+      display: inline-block;
+      vertical-align: baseline;
+      white-space: nowrap;
       font-size: 30px;
       color:#848080;
       &.active{
         color: #2D2D2D;
         font-size: 36px;
+        position: relative;
+        .bar{
+          position:absolute;
+          width: 80px;
+          height: 6px;
+          border-radius: 3px;
+          background-color: #00A0E9;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
     }
   }

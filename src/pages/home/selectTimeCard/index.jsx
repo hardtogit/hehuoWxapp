@@ -12,13 +12,22 @@ const Index = (props) => {
     const router =useRouter()
     const {shop_id}=useRouter().params
     const [empty,setEmpty]=useState(false)
+    const [id,setId]=useState()
     const [timeCards,setTimeCards]=useState([])
     // const timeCards=Taro.getStorageSync('timeCards')
+
+    if(router.params.type==1){//表示是优惠券
+      console.log(router.params.couponId)
+      setId(router.params.couponId)
+      console.log(router.params.couponId)
+    }
     useEffect(()=>{
       network.Fetch({
         "obj":"user",
         "act":"list_user_card_user",
-        "shops_id":router.params.id||'o15937049856544559001',
+        "shop_id":router.params.id||'o15937049856544559001',
+        "begin_time":router.startTime|| dayjs(dayjs().format('YYYY-MM-DD')).unix(),
+        "end_time":router.endTime|| dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
         "page":1,
         "limit":100
       }).then((data)=>{
@@ -32,8 +41,10 @@ const Index = (props) => {
 
     },[])
     const submit=()=>{
-
-
+      const arr=timeCards.filter((item)=>id==item._id)
+      console.log(arr,'sdsds')
+      Taro.setStorageSync('discount',{type:'次卡',coupon:arr[0]})
+      Taro.navigateBack({})
     }
     return (
         <View className='info'>
@@ -52,14 +63,13 @@ const Index = (props) => {
                     <View className='top'>
                       <View className='inner'>
                         <View className='left'>
-                        <View className='title'>{card.memb_off_time}/次</View>
-                        <View className='time'>活动有效期：{dayjs(card.effective_time).format('YYYY.MM.DD')}-{dayjs(card.expire_time).format('YYYY.MM.DD')}</View>
+                        <View className='title'>{card.memb_off_time}小时/次</View>
+                        <View className='time'>活动有效期：{dayjs(card.effective_time*1000).format('YYYY.MM.DD')}-{dayjs(card.expire_time*1000).format('YYYY.MM.DD')}</View>
                         </View>
                         {card.user_memb_stat=='未使用'&&
-                          <View className='btn' onClick={()=>Taro.navigateTo({
-                            url:`/pages/home/storeDetail/index?id=${card.shop_id}`
-                          })}>
-                          去使用
+                          <View className={classNames(['btn',id==card._id&&'active'])}onClick={()=>{
+                            setId(card._id)}}>
+                          使用
                           </View>
                         }
                       </View>

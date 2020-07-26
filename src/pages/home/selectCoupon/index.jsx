@@ -14,16 +14,20 @@ export default function Index (){
   const [id,setId]=useState()
   const [selectCoupon,setSelectCoupon]=useState({})
   useEffect(()=>{
+    console.log(router.params)
     if(router.params.type==1){//表示是优惠券
       console.log(router.params.couponId)
       setId(router.params.couponId)
+      console.log(router.params.couponId)
     }
     network.Fetch({
       "obj":"user",
       "act":"list_user_discounts",
-      "shops_id":router.params.id||'o15937049856544559001',
+      "shop_id":router.params.id||'o15937049856544559001',
+      "begin_time":router.startTime|| dayjs(dayjs().format('YYYY-MM-DD')).unix(),
+      "end_time":router.endTime|| dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
       "page":1,
-      "limit":100
+      "limit":20
     }).then((data)=>{
       setCoupons(data.list)
       // setGetCoupons(data.ulist)
@@ -33,7 +37,8 @@ export default function Index (){
     })
   },[])
   const submit=()=>{
-  const arr=coupons.filter((item)=>id==item._id)
+    const arr=coupons.filter((item)=>id==item._id)
+    console.log(arr,'sdsds')
     Taro.setStorageSync('discount',{type:'优惠券',coupon:arr[0]})
     Taro.navigateBack({})
   }

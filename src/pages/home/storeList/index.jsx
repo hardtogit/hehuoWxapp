@@ -1,6 +1,6 @@
 
 
-import Taro, { Component,useEffect,useState} from "@tarojs/taro";
+import Taro, { Component,useEffect,useState,useRouter} from "@tarojs/taro";
 import network from '@/utils/network'
 import {
     View,
@@ -10,22 +10,22 @@ import {
     Swiper,
     SwiperItem
 } from "@tarojs/components";
-import OrderItem from "../../../components/OrderItem";
+import OrderItem from "../../../components/TeaCard";
 import "./index.scss";
 
 export default function Index() {
   const [empty,setEmpty]=useState(false)
   const [orders,setOrders]=useState([])
+  const router=useRouter()
   useEffect(()=>{
     network.Fetch({
       "obj":"user",
-      "act":"list_order",
-      status:'已预约',
-      "page":1,
-      "limit":100
+      "act":"find_nearby_shop",
+      latitude:router.params.latitude,
+      longitude:router.params.longitude,
     }).then((data)=>{
-      setOrders(data.list)
-      if((!data.list||data.list.length===0)){
+      setOrders(data.shop)
+      if((!data.shop||data.shop.length===0)){
         setEmpty(true)
       }
     })
@@ -33,24 +33,15 @@ export default function Index() {
   },[])
     return (
         <View className='openCode'>
-           {
-        empty&&
-        <View className='empty'>
-        <Image  className='emptyImg' src={require('../../../assets/img/no_data.png')}></Image>
-        <View className='emptyText'>
-          还没有已预约的订单
-        </View>
-      </View>
-      }
           {orders.map((order)=>{
               return(
                 <View className='item'>
-                <OrderItem order={order} />
+                <OrderItem tea={order} />
             </View>
               )
           })}
         </View>)
 }
 Index.config = {
-    navigationBarTitleText: '开门码'
+    navigationBarTitleText: '周边店铺'
   }

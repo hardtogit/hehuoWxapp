@@ -27,6 +27,7 @@ class Index extends Component{
       <View className='col'>
              <ListTemplate
             ref={(listRef)=>{this.listRef=listRef}}
+            emptyText="您暂时没有收藏的店铺"
             preLoad={false}
             listDataKey='colList'
             fetchFn={(params) =>

@@ -724,6 +724,208 @@
 					"pathName": "pages/home/sureOrder/index",
 					"query": "type=2",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/openCode/index",
+					"pathName": "pages/home/openCode/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/codeList/index",
+					"pathName": "pages/home/codeList/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/codeList/index",
+					"pathName": "pages/home/codeList/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/openCode/index",
+					"pathName": "pages/home/openCode/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/codeList/index",
+					"pathName": "pages/home/codeList/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/map/index",
+					"pathName": "pages/home/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index",
+					"pathName": "pages/phone/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/map/index",
+					"pathName": "pages/home/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/phone/index",
+					"pathName": "pages/phone/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/map/index",
+					"pathName": "pages/home/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/phone/index",
+					"pathName": "pages/phone/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/map/index",
+					"pathName": "pages/home/map/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/appointment/index",
+					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/appointment/index",
+					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/success/index",
+					"pathName": "pages/home/success/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/appointment/index",
+					"pathName": "pages/home/appointment/index",
+					"scene": null
 				}
 			]
 		}

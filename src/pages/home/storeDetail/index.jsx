@@ -1,4 +1,4 @@
-import Taro, { Component, useRouter ,useEffect,useState} from "@tarojs/taro";
+import Taro, { Component, useRouter ,useEffect,useState,useDidShow,useShareAppMessage} from "@tarojs/taro";
 import network from '@/utils/network'
 import {downUrl} from '@/config'
 import {
@@ -10,9 +10,8 @@ import {
   SwiperItem
 } from "@tarojs/components";
 import RoomItem from "../../../components/RoomItem";
-// import RoomItem from "../../../components/CouponSelectItem";
 import GetCoupon from "./components/GetCoupon";
-
+import GetCard from "./components/GetCard";
 
 import "./index.scss";
 
@@ -20,6 +19,8 @@ export default function Index() {
   const router=useRouter()
   const [entity,setEntity]=useState()
   const [visibleOne,setVisibleOne]=useState(false)
+  const [visibleTwo,setVisibletwo]=useState(false)
+
 
   const openLocation=()=>{
     console.log(entity.shop)
@@ -41,11 +42,14 @@ export default function Index() {
          icon:'none'
        })
     })
-
-
-
   }
-  useEffect(() => {
+  useShareAppMessage((options)=>{
+    return {
+      title:entity.shop.shop_name,
+      path:'/pages/home/storeDetail/index?id='+router.params.id,
+    }
+  })
+  useDidShow(() => {
     network.Fetch({
       "obj":"user",
 	"act":"details_shops",
@@ -56,9 +60,11 @@ export default function Index() {
       })
       setEntity(res)
     })
-  }, [router.params.id])
+  })
   return (
     <View className='store_detail'>
+      {visibleOne&&<GetCoupon visible shop_id={router.params.id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} />}
+      {visibleTwo&& <GetCard timeCards={entity.memb_card} shop_id={router.params.id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard> }
       <View className='swiper_container'>
         <Swiper
           className='swiper'
@@ -88,17 +94,23 @@ export default function Index() {
           </View>
         </View>
         <View className='labels'>
-          <View className='label'>投影仪</View>
-          <View className='label'>充电宝</View>
+          {entity.shop.features_serve.map((text)=>{
+              return (
+              <View className='label'>{text}</View>
+              )
+          })}
         </View>
 
-        <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${router.params.id||'o15937049856544559001'}`})}>
+        {/* <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${router.params.id||'o15937049856544559001'}`})}> */}
+        <View className='bar one' onClick={()=>setVisibleOne(true)}>
+
           <Image className='left' src={require('../../../assets/img/home/item_one.png')}></Image>
           <View className='center'>限时优惠折扣</View>
           <View className='text'>我要领取</View>
           <Image className='arrow' src={require('../../../assets/img/home/right_one.png')}></Image>
         </View>
-        <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',entity.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}>
+        {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',entity.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
+        <View className='bar two' onClick={()=>setVisibletwo(true)}>
         <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
           <View className='center'>次卡优惠购买</View>
           <View className='text'>够买优惠次数</View>
@@ -110,7 +122,7 @@ export default function Index() {
           </View>
           {entity.room.map((room)=>{
             return(
-              <RoomItem room={room} />
+              <RoomItem room={room} shop_id={router.params.id}/>
             )
           })}
         </View>

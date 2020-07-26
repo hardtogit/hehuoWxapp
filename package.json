@@ -32,9 +32,9 @@
 		"@tarojs/components": "2.2.9",
 		"@tarojs/components-qa": "2.2.9",
 		"@tarojs/mobx": "2.2.9",
-    "@tarojs/mobx-h5": "2.2.9",
-    "@tarojs/plugin-terser":"2.2.9",
+		"@tarojs/mobx-h5": "2.2.9",
 		"@tarojs/plugin-sass": "^2.2.9",
+		"@tarojs/plugin-terser": "2.2.9",
 		"@tarojs/router": "2.2.9",
 		"@tarojs/taro": "2.2.9",
 		"@tarojs/taro-alipay": "2.2.9",
@@ -48,8 +48,10 @@
 		"mobx": "4.8.0",
 		"nerv-devtools": "^1.5.7",
 		"nervjs": "^1.5.7",
+		"qrcode": "^1.4.4",
 		"regenerator-runtime": "0.11.1",
-		"taro-ui": "^2.3.4"
+		"taro-ui": "^2.3.4",
+		"weapp-qrcode": "^1.0.0"
 	},
 	"devDependencies": {
 		"@tarojs/cli": "2.2.9",

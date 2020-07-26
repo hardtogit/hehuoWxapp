@@ -33,7 +33,8 @@ const Index = () => {
         network.Fetch({
             "obj":"user",
             "act":"set_personal",
-            "phone":value
+            "phone":value,
+            type:2
         }).then((data) => {
             Taro.showToast({
                 title:'绑定成功',
@@ -41,7 +42,7 @@ const Index = () => {
                 duration: 2000
             })
             setTimeout(()=>{
-                Taro.navigateBack({})    
+                Taro.navigateBack({})
             },2000)
         })
 
@@ -62,7 +63,7 @@ const Index = () => {
         <View className='btn' onClick={submit}>
             保存
         </View>
-        </View> 
+        </View>
     )
 }
 Index.config = {

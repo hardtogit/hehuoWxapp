@@ -15,6 +15,8 @@ const Index = () => {
       "act": "get_personal"
     }).then((data) => {
       setPerson(data.personal)
+      const userInfo=Taro.getStorageSync('userInfo')
+      Taro.setStorageSync('userInfo',{...userInfo,...data.personal})
     })
 
 
@@ -39,15 +41,15 @@ const Index = () => {
         </View>
         <View className='bottom'>
           <View className='item' onClick={()=>Taro.navigateTo({url:'/pages/me/coupon/index'})}>
-            <View className='num'>22</View>
+  <View className='num'>{person.disc_count}</View>
             <View className='text'>优惠券</View>
           </View>
           <View className='item' onClick={() => Taro.navigateTo({ url: '/pages/me/wallet/index' })}>
-            <View className='num'>22</View>
+  <View className='num'>{parseFloat(person.balance||0).toFixed(2)}</View>
             <View className='text'>钱包</View>
           </View>
           <View className='item'>
-            <View className='num'>22</View>
+  <View className='num'>{person.integral}</View>
             <View className='text'>积分</View>
           </View>
         </View>

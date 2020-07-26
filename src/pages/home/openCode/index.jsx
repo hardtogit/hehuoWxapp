@@ -1,10 +1,13 @@
 
 
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component,useEffect,useState,useDidShow} from "@tarojs/taro";
+import dayjs from 'dayjs'
+import drawQrcode from 'weapp-qrcode'
 import {
   View,
   Button,
   Text,
+  Canvas,
   Image,
   Swiper,
   SwiperItem
@@ -13,6 +16,18 @@ import {
 import "./index.scss";
 
 export default function Index() {
+  const [order,setOrder]=useState({})
+  const [imgUrl,setImageurl] = useState('')
+  useEffect(()=>{
+      const currentOrder=Taro.getStorageSync('currentOrder')
+      setOrder(currentOrder)
+      drawQrcode({
+        width: 160,
+        height: 160,
+        canvasId: 'myQrcode',
+        text: currentOrder._id
+      })
+  },[])
   return (
     <View className='openCode'>
       <View className='tip'>
@@ -21,24 +36,30 @@ export default function Index() {
       <View className='content'>
         <View className='top'>
           <View className='title'>开门请出示</View>
-          <View className='qrcode'></View>  
+            <canvas style='width: 160px; height: 160px;margin:20px auto' canvas-id='myQrcode'></canvas>
         </View>
         <View className='bottom'>
           <View className='item'>
             <View className='left'>包间名</View>
-            <View className='right'>大黄峰</View>
+  <View className='right'>{order.room_name}</View>
           </View>
           <View className='item'>
             <View className='left'>地址</View>
-            <View className='right'>大黄峰</View>
+  <View className='right'>{order.shop_name}</View>
           </View>
           <View className='item'>
             <View className='left'>电话</View>
-            <View className='right'>大黄峰</View>
+  <View className='right'>{order.serve_phone}</View>
           </View>
           <View className='item'>
             <View className='left'>有效期</View>
-            <View className='right'>大黄峰</View>
+  <View className='right'>
+   {order.service_time?
+    <Text>  {
+    dayjs(order.service_time.begin_time*1000).format('YYYY.MM.DD HH:mm')
+  }-{dayjs(order.service_time.end_time*1000).format('YYYY.MM.DD HH:mm')}
+  </Text>:'一口价时段'}
+  </View>
           </View>
         </View>
 

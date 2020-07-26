@@ -27,7 +27,7 @@ const store = {
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index","pages/home/buyTimesCard/index","pages/home/selectTimeCard/index","pages/home/selectCoupon/index","pages/home/appointment/index","pages/home/buyCoupon/index","pages/home/storeDetail/index","pages/home/roomDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index","pages/me/problem/index","pages/me/apply/index","pages/me/timesCard/index","pages/me/record/index","pages/home/sureOrder/index","pages/home/success/index"],
+    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index","pages/phone/index","pages/home/buyTimesCard/index","pages/home/selectTimeCard/index","pages/home/selectCoupon/index","pages/home/appointment/index","pages/home/buyCoupon/index","pages/home/storeDetail/index","pages/home/roomDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index","pages/me/problem/index","pages/me/apply/index","pages/me/timesCard/index","pages/me/record/index","pages/home/sureOrder/index","pages/home/success/index","pages/home/storeList/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",

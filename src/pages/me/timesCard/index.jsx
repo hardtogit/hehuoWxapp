@@ -18,6 +18,9 @@ class Index extends Component{
       tabIndex:1
     }
   }
+  onReachBottom(){
+    this.listRef.getData()
+  }
   render(){
     const {tabIndex}=this.state
     const {cardList}=this.props.listDataStore

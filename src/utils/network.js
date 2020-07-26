@@ -1,4 +1,7 @@
+import Taro from "@tarojs/taro"
 import apiModel from "../assets/js/APIConnectionWX.min";
+
+
 let callBackFn = {};
 let apiconn = new apiModel.APIConnection();
 let loginFlag=false;
@@ -8,26 +11,27 @@ apiconn.state_changed_handler = function() {
 };
 apiconn.response_received_handler = function(jo) {
   if (jo.ustr) {
-    if(jo.ustr=="未登录"){
-      if(loginFlag==false){
-        wx.navigateTo({
-          url:'/pages/login/index'
-        })
-        loginFlag=true
-        setTimeout(()=>{
-           loginFlag=false 
-        },20000)
-        return
-      }
-   
-    }
-    wx.showToast({ icon: "none", title: jo.ustr });
     if (
       callBackFn[jo.obj + "_" + jo.act] &&
       callBackFn[jo.obj + "_" + jo.act].length
     ) {
       callBackFn[jo.obj + "_" + jo.act].shift()(jo, "error");
     }
+    if(jo.ustr=="未登录"){
+      if(loginFlag==false){
+        Taro.navigateTo({
+          url:'/pages/login/index'
+        })
+        loginFlag=true
+        setTimeout(()=>{
+           loginFlag=false
+        },3000)
+        return
+      }
+
+    }
+    Taro.showToast({ icon: "none", title: jo.ustr });
+
   } else {
     if (
       callBackFn[jo.obj + "_" + jo.act] &&

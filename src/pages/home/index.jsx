@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import {inject,observer} from '@tarojs/mobx'
 import TeaCard from '@/components/TeaCard'
 import network from '@/utils/network'
+import QQMapWX from '../../assets/js/qqmap-wx-jssdk.min.js'
 import CouponModal from './components/CouponModal'
 import { downUrl } from '../../config'
 
@@ -19,12 +20,28 @@ class Index extends Component{
     this.state={
       visibleHelp:false,
       visibleCoupon:false,
+      visibleClassfly:false,
       typeId:null,
       banner:[],
-      type:[]
+      type:[],
+      location:'定位中...',
+      locations:''
     }
   }
-  componentDidShow(){
+  // componentDidMount(){
+  //   Taro.requestSubscribeMessage({
+  //     tmplIds: ['IJpLmPETjSPBTBqPoZMmg_At0iqsFRPWYWgRHr0A86M'],
+  //     success (res) {
+
+  //     }
+  //   })
+  // }
+  componentDidMount(){
+    const $this=this
+    const  qqmapsdk = new QQMapWX({
+      key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
+    });
+
     network.Fetch({
       "obj": "user",
       "act": "list_advertising"
@@ -37,22 +54,44 @@ class Index extends Component{
       "obj": "user",
       "act": "list_category"
     }).then((result) => {
-      this.setState({
-        type:result.list,
-        typeId:result.list[0]._id
-      },()=>{
-        this.listRef.initLoad()
-      })
+      qqmapsdk.reverseGeocoder({
+        success:function(results){
+              console.log(results)
+              $this.setState({
+                location:results.result.address_component.city+results.result.address_component.district
+              })
+              $this.setState({
+                type:result.list,
+                typeId:result.list[0]._id,
+                locations:results.result.location
+              },()=>{
+                $this.listRef.initLoad()
+              })
+          }
+        })
+
+
+
     })
   }
   onReachBottom(){
     this.listRef.getData()
   }
+  onShareAppMessage(options){
+      return {
+        title:'精龟叙',
+        path:'/pages/home/index',
+      }
+  }
+
   render(){
     const {  visibleHelp,
       visibleCoupon,
+      visibleClassfly,
       typeId,
       banner,
+      location,
+      locations,
       type}=this.state
       const {teaList}=this.props.listDataStore
     return (
@@ -61,18 +100,24 @@ class Index extends Component{
           <View className='toolbar'>
             <View className='left'>
               <Image className='location' src={require('../../assets/img/home/location_one.png')}></Image>
-              <Text className='text'>上海市晋安区</Text>
+              <Text className='text'>{location}</Text>
               <Image className='arrow_down' src={require('../../assets/img/home/arrow_down.png')}></Image>
             </View>
             <View className='right'>
-              <View className='cooperation'>
+              <View className='cooperation' onClick={()=>Taro.navigateTo({url:'/pages/me/apply/index'})}>
                 <Image className='icon' src={require('../../assets/img/home/cooperation.png')}></Image>
                 <Text className='label'>加盟合作</Text>
               </View>
 
-              <View className='store'>
+              <View className='store' onClick={()=>{
+                Taro.showModal({
+                  title:'温馨提示',
+                  content:'正在开发中，请耐心等待',
+
+                })
+              }}>
                 <Image className='icon' src={require('../../assets/img/home/store.png')}></Image>
-                <Text className='label'>积分商城</Text>
+                <Text className='label'>优选商城</Text>
               </View>
             </View>
           </View>
@@ -98,7 +143,7 @@ class Index extends Component{
             <View className='function'>
               <Image className='icon' src={require('../../assets/img/home/fn_one.png')}></Image>
               <Text className='text'>
-                我来续单
+                我要续单
          </Text>
             </View>
             <View className='function' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index' })}>
@@ -123,14 +168,27 @@ class Index extends Component{
         </View>
         <View className='body'>
           <View className='tabs'>
-            {type.map((item) => (
-              <View className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
+            {type.map((item,i) => {
+              if(i<3){
+                return(
+                  <View className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
                     this.listRef.initLoad()
               })}}>
                 {item.category_name}
+                <View className='bar'></View>
               </View>
-            ))}
-
+              )
+              }
+            })}
+            {type.length>3&&
+            <View className='more' onClick={()=>{
+              this.setState({
+                visibleClassfly:true
+              })
+            }}>
+              更多<Image className='icon' src={require('../../assets/img/me/arrow_right.png')}></Image>
+            </View>
+            }
           </View>
           <ListTemplate ref={(listRef)=>{this.listRef=listRef}} preLoad={false}
             listDataKey='teaList'
@@ -139,11 +197,13 @@ class Index extends Component{
               ...params,
               obj: "user",
               act: "list_shops",
-              category_id: typeId
+              category_id: typeId,
+              latitude:locations.lat,
+              longitude:locations.lng
             })
           }
           >
-               {teaList.map((tea)=>{
+          {teaList.map((tea)=>{
             return(
               <View className='teaContainer'>
               <TeaCard tea={tea} key={tea._id} />
@@ -157,15 +217,15 @@ class Index extends Component{
         <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
           <View className='title'>服务中心</View>
           <View className='funs'>
-            <View className='fun '>
+            <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
               <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
               <Text className='text'>联系我们</Text>
             </View>
-            <View className='fun'>
+            <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
               <Image className='icon two' src={require("../../assets/img/home/help2.png")}></Image>
               <Text className='text'>关于我们</Text>
             </View>
-            <View className='fun '>
+            <View className='fun ' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
               <Image className='icon three' src={require("../../assets/img/home/help3.png")}></Image>
               <Text className='text'> 常见问题</Text>
             </View>
@@ -173,6 +233,27 @@ class Index extends Component{
           <View className='btn' onClick={() => this.setState({ visibleHelp:false})}>
             取消
         </View>
+        </AtFloatLayout>
+        <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly:false})}>
+          <View className='head'>
+            <View className="text">全部服务</View>
+            <Image className='icon' onClick={()=>this.setState({
+              visibleClassfly:false
+            })} src={require('../../assets/img/close.png')}></Image>
+            </View>
+          <View className='funs'>
+          {type.map((item,i) => {
+                return(<View className='pfun'
+                onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
+                  this.listRef.initLoad()
+                  })}}
+                >
+                    <Image className='icon' src={downUrl+item.category_fid}></Image>
+                         <Text className='text'>{item.category_name}</Text>
+                     </View>
+                  )
+            })}
+          </View>
         </AtFloatLayout>
           {visibleCoupon&&
           <CouponModal></CouponModal>

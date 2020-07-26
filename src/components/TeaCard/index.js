@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import {downUrl} from '../../config'
 import {View,Image} from '@tarojs/components'
+import {countDistance} from '@/utils'
 import './index.scss'
 
 export default function Index(props){
@@ -10,7 +11,7 @@ return(
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
      <Image className='tag' src={require('../../assets/img/home/tag.png')}></Image>
      <View className='time'>
-        {tea.label} | {tea.business_time}
+        {tea.label} | {tea.business_time=="00:00-00:00"?'24小时':tea.business_time}
      </View>
      <View className='content'>
        <View className='title'>
@@ -26,11 +27,16 @@ return(
          })}
        </View>
        <View className='dis'>
-       {tea.distance}
+       {countDistance(tea.distance) }
        </View>
        <View className='address'>
          {tea.address}
        </View>
+     </View>
+     <View className='price'>
+         <View className='unit'>¥</View>
+        <View className='num'>{tea.min_price}</View>
+         <View className='text'>起</View>
      </View>
    </View>
 )

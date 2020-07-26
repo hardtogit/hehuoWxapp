@@ -15,7 +15,7 @@ const Index = (props) => {
     "obj":"user",
 		"act":"add_card_user",
 		"memb_id":timeCard._id,
-    "shops_id":shop_id||'o15935343187253150939',
+    "shop_id":shop_id||'o15935343187253150939',
      payment_type
     }).then((data)=>{
       setVisible(false)
@@ -42,7 +42,7 @@ const Index = (props) => {
         <View className='top'>
           <View className='inner'>
             <View className='left'>
-            <View className='title'>{timeCard.memb_off_time}/次 {timeCard.memb_purchase_times} 即赠 {timeCard.memb_discounts_times}使用卷</View>
+             <View className='title'>{timeCard.memb_name}</View>
             <View className='time'>活动有效期：{`${dayjs(timeCard.effective_time*1000).format('YYYY.MM.DD')}-${dayjs(timeCard.expire_time*1000).format('YYYY.MM.DD')}`}</View>
             </View>
           </View>

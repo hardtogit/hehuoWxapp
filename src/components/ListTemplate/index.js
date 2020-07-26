@@ -36,11 +36,16 @@ class Index extends Taro.Component {
       let arr = [];
       if (this.page === 1) {
         arr = data.list;
+        if(data.list.length===0){
+            this.setState({
+              empty:true
+            })
+        }
       } else {
         arr = [...listDataStore[listDataKey], ...data.list];
       }
       this.page+=1;
-      listDataStore.updateListData({key:listDataKey,listData:arr})
+      listDataStore.updateListData({key:listDataKey,listData:[...arr]})
     }).catch(()=>{
       Taro.hideLoading({})
     });
@@ -55,10 +60,19 @@ class Index extends Taro.Component {
   };
 
   render() {
-    const { dataSource } = this.state;
-    const {renderList,children}=this.props
+    const { dataSource,empty } = this.state;
+    const {renderList,children,emptyText}=this.props
     return (
       <View>
+     {
+        empty&&
+        <View className='empty'>
+        <Image  className='emptyImg' src={require('../../assets/img/no_data.png')}></Image>
+        <View className='emptyText'>
+          {emptyText}
+        </View>
+      </View>
+      }
         {children}
       </View>
     );

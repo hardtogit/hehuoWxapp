@@ -23,7 +23,7 @@ const Index = () => {
             network.Fetch({
                obj:'loginInfo',
                act:'get',
-               code:res.code 
+               code:res.code
             }).then((data)=>{
                 console.log(data)
                 network.Fetch({
@@ -37,19 +37,24 @@ const Index = () => {
                     console.log(result)
                     Taro.setStorageSync('userInfo', result.user_info)
                     Taro.setStorageSync('sess',result.sess)
-                    Taro.navigateBack({})
-                }) 
-          
+                    if(result.user_info.phone){
+                      Taro.navigateBack({})
+                    }else{
+                      Taro.redirectTo({url:'/pages/phone/index'})
+                    }
+
+                })
+
             })
 
            }
-         }) 
+         })
     }
   }
   return (
     <View className='me'>
       <Image className='logo' src={require('../../assets/img/me/logo.png')}></Image>
-      <Button className='btn' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>授权登陆</Button> 
+      <Button className='btn' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>授权登陆</Button>
     </View>
   )
 }

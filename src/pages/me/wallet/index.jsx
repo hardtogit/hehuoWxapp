@@ -57,17 +57,17 @@ const Index = () => {
     return (
         <View className='wallet'>
              <AtModal
-        isOpened={visible}
-        title='提示'
-        confirmText='确定'
-        onClose={()=>setVisible(false)}
-        onConfirm={()=>setVisible(false)}
-        content='如果需要开具发票，请联系门店负责人开具'
-      />
+                isOpened={visible}
+                title='提示'
+                confirmText='确定'
+                onClose={()=>setVisible(false)}
+                onConfirm={()=>setVisible(false)}
+                content='如果需要开具发票，请联系门店负责人开具'
+              />
             <View className='header'>
                 <View className='detail' onClick={()=>{Taro.navigateTo({url:'/pages/me/record/index'})}}>明细</View>
                 <View className='money'>
-                    {entity.balance}
+                    {parseFloat(entity.balance||0).toFixed(2)}
             </View>
                 <View className='total'>总额（元）</View>
             </View>

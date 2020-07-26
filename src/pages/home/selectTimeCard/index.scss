@@ -90,7 +90,12 @@ page{
         font-size:24px;
         font-family:PingFang SC;
         font-weight:bold;
-        color:rgba(18,164,231,1);
+        color:#222;
+        &.active{
+          // background:rgba(0,160,233,1);
+          font-size:28px;
+          color: rgba(0,160,233,1);
+        }
       }
     }
   }

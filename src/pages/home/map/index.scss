@@ -8,7 +8,7 @@
         align-items: center;
         justify-content: center;
         .input{
-            width: 634px; 
+            width: 634px;
             height: 60px;
             background-color: #EFF3F6;
             border-radius: 30px;
@@ -42,9 +42,11 @@
         border-radius:40px;
         position: absolute;
         color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        text-align: center;
+        line-height: 80px;
         font-size: 32px;
         bottom: 50px;
         left: 50%;

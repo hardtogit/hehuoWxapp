@@ -6,7 +6,7 @@ import "./index.scss";
 export default function Index (props){
   const {col}=props
     return(
-        <View className='colItem' onClick={()=>{Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${col.shops_id}`})}}>
+        <View className='colItem' onClick={()=>{Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${col.shop_id}`})}}>
             <View className='label'>{col.shop_name} | {col.business_time}</View>
             <Image className='start' src={require('../../assets/img/me/start.png')}></Image>
             <Image className='cover' src={downUrl+col.home_fid}></Image>
