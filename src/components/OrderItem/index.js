@@ -5,24 +5,24 @@ import dayjs from "dayjs";
 import "./index.scss";
 
 export default function Index(props) {
-  const { order } = props;
+  const { order ,type} = props;
   const status = 1;
   return (
-    <View className="order_item">
-      <View className="top at-row">
-        <View className="at-col at-col-8 left">订单编号:{order._id}</View>
-        <View className="at-col right">{order.status}</View>
+    <View className='order_item'>
+      <View className='top at-row'>
+        <View className='at-col at-col-8 left'>订单编号:{order._id}</View>
+        <View className='at-col right'>{order.status}</View>
       </View>
-      <View className="body">
-        <View className="left">
+      <View className='body'>
+        <View className='left'>
           <Image
-            className="cover"
+            className='cover'
             src={downUrl+order.shop_home_fid}
           ></Image>
         </View>
-        <View className="right">
-          <View className="name">{order.room_name}</View>
-          <View className="text">
+        <View className='right'>
+          <View className='name'>{order.room_name}</View>
+          <View className='text'>
             {dayjs(
               order.service_time && order.service_time.begin_time * 1000
             ).format("MM月DD日 HH:mm")}{" "}
@@ -31,19 +31,19 @@ export default function Index(props) {
               order.service_time && order.service_time.end_time * 1000
             ).format("MM月DD日 HH:mm")}
           </View>
-          <View className="text">
+          <View className='text'>
             共计{order.service_time && order.service_time.total_time}小时
           </View>
         </View>
       </View>
-      <View className="bottom">
-        <View className="left">
-          <View className="label">合计：</View>
-          <View className="unit">¥</View>
-          <View className="num">{order.payment_amount}</View>
+      <View className='bottom'>
+        <View className='left'>
+          <View className='label'>合计：</View>
+          <View className='unit'>¥</View>
+          <View className='num'>{order.payment_amount}</View>
         </View>
-        <View className="right">
-          {order.status == "待支付" && <View className="btn" onClick={()=>{
+        <View className='right'>
+          {order.status == "待支付" && <View className='btn' onClick={()=>{
             Taro.requestPayment({
               ...order.pay_info,
               success:function(){
@@ -53,20 +53,34 @@ export default function Index(props) {
                 })
               }
             })
-          }}>去支付</View>}
-          {order.status == "已预约" && (
+          }}
+          >去支付</View>}
+          {(order.status == "已预约"&&type!=='continue' )&& (
             <View
-              className="btn"
+              className='btn'
               onClick={() => {
                 Taro.setStorageSync("currentOrder", order);
-                Taro.navigateTo({ url: "/pages/home/openCode/index" });
+                Taro.navigateTo({ url: `/pages/home/openCode/index?id=${order._id}` });
               }}
             >
               查看开门码
             </View>
           )}
-          {order.status == "已使用" && <View className="btn">续费</View>}
-          {status == 3 && <View className="btn">删除订单</View>}
+          {
+            type==='continue'&&
+            <View
+              className='btn'
+              onClick={() => {
+              Taro.setStorageSync("continueOrder", order);
+              Taro.navigateTo({ url: `/pages/home/continueOrder/index?id=${order.room_id}&shop_id=${order.shop_id}&type=continue` });
+            }}
+            >
+             我要续单
+          </View>
+          }
+
+          {order.status == "已使用" && <View className='btn'>续费</View>}
+          {status == 3 && <View className='btn'>删除订单</View>}
         </View>
       </View>
     </View>

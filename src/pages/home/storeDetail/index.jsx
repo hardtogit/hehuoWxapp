@@ -1,26 +1,38 @@
 import Taro, { Component, useRouter ,useEffect,useState,useDidShow,useShareAppMessage} from "@tarojs/taro";
 import network from '@/utils/network'
 import {downUrl} from '@/config'
+import {countDistance} from '@/utils'
 import {
   View,
   Button,
-  Text,
+  Video,
   Image,
   Swiper,
   SwiperItem
 } from "@tarojs/components";
+import classNames from 'classnames'
+import ChoicePayType from '@/components/ChoicePayType'
 import RoomItem from "../../../components/RoomItem";
+import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js'
 import GetCoupon from "./components/GetCoupon";
 import GetCard from "./components/GetCard";
 
+
 import "./index.scss";
+
+const  qqmapsdk = new QQMapWX({
+  key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
+});
 
 export default function Index() {
   const router=useRouter()
   const [entity,setEntity]=useState()
   const [visibleOne,setVisibleOne]=useState(false)
   const [visibleTwo,setVisibletwo]=useState(false)
-
+  const [visibleThree,setVisibleThree]=useState(false)
+  const [timeCard,setTimeCard]=useState({})
+  const [current,setCurrent]=useState(0)
+  const [type,setType]=useState('img')
 
   const openLocation=()=>{
     console.log(entity.shop)
@@ -35,12 +47,37 @@ export default function Index() {
     network.Fetch({
       "obj":"user",
       "act":"add_shop_collect",
-      "shop_id":router.params.id||'o15937049856544559001',
+      "shop_id":router.params.id||'o15956078815923459529',
     }).then((res)=>{
        Taro.showToast({
          title:'收藏成功',
          icon:'none'
        })
+    })
+  }
+  const buy=(payment_type)=>{
+    network.Fetch({
+    "obj":"user",
+		"act":"add_card_user",
+		"memb_id":timeCard._id,
+    "shop_id":router.params.id||'o15956078815923459529',
+     payment_type
+    }).then((data)=>{
+      setVisibleThree(false)
+      Taro.requestPayment({
+        ...data.pay_info,
+        success:function(){
+          Taro.showToast({
+            title:'购买成功',
+            icon:'none'
+          })
+          setTimeout(()=>{
+            Taro.navigateBack({})
+          },1000)
+        }
+      })
+
+
     })
   }
   useShareAppMessage((options)=>{
@@ -50,44 +87,90 @@ export default function Index() {
     }
   })
   useDidShow(() => {
-    network.Fetch({
-      "obj":"user",
-	"act":"details_shops",
-	"shop_id":router.params.id||'o15937049856544559001',
-    }).then((res)=>{
-      Taro.setNavigationBarTitle({
-        title:res.shop.shop_name
+    if(Taro.getStorageSync('myLocation')){
+      network.Fetch({
+        "obj":"user",
+        "act":"details_shops",
+        "shop_id":router.params.id||'o15956078815923459529',
+        "latitude":Taro.getStorageSync('myLocation').lat,
+        "longitude":Taro.getStorageSync('myLocation').lng,
+      }).then((res)=>{
+        Taro.setNavigationBarTitle({
+          title:res.shop.shop_name
+        })
+        setEntity(res)
       })
-      setEntity(res)
-    })
+    }else{
+      qqmapsdk.reverseGeocoder({
+        success:function(results){
+          network.Fetch({
+            "obj":"user",
+            "act":"details_shops",
+            "shop_id":router.params.id||'o15956078815923459529',
+            "latitude":results.result.location.lat,
+            "longitude":results.result.location.lng,
+          }).then((res)=>{
+            Taro.setNavigationBarTitle({
+              title:res.shop.shop_name
+            })
+            setEntity(res)
+          })
+          Taro.setStorageSync('myLocation',results.result.location)
+        }
+      })
+    }
+
+
+
   })
+  const openPay=(selectTimeCard)=>{
+    setTimeCard(selectTimeCard)
+    setVisibleThree(true)
+  }
   return (
     <View className='store_detail'>
-      {visibleOne&&<GetCoupon visible shop_id={router.params.id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} />}
-      {visibleTwo&& <GetCard timeCards={entity.memb_card} shop_id={router.params.id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard> }
+      {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
+      {visibleOne&&<View className='getCoupon'> <GetCoupon visible shop_id={router.params.id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>}
+      {visibleTwo&& <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard></View> }
       <View className='swiper_container'>
         <Swiper
-          className='swiper'
-          indicatorColor='#999'
-          indicatorActiveColor='#333'
-          circular
-          indicatorDots
-          autoplay
-        >
-          {entity.shop.shop_fids.map((url)=>(<SwiperItem>
-            <Image
-              className='slide'
-              src={downUrl+url}
-            ></Image>
-          </SwiperItem>))}
-        </Swiper>
+        className='swiper'
+        ndicatorDots={false}
+        circular
+        autoplay
+        onChange={(e)=>{
+            setCurrent(e.detail.current)
+        }}
+      >
+          {
+            entity.shop.vadio &&
+              <SwiperItem>
+                <Video src={downUrl+entity.shop.vadio} className='video'/>
+              </SwiperItem>
+          }
+        {entity.shop.shop_fids.map((url)=>(<SwiperItem>
+          <Image
+            className='slide'
+            src={downUrl+url}
+          ></Image>
+        </SwiperItem>))}
+      </Swiper>
+
+
+          <View className='count'>
+           {current+1}/{ entity.shop.vadio?entity.shop.shop_fids.length+1:entity.shop.shop_fids.length}
+          </View>
+
+
+
+
       </View>
       <View className='content'>
   <View className='title'>{ entity.shop.label}|{entity.shop.shop_name}</View>
         <View className='address' onClick={()=>Taro.openLocation({})}>
           <View className='text'>
-  <View>{entity.shop.address}</View>
-  <View>距离您有{entity.shop.distance}km</View>
+          <View>{entity.shop.address}</View>
+          <View>距离您有{countDistance(entity.shop.distance)}</View>
           </View>
           <View className='icon' onClick={openLocation}>
             <Image className='img' src={require('../../../assets/img/home/location_icon.png')}></Image>
@@ -154,7 +237,7 @@ export default function Index() {
                   收藏
                 </View>
               </View>
-              <View className='fn'>
+              <View className='fn' onClick={()=>{Taro.makePhoneCall({phoneNumber:entity.shop.serve_phone})}}>
                 <Image  className='img' src={require('../../../assets/img/home/sd4.png')}></Image>
                 <View className='text'>
                   客服

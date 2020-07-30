@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import network from '@/utils/network'
 import dayjs from 'dayjs'
 import {AtFloatLayout} from 'taro-ui'
-import { View, Button, Text,Image } from "@tarojs/components";
+import { View, ScrollView, Text,Image } from "@tarojs/components";
 import "./index.scss";
 
 
@@ -58,11 +58,12 @@ export default (props) => {
     })
   },[])
   return (
+    <View className='getCoupon'>
     <AtFloatLayout isOpened={visible} >
       <View className='modal'>
        <View className='header'>
          <View className='left'>优惠券</View>
-          <View className='right' onClick={onCancel}>X</View>
+         <Image className='right' src={require('../../../../../assets/img/home/close.png')} onClick={onCancel}></Image>
        </View>
             {
         empty&&
@@ -73,6 +74,7 @@ export default (props) => {
         </View>
       </View>
       }
+      <ScrollView scrollY className='all'>
       {coupons.map((coupon)=>{
         return(
           <View className={classNames(['coupon'])}>
@@ -115,11 +117,13 @@ export default (props) => {
         </View>
         )
       })}
+      </ScrollView>
       <View className='btns' onClick={onCancel}>
          确认
       </View>
       </View>
     </AtFloatLayout>
+    </View>
   )
 }
 

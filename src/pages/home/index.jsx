@@ -28,14 +28,6 @@ class Index extends Component{
       locations:''
     }
   }
-  // componentDidMount(){
-  //   Taro.requestSubscribeMessage({
-  //     tmplIds: ['IJpLmPETjSPBTBqPoZMmg_At0iqsFRPWYWgRHr0A86M'],
-  //     success (res) {
-
-  //     }
-  //   })
-  // }
   componentDidMount(){
     const $this=this
     const  qqmapsdk = new QQMapWX({
@@ -67,6 +59,7 @@ class Index extends Component{
               },()=>{
                 $this.listRef.initLoad()
               })
+              Taro.setStorageSync('myLocation',results.result.location)
           }
         })
 
@@ -95,7 +88,7 @@ class Index extends Component{
       type}=this.state
       const {teaList}=this.props.listDataStore
     return (
-      <View>
+      <View className='home'>
         <View className='header'>
           <View className='toolbar'>
             <View className='left'>
@@ -139,12 +132,12 @@ class Index extends Component{
               })}
             </Swiper>
           </View>
-          <View className='functions'>
-            <View className='function'>
+          <View className='functions' >
+            <View className='function' onClick={()=>Taro.navigateTo({url:'/pages/home/continueList/index'})}>
               <Image className='icon' src={require('../../assets/img/home/fn_one.png')}></Image>
               <Text className='text'>
                 我要续单
-         </Text>
+            </Text>
             </View>
             <View className='function' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index' })}>
               <Image className='icon' src={require('../../assets/img/home/fn_two.png')}></Image>
@@ -169,7 +162,7 @@ class Index extends Component{
         <View className='body'>
           <View className='tabs'>
             {type.map((item,i) => {
-              if(i<3){
+              if(i<4){
                 return(
                   <View className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
                     this.listRef.initLoad()
@@ -180,7 +173,7 @@ class Index extends Component{
               )
               }
             })}
-            {type.length>3&&
+            {type.length>4&&
             <View className='more' onClick={()=>{
               this.setState({
                 visibleClassfly:true
@@ -213,48 +206,48 @@ class Index extends Component{
             }
           </ListTemplate>
         </View>
-
-        <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
-          <View className='title'>服务中心</View>
-          <View className='funs'>
-            <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
-              <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
-              <Text className='text'>联系我们</Text>
+        <View className='normal'>
+          <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
+            <View className='title'>服务中心</View>
+            <View className='funs'>
+              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
+                <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
+                <Text className='text'>联系我们</Text>
+              </View>
+              <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
+                <Image className='icon two' src={require("../../assets/img/home/help2.png")}></Image>
+                <Text className='text'>关于我们</Text>
+              </View>
+              <View className='fun ' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
+                <Image className='icon three' src={require("../../assets/img/home/help3.png")}></Image>
+                <Text className='text'> 常见问题</Text>
+              </View>
             </View>
-            <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
-              <Image className='icon two' src={require("../../assets/img/home/help2.png")}></Image>
-              <Text className='text'>关于我们</Text>
-            </View>
-            <View className='fun ' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
-              <Image className='icon three' src={require("../../assets/img/home/help3.png")}></Image>
-              <Text className='text'> 常见问题</Text>
-            </View>
-          </View>
-          <View className='btn' onClick={() => this.setState({ visibleHelp:false})}>
-            取消
+          </AtFloatLayout>
         </View>
-        </AtFloatLayout>
-        <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly:false})}>
-          <View className='head'>
-            <View className="text">全部服务</View>
-            <Image className='icon' onClick={()=>this.setState({
-              visibleClassfly:false
-            })} src={require('../../assets/img/close.png')}></Image>
+        <View className='teshu'>
+          <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly:false})}>
+            <View className='head'>
+              <View className="text">全部服务</View>
+              <Image className='icon' onClick={()=>this.setState({
+                visibleClassfly:false
+              })} src={require('../../assets/img/close.png')}></Image>
             </View>
-          <View className='funs'>
-          {type.map((item,i) => {
+            <View className='funs'>
+              {type.map((item,i) => {
                 return(<View className='pfun'
-                onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
-                  this.listRef.initLoad()
-                  })}}
-                >
+                             onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
+                               this.listRef.initLoad()
+                             })}}
+                  >
                     <Image className='icon' src={downUrl+item.category_fid}></Image>
-                         <Text className='text'>{item.category_name}</Text>
-                     </View>
-                  )
-            })}
-          </View>
-        </AtFloatLayout>
+                    <Text className='text'>{item.category_name}</Text>
+                  </View>
+                )
+              })}
+            </View>
+          </AtFloatLayout>
+        </View>
           {visibleCoupon&&
           <CouponModal></CouponModal>
           }

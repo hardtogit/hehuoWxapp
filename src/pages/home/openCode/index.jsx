@@ -1,8 +1,9 @@
 
 
-import Taro, { Component,useEffect,useState,useDidShow} from "@tarojs/taro";
+import Taro, { Component,useEffect,useState,useShareAppMessage,useRouter} from "@tarojs/taro";
 import dayjs from 'dayjs'
 import drawQrcode from 'weapp-qrcode'
+import  network from '@/utils/network'
 import {
   View,
   Button,
@@ -17,16 +18,28 @@ import "./index.scss";
 
 export default function Index() {
   const [order,setOrder]=useState({})
+  const router=useRouter()
   const [imgUrl,setImageurl] = useState('')
+  useShareAppMessage(()=>{
+        return {
+          title:'开门码',
+          path:`/pages/home/openCode/index?id=${router.params.id}`,
+        }
+  })
   useEffect(()=>{
-      const currentOrder=Taro.getStorageSync('currentOrder')
-      setOrder(currentOrder)
+    network.Fetch({
+      "obj": "user",
+      "act": "details_order",
+      order_id:router.params.id
+    }).then((res)=>{
+      setOrder(res.order)
       drawQrcode({
         width: 160,
         height: 160,
         canvasId: 'myQrcode',
-        text: currentOrder._id
+        text: router.params.id
       })
+    })
   },[])
   return (
     <View className='openCode'>

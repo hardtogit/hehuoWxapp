@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import classNames from 'classnames'
+import network from '@/utils/network'
 import dayjs from 'dayjs'
 import { View, Button, Text } from "@tarojs/components";
 import "./index.scss";
@@ -8,6 +9,21 @@ const Index = (props) => {
   const {coupon,status}=props
   const use=status==='已使用'
   const timeout=status==='已过期'
+  const getCouponFn=(disc_id)=>{
+    network.Fetch({
+      "obj":"user",
+      "act":"add_discounts",
+      "disc_id":disc_id,
+      "shop_id":router.params.id||'o15937049856544559001',
+    }).then(()=>{
+      Taro.showToast({
+        title:'领取成功',
+        icon:'none'
+      })
+    })
+  }
+
+
   return (
     <View className={classNames(['coupon',use&&'use',timeout&&'timeout'])}>
       <View className='left'>

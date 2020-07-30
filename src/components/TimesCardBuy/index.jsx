@@ -8,7 +8,7 @@ import "./index.scss";
 
 
 const Index = (props) => {
-  const {timeCard,shop_id}=props
+  const {timeCard,shop_id,openPay}=props
   const [visible,setVisible]=useState(false)
   const buy=(payment_type)=>{
     network.Fetch({
@@ -50,10 +50,9 @@ const Index = (props) => {
             <View className='price'>
               {timeCard.memb_price}
             </View>
-            <View className='btn' onClick={()=>setVisible(true)}>
+            <View className='btn' onClick={()=>openPay(timeCard)}>
               立即购买
             </View>
-
           </View>
         </View>
     </View>

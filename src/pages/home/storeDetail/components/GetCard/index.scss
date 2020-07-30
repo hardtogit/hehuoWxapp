@@ -86,7 +86,7 @@
     width: 216px;
     height: 146px;
     display: block;
-    margin: 130px auto 0 auto;
+    margin: 80px auto 0 auto;
   }
   .emptyText{
     font-size: 28px;
@@ -96,11 +96,20 @@
   }
 }
 .header{
-  padding: 6px 30px 30px 30px;
+  padding: 20px 30px 20px 30px;
   display: flex;
   align-items: center;
   .left{
     flex: 1;
+    font-size: 34px;
+    color: #282828;
+  }
+  .right{
+    color: #888;
+    font-size: 36px;
+    display: block;
+    width: 28px;
+    height: 28px;
   }
 }
 .btns{
@@ -115,4 +124,13 @@
   color: #fff;
   background-color: #00A0E9;
   font-size: 32px;
+}
+.modal{
+  padding-bottom: 100px;
+}
+.all{
+  max-height: 600px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10000;
 }

@@ -925,6 +925,48 @@
 					"id": -1,
 					"name": "pages/home/appointment/index",
 					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueList/index",
+					"pathName": "pages/home/continueList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueOrder/index",
+					"pathName": "pages/home/continueOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueOrder/index",
+					"pathName": "pages/home/continueOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/storeDetail/index",
+					"pathName": "pages/home/storeDetail/index",
 					"scene": null
 				}
 			]

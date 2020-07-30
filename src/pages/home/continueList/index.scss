@@ -1,0 +1,24 @@
+page{
+  background-color: #F0F1F3;
+}
+
+.openCode{
+    padding: 20px 30px;
+    .item{
+      margin-bottom: 20px;
+    }
+  }
+  .empty{
+    .emptyImg{
+      width: 216px;
+      height: 146px;
+      display: block;
+      margin: 130px auto 0 auto;
+    }
+    .emptyText{
+      font-size: 28px;
+      color: #7B7B7B;
+      text-align: center;
+      margin-top: 76px;
+    }
+  }

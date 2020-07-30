@@ -93,7 +93,7 @@ const Index = () => {
     <View className='mapPage'>
       <View className='topBar'>
         <Input className='input' onClick={chooseLocation} placeholder='搜索位置查找附近空间' value={name} />
-        <Image className='img' src={userInfo.avatar_fid} />
+        <Image className='img' src={userInfo.avatar_fid} onClick={()=>Taro.switchTab({url:'/pages/me/index'})} />
       </View>
       <View className='mapContainer'>
         <Map className='map' latitude={location.latitude}

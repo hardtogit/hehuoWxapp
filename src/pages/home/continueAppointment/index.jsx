@@ -18,9 +18,11 @@ const weekMap={
 }
 
 export default function Index(props){
-  const [timeScope,setTimeScope]= useState([])
+  const continueOrder=Taro.getStorageSync('continueOrder')
+  console.log(continueOrder,'sssss')
+  const [timeScope,setTimeScope]= useState([dayjs(continueOrder.service_time.begin_time*1000).format('HH:mm'),dayjs(continueOrder.service_time.end_time*1000).format('HH:mm')])
   const [canTime, setCanTime]=useState({})
-  const [date,setDate]=useState(dayjs().unix())
+  const [date,setDate]=useState(continueOrder.service_time.begin_time)
   const router=useRouter()
   const validateTime=(time2)=>{
       const time1=timeScope[0]
@@ -88,10 +90,10 @@ export default function Index(props){
   const disabled=(str)=>{
     let times= dayjs(dayjs(date*1000).format('YYYY-MM-DD')).unix()+(parseInt(str.split(':')[0])*60+ parseInt(str.split(':')[1]))*60
     let flag=false
-    // console.log(canTime.uses_time)
+    console.log(canTime.uses_time)
     if(canTime.uses_time){
       flag=canTime.uses_time.some((item)=>{
-        // console.log(item,times)
+        console.log(item,times)
         return (item[0]-1<times&&times<item[1]+1)
       })
     }
@@ -123,20 +125,20 @@ export default function Index(props){
   return (
 
       <View className='content'>
-    <View className='tip'>1小时起订，灰色为已被预订。预约成功后，可提前15分钟入场</View>
+    <View className='tip'>续约时段以订单结束时刻为开始，重新选定的时刻为结束</View>
     <View className='dates'>
-      <View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().format('YYYY-MM-DD')&&'active'])} onClick={()=>choiceDate(dayjs().unix())}>
+      <View className={classNames(['date','active'])} onClick={()=>choiceDate(dayjs().unix())}>
       <View className='num'>{dayjs().format('MM月DD日')}</View>
-      <View className='week'>{weekMap[dayjs().day()]}</View>
+      <View className='week'>{weekMap[dayjs(date*1000).day()]}</View>
       </View>
-      <View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(1,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(1,'d').unix())}>
-        <View className='num'>{dayjs().add(1,'d').format('MM月DD日')}</View>
-        <View className='week'>{weekMap[dayjs().add(1,'d').day()]}</View>
-      </View>
-      <View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(2,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(2,'d').unix())}>
-        <View className='num'>{dayjs().add(2,'d').format('MM月DD日')}</View>
-        <View className='week'> {weekMap[dayjs().add(2,'d').day()]}</View>
-      </View>
+      {/*<View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(1,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(1,'d').unix())}>*/}
+      {/*  <View className='num'>{dayjs().add(1,'d').format('MM月DD日')}</View>*/}
+      {/*  <View className='week'>{weekMap[dayjs().add(1,'d').day()]}</View>*/}
+      {/*</View>*/}
+      {/*<View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(2,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(2,'d').unix())}>*/}
+      {/*  <View className='num'>{dayjs().add(2,'d').format('MM月DD日')}</View>*/}
+      {/*  <View className='week'> {weekMap[dayjs().add(2,'d').day()]}</View>*/}
+      {/*</View>*/}
       {/* <View className='date'>
         <View className='week'>其他日期</View>
       </View> */}
@@ -144,9 +146,21 @@ export default function Index(props){
     <View className='time'>
       {timeArr.map((time)=>{
             return (
-              <View className={classNames(['item',(timeScope.length===2&&timeScope[0]<time&&time<timeScope[1])&&'inner', timeScope.indexOf(time)!==-1&&'active',disabled(time)&&'disabled'])} onClick={()=>{
+              <View className={classNames(['item',(timeScope.length===2&&timeScope[0]<time&&time<timeScope[1])&&'inner',disabled(time)&&'disabled', timeScope.indexOf(time)!==-1&&'active'])} onClick={()=>{
+               let startTime=(parseInt(timeScope[0].split(':')[0])*60+ parseInt(timeScope[0].split(':')[1]))* 60
+               let endTime=(parseInt(timeScope[1].split(':')[0])*60+ parseInt(timeScope[1].split(':')[1]))* 60
+               let finalTime=(parseInt(time.split(':')[0])*60+ parseInt(time.split(':')[1]))* 60
+
+                console.log(endTime,finalTime)
                 if(disabled(time)){
                   return
+                }
+                if(finalTime<endTime){
+                  Taro.showToast({
+                    title:'请选择订单结束之后的时刻',
+                    icon:'none'
+                  })
+                  return;
                 }
                 if(timeScope.indexOf(time)!==-1){
                     setTimeScope(timeScope.filter((item)=>item!==time))
@@ -170,10 +184,15 @@ export default function Index(props){
                       setTimeScope([time])
                     }
                   }else{
-                    Taro.showToast({
-                      title:'请先点击选择按钮取消所选时间',
-                      icon:'none'
-                    })
+                    if(validateTime(time).pass){
+                        setTimeScope([timeScope[0],timeScope[1],time])
+                    }else{
+                      Taro.showToast({
+                        title:validateTime(time).msg,
+                        icon:"none"
+                      })
+                      return
+                    }
                   }
                 }
               }}
@@ -185,7 +204,7 @@ export default function Index(props){
       </View>
       <View className='buttom'>
         <View className='right' onClick={submit}>
-          预约
+          续约
         </View>
       </View>
     </View>

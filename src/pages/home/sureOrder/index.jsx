@@ -27,9 +27,9 @@ export default function Index(){
   }
   if(discount){
       if(discount.type=='优惠券'){
-          realMoney=realMoney-discount.coupon.disc_off_price
+          realMoney=realMoney-discount.coupon.disc_off_price<0?0:realMoney-discount.coupon.disc_off_price
       }else{
-          realMoney=(realMoney-discount.coupon.memb_off_time*room.room.price.money)<0?0:realMoney-discount.coupon.memb_off_time*room.room.price.money
+          realMoney=(realMoney-discount.coupon.memb_off_time*room.room.price.money*2)<0?0:realMoney-discount.coupon.memb_off_time*room.room.price.money*2
       }
   }
   useDidShow(()=>{
@@ -67,7 +67,7 @@ export default function Index(){
             "type":discount.type,
             "discount_id":discount.coupon._id
           },
-          "payment_amount":money,
+          "payment_amount":realMoney,
           "payment_type":payment_type
          }
        }else{
@@ -82,7 +82,7 @@ export default function Index(){
           },
           original_amount:money,
           reservation_data:dayjs(dayjs(sureOrderData.timeScope.startTime*1000).format('YYYY-MM-DD')).unix(),
-          "payment_amount":money,
+          "payment_amount":realMoney,
           "payment_type":payment_type
          }
        }
@@ -224,8 +224,8 @@ export default function Index(){
     </View>
     <View className='card two'>
               <View className='cell' >
-                    <View className='left'>
-                      <View className={classNames(['checkbox', checked&&'active'])} onClick={()=>setChecked(!checked)}></View>
+                    <View className='left'  onClick={()=>setChecked(!checked)}>
+                      <View className={classNames(['checkbox', checked&&'active'])}></View>
                     请详细阅读精龟叙用户协议，同意后付款
                     </View>
                     <View className='right'>

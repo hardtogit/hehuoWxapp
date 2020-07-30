@@ -21,6 +21,15 @@ class Index extends Component{
       this.listRef.initLoad()
     }
   }
+  cancelCol=(id)=>{
+    network.Fetch({
+      obj:'user',
+      act:'del_collect',
+      collect_id:id
+    }).then(()=>{
+      this.listRef.initLoad()
+    })
+  }
   render(){
     const {colList}=this.props.listDataStore
     return(
@@ -39,7 +48,7 @@ class Index extends Component{
           >
           {colList.map((col)=>{
             return(
-              <ColItem col={col}/>
+              <ColItem col={col} cancelCol={this.cancelCol} />
             )
             })
             }

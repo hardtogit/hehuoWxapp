@@ -2,7 +2,6 @@ import Taro, {Component, useRouter, useEffect, useState, useDidShow, useShareApp
 import network from '@/utils/network'
 import { AtIcon } from 'taro-ui'
 import dayjs from 'dayjs'
-import {countDistance} from '@/utils'
 import {downUrl} from '@/config'
 import {
   View,
@@ -15,13 +14,10 @@ import {
 } from "@tarojs/components";
 import GetCoupon from "../storeDetail/components/GetCoupon";
 import GetCard from "../storeDetail/components/GetCard";
+
 import TimePicker from "../../../components/TimePicker";
 import "./index.scss";
-import QQMapWX from "../../../assets/js/qqmap-wx-jssdk.min";
 
-const  qqmapsdk = new QQMapWX({
-  key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
-});
 export default function Index() {
   const router=useRouter()
   const [room, setRoom] = useState({})
@@ -51,45 +47,22 @@ export default function Index() {
     }
   })
   useEffect(() => {
-    if(Taro.getStorageSync('myLocation')){
-      network.Fetch({
-        "obj":"user",
-        "act":"details_shops",
-        "shop_id":router.params.shop_id||'o15956078815923459529',
-        "latitude":Taro.getStorageSync('myLocation').lat,
-        "longitude":Taro.getStorageSync('myLocation').lng,
-      }).then((res)=>{
-        Taro.setNavigationBarTitle({
-          title:res.shop.shop_name
-        })
-        setEntity(res)
+    network.Fetch({
+      "obj":"user",
+	"act":"details_shops",
+	"shop_id":router.params.shop_id||'o15956078815923459529',
+    }).then((res)=>{
+      Taro.setNavigationBarTitle({
+        title:res.shop.shop_name
       })
-    }else{
-      qqmapsdk.reverseGeocoder({
-        success:function(results){
-          network.Fetch({
-            "obj":"user",
-            "act":"details_shops",
-            "shop_id":router.params.shop_id||'o15956078815923459529',
-            "latitude":results.result.location.lat,
-            "longitude":results.result.location.lng,
-          }).then((res)=>{
-            Taro.setNavigationBarTitle({
-              title:res.shop.shop_name
-            })
-            setEntity(res)
-          })
-          Taro.setStorageSync('myLocation',results.result.location)
-        }
-      })
-    }
-
+      setEntity(res)
+    })
     network.Fetch({
       "obj":"user",
       "act":"single_room",
-      "room_id": router.params.id||'o15942139490885128974'
+      "room_id": router.params.id||'o15956083697860679626'
     }).then(data=>setRoom(data))
-  }, [])
+  }, [router.params.id, router.params.shop_id])
   const goCount=()=>{
     //TODO验证
 
@@ -152,7 +125,7 @@ export default function Index() {
         <View className='address' onClick={()=>openLocation()}>
           <View className='text'>
           <View>{entity.shop.address}</View>
-  <View>距离您有{countDistance(entity.shop.distance)}</View>
+  <View>距离您有{entity.shop.distance}km</View>
           </View>
           <View className='icon'>
             <Image className='img' src={require('../../../assets/img/me/room_ad.png')}></Image>
@@ -167,7 +140,7 @@ export default function Index() {
           })}
         </View>
         {room.room.price.type==='时段价'&&
-        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
+        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/continueAppointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
         <View className='text'>
           {timeScope?`预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:mm')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:mm')}`:'点击选择时间'}
         </View>
@@ -219,7 +192,7 @@ export default function Index() {
                   price:room.room.price.money*(timeScope.endTime-timeScope.startTime)/3600*2
                });
                  Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=2`})}}
-               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
+               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/continueAppointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去续约</View>:
                <View onClick={()=>Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=1`})}>去结算</View>
           }
           </View>

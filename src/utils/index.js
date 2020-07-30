@@ -12,7 +12,7 @@ export const getTimeArr=(start,end)=>{
   if(!start||!end){
     return timeArr
   }
-  const long1=Math.ceil((parseInt(start.split(':')[0])*60+ parseInt(start.split(':')[1]))/30)*30
+  const long1=Math.floor((parseInt(start.split(':')[0])*60+ parseInt(start.split(':')[1]))/30)*30
   const long2=Math.floor((parseInt(end.split(':')[0])*60+ parseInt(end.split(':')[1]))/30)*30;
   for(let i=long1;i<=long2;i+=30){
     let h=parseInt(i/60)

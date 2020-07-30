@@ -2,83 +2,113 @@
 page{
   background-color: #F0F1F3;
 }
-.at-float-layout__container{
-  min-height: 418px;
-  // height: 418px;
-  max-height: 1400px!important;
-  padding: 0;
-  border-radius: 16px 16px 0 0;
-  .head{
-    display: flex;
-    font-size: 34px;
-    padding: 40px 30px;
-    align-items: center;
-    .icon{
-      width: 28px;
-      height: 28px;
-    }
-    .text{
-      flex: 1;
-    }
-  }
-  .layout-body{
+.home{
+  .at-float-layout__container{
+     height: 320px;
     padding: 0;
-    .title{
-      text-align: center;
-      font-size: 26px;
-      padding: 35px 0;
+    border-radius: 16px 16px 0 0;
+    .head{
+      display: flex;
+      font-size: 34px;
+      padding: 40px 30px;
+      align-items: center;
+      .icon{
+        width: 28px;
+        height: 28px;
+      }
+      .text{
+        flex: 1;
+      }
     }
+    .layout-body{
+      padding: 0;
+      .title{
+        text-align: center;
+        font-size: 32px;
+        padding: 35px 0;
+      }
 
-    .funs{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      margin-top: 20px;
-      white-space: pre-wrap;
-      .fun{
-        flex:1;
-        text-align: center;
-        .icon{
-          display: inline-block;
-          width: 82px;
-          height: 66px;
+      .funs{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        white-space: pre-wrap;
+        .fun{
+          flex:1;
+          text-align: center;
+          .icon{
+            display: inline-block;
+            width: 82px;
+            height: 66px;
+          }
+          .text{
+            display: block;
+            margin-top: 28px;
+            font-size: 29px;
+          }
         }
-        .text{
-          display: block;
-          margin-top: 28px;
-          font-size: 29px;
+        .pfun{
+          width: 187.5px;
+          text-align: center;
+          margin-bottom: 60px;
+          .icon{
+            width: 72px;
+            height: 72px;
+            display: inline-block;
+          }
+          .text{
+            display: block;
+            color: #282828;
+            margin-top: 6px;
+            font-size: 28px;
+          }
         }
       }
-      .pfun{
-        width: 187.5px;
-        text-align: center;
-        .icon{
-          width: 72px;
-          height: 72px;
-          display: inline-block;
-        }
-        .text{
-          display: block;
-          color: #282828;
-          margin-top: 6px;
-          font-size: 28px;
-        }
+      .btn{
+        width:691px;
+        height:80px;
+        background:rgba(0,160,233,0.08);
+        border-radius:40px;
+        margin: 40px auto 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        color: #05A3EB;
       }
-    }
-    .btn{
-      width:691px;
-      height:80px;
-      background:rgba(0,160,233,0.08);
-      border-radius:40px;
-      margin: 40px auto 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      color: #05A3EB;
     }
   }
-
+  .normal{
+    .at-float-layout__container{
+      height: 320px!important;
+      min-height: 320px!important;
+      .layout-body{
+        height: 320px!important;
+        min-height: 320px!important;
+        .layout-body__content{
+          height: 320px!important;
+          min-height: 320px!important;
+        }
+      }
+    }
+  }
+  .teshu{
+    .at-float-layout__container{
+      max-height: 70%!important;
+      height: auto;
+      min-height: 320px!important;
+      .layout-body{
+        max-height: 70%!important;
+        min-height: 320px!important;
+        .layout-body__content{
+          max-height: 70%!important;
+          min-height: 320px!important;
+        }
+      }
+    }
+  }
 }
 .header{
   background-image: url('../../assets/img/home/home_bg.png');
@@ -173,6 +203,7 @@ page{
     // align-items: center;
     white-space: nowrap;
     position: relative;
+    margin-bottom: 30px;
     .more{
       position: absolute;
       display: flex;

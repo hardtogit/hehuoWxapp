@@ -3,21 +3,23 @@ import classNames from 'classnames'
 import network from '@/utils/network'
 import dayjs from 'dayjs'
 import TimesCardBuy from '@/components/TimesCardBuy'
+import ChoicePayType from '@/components/ChoicePayType'
 import {AtFloatLayout} from 'taro-ui'
-import { View, Button, Text,Image } from "@tarojs/components";
+import { View, ScrollView,Image } from "@tarojs/components";
 import "./index.scss";
 
 
 
 export default (props) => {
-  const {onCancel,visible,timeCards,shop_id}=props
+  const {onCancel,visible,timeCards,shop_id,openPay}=props
   const [coupons,setCoupons]=useState([])
   return (
+    <View className='getCard'>
     <AtFloatLayout isOpened={visible} >
       <View className='modal'>
        <View className='header'>
          <View className='left'>优惠次卡</View>
-          <View className='right' onClick={onCancel}>X</View>
+          <Image className='right' src={require('../../../../../assets/img/home/close.png')} onClick={onCancel}></Image>
        </View>
             {
         timeCards.length===0&&
@@ -28,17 +30,20 @@ export default (props) => {
         </View>
       </View>
       }
+      <ScrollView className='all'>
            {timeCards.map((timeCard)=>{
                   return(
-                    <TimesCardBuy timeCard={timeCard} shop_id={shop_id}></TimesCardBuy>
+                    <TimesCardBuy timeCard={timeCard} shop_id={shop_id} openPay={openPay}></TimesCardBuy>
                   )
              })}
+      </ScrollView>
 
       <View className='btns' onClick={onCancel}>
          确认
       </View>
       </View>
     </AtFloatLayout>
+    </View>
   )
 }
 
