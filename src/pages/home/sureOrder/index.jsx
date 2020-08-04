@@ -118,7 +118,7 @@ export default function Index(){
     network.Fetch(params).then((res)=>{
       Taro.hideLoading({})
       setVisible(false)
-      if(payment_type==='balance'){
+      if(payment_type==='balance'||realMoney==0){
         Taro.setStorageSync('currentOrder',res.order)
         Taro.navigateTo({url:`/pages/home/success/index?id=${res.order._id}`} )
       }else{

@@ -167,7 +167,7 @@ export default function Index() {
           })}
         </View>
         {room.room.price.type==='时段价'&&
-        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
+        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/${entity.shop.business_time=='00:00-23:59'?'appointment':'appointmentCopy'}/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
         <View className='text'>
           {timeScope?`预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:mm')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:mm')}`:'点击选择时间'}
         </View>
@@ -219,7 +219,7 @@ export default function Index() {
                   price:room.room.price.money*(timeScope.endTime-timeScope.startTime)/3600*2
                });
                  Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=2`})}}
-               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
+               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/${entity.shop.business_time=='00:00-23:59'?'appointment':'appointmentCopy'}/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
                <View onClick={()=>Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=1`})}>去结算</View>
           }
           </View>

@@ -1030,6 +1030,13 @@
 					"id": -1,
 					"name": "pages/home/appointment/index",
 					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/appointment/index",
+					"pathName": "pages/home/appointment/index",
 					"scene": null
 				}
 			]
