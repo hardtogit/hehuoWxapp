@@ -29,7 +29,7 @@ export default function Index(props){
 
       const long1= timeScope[0]
       const long2= time2
-      console.log(long1,long2,'ss')
+      // console.log(long1,long2,'ss')
       if(Math.abs(long1-long2)<60*60) {
         return {
           pass: false,
@@ -80,7 +80,7 @@ export default function Index(props){
   const timeArr=getTimeArr(canTime.start_time,canTime.end_time)
   const timeArrTwo=getTimeArr(canTimeTwo.start_time,canTimeTwo.end_time)
   const timeArrThree=getTimeArr(canTimeThree.start_time,canTimeThree.end_time)
-  console.log(timeArrTwo,canTimeTwo)
+  // console.log(timeArrTwo,canTimeTwo)
 
   const getCanTimes=(time)=>{
     return new Promise((resolve,reject)=>{
@@ -326,9 +326,6 @@ export default function Index(props){
       {timeArrThree.map((time)=>{
             return (
               <View key={time} className={classNames(['item',inner(time,dayjs().add(2,'d').unix())&&'inner', active(time,dayjs().add(2,'d').unix())&&'active',disabled(time,dayjs().add(2,'d').unix())&&'disabled'])}
-                onTouchStart={()=>{
-                      console.log('aaaa')
-                    }}
 
                 onClick={()=>{
                   handleClick(time,dayjs().add(2,'d').unix())
