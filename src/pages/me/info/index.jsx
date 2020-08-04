@@ -11,8 +11,8 @@ import "./index.scss";
 const Index = (props) => {
     console.log(props)
     const entity=Taro.getStorageSync('userInfo')
-    console.log(entity)  
-    return ( 
+    console.log(entity)
+    return (
         <View className='info'>
              <View className='cell' >
                     <View className='left'>
@@ -33,7 +33,7 @@ const Index = (props) => {
                 </View>
                 <View className='cell' onClick={()=>{Taro.navigateTo({url:"/pages/me/bindPhone/index"})}}>
                     <View className='left'>
-                        手机号 
+                        手机
                     </View>
                     <View className='right'>
                         {entity.phone||'去绑定'}
@@ -48,7 +48,7 @@ const Index = (props) => {
                         已绑定
                     </View>
                 </View>
-    
+
 
         </View>
     )

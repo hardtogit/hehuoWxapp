@@ -83,7 +83,7 @@ const Index = (props) => {
              })}
    <View className='buttom'>
         <View className='right' onClick={submit}>
-          预约
+        确定
         </View>
       </View>
 

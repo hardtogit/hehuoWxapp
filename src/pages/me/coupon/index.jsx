@@ -55,7 +55,7 @@ class Index extends Component{
               {couponList.map((coupon)=>{
               return(
                 <View className='item'>
-                  <CouponItem coupon={coupon} status={status}/>
+                  <CouponItem coupon={coupon} status={status} reLoad={()=>{this.listRef.initLoad()}} />
                 </View>
               )
               })

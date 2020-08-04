@@ -5,7 +5,20 @@ page{
 .apply{
   padding: 0 30px;
   background-color: #fff;
-
+  // .at-modal__container{
+  //   width:520px;
+  //   height:360px;
+  //   background:rgba(249,249,249,1);
+  //   border-radius:6px;
+  //   .at-modal__header{
+  //     padding: 54px 0 64px 0;
+  //   }
+  //   .at-modal__content{
+  //     padding: 0;
+  //     min-height: 0;
+  //     text-align: center;
+  //   }
+  // }
   .inputGroup{
     border-bottom: 1px solid #efefef;
     height: 100px;
@@ -47,4 +60,11 @@ page{
     bottom: 0;
     left: 0;
   }
+}
+.tip{
+  text-align: right;
+  color: #7B7B7B;
+  font-size: 24px;
+  padding: 24px;
+  background-color: #F0F1F3;
 }

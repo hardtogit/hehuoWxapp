@@ -99,18 +99,27 @@ export default function Index(props){
     }
     return flag
   }
+  const isInner=(time)=>{
+    if(timeScope.length===2){
+      return timeScope[0]<time&&time<timeScope[1]
+    }else if(timeScope.length===3){
+      return timeScope[0]<time&&time<timeScope[2]
+    }else{
+      return false
+    }
+  }
   const submit=()=>{
-      if(timeScope.length!==2){
+      if(timeScope.length!==3){
         Taro.showToast({
-          title:'请先选择预约时间',
+          title:'请先选择续约时间',
           icon:'none'
         })
         return
       }
       const preDate= dayjs(dayjs(date*1000).format('YYYY-MM-DD')).unix()
-      let startTime=preDate+(parseInt(timeScope[0].split(':')[0])*60+ parseInt(timeScope[0].split(':')[1]))* 60
+      let startTime=preDate+(parseInt(timeScope[1].split(':')[0])*60+ parseInt(timeScope[1].split(':')[1]))* 60
 
-      let endTime=preDate+(parseInt(timeScope[1].split(':')[0])*60+ parseInt(timeScope[1].split(':')[1]))* 60
+      let endTime=preDate+(parseInt(timeScope[2].split(':')[0])*60+ parseInt(timeScope[2].split(':')[1]))* 60
       if(startTime>endTime){
         let sum=startTime;
         startTime=endTime;
@@ -146,7 +155,7 @@ export default function Index(props){
     <View className='time'>
       {timeArr.map((time)=>{
             return (
-              <View className={classNames(['item',(timeScope.length===2&&timeScope[0]<time&&time<timeScope[1])&&'inner',disabled(time)&&'disabled', timeScope.indexOf(time)!==-1&&'active'])} onClick={()=>{
+              <View className={classNames(['item',isInner(time)&&'inner',disabled(time)&&'disabled', timeScope.indexOf(time)!==-1&&'active'])} onClick={()=>{
                let startTime=(parseInt(timeScope[0].split(':')[0])*60+ parseInt(timeScope[0].split(':')[1]))* 60
                let endTime=(parseInt(timeScope[1].split(':')[0])*60+ parseInt(timeScope[1].split(':')[1]))* 60
                let finalTime=(parseInt(time.split(':')[0])*60+ parseInt(time.split(':')[1]))* 60

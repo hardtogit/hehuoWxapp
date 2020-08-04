@@ -6,16 +6,20 @@ import { View, Button, Text } from "@tarojs/components";
 import "./index.scss";
 
 const Index = (props) => {
-  const {coupon,status}=props
+  const {coupon,status,reLoad}=props
   const use=status==='已使用'
   const timeout=status==='已过期'
   const getCouponFn=(disc_id)=>{
+    // Taro.showLoading({
+    //   title:''
+    // })
     network.Fetch({
       "obj":"user",
       "act":"add_discounts",
       "disc_id":disc_id,
-      "shop_id":router.params.id||'o15937049856544559001',
+      "shop_id":coupon.shop_id,
     }).then(()=>{
+      reLoad()
       Taro.showToast({
         title:'领取成功',
         icon:'none'
@@ -40,8 +44,8 @@ const Index = (props) => {
               <View className='time'> 有效期：{dayjs(coupon.effective_time*1000).format('YYYY.MM.DD')}-{dayjs(coupon.expire_time*1000).format('YYYY.MM.DD')}</View>
       </View>
       <View className='right'>
-        {status=='未使用'&& <View className='btn'>去使用</View>}
-        {status=='未领取'&& <View className='btn'>领取</View>}
+        {status=='未使用'&& <View className='btn' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${coupon.shop_id}`})}>去使用</View>}
+        {status=='未领取'&& <View className='btn' onClick={()=>getCouponFn(coupon._id)}>领取</View>}
       </View>
     </View>
   )

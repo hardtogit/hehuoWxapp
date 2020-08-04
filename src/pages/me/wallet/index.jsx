@@ -80,7 +80,7 @@ const Index = () => {
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>
                     </View>
                 </View>
-                <View className='cell' onClick={()=>setVisible(true)}>
+                <View className='cell' onClick={()=>Taro.showToast({title:'如果需要开具发票，请联系门店负责人开具',icon:'none'})}>
                     <View className='left'>
                         申请发票
                     </View>

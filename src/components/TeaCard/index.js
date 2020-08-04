@@ -11,7 +11,7 @@ return(
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
      <Image className='tag' src={require('../../assets/img/home/tag.png')}></Image>
      <View className='time'>
-        {tea.label} | {tea.business_time=="00:00-00:00"?'24小时':tea.business_time}
+        {tea.label} | {tea.business_time=="00:00-23:59"?'24h':tea.business_time}
      </View>
      <View className='content'>
        <View className='title'>

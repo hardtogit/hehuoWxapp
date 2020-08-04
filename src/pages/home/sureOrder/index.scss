@@ -30,6 +30,7 @@ page{
       .img{
         width: 164px;
         height: 164px;
+        border-radius: 24px;
       }
       .name{
         flex: 1;
@@ -62,8 +63,8 @@ page{
         display: flex;
         align-items: center;
         .checkbox{
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           border: 1px solid #999;
           margin-right: 10px;
@@ -102,8 +103,8 @@ page{
     }
     .num{
       color: #F0B80D;
-      font-size: 54px;
-
+      font-size: 64px;
+      font-weight: bold;
     }
     .text{
       color: #A6A6A6;
@@ -113,7 +114,7 @@ page{
     }
   }
   .btn{
-    width: 200px;
+    width: 320px;
     height:80px;
     background:rgba(0,160,233,1);
     box-shadow:0px 7px 16px 0px rgba(15,88,177,0.18);

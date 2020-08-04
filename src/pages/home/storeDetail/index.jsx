@@ -237,7 +237,7 @@ export default function Index() {
                   收藏
                 </View>
               </View>
-              <View className='fn' onClick={()=>{Taro.makePhoneCall({phoneNumber:entity.shop.serve_phone})}}>
+              <View className='fn' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+entity.shop.serve_phone})}}>
                 <Image  className='img' src={require('../../../assets/img/home/sd4.png')}></Image>
                 <View className='text'>
                   客服

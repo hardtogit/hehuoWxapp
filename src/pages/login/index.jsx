@@ -1,6 +1,6 @@
 import Taro, { Component ,useEffect} from "@tarojs/taro";
 import { View, Button, Text, WebView, Image} from "@tarojs/components";
-import network from '../../utils/network'
+import network from '../../utils/http'
 import "./index.scss";
 
 
@@ -17,6 +17,9 @@ const Index = () => {
     console.log(e)
     const userInfo=e.detail.userInfo;
     if(userInfo){
+         Taro.showLoading({
+           title:'登录中...'
+         })
          Taro.login({
            success:(res)=>{
              console.log(res)
@@ -34,7 +37,7 @@ const Index = () => {
                   sex:userInfo.gender,
                   avatar_fid:userInfo.avatarUrl
                 }).then((result)=>{
-                    console.log(result)
+                    Taro.hideLoading({})
                     Taro.setStorageSync('userInfo', result.user_info)
                     Taro.setStorageSync('sess',result.sess)
                     if(result.user_info.phone){

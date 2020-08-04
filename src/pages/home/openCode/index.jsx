@@ -14,6 +14,7 @@ import {
   SwiperItem
 } from "@tarojs/components";
 
+
 import "./index.scss";
 
 export default function Index() {
@@ -43,8 +44,7 @@ export default function Index() {
   },[])
   return (
     <View className='openCode'>
-      <View className='tip'>
-        “开门码”可转发给好友使用 </View>
+      <View className='tip'>“开门码”可转发给好友使用 </View>
       <View className='tip'>点击右上角，选择“发送给好友”</View>
       <View className='content'>
         <View className='top'>
@@ -76,6 +76,10 @@ export default function Index() {
           </View>
         </View>
 
+      </View>
+
+      <View className='btn' onClick={()=>Taro.switchTab({url:'/pages/home/index'})}>
+        回到首页
       </View>
     </View>)
 }

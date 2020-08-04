@@ -53,6 +53,10 @@
       &:nth-child(4n){
         margin-right: 0;
       }
+      &.active{
+        background:rgba(0,160,233,1);
+        color: #fff;
+      }
       &.disabled{
         background-color: #ddd;
         color: #fff;
@@ -60,10 +64,6 @@
       &.inner{
         color: #fff;
         background-color: rgba($color: #00A0E9, $alpha: .3);
-      }
-      &.active{
-        background-color:rgba(0,160,233,1);
-        color: #fff;
       }
     }
   }

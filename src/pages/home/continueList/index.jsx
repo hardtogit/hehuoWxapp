@@ -10,6 +10,7 @@ import {
     Swiper,
     SwiperItem
 } from "@tarojs/components";
+import GoHome from '@/components/GoHome'
 import OrderItem from "../../../components/OrderItem";
 import "./index.scss";
 
@@ -20,7 +21,7 @@ export default function Index() {
     network.Fetch({
       "obj":"user",
       "act":"list_order",
-      status:'已预约',
+      status:'续单',
       "page":1,
       "limit":100
     }).then((data)=>{
@@ -33,12 +34,13 @@ export default function Index() {
   },[])
     return (
         <View className='openCode'>
+          <GoHome />
            {
         empty&&
         <View className='empty'>
         <Image  className='emptyImg' src={require('../../../assets/img/no_data.png')}></Image>
         <View className='emptyText'>
-          还没有已预约的订单
+          您没有可续约的订单
         </View>
       </View>
       }

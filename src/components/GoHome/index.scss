@@ -1,0 +1,15 @@
+.btnHome{
+  width:280px;
+  height:80px;
+  background:#00A0E9;
+  color:#fff;
+  border-radius:25px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 32px;
+  position: fixed;
+  bottom:100px;
+  left: 50%;
+  z-index: 100;
+  transform: translateX(-50%);
+}

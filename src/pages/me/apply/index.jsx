@@ -37,6 +37,7 @@ const Index = () => {
     })
   }
   return (
+    <View>
     <View className='apply'>
       <View className='inputGroup'>
         <View className='label'>
@@ -75,6 +76,7 @@ const Index = () => {
         }}
       ></Textarea>
 
+
       <View className='btn' onClick={submit}>
         提交申请
       </View>
@@ -88,6 +90,8 @@ const Index = () => {
         }}
         content=' 工作人员将在3-5个工作日与您联系 '
       />
+    </View>
+    <View className='tip'>*工作人员将在3-5个工作日与您联系</View>
     </View>
   )
 }

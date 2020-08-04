@@ -10,6 +10,7 @@ import {
     Swiper,
     SwiperItem
 } from "@tarojs/components";
+import GoHome from '@/components/GoHome'
 import OrderItem from "../../../components/OrderItem";
 import "./index.scss";
 
@@ -33,6 +34,7 @@ export default function Index() {
   },[])
     return (
         <View className='openCode'>
+          <GoHome />
            {
         empty&&
         <View className='empty'>

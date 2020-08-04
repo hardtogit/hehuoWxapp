@@ -55,7 +55,7 @@ export default function Index(){
         params={
           "obj":"user",
           "act":"generate_order",
-          order_type:'首次',
+          order_type:router.params.way?'续单':'首次',
           "room_id":router.params.id||'o15951435145368449687',
           "service_time":{
             "begin_time":router.params.type==2?sureOrderData.timeScope.startTime:'',
@@ -74,7 +74,7 @@ export default function Index(){
         params={
           "obj":"user",
           "act":"generate_order",
-          order_type:'首次',
+          order_type:router.params.way?'续单':'首次',
           "room_id":router.params.id||'o15951435145368449687',
           "service_time":{
             "begin_time":router.params.type==2?sureOrderData.timeScope.startTime:'',
@@ -120,19 +120,17 @@ export default function Index(){
       setVisible(false)
       if(payment_type==='balance'){
         Taro.setStorageSync('currentOrder',res.order)
-        Taro.navigateTo({url:'/pages/home/success/index'} )
+        Taro.navigateTo({url:`/pages/home/success/index?id=${res.order._id}`} )
       }else{
         Taro.requestPayment({
           ...res.pay_info,
           success:()=>{
               Taro.setStorageSync('currentOrder',res.order)
-              Taro.navigateTo({url:'/pages/home/success/index'} )
+              Taro.navigateTo({url:`/pages/home/success/index?id=${res.order._id}`} )
           }
         })
       }
-
     })
-
   }
   const createOrder=()=>{
         if(!checked){

@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider } from "@tarojs/mobx";
-import network from './utils/network';
+import network from './utils/http';
 import Index from "./pages/index";
 
 import counterStore from "./store/counter";
@@ -76,7 +76,17 @@ class App extends Component {
     Taro.authorize({
       scope: 'scope.userLocation'
     })
+    Taro.requestSubscribeMessage({
+      tmplIds: ['IJpLmPETjSPBTBqPoZMmg_At0iqsFRPWYWgRHr0A86M'],
+      success (res) {
+        console.log(res)
+      }
+    })
   }
+  // componentDidShow(){
+  //   network.apiconn.connect();
+  //   console.log('重连了')
+  // }
 
   componentDidShow() { }
 

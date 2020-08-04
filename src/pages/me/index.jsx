@@ -7,7 +7,16 @@ import "./index.scss";
 
 const Index = () => {
   const [person, setPerson] = useState({})
+  const [data, setData] = useState({})
   const [visible, setVisible] = useState(false)
+  useEffect(()=>{
+    network.Fetch({
+      "obj": "user",
+      "act": "contact_us"
+    }).then((a) => {
+        setData(a)
+    })
+  },[])
 
   useDidShow(() => {
     network.Fetch({
@@ -82,7 +91,7 @@ const Index = () => {
               关于我们
              </View>
           </View>
-          <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
+          <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:data.platform_phone})}}>
             <Image className='img' src={require('../../assets/img/me/me5.png')}></Image>
             <View className='text'>
               联系我们

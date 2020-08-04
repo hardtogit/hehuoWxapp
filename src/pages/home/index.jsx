@@ -25,7 +25,8 @@ class Index extends Component{
       banner:[],
       type:[],
       location:'定位中...',
-      locations:''
+      locations:'',
+      phone:''
     }
   }
   componentDidMount(){
@@ -33,6 +34,16 @@ class Index extends Component{
     const  qqmapsdk = new QQMapWX({
       key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
     });
+
+      network.Fetch({
+        "obj": "user",
+        "act": "contact_us"
+      }).then((a) => {
+          this.setState(
+            {
+              phone:a.platform_phone
+            })
+      })
 
     network.Fetch({
       "obj": "user",
@@ -85,6 +96,7 @@ class Index extends Component{
       banner,
       location,
       locations,
+      phone,
       type}=this.state
       const {teaList}=this.props.listDataStore
     return (
@@ -210,7 +222,7 @@ class Index extends Component{
           <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
             <View className='title'>服务中心</View>
             <View className='funs'>
-              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:'15528059522'})}}>
+              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:phone})}}>
                 <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
                 <Text className='text'>联系我们</Text>
               </View>
