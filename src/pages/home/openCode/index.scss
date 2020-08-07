@@ -6,11 +6,12 @@ page{
     .tip{
         text-align: center!important;
         color: #fff;
-        font-size: 22px;
+        font-size: 26px;
     }
     .content{
         width: 690px;
         border-radius: 42px;
+        overflow: hidden;
         height: 855px;
         margin-top: 30px;
         .top{

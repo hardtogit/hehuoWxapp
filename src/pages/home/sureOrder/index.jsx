@@ -27,9 +27,9 @@ export default function Index(){
   }
   if(discount){
       if(discount.type=='优惠券'){
-          realMoney=realMoney-discount.coupon.disc_off_price<0?0:realMoney-discount.coupon.disc_off_price
+          realMoney=realMoney-discount.coupon.disc_off_price<0?0:(realMoney*100-discount.coupon.disc_off_price*100)/100
       }else{
-          realMoney=(realMoney-discount.coupon.memb_off_time*room.room.price.money*2)<0?0:realMoney-discount.coupon.memb_off_time*room.room.price.money*2
+          realMoney=(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2*100)<0?0:(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2*100)/100
       }
   }
   useDidShow(()=>{
@@ -116,17 +116,21 @@ export default function Index(){
       }
   }
     network.Fetch(params).then((res)=>{
+      Taro.removeStorageSync('appointmentTimeScope');
       Taro.hideLoading({})
       setVisible(false)
       if(payment_type==='balance'||realMoney==0){
         Taro.setStorageSync('currentOrder',res.order)
-        Taro.navigateTo({url:`/pages/home/success/index?id=${res.order._id}`} )
+        Taro.redirectTo({url:`/pages/home/success/index?id=${res.order._id}`} )
       }else{
         Taro.requestPayment({
           ...res.pay_info,
           success:()=>{
               Taro.setStorageSync('currentOrder',res.order)
-              Taro.navigateTo({url:`/pages/home/success/index?id=${res.order._id}`} )
+              Taro.redirectTo({url:`/pages/home/success/index?id=${res.order._id}`} )
+          },
+          fail:()=>{
+             Taro.navigateBack({})
           }
         })
       }
@@ -177,11 +181,11 @@ export default function Index(){
         </View>
         <View className='item'>
           <View className='left'>优惠金额：</View>
-          <View className='right'>{(discount&&discount.type=='优惠券')?discount.coupon.disc_off_price:'-'}</View>
+          <View className='right'>{(discount&&discount.type=='优惠券')?<Text style={{color:'red'}}>{discount.coupon.disc_off_price}</Text>:'-'}</View>
         </View>
         <View className='item'>
           <View className='left'>次卡抵用：</View>
-          <View className='right'>{(discount&&discount.type=='次卡')?`${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time*room.room.price.money}`:'-'}</View>
+          <View className='right'>{(discount&&discount.type=='次卡')?<Text style={{color:'red'}}>{ `${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time*room.room.price.money}`}</Text>:'-'}</View>
         </View>
         <View className='item'>
           <View className='left'>应付金额：</View>
@@ -224,7 +228,7 @@ export default function Index(){
               <View className='cell' >
                     <View className='left'  onClick={()=>setChecked(!checked)}>
                       <View className={classNames(['checkbox', checked&&'active'])}></View>
-                    请详细阅读精龟叙用户协议，同意后付款
+                    请详细阅读精归叙用户协议，同意后付款
                     </View>
                     <View className='right'>
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>

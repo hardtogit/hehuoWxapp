@@ -55,7 +55,7 @@ export default function Index(props) {
             })
           }}
           >去支付</View>}
-          {(order.status == "已预约"&&type!=='continue' )&& (
+          {(type=='openCode')&& (
             <View
               className='btn'
               onClick={() => {
@@ -79,8 +79,8 @@ export default function Index(props) {
           </View>
           }
 
-          {order.status == "已使用" && <View className='btn'>续费</View>}
-          {status == 3 && <View className='btn'>删除订单</View>}
+          {/* {order.status == "已使用" && <View className='btn'>续费</View>} */}
+          {/* {status == 3 && <View className='btn'>删除订单</View>} */}
         </View>
       </View>
     </View>

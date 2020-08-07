@@ -21,7 +21,7 @@ export default function Index() {
     network.Fetch({
       "obj":"user",
       "act":"list_order",
-      status:'已预约',
+      status:'开门码',
       "page":1,
       "limit":100
     }).then((data)=>{
@@ -47,7 +47,7 @@ export default function Index() {
           {orders.map((order)=>{
               return(
                 <View className='item'>
-                <OrderItem order={order} />
+                <OrderItem order={order} type='openCode' />
             </View>
               )
           })}

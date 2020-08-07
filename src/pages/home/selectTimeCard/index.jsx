@@ -39,15 +39,15 @@ const Index = (props) => {
       })
 
 
-    },[])
+    },[router.endTime, router.params.id, router.startTime])
     const submit=()=>{
       const arr=timeCards.filter((item)=>id==item._id)
-      console.log(arr,'sdsds')
       Taro.setStorageSync('discount',{type:'次卡',coupon:arr[0]})
       Taro.navigateBack({})
     }
     return (
         <View className='info'>
+             <View className='tip'>*不可与优惠券叠加使用</View>
              {
               empty&&
               <View className='empty'>
@@ -65,10 +65,16 @@ const Index = (props) => {
                         <View className='left'>
                         <View className='title'>{card.memb_off_time}小时/次</View>
                         <View className='time'>活动有效期：{dayjs(card.effective_time*1000).format('YYYY.MM.DD')}-{dayjs(card.expire_time*1000).format('YYYY.MM.DD')}</View>
+                  <View className='time'>剩余次数：{card.owned_number}</View>
                         </View>
                         {card.user_memb_stat=='未使用'&&
                           <View className={classNames(['btn',id==card._id&&'active'])}onClick={()=>{
-                            setId(card._id)}}>
+                            // const arr=timeCards.filter((item)=>id==item._id)
+                            Taro.setStorageSync('discount',{type:'次卡',coupon:card})
+                            Taro.navigateBack({})
+                            // setId(card._id)
+                          }}
+                          >
                           使用
                           </View>
                         }
@@ -81,11 +87,11 @@ const Index = (props) => {
                 </View>
                   )
              })}
-   <View className='buttom'>
+   {/* <View className='buttom'>
         <View className='right' onClick={submit}>
         确定
         </View>
-      </View>
+      </View> */}
 
         </View>
     )

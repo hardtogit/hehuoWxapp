@@ -1,5 +1,6 @@
 @import "~taro-ui/dist/style/components/float-layout.scss";
 // @import "~taro-ui/dist/style/components/nav-bar.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
 .at-float-layout__container{
   padding: 0;
@@ -103,7 +104,7 @@ page {
     .address {
       font-size: 22px;
       height: 112px;
-      color: #d0d0d0;
+      color: #7B7B7B;
       align-items: center;
       display: flex;
       background-image: url('../../../assets/img/me/room_adc.png');
@@ -274,6 +275,38 @@ page {
       font-size: 30px;
       justify-content: center;
       margin-left: 30px;
+    }
+  }
+}
+.getCoupon{
+  .at-float-layout__container{
+    max-height: 80%!important;
+    border-radius: 16px 16px 0 0;
+    height: auto;
+    min-height: 320px!important;
+    .layout-body{
+      max-height: 80%!important;
+      min-height: 320px!important;
+      .layout-body__content{
+        max-height: 80%!important;
+        min-height: 320px!important;
+      }
+    }
+  }
+}
+.getCard{
+  .at-float-layout__container{
+    max-height: 80%!important;
+    border-radius: 16px 16px 0 0;
+    height: auto;
+    min-height: 320px!important;
+    .layout-body{
+      max-height: 80%!important;
+      min-height: 320px!important;
+      .layout-body__content{
+        max-height: 80%!important;
+        min-height: 320px!important;
+      }
     }
   }
 }

@@ -1037,6 +1037,34 @@
 					"id": -1,
 					"name": "pages/home/appointment/index",
 					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/openCode/index",
+					"pathName": "pages/home/openCode/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/appointment/index",
+					"pathName": "pages/home/appointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/selectTimeCard/index",
+					"pathName": "pages/home/selectTimeCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/me/timesCard/index",
+					"pathName": "pages/me/timesCard/index",
 					"scene": null
 				}
 			]

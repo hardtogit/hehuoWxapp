@@ -3,6 +3,7 @@ import network from '@/utils/network'
 import { AtIcon } from 'taro-ui'
 import dayjs from 'dayjs'
 import {countDistance} from '@/utils'
+import ChoicePayType from '@/components/ChoicePayType'
 import {downUrl} from '@/config'
 import {
   View,
@@ -29,11 +30,17 @@ export default function Index() {
   const [visibleOne,setVisibleOne]=useState(false)
   const [visibleTwo,setVisibletwo]=useState(false)
   const [timeScope,setTimeScope] = useState()
+  const [visibleThree,setVisibleThree]=useState(false)
+  const [timeCard,setTimeCard]=useState({})
   const buttonPosition=Taro.getMenuButtonBoundingClientRect()
+  useEffect(()=>{
+    Taro.removeStorageSync('appointmentTimeScope')
+  },[])
+
   useDidShow(()=>{
     const appointmentTimeScope=Taro.getStorageSync('appointmentTimeScope')
     setTimeScope(appointmentTimeScope)
-    Taro.removeStorageSync('appointmentTimeScope')
+    // Taro.removeStorageSync('appointmentTimeScope')
   })
   const openLocation=()=>{
     console.log(entity.shop)
@@ -89,7 +96,7 @@ export default function Index() {
       "act":"single_room",
       "room_id": router.params.id||'o15942139490885128974'
     }).then(data=>setRoom(data))
-  }, [])
+  }, [router.params.id, router.params.shop_id])
   const goCount=()=>{
     //TODO验证
 
@@ -99,12 +106,41 @@ export default function Index() {
     Taro.setStorageSync('orderInfo',)
      Taro.navigateTo({url:'/pages/home/sureOrder/index'})
   }
+  const buy=(payment_type)=>{
+    network.Fetch({
+    "obj":"user",
+		"act":"add_card_user",
+		"memb_id":timeCard._id,
+    "shop_id":router.params.shop_id||'o15956078815923459529',
+     payment_type
+    }).then((data)=>{
+      setVisibleThree(false)
+      Taro.requestPayment({
+        ...data.pay_info,
+        success:function(){
+          Taro.showToast({
+            title:'购买成功',
+            icon:'none'
+          })
+          setTimeout(()=>{
+            Taro.navigateBack({})
+          },1000)
+        }
+      })
+    })
+  }
+  const openPay=(selectTimeCard)=>{
+    setTimeCard(selectTimeCard)
+    setVisibleThree(true)
+  }
   console.log(timeScope)
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
-      {visibleOne&&<GetCoupon visible shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} />}
-      {visibleTwo&& <GetCard shop_id={router.params.shop_id||'o15937049856544559001'} timeCards={entity.memb_card} visible onCancel={()=>setVisibletwo(false)}></GetCard> }
+
+       {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
+      {visibleOne&&<View className='getCoupon'> <GetCoupon visible shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>}
+      {visibleTwo&& <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard></View> }
       <View className='navBar' style={{top:`${buttonPosition.top}px`,height:`${buttonPosition.height}px`,paddingRight:`${buttonPosition.width+20}px`}}>
         <AtIcon value='chevron-left' color='#fff' size={28} onClick={()=>Taro.navigateBack({})}></AtIcon>
         <View className='right'>
@@ -167,7 +203,7 @@ export default function Index() {
           })}
         </View>
         {room.room.price.type==='时段价'&&
-        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/${entity.shop.business_time=='00:00-23:59'?'appointment':'appointmentCopy'}/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
+        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
         <View className='text'>
           {timeScope?`预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:mm')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:mm')}`:'点击选择时间'}
         </View>
@@ -219,7 +255,7 @@ export default function Index() {
                   price:room.room.price.money*(timeScope.endTime-timeScope.startTime)/3600*2
                });
                  Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=2`})}}
-               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/${entity.shop.business_time=='00:00-23:59'?'appointment':'appointmentCopy'}/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
+               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
                <View onClick={()=>Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=1`})}>去结算</View>
           }
           </View>

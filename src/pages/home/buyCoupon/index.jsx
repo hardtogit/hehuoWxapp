@@ -55,7 +55,7 @@ export default function Index (){
         setEmpty(true)
       }
     })
-  },[])
+  },[router.params.id])
   return (
     <View>
       {

@@ -1,5 +1,6 @@
 @import "~taro-ui/dist/style/components/float-layout.scss";
 // @import "~taro-ui/dist/style/components/nav-bar.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
 .at-float-layout__container{
   padding: 0;
@@ -274,6 +275,38 @@ page {
       font-size: 30px;
       justify-content: center;
       margin-left: 30px;
+    }
+  }
+}
+.getCoupon{
+  .at-float-layout__container{
+    max-height: 80%!important;
+    border-radius: 16px 16px 0 0;
+    height: auto;
+    min-height: 320px!important;
+    .layout-body{
+      max-height: 80%!important;
+      min-height: 320px!important;
+      .layout-body__content{
+        max-height: 80%!important;
+        min-height: 320px!important;
+      }
+    }
+  }
+}
+.getCard{
+  .at-float-layout__container{
+    max-height: 80%!important;
+    border-radius: 16px 16px 0 0;
+    height: auto;
+    min-height: 320px!important;
+    .layout-body{
+      max-height: 80%!important;
+      min-height: 320px!important;
+      .layout-body__content{
+        max-height: 80%!important;
+        min-height: 320px!important;
+      }
     }
   }
 }

@@ -35,7 +35,7 @@ export default function Index (){
         setEmpty(true)
       }
     })
-  },[])
+  },[router.endTime, router.params, router.startTime])
   const submit=()=>{
     const arr=coupons.filter((item)=>id==item._id)
     console.log(arr,'sdsds')
@@ -45,6 +45,7 @@ export default function Index (){
   console.log(router.params.price)
   return (
     <View className='selectCoupon'>
+        <View className='tip'>*不可与次卡叠加使用</View>
       {
         empty&&
         <View className='empty'>
@@ -72,19 +73,27 @@ export default function Index (){
           <View className='right'>
             <View className={classNames(['btn',id==coupon._id&&'active', parseInt(router.params.price)< parseInt(coupon.disc_use_price)&&'default'])} onClick={()=>{
 
-              if(parseInt(router.params.price)< parseInt(coupon.disc_use_price)){
-                return
-              }
-              setId(coupon._id)}}>使用</View>
+              // if(parseInt(router.params.price)< parseInt(coupon.disc_use_price)){
+              //   return
+              // }
+              // setId(coupon._id)
+              // const arr=coupons.filter((item)=>id==item._id)
+              // console.log(arr,'sdsds')
+              Taro.setStorageSync('discount',{type:'优惠券',coupon:coupon})
+              Taro.navigateBack({})
+
+
+            }}
+            >使用</View>
           </View>
         </View>
         )
       })}
-         <View className='buttom'>
+         {/* <View className='buttom'>
         <View className='right' onClick={submit}>
           确定
         </View>
-      </View>
+      </View> */}
 </View>
   )
 }

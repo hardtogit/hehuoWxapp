@@ -13,13 +13,15 @@ const Index = (props) => {
         <View className='top'>
           <View className='inner'>
             <View className='left'>
-            <View className='title'>{card.memb_off_time}/次</View>
-            <View className='time'>活动有效期：{dayjs(card.effective_time).format('YYYY.MM.DD')}-{dayjs(card.expire_time).format('YYYY.MM.DD')}</View>
+            <View className='title'>{card.memb_off_time}小时/次</View>
+            <View className='time'>活动有效期：{dayjs(card.effective_time*1000).format('YYYY.MM.DD')}-{dayjs(card.expire_time*1000).format('YYYY.MM.DD')}</View>
+            <View className='time'>剩余次数：{card.owned_number}</View>
             </View>
             {card.user_memb_stat=='未使用'&&
               <View className='btn' onClick={()=>Taro.navigateTo({
                 url:`/pages/home/storeDetail/index?id=${card.shop_id}`
-              })}>
+              })}
+              >
               去使用
               </View>
             }

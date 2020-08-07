@@ -5,6 +5,7 @@ import network from '@/utils/network'
 import {getTimeArr} from '@/utils/index'
 import { View, Button, Text, WebView, Image,Swiper,SwiperItem} from "@tarojs/components";
 import "./index.scss";
+import index from "../../index";
 
 const weekMap={
   0:'星期日',
@@ -96,11 +97,19 @@ export default function Index(props){
       }).then((res)=>{
           Taro.hideLoading({})
           if(dayjs(dayjs(time*1000).format('YYYY-MM-DD')).unix()==dayjs(dayjs().format('YYYY-MM-DD')).unix()){
-              resolve({
-                ...res.tea_home_time,
-                start_time:dayjs().format('HH:mm'),
-                // end_time:res.tea_home_time.end_time
-            })
+              if( (parseInt(dayjs().format('HH:mm').split(':')[0])*60+parseInt(parseInt(dayjs().format('HH:mm').split(':')[1])))>
+               (parseInt(res.tea_home_time.start_time.split(':')[0])*60+parseInt(parseInt(res.tea_home_time.start_time.split(':')[1])))
+
+              ){
+                resolve({
+                  ...res.tea_home_time,
+                  start_time:dayjs().format('HH:mm'),
+                  // end_time:res.tea_home_time.end_time
+              })
+
+              }else{
+                resolve(res.tea_home_time)
+              }
               // setCanTime()
           }else{
             resolve(res.tea_home_time)
@@ -287,7 +296,7 @@ export default function Index(props){
       current={current}
       className='swiper'
       onChange={(e)=>{
-         if(canTime.end_time!='23:59'){
+         if(canTimeTwo.end_time!='23:59'&&canTimeTwo.start_time=='00:00'){
            setTimeScope([])
          }
         setCurrent(e.detail.current)
