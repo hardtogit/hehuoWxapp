@@ -174,7 +174,7 @@ class Index extends Component{
         <View className='body'>
           <View className='tabs'>
             {type.map((item,i) => {
-              if(i<4){
+              if(i<3||(i==3&&type.length==4)){
                 return(
                   <View className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
                     this.listRef.initLoad()
@@ -222,7 +222,7 @@ class Index extends Component{
           <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
             <View className='title'>服务中心</View>
             <View className='funs'>
-              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:phone})}}>
+              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
                 <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
                 <Text className='text'>联系我们</Text>
               </View>
@@ -245,7 +245,7 @@ class Index extends Component{
                 visibleClassfly:false
               })} src={require('../../assets/img/close.png')}></Image>
             </View>
-            <View className='funs'>
+            <View className='funs  aa'>
               {type.map((item,i) => {
                 return(<View className='pfun'
                              onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{

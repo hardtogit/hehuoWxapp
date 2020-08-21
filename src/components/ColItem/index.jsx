@@ -7,7 +7,7 @@ export default function Index (props){
   const {col,cancelCol}=props
     return(
         <View className='colItem' onClick={()=>{Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${col.shop_id}`})}}>
-            <View className='label'>{col.shop_name} | {col.business_time}</View>
+            <View className='label'>{col.shop_name} | {col.business_time=="00:00-23:59"?'24h':col.business_time}</View>
             <Image className='start' onClick={(e)=>{e.stopPropagation();cancelCol(col._id)}} src={require('../../assets/img/me/start.png')}></Image>
             <Image className='cover' src={downUrl+col.home_fid}></Image>
             <View className='bottom'>

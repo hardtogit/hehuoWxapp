@@ -62,9 +62,9 @@ export default (props) => {
     <View className='getCoupon'>
       <AtFloatLayout isOpened={visible} >
         <View className='modal'>
-          <View className='header'>
+          <View className='header' onClick={onCancel}>
             <View className='left'>优惠券</View>
-            <Image className='right' src={require('../../../../../assets/img/home/close.png')} onClick={onCancel}></Image>
+            <Image className='right' src={require('../../../../../assets/img/home/close.png')} ></Image>
           </View>
           {
             empty &&
@@ -118,6 +118,7 @@ export default (props) => {
                 </View>
               )
             })}
+            <View className='tip'>*不可与次卡叠加使用</View>
           </ScrollView>
           <View className='btns' onClick={onCancel}>
             确认

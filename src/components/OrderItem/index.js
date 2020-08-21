@@ -11,7 +11,7 @@ export default function Index(props) {
     <View className='order_item'>
       <View className='top at-row'>
         <View className='at-col at-col-8 left'>订单编号:{order._id}</View>
-        <View className='at-col right'>{order.status}</View>
+        <View className='at-col right'>{order.user_status}</View>
       </View>
       <View className='body'>
         <View className='left'>

@@ -136,7 +136,7 @@ export default function Index(props){
       <View className='content'>
     <View className='tip'>续约时段以订单结束时刻为开始，重新选定的时刻为结束</View>
     <View className='dates'>
-      <View className={classNames(['date','active'])} onClick={()=>choiceDate(dayjs().unix())}>
+      <View className={classNames(['date','active'])} >
       <View className='num'>{dayjs().format('MM月DD日')}</View>
       <View className='week'>{weekMap[dayjs(date*1000).day()]}</View>
       </View>

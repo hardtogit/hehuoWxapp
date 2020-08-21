@@ -90,7 +90,7 @@ export default function Index() {
     network.Fetch({
       "obj":"user",
       "act":"single_room",
-      "room_id": router.params.id||'o15942139490885128974'
+      "room_id": router.params.id||'o15956083697860679626'
     }).then(data=>setRoom(data))
   }, [router.params.id, router.params.shop_id])
   const goCount=()=>{
@@ -135,8 +135,8 @@ export default function Index() {
     <View className='store_detail'>
 
        {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
-      {visibleOne&&<View className='getCoupon'> <GetCoupon visible shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>}
-      {visibleTwo&& <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard></View> }
+      <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
+      <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>
       <View className='navBar' style={{top:`${buttonPosition.top}px`,height:`${buttonPosition.height}px`,paddingRight:`${buttonPosition.width+20}px`}}>
         <AtIcon value='chevron-left' color='#fff' size={28} onClick={()=>Taro.navigateBack({})}></AtIcon>
         <View className='right'>
@@ -150,7 +150,7 @@ export default function Index() {
           indicatorColor='#999'
           indicatorActiveColor='#333'
           circular
-          indicatorDots
+          indicatorDots={false}
           autoplay
         >
           {room.room.shop_fids.map((url)=>{
@@ -166,6 +166,13 @@ export default function Index() {
         </Swiper>
       </View>
       <View className='content'>
+      <View className='box'>
+          <View className='price'>
+            <View className='unit'>¥</View>
+        {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
+        {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
+          </View>
+          </View>
         <View className='title'>{room.room.room_name}</View>
          <View className='tips'>
            <View className='tip'>
@@ -199,7 +206,7 @@ export default function Index() {
           })}
         </View>
         {room.room.price.type==='时段价'&&
-        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
+        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/continueAppointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
         <View className='text'>
           {timeScope?`预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:mm')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:mm')}`:'点击选择时间'}
         </View>

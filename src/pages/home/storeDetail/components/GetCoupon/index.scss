@@ -97,7 +97,7 @@
   }
 }
 .header{
-  padding: 6px 30px 30px 30px;
+  padding: 20px 30px 40px 30px;
   display: flex;
   align-items: center;
   .left{
@@ -164,4 +164,14 @@
       }
     }
   }
+}
+.tip{
+  font-size:24px;
+  font-family:PingFang SC;
+  padding: 20px;
+  font-weight:400;
+  color:rgba(122,122,122,1);
+  line-height:18px;
+  text-align: right;
+  margin-top: 20px;
 }

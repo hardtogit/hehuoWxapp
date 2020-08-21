@@ -1,5 +1,5 @@
 import Taro, { Component ,useState,useEffect} from "@tarojs/taro";
-import { View, Button, Text, Map, Input, Image, CoverView } from "@tarojs/components";
+import { View, Button, Text, Map, Input, Image, CoverView,CoverImage } from "@tarojs/components";
 import network from '@/utils/network'
 import "./index.scss";
 
@@ -9,6 +9,8 @@ const Index = () => {
   const [markers,setMarkers]=useState([])
   const [name,setName]=useState('')
   const [scale,setScale]=useState(14)
+  const [phone,setPhone]=useState('')
+  const [visible,setVisible]=useState(false)
 
 
   const userInfo=Taro.getStorageSync('userInfo')
@@ -63,6 +65,12 @@ const Index = () => {
     console.log(id)
   }
   useEffect(()=>{
+    network.Fetch({
+      "obj": "user",
+      "act": "contact_us"
+    }).then((a) => {
+          setPhone(a.platform_phone)
+    })
      Taro.getLocation({
        success:(e)=>{
         console.log(e)
@@ -104,6 +112,30 @@ const Index = () => {
           optimize
           onMarkerTap={handleCalloutTapEventDetail}
         >
+          <CoverImage className='kefu' onClick={()=>setVisible(true)} src={require('../../../assets/img/home/kefu.png')} />
+          {visible&&
+          <CoverView>
+          <CoverView className='mask' onClick={()=>setVisible(false)}></CoverView>
+          <CoverView className='pop'>
+          <CoverView className='title'>服务中心</CoverView>
+            <CoverView className='funs'>
+              <CoverView className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
+                <CoverImage className='icon' src={require("../../../assets/img/home/help1.png")}></CoverImage>
+                <CoverView className='text'>联系我们</CoverView>
+              </CoverView>
+              <CoverView className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
+                <CoverImage className='icon two' src={require("../../../assets/img/home/help2.png")}></CoverImage>
+                <CoverView className='text'>关于我们</CoverView>
+              </CoverView>
+              <CoverView className='fun ' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
+                <CoverImage className='icon three' src={require("../../../assets/img/home/help3.png")}></CoverImage>
+                <CoverView className='text'> 常见问题</CoverView>
+              </CoverView>
+            </CoverView>
+          </CoverView>
+          </CoverView>
+
+          }
 
           <CoverView className='btn' onClick={()=>Taro.navigateTo({url:`/pages/home/storeList/index?longitude=${location.longitude}&latitude=${location.latitude}`})}>
             预约空间

@@ -15,7 +15,7 @@ const Index = (props) => {
                     <TimesCardBuy timeCard={timeCard} shop_id={shop_id}></TimesCardBuy>
                   )
              })}
-
+            <View className='tip'>*不可与优惠券叠加使用</View>
         </View>
     )
 }

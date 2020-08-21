@@ -69,7 +69,11 @@ class Index extends Component{
             )
             })
             }
+            {orderList.length!==0&&
+            <View className='tip'>*门店优惠券不可与平台红包叠加使用</View>
+            }
         </ListTemplate>
+
         </View>
       </View>
     )

@@ -8,7 +8,8 @@ import {
   Video,
   Image,
   Swiper,
-  SwiperItem
+  SwiperItem,
+  RichText
 } from "@tarojs/components";
 import classNames from 'classnames'
 import ChoicePayType from '@/components/ChoicePayType'
@@ -35,7 +36,6 @@ export default function Index() {
   const [type,setType]=useState('img')
 
   const openLocation=()=>{
-    console.log(entity.shop)
       Taro.openLocation({
         longitude: Number(entity.shop.longitude),
         latitude: Number(entity.shop.latitude),
@@ -53,7 +53,61 @@ export default function Index() {
          title:'收藏成功',
          icon:'none'
        })
+       getData()
     })
+  }
+  const cancelCol=()=>{
+    network.Fetch({
+      obj:'user',
+      act:'del_collect',
+      collect_id:entity.shop.collect_status_id,
+    }).then(()=>{
+      Taro.showToast({
+        title:'操作成功',
+        icon:'none'
+      })
+      getData()
+    })
+  }
+  const getData=()=>{
+    if(Taro.getStorageSync('myLocation')){
+      network.Fetch({
+        "obj":"user",
+        "act":"details_shops",
+        "shop_id":router.params.id||'o15956078815923459529',
+        "latitude":Taro.getStorageSync('myLocation').lat,
+        "longitude":Taro.getStorageSync('myLocation').lng,
+      }).then((res)=>{
+        Taro.setNavigationBarTitle({
+          title:res.shop.shop_name
+        })
+        const regex = new RegExp('<img', 'gi');
+        res.shop.details_desc=res.shop.details_desc&&res.shop.details_desc.replace(regex,'<img style="width:100%;display:block"')
+        setEntity(res)
+      })
+    }else{
+      qqmapsdk.reverseGeocoder({
+        success:function(results){
+          network.Fetch({
+            "obj":"user",
+            "act":"details_shops",
+            "shop_id":router.params.id||'o15956078815923459529',
+            "latitude":results.result.location.lat,
+            "longitude":results.result.location.lng,
+          }).then((res)=>{
+            Taro.setNavigationBarTitle({
+              title:res.shop.shop_name
+            })
+            const regex = new RegExp('<img', 'gi');
+            res.shop.details_desc=res.shop.details_desc&&res.shop.details_desc.replace(regex,'<img style="width:100%;display:block"')
+            setEntity(res)
+          })
+          Taro.setStorageSync('myLocation',results.result.location)
+        }
+      })
+    }
+
+
   }
   const buy=(payment_type)=>{
     network.Fetch({
@@ -87,41 +141,7 @@ export default function Index() {
     }
   })
   useDidShow(() => {
-    if(Taro.getStorageSync('myLocation')){
-      network.Fetch({
-        "obj":"user",
-        "act":"details_shops",
-        "shop_id":router.params.id||'o15956078815923459529',
-        "latitude":Taro.getStorageSync('myLocation').lat,
-        "longitude":Taro.getStorageSync('myLocation').lng,
-      }).then((res)=>{
-        Taro.setNavigationBarTitle({
-          title:res.shop.shop_name
-        })
-        setEntity(res)
-      })
-    }else{
-      qqmapsdk.reverseGeocoder({
-        success:function(results){
-          network.Fetch({
-            "obj":"user",
-            "act":"details_shops",
-            "shop_id":router.params.id||'o15956078815923459529',
-            "latitude":results.result.location.lat,
-            "longitude":results.result.location.lng,
-          }).then((res)=>{
-            Taro.setNavigationBarTitle({
-              title:res.shop.shop_name
-            })
-            setEntity(res)
-          })
-          Taro.setStorageSync('myLocation',results.result.location)
-        }
-      })
-    }
-
-
-
+    getData()
   })
   const openPay=(selectTimeCard)=>{
     setTimeCard(selectTimeCard)
@@ -130,25 +150,26 @@ export default function Index() {
   return (
     <View className='store_detail'>
       {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
-      {visibleOne&&<View className='getCoupon'> <GetCoupon visible shop_id={router.params.id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>}
-      {visibleTwo&& <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.id||'o15937049856544559001'}  visible onCancel={()=>setVisibletwo(false)}></GetCard></View> }
+      <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
+      <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>
       <View className='swiper_container'>
         <Swiper
         className='swiper'
         ndicatorDots={false}
         circular
-        autoplay
+        autoplay={false}
         onChange={(e)=>{
             setCurrent(e.detail.current)
         }}
+        nextMargin='60rpx'
       >
           {
             entity.shop.vadio &&
-              <SwiperItem>
+              <SwiperItem className='swiperItem'>
                 <Video src={downUrl+entity.shop.vadio} className='video'/>
               </SwiperItem>
           }
-        {entity.shop.shop_fids.map((url)=>(<SwiperItem>
+        {entity.shop.shop_fids.map((url)=>(<SwiperItem className='swiperItem'>
           <Image
             className='slide'
             src={downUrl+url}
@@ -170,7 +191,7 @@ export default function Index() {
         <View className='address' onClick={()=>Taro.openLocation({})}>
           <View className='text'>
           <View>{entity.shop.address}</View>
-          <View>距离您有{countDistance(entity.shop.distance)}</View>
+          <View>{countDistance(entity.shop.distance)}</View>
           </View>
           <View className='icon' onClick={openLocation}>
             <Image className='img' src={require('../../../assets/img/home/location_icon.png')}></Image>
@@ -215,7 +236,11 @@ export default function Index() {
           <View className='sub_title'>
               使用说明：
           </View>
+          <RichText className='richText' nodes={entity.shop.details_desc} >
+
+          </RichText>
         </View>
+
         <View className='bottom'>
               <View className='fn' onClick={()=>Taro.switchTab({url:'/pages/home/index'})}>
                 <Image className='img' src={require('../../../assets/img/home/sd1.png')}></Image>
@@ -231,8 +256,15 @@ export default function Index() {
                 </View>
                 </Button>
               </View>
-              <View className='fn' onClick={colStore}>
+              <View className='fn' onClick={()=>{if(entity.shop.collect_status=='已收藏'){
+                  cancelCol()
+              }else{
+                colStore()
+              }   }} >
+                {entity.shop.collect_status=='已收藏'? <Image className='img start' src={require('../../../assets/img/me/start.png')}></Image>:
                 <Image className='img' src={require('../../../assets/img/home/sd3.png')}></Image>
+                }
+
                 <View className='text'>
                   收藏
                 </View>

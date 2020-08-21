@@ -25,7 +25,7 @@ const Index = (props) => {
       network.Fetch({
         "obj":"user",
         "act":"list_user_card_user",
-        "shop_id":router.params.id||'o15937049856544559001',
+        "shop_id":router.params.id||'o15956078815923459529',
         "begin_time":router.startTime|| dayjs(dayjs().format('YYYY-MM-DD')).unix(),
         "end_time":router.endTime|| dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
         "page":1,

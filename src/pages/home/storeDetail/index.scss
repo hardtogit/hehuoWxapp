@@ -5,19 +5,28 @@ page {
   background-color: #f0f1f3;
 }
 .store_detail {
+  padding-bottom: 120px;
   .swiper_container {
     background-color: #fff;
-    padding: 0 30px;
+    //padding: 0 30px;
+    //padding-left: 30px;
     position: relative;
     height: 430px;
     overflow: hidden;
     .swiper {
       height: 430px;
-      border-radius: 16px;
+      //border-radius: 16px;
+
       overflow: hidden;
+      .swiperItem{
+        padding-left: 30px;
+        box-sizing: border-box;
+
+      }
       .slide {
         width: 100%;
         height: 100%;
+        border-radius: 16px;
       }
     }
     .video{
@@ -80,6 +89,7 @@ page {
       .text {
         flex: 1;
         width: 0;
+        letter-spacing: 2px;
       }
       .icon {
         width: 72px;
@@ -201,6 +211,11 @@ page {
         width: 50px;
         height: 50px;
         display: inline-block;
+        &.start{
+          width: 40px;
+          height: 40px;
+          margin:5px auto;
+        }
       }
       .text{
         font-size: 22px;

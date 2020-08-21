@@ -9,6 +9,9 @@ export default function Index(props){
 return(
    <View className='card' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}`})}>
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
+     <View className='coverBg'>
+
+     </View>
      <Image className='tag' src={require('../../assets/img/home/tag.png')}></Image>
      <View className='time'>
         {tea.label} | {tea.business_time=="00:00-23:59"?'24h':tea.business_time}
@@ -32,12 +35,13 @@ return(
        <View className='address'>
          {tea.address}
        </View>
-     </View>
-     <View className='price'>
+       <View className='price'>
          <View className='unit'>¥</View>
         <View className='num'>{tea.min_price}</View>
          <View className='text'>起</View>
      </View>
+     </View>
+
    </View>
 )
 }

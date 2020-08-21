@@ -69,9 +69,9 @@ page {
     padding: 0 30px 0 30px;
     border-radius: 16px;
     position: relative;
-    top:-10px;
+    top:-20px;
     background-color: #fff;
-    border-radius: 16px 16px 0 0;
+    border-radius: 24px 24px 0 0;
     .title {
       font-size: 32px;
       padding: 30px 0;
@@ -275,6 +275,34 @@ page {
       font-size: 30px;
       justify-content: center;
       margin-left: 30px;
+    }
+  }
+}
+.box{
+  position:absolute;
+  right:20px;
+  padding:8px 10px;
+  border-radius:16px;
+  top:-40px;
+  background-color:#FEF7CE;
+  .price{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: baseline;
+    .unit{
+        color: #F0B80D;
+        font-size: 24px;
+    }
+    .num{
+      color: #F0B80D;
+      font-size: 48px;
+
+    }
+    .text{
+      color: #A6A6A6;
+      font-size: 20px;
+
     }
   }
 }

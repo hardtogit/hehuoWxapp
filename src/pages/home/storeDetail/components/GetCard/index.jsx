@@ -17,9 +17,9 @@ export default (props) => {
     <View className='getCard'>
     <AtFloatLayout isOpened={visible} >
       <View className='modal'>
-       <View className='header'>
+       <View className='header' onClick={onCancel}>
          <View className='left'>优惠次卡</View>
-          <Image className='right' src={require('../../../../../assets/img/home/close.png')} onClick={onCancel}></Image>
+          <Image className='right' src={require('../../../../../assets/img/home/close.png')} ></Image>
        </View>
             {
         timeCards.length===0&&
@@ -30,12 +30,13 @@ export default (props) => {
         </View>
       </View>
       }
-      <ScrollView className='all'>
+      <ScrollView scrollY={true} className='all'>
            {timeCards.map((timeCard)=>{
                   return(
                     <TimesCardBuy timeCard={timeCard} shop_id={shop_id} openPay={openPay}></TimesCardBuy>
                   )
              })}
+        <View className='tip'>*不可与优惠券叠加使用</View>
       </ScrollView>
 
       <View className='btns' onClick={onCancel}>

@@ -31,7 +31,10 @@ export default function Index(){
       }else{
           realMoney=(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2*100)<0?0:(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2*100)/100
       }
+      // const a=(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2)/100
+      // console.log(realMoney*100,discount.coupon.memb_off_time*room.room.price.money*2*100,'dasds')
   }
+  realMoney=realMoney.toFixed(2)
   useDidShow(()=>{
     const selectDiscount=Taro.getStorageSync('discount')
     setDiscount(selectDiscount)
@@ -41,9 +44,9 @@ export default function Index(){
     network.Fetch({
       "obj":"user",
       "act":"single_room",
-      "room_id": router.params.id||'o15951435145368449687'
+      "room_id": router.params.id||'o15956083697860679626'
     }).then(data=>setRoom(data))
-  },[router.params.id])
+  },[])
   const buy=(payment_type)=>{
     Taro.showLoading({
       title:'处理中，请稍后...',
@@ -115,6 +118,10 @@ export default function Index(){
       }
       }
   }
+  const continueOrder=Taro.getStorageSync('continueOrder')
+  if(continueOrder&&continueOrder._id){
+    params.order_id=continueOrder._id
+  }
     network.Fetch(params).then((res)=>{
       Taro.removeStorageSync('appointmentTimeScope');
       Taro.hideLoading({})
@@ -185,7 +192,7 @@ export default function Index(){
         </View>
         <View className='item'>
           <View className='left'>次卡抵用：</View>
-          <View className='right'>{(discount&&discount.type=='次卡')?<Text style={{color:'red'}}>{ `${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time*room.room.price.money}`}</Text>:'-'}</View>
+          <View className='right'>{(discount&&discount.type=='次卡')?<Text style={{color:'red'}}>{ `${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time*room.room.price.money*2}`}</Text>:'-'}</View>
         </View>
         <View className='item'>
           <View className='left'>应付金额：</View>
