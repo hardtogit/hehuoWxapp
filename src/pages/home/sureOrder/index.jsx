@@ -1,7 +1,7 @@
 import Taro, { Component,useState ,useRouter,useEffect,useDidShow} from "@tarojs/taro";
 import classNames from 'classnames'
 import dayjs from 'dayjs'
-import { View, Button, Text,Image } from "@tarojs/components";
+import { View, Button, Text,Image ,Icon} from "@tarojs/components";
 import ChoicePayType from '@/components/ChoicePayType'
 import network from '@/utils/network'
 import {downUrl} from '../../../config/index'
@@ -234,10 +234,11 @@ export default function Index(){
     <View className='card two'>
               <View className='cell' >
                     <View className='left'  onClick={()=>setChecked(!checked)}>
-                      <View className={classNames(['checkbox', checked&&'active'])}></View>
+                      {!checked&&<View style={{width:'22px',height:'22px'}} className={classNames(['checkbox', checked&&'active'])}></View>}
+                      {checked&&<Icon className='gou' type={'success'} color="#00A0E9" size={22}></Icon>}
                     请详细阅读精归叙用户协议，同意后付款
                     </View>
-                    <View className='right'>
+                    <View className='right' onClick={()=>Taro.navigateTo({url:'/pages/home/doc/index'})}>
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>
                     </View>
                 </View>

@@ -1,4 +1,4 @@
-import Taro, { Component ,useState,useEffect} from "@tarojs/taro";
+import Taro, { Component ,useState,useEffect,useShareAppMessage} from "@tarojs/taro";
 import { View, Button, Text, Map, Input, Image, CoverView,CoverImage } from "@tarojs/components";
 import network from '@/utils/network'
 import "./index.scss";
@@ -64,6 +64,7 @@ const Index = () => {
     Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${id.markerId}`})
     console.log(id)
   }
+  useShareAppMessage({})
   useEffect(()=>{
     network.Fetch({
       "obj": "user",
@@ -113,10 +114,12 @@ const Index = () => {
           onMarkerTap={handleCalloutTapEventDetail}
         >
           <CoverImage className='kefu' onClick={()=>setVisible(true)} src={require('../../../assets/img/home/kefu.png')} />
+          {/* {visible&& */}
+          {/* <CoverView> */}
           {visible&&
-          <CoverView>
-          <CoverView className='mask' onClick={()=>setVisible(false)}></CoverView>
-          <CoverView className='pop'>
+            <CoverView className='mask' onClick={()=>setVisible(false)}></CoverView>
+          }
+         {visible&& <CoverView className='pop'>
           <CoverView className='title'>服务中心</CoverView>
             <CoverView className='funs'>
               <CoverView className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
@@ -132,11 +135,10 @@ const Index = () => {
                 <CoverView className='text'> 常见问题</CoverView>
               </CoverView>
             </CoverView>
-          </CoverView>
-          </CoverView>
+          </CoverView>}
 
-          }
-
+          {/* </CoverView> */}
+          {/* } */}
           <CoverView className='btn' onClick={()=>Taro.navigateTo({url:`/pages/home/storeList/index?longitude=${location.longitude}&latitude=${location.latitude}`})}>
             预约空间
         </CoverView>

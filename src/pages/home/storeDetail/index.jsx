@@ -11,6 +11,7 @@ import {
   SwiperItem,
   RichText
 } from "@tarojs/components";
+import {AtActionSheet,AtActionSheetItem} from 'taro-ui'
 import classNames from 'classnames'
 import ChoicePayType from '@/components/ChoicePayType'
 import RoomItem from "../../../components/RoomItem";
@@ -28,6 +29,7 @@ const  qqmapsdk = new QQMapWX({
 export default function Index() {
   const router=useRouter()
   const [entity,setEntity]=useState()
+  const [visiblePhone,setVisiblePhone]=useState(false)
   const [visibleOne,setVisibleOne]=useState(false)
   const [visibleTwo,setVisibletwo]=useState(false)
   const [visibleThree,setVisibleThree]=useState(false)
@@ -269,13 +271,22 @@ export default function Index() {
                   收藏
                 </View>
               </View>
-              <View className='fn' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+entity.shop.serve_phone})}}>
+              <View className='fn' onClick={()=>{setVisiblePhone(true)}}>
                 <Image  className='img' src={require('../../../assets/img/home/sd4.png')}></Image>
                 <View className='text'>
                   客服
                 </View>
               </View>
+
         </View>
+        <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={()=>setVisiblePhone(false)} >
+        <AtActionSheetItem>
+          {entity.shop.serve_phone}
+        </AtActionSheetItem>
+        <AtActionSheetItem  onClick={()=>{Taro.makePhoneCall({phoneNumber:''+entity.shop.serve_phone})}}>
+          呼叫
+        </AtActionSheetItem>
+          </AtActionSheet>
     </View>
   );
 }

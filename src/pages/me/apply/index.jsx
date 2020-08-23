@@ -1,4 +1,4 @@
-import Taro, { Component ,useEffect,useState} from "@tarojs/taro";
+import Taro, { Component ,useEffect,useState,useShareAppMessage} from "@tarojs/taro";
 import { View, Button, Text, WebView, Image,Input,Textarea} from "@tarojs/components";
 import { AtModal, AtModalHeader, AtModalContent, AtModalAction } from "taro-ui"
 import ProblemItem from '@/components/ProblemItem'
@@ -15,7 +15,7 @@ const Index = () => {
   const [phone, setPhone] = useState('')
   const [suggestion_msg, setSuggestion_msg] = useState('')
 
-
+  useShareAppMessage({})
   useEffect(()=>{
     network.Fetch({
       "obj":"user",

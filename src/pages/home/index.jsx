@@ -1,6 +1,6 @@
 import Taro, { Component, useState, useEffect, createRef,useDidShow } from "@tarojs/taro";
-import { View, Button, Text, Image, Swiper, SwiperItem } from "@tarojs/components";
-import { AtFloatLayout } from 'taro-ui'
+import { View, Button, Text, Image, Swiper, SwiperItem,ScrollView, } from "@tarojs/components";
+import { AtFloatLayout,AtActionSheet, AtActionSheetItem  } from 'taro-ui'
 import classNames from 'classnames'
 import {inject,observer} from '@tarojs/mobx'
 import TeaCard from '@/components/TeaCard'
@@ -21,12 +21,14 @@ class Index extends Component{
       visibleHelp:false,
       visibleCoupon:false,
       visibleClassfly:false,
+      visiblePhone:false,
       typeId:null,
       banner:[],
       type:[],
       location:'定位中...',
       locations:'',
-      phone:''
+      phone:'',
+      scrollIntoView:'',
     }
   }
   componentDidMount(){
@@ -97,6 +99,8 @@ class Index extends Component{
       location,
       locations,
       phone,
+      visiblePhone,
+      scrollIntoView,
       type}=this.state
       const {teaList}=this.props.listDataStore
     return (
@@ -172,26 +176,29 @@ class Index extends Component{
           </View>
         </View>
         <View className='body'>
-          <View className='tabs'>
+          <View className='scrollContainer'>
+          <ScrollView scrollX enhanced 	 className='tabs'>
             {type.map((item,i) => {
-              if(i<3||(i==3&&type.length==4)){
                 return(
-                  <View className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
+                  <View id={item._id} className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
                     this.listRef.initLoad()
+                    this.setState({
+                      scrollIntoView:item._id
+                    })
               })}}>
                 {item.category_name}
                 <View className='bar'></View>
               </View>
               )
-              }
             })}
-            {type.length>4&&
+          </ScrollView>
+          {type.length>1&&
             <View className='more' onClick={()=>{
               this.setState({
                 visibleClassfly:true
               })
             }}>
-              更多<Image className='icon' src={require('../../assets/img/me/arrow_right.png')}></Image>
+            <Image className='icon' src={require('../../assets/img/home/more.png')}></Image>
             </View>
             }
           </View>
@@ -222,7 +229,7 @@ class Index extends Component{
           <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
             <View className='title'>服务中心</View>
             <View className='funs'>
-              <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
+              <View className='fun' onClick={()=>{this.setState({visiblePhone:true})}}>
                 <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
                 <Text className='text'>联系我们</Text>
               </View>
@@ -260,6 +267,14 @@ class Index extends Component{
             </View>
           </AtFloatLayout>
         </View>
+        <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={()=>this.setState({visiblePhone:false})}>
+        <AtActionSheetItem>
+          {phone}
+        </AtActionSheetItem>
+        <AtActionSheetItem onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
+          呼叫
+        </AtActionSheetItem>
+      </AtActionSheet>
           {visibleCoupon&&
           <CouponModal></CouponModal>
           }

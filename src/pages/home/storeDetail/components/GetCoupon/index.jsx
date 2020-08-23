@@ -84,7 +84,7 @@ export default (props) => {
                       <View className='unit'>¥</View> {coupon.disc_off_price}
                     </View>
                     <View className='text'>
-                      {coupon.disc_use_price != 0 ? `满${coupon.disc_use_price}可用` : '无门槛'}
+                      {coupon.disc_use_price?`满${coupon.disc_use_price}可用` : '无门槛'}
                     </View>
                   </View>
                   <View className='center'>

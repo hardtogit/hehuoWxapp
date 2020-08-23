@@ -47,7 +47,7 @@ const Index = (props) => {
     }
     return (
         <View className='info'>
-             <View className='tip'>*不可与优惠券叠加使用</View>
+
              {
               empty&&
               <View className='empty'>
@@ -87,6 +87,7 @@ const Index = (props) => {
                 </View>
                   )
              })}
+             <View className='tip'>*不可与优惠券叠加使用</View>
    {/* <View className='buttom'>
         <View className='right' onClick={submit}>
         确定

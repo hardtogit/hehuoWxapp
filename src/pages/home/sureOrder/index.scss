@@ -34,7 +34,7 @@ page{
       }
       .name{
         flex: 1;
-        padding-left: 10px;
+        padding-left: 20px;
       }
     }
 
@@ -72,6 +72,11 @@ page{
             background-color: #00A0E9;
             border-color: #00A0E9;
           }
+        }
+        .gou{
+          width: 44px;
+          height: 44px;
+          margin-right: 10px;
         }
     }
     .right{

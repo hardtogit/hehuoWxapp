@@ -18,7 +18,7 @@ const Index = () => {
   },[])
   return (
     <View className='about'>
-      <Image className='logo' src={downUrl+entity.logo_fid}></Image>
+      <Image className='logo' src={entity.logo_fid?downUrl+entity.logo_fid:''}></Image>
       <View className='title'>软件介绍：</View>
       <View className='content'>
         {entity.app_info}

@@ -12,3 +12,10 @@ View,Text,Input{
 // .at-float-layout .layout-body__content{
 //   min-height: 200px!important;
 // }
+.at-modal__container{
+  width: 600px!important;
+  transform: translate(-50%,-60%)!important;
+  .at-modal__content{
+    padding: 32px 32px;
+  }
+}

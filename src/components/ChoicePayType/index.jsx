@@ -26,7 +26,7 @@ export default function Index(props){
   },[])
   // console.log(userInfo,'aa')
   return(
-    <AtModal isOpened>
+    <AtModal isOpened onClose={onCancel}>
     {/* <AtModalHeader>选择支付方式</AtModalHeader> */}
     <AtModalContent>
     <View className='title'>选择支付方式</View>

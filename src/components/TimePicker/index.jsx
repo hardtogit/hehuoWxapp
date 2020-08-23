@@ -25,25 +25,7 @@ export default (props) => {
   return (
     <AtFloatLayout isOpened={visible} onClick={() => this.setState({ visibleHelp:false})}>
       <View className='content'>
-    <View className='title'>服务中心</View>
-    <View className='tip'>1小时起订，灰色为已被预订。预约成功后，可提前15分钟入场</View>
-    <View className='dates'>
-      <View className='date'>
-        <View className='num'>5月1日</View>
-        <View className='week'>星期五</View>
-      </View>
-      <View className='date'>
-        <View className='num'>5月1日</View>
-        <View className='week'>星期五</View>
-      </View>
-      <View className='date'>
-        <View className='num'>5月1日</View>
-        <View className='week'> 星期五</View>
-      </View>
-      <View className='date'>
-        <View className='week'>其他日期</View>
-      </View>
-    </View>
+      
     <View className='time'>
       {timeArr.map((time)=>{
             return (

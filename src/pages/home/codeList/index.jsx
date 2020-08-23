@@ -1,6 +1,6 @@
 
 
-import Taro, { Component,useEffect,useState} from "@tarojs/taro";
+import Taro, { Component,useEffect,useState,useShareAppMessage} from "@tarojs/taro";
 import network from '@/utils/network'
 import {
     View,
@@ -17,6 +17,7 @@ import "./index.scss";
 export default function Index() {
   const [empty,setEmpty]=useState(false)
   const [orders,setOrders]=useState([])
+  useShareAppMessage({})
   useEffect(()=>{
     network.Fetch({
       "obj":"user",

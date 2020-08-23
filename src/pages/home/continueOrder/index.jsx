@@ -32,6 +32,7 @@ export default function Index() {
   const [timeScope,setTimeScope] = useState()
   const [visibleThree,setVisibleThree]=useState(false)
   const [timeCard,setTimeCard]=useState({})
+  const [current,setCurrent]=useState(0)
   const buttonPosition=Taro.getMenuButtonBoundingClientRect()
   useDidShow(()=>{
     const appointmentTimeScope=Taro.getStorageSync('appointmentTimeScope')
@@ -145,12 +146,18 @@ export default function Index() {
 
       </View>
       <View className='swiper_container'>
+          <View className='count'>
+           {current+1}/{room.room.shop_fids.length}
+          </View>
         <Swiper
           className='swiper'
           indicatorColor='#999'
           indicatorActiveColor='#333'
           circular
           indicatorDots={false}
+          onChange={(e)=>{
+            setCurrent(e.detail.current)
+          }}
           autoplay
         >
           {room.room.shop_fids.map((url)=>{
@@ -170,7 +177,7 @@ export default function Index() {
           <View className='price'>
             <View className='unit'>¥</View>
         {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
-        {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
+        {room.room.price.type==='时段价'&&<View className='text'>起</View>}
           </View>
           </View>
         <View className='title'>{room.room.room_name}</View>
@@ -238,7 +245,7 @@ export default function Index() {
         </View>
         </View>
         <View className='bottom'>
-          <View className='service'>
+          <View className='service'  onClick={()=>{Taro.makePhoneCall({phoneNumber:''+entity.shop.serve_phone})}}>
             <Image className='icon' src={require('../../../assets/img/me/room_five.png')}>
             </Image>
             <View className='text'>
@@ -248,6 +255,7 @@ export default function Index() {
           <View className='price'>
             <View className='unit'>¥</View>
         {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
+        <Text style={{width:'4px'}}> </Text>
         {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
           </View>
           <View className='btn' onClick={goCount}>

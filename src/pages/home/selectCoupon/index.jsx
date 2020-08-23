@@ -45,7 +45,6 @@ export default function Index (){
   console.log(router.params.price)
   return (
     <View className='selectCoupon'>
-        <View className='tip'>*不可与次卡叠加使用</View>
       {
         empty&&
         <View className='empty'>
@@ -94,6 +93,7 @@ export default function Index (){
           确定
         </View>
       </View> */}
+        <View className='tip'>*不可与次卡叠加使用</View>
 </View>
   )
 }

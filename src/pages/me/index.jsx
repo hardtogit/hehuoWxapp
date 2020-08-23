@@ -1,6 +1,6 @@
 import Taro, { Component, useEffect, useDidShow, useState } from "@tarojs/taro";
 import { View, Button, Text, WebView, Image } from "@tarojs/components";
-import {AtModal} from 'taro-ui'
+import {AtModal,AtActionSheet,AtActionSheetItem} from 'taro-ui'
 import network from '@/utils/network'
 import "./index.scss";
 
@@ -8,6 +8,7 @@ import "./index.scss";
 const Index = () => {
   const [person, setPerson] = useState({})
   const [data, setData] = useState({})
+  const [visiblePhone,setVisiblePhone]=useState(false)
   const [visible, setVisible] = useState(false)
   useEffect(()=>{
     network.Fetch({
@@ -91,7 +92,7 @@ const Index = () => {
               关于我们
              </View>
           </View>
-          <View className='fun' onClick={()=>{Taro.makePhoneCall({phoneNumber:data.platform_phone})}}>
+          <View className='fun' onClick={()=>setVisiblePhone(true)}>
             <Image className='img' src={require('../../assets/img/me/me5.png')}></Image>
             <View className='text'>
               联系我们
@@ -105,6 +106,15 @@ const Index = () => {
           </View>
         </View>
       </View>
+      <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={()=>setVisiblePhone(false)} >
+        <AtActionSheetItem>
+          {data.platform_phone}
+        </AtActionSheetItem>
+        <AtActionSheetItem  onClick={()=>{Taro.makePhoneCall({phoneNumber:''+data.platform_phone})}}>
+          呼叫
+        </AtActionSheetItem>
+          </AtActionSheet>
+
     </View>
   )
 }

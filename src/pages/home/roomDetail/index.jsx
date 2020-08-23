@@ -1,6 +1,6 @@
 import Taro, {Component, useRouter, useEffect, useState, useDidShow, useShareAppMessage} from "@tarojs/taro";
 import network from '@/utils/network'
-import { AtIcon } from 'taro-ui'
+import { AtIcon ,AtActionSheet,AtActionSheetItem} from 'taro-ui'
 import dayjs from 'dayjs'
 import {countDistance} from '@/utils'
 import ChoicePayType from '@/components/ChoicePayType'
@@ -27,11 +27,13 @@ export default function Index() {
   const router=useRouter()
   const [room, setRoom] = useState({})
   const [entity, setEntity] = useState({})
+  const [visiblePhone,setVisiblePhone]=useState(false)
   const [visibleOne,setVisibleOne]=useState(false)
   const [visibleTwo,setVisibletwo]=useState(false)
   const [timeScope,setTimeScope] = useState()
   const [visibleThree,setVisibleThree]=useState(false)
   const [timeCard,setTimeCard]=useState({})
+  const [current,setCurrent]=useState(0)
   const buttonPosition=Taro.getMenuButtonBoundingClientRect()
   useDidShow(()=>{
     const appointmentTimeScope=Taro.getStorageSync('appointmentTimeScope')
@@ -58,7 +60,7 @@ export default function Index() {
       network.Fetch({
         "obj":"user",
         "act":"details_shops",
-        "shop_id":router.params.shop_id||'o15956078815923459529',
+        "shop_id":router.params.shop_id||'o15979071007186889648',
         "latitude":Taro.getStorageSync('myLocation').lat,
         "longitude":Taro.getStorageSync('myLocation').lng,
       }).then((res)=>{
@@ -73,7 +75,7 @@ export default function Index() {
           network.Fetch({
             "obj":"user",
             "act":"details_shops",
-            "shop_id":router.params.shop_id||'o15956078815923459529',
+            "shop_id":router.params.shop_id||'o15979071007186889648',
             "latitude":results.result.location.lat,
             "longitude":results.result.location.lng,
           }).then((res)=>{
@@ -90,7 +92,7 @@ export default function Index() {
     network.Fetch({
       "obj":"user",
       "act":"single_room",
-      "room_id": router.params.id||'o15956083697860679626'
+      "room_id": router.params.id||'o15979078737097969055'
     }).then(data=>{
       const regex = new RegExp('<img', 'gi');
       data.room.details_desc=data.room.details_desc&&data.room.details_desc.replace(regex,'<img style="width:100%;display:block"')
@@ -111,7 +113,7 @@ export default function Index() {
     "obj":"user",
 		"act":"add_card_user",
 		"memb_id":timeCard._id,
-    "shop_id":router.params.shop_id||'o15956078815923459529',
+    "shop_id":router.params.shop_id||'o15979071007186889648',
      payment_type
     }).then((data)=>{
       setVisibleThree(false)
@@ -137,6 +139,7 @@ export default function Index() {
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
+      <TimePicker visible={true}></TimePicker>  
        {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>
@@ -148,12 +151,18 @@ export default function Index() {
 
       </View>
       <View className='swiper_container'>
+         <View className='count'>
+           {current+1}/{room.room.shop_fids.length}
+          </View>
         <Swiper
           className='swiper'
           indicatorColor='#999'
           indicatorActiveColor='#333'
           circular
           indicatorDots={false}
+          onChange={(e)=>{
+            setCurrent(e.detail.current)
+          }}
           autoplay
         >
           {room.room.shop_fids.map((url)=>{
@@ -173,10 +182,9 @@ export default function Index() {
           <View className='price'>
             <View className='unit'>¥</View>
         {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
-        {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
+        {room.room.price.type==='时段价'&&<View className='text'>起</View>}
           </View>
           </View>
-
         <View className='title'>{room.room.room_name}</View>
          <View className='tips'>
            <View className='tip'>
@@ -195,7 +203,7 @@ export default function Index() {
         <View className='address' onClick={()=>openLocation()}>
           <View className='text'>
           <View>{entity.shop.address}</View>
-  <View>距离您有{countDistance(entity.shop.distance)}</View>
+        <View>{countDistance(entity.shop.distance)}</View>
           </View>
           <View className='icon'>
             <Image className='img' src={require('../../../assets/img/me/room_ad.png')}></Image>
@@ -242,7 +250,7 @@ export default function Index() {
         </View>
         </View>
         <View className='bottom'>
-          <View className='service'>
+          <View className='service'  onClick={()=>{setVisiblePhone(true)}}>
             <Image className='icon' src={require('../../../assets/img/me/room_five.png')}>
             </Image>
             <View className='text'>
@@ -252,6 +260,7 @@ export default function Index() {
           <View className='price'>
             <View className='unit'>¥</View>
         {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
+        <Text style={{width:'4px'}}> </Text>
         {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
           </View>
           <View className='btn' onClick={goCount}>
@@ -267,6 +276,14 @@ export default function Index() {
           }
           </View>
         </View>
+        <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={()=>setVisiblePhone(false)} >
+        <AtActionSheetItem>
+          {entity.shop.serve_phone}
+        </AtActionSheetItem>
+        <AtActionSheetItem  onClick={()=>{Taro.makePhoneCall({phoneNumber:''+entity.shop.serve_phone})}}>
+          呼叫
+        </AtActionSheetItem>
+          </AtActionSheet>
     </View>
   );
 }
