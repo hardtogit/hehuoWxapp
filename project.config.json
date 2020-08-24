@@ -21,7 +21,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -1163,6 +1163,20 @@
 					"id": -1,
 					"name": "pages/home/roomDetail/index",
 					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/roomDetail/index",
+					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/sureOrder/index",
+					"pathName": "pages/home/sureOrder/index",
 					"query": "",
 					"scene": null
 				},

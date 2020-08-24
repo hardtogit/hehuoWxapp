@@ -28,6 +28,7 @@ export default function Index() {
   const [room, setRoom] = useState({})
   const [entity, setEntity] = useState({})
   const [visiblePhone,setVisiblePhone]=useState(false)
+  const [visibleTimeScope,setVisibleTimeScope]=useState(false)
   const [visibleOne,setVisibleOne]=useState(false)
   const [visibleTwo,setVisibletwo]=useState(false)
   const [timeScope,setTimeScope] = useState()
@@ -35,11 +36,11 @@ export default function Index() {
   const [timeCard,setTimeCard]=useState({})
   const [current,setCurrent]=useState(0)
   const buttonPosition=Taro.getMenuButtonBoundingClientRect()
-  useDidShow(()=>{
-    const appointmentTimeScope=Taro.getStorageSync('appointmentTimeScope')
-    setTimeScope(appointmentTimeScope)
-    // Taro.removeStorageSync('appointmentTimeScope')
-  })
+  // useDidShow(()=>{
+  //   const appointmentTimeScope=Taro.getStorageSync('appointmentTimeScope')
+  //   setTimeScope(appointmentTimeScope)
+  //   // Taro.removeStorageSync('appointmentTimeScope')
+  // })
   const openLocation=()=>{
     console.log(entity.shop)
       Taro.openLocation({
@@ -139,7 +140,7 @@ export default function Index() {
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
-      <TimePicker visible={true}></TimePicker>  
+      <TimePicker  shop_id={room.room.shop_id||'o15979071007186889648'} tea_zone_id={room.room._id||'o15979078737097969055'}  visible={visibleTimeScope} setTimeScopeFn={setTimeScope} onCancel={()=>{setVisibleTimeScope(false)}}></TimePicker>
        {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>
@@ -218,7 +219,7 @@ export default function Index() {
         {/*  })}*/}
         {/*</View>*/}
         {room.room.price.type==='时段价'&&
-        <View className='bar three' onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>
+        <View className='bar three' onClick={()=>setVisibleTimeScope(true)}>
         <View className='text'>
           {timeScope?`预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:mm')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:mm')}`:'点击选择时间'}
         </View>
@@ -271,7 +272,7 @@ export default function Index() {
                   price:room.room.price.money*(timeScope.endTime-timeScope.startTime)/3600*2
                });
                  Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=2`})}}
-               >去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${room.room._id||'o15937054688063290119'}`})}>去预约</View>:
+               >去结算</View>:<View onClick={()=>setVisibleTimeScope(true)}>去预约</View>:
                <View onClick={()=>Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=1`})}>去结算</View>
           }
           </View>

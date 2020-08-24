@@ -1,7 +1,7 @@
 @import "~taro-ui/dist/style/components/float-layout.scss";
 .content{
   padding: 0 30px;
-  padding-bottom: 120px;
+  padding-bottom: 96px;
   position: relative;
   .title{
     text-align: center;
@@ -9,9 +9,18 @@
     color: #282828;
     padding: 30px 0;
   }
+  .clock{
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin-right: 4px;
+  }
   .tip{
     font-size: 22px;
     color: #888888;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
   .dates{
     height: 94px;
@@ -23,6 +32,7 @@
     color: #888888;
     margin-top: 25px;
     .date{
+      height: 94px;
       flex: 1;
       font-size: 26px;
       display: flex;
@@ -33,14 +43,16 @@
         background-color: #00A0E9;
         color: #fff;
       }
-
     }
 
   }
-  .time{
-    height: 520px;
-    overflow: scroll;
+  .times{
+    height: 680px;
+    overflow-y: scroll;
     margin-top: 50px;
+    .swiper{
+      height: 860px;
+    }
     .item{
       width:150px;
       height:60px;
@@ -58,6 +70,14 @@
       &.active{
         background:rgba(0,160,233,1);
         color: #fff;
+      }
+      &.disabled{
+        background-color: #ddd;
+        color: #fff;
+      }
+      &.inner{
+        color: #fff;
+        background-color: rgba($color: #00A0E9, $alpha: .3);
       }
     }
   }
@@ -89,5 +109,11 @@
     background-color: #00A0E9;
     color: #fff;
   }
+}
+
+::-webkit-scrollbar {
+  // width: 0;
+  // height: 0;
+  // color: transparent;
 }
 

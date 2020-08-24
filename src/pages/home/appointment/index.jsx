@@ -5,7 +5,7 @@ import network from '@/utils/network'
 import {getTimeArr} from '@/utils/index'
 import { View, Button, Text, WebView, Image,Swiper,SwiperItem} from "@tarojs/components";
 import "./index.scss";
-import index from "../../index";
+
 
 const weekMap={
   0:'星期日',

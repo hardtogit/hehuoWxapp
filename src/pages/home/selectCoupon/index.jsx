@@ -71,17 +71,11 @@ export default function Index (){
           </View>
           <View className='right'>
             <View className={classNames(['btn',id==coupon._id&&'active', parseInt(router.params.price)< parseInt(coupon.disc_use_price)&&'default'])} onClick={()=>{
-
-              // if(parseInt(router.params.price)< parseInt(coupon.disc_use_price)){
-              //   return
-              // }
-              // setId(coupon._id)
-              // const arr=coupons.filter((item)=>id==item._id)
-              // console.log(arr,'sdsds')
+              if(parseInt(router.params.price)< parseInt(coupon.disc_use_price)){
+                return
+              }
               Taro.setStorageSync('discount',{type:'优惠券',coupon:coupon})
               Taro.navigateBack({})
-
-
             }}
             >使用</View>
           </View>

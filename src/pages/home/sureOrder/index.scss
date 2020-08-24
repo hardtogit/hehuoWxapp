@@ -62,6 +62,12 @@ page{
         color: #575757;
         display: flex;
         align-items: center;
+        .icona{
+          width: 48px;
+          height: 48px;
+          display: inline-block;
+          margin-right: 6px;
+        }
         .checkbox{
           width: 40px;
           height: 40px;
@@ -80,6 +86,11 @@ page{
         }
     }
     .right{
+        height: 100%;
+        width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         .icon{
             width: 15px;
             height: 25px;

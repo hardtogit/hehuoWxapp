@@ -206,7 +206,7 @@ export default function Index(){
     <View className='card two'>
               <View className='cell' onClick={goOne}>
                     <View className='left'>
-                        优惠券
+                       <Image className='icona' src={require('../../../assets/img/home/coupon.png')}></Image>  优惠券选择
                     </View>
                     <View className='right'>
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>
@@ -215,6 +215,7 @@ export default function Index(){
                 {router.params.type==2&&
                   <View className='cell' onClick={()=>Taro.navigateTo({url:`/pages/home/selectTimeCard/index?id=${room.room.shop_id}&startTime=${sureOrderData.timeScope.startTime}&endTime=${sureOrderData.timeScope.endTime}`})}>
                     <View className='left'>
+                    <Image className='icona' src={require('../../../assets/img/home/card.png')}></Image>
                         次卡选择
                     </View>
                     <View className='right'>

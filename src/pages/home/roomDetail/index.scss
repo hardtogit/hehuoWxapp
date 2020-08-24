@@ -5,6 +5,7 @@
 @import "~taro-ui/dist/style/components/action-sheet.scss";
 .at-float-layout__container{
   padding: 0;
+  max-height: 1200px!important;
   border-radius: 16px 16px 0 0;
   .layout-body{
     padding: 0;
