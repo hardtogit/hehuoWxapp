@@ -18,12 +18,13 @@ export default function Index(){
   const sureOrderData=Taro.getStorageSync('sureOrderData')
   let money=0;
   let realMoney=0;
+  console.log(router.params.type)
   if(router.params.type==2){
     money=sureOrderData.price;
     realMoney=sureOrderData.price
   }else{
-    money=room.room&&room.room.price.money
-    realMoney=room.room&&room.room.price.money
+    money=room.room?room.room.price.money:0
+    realMoney=room.room?room.room.price.money:0
   }
   if(discount){
       if(discount.type=='优惠券'){
@@ -34,7 +35,7 @@ export default function Index(){
       // const a=(realMoney*100-discount.coupon.memb_off_time*room.room.price.money*2)/100
       // console.log(realMoney*100,discount.coupon.memb_off_time*room.room.price.money*2*100,'dasds')
   }
-  realMoney=realMoney.toFixed(2)
+  realMoney=parseFloat(realMoney).toFixed(2)
   useDidShow(()=>{
     const selectDiscount=Taro.getStorageSync('discount')
     setDiscount(selectDiscount)

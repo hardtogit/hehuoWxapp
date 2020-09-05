@@ -12,7 +12,7 @@ export default function Index(props) {
       <View className='left'>
         <Image
           className='cover'
-          src={downUrl+room.shop_fids[0]}
+          src={downUrl+room.tea_fids[0]}
         ></Image>
       </View>
       <View className='center'>
@@ -30,7 +30,7 @@ export default function Index(props) {
       <View className='right'>
         <View className='price'>
           {room.price.type==='一口价'&&
-           <View className='num'>{room.price.money}{room.price.type=='时段价'&&<Text className='text'>起</Text>}</View>
+           <View className='num'>{room.price.money}{room.price.type=='时段价'?<Text className='text'>起</Text>:<Text className='text'>元</Text>}</View>
           }
           {
             room.price.type==='时段价'&&

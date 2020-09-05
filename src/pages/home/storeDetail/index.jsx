@@ -189,7 +189,7 @@ export default function Index() {
 
       </View>
       <View className='content'>
-  <View className='title'>{ entity.shop.label}|{entity.shop.shop_name}</View>
+  <View className='title'>{entity.shop.shop_name}</View>
         <View className='address' onClick={()=>Taro.openLocation({})}>
           <View className='text'>
           <View>{entity.shop.address}</View>

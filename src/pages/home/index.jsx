@@ -142,7 +142,11 @@ class Index extends Component{
               {banner.map((item) => {
                 return (
                   <SwiperItem>
-                    <Image className='slide' src={downUrl + item.adv_cover}></Image>
+                    <Image className='slide' src={downUrl + item.adv_cover} onClick={()=>{
+                      if(item.adv_jump_link){
+                        Taro.navigateTo({url:item.adv_jump_link})
+                      }
+                    }} ></Image>
                   </SwiperItem>
                 )
               })}

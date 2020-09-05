@@ -1184,6 +1184,28 @@
 					"id": -1,
 					"name": "pages/home/roomDetail/index",
 					"pathName": "pages/home/roomDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/index",
+					"pathName": "pages/home/index",
+					"query": "sure",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueAppointment/index",
+					"pathName": "pages/home/continueAppointment/index",
+					"query": "sure",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueAppointment/index",
+					"pathName": "pages/home/continueAppointment/index",
+					"query": "sure",
 					"scene": null
 				}
 			]

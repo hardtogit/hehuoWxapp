@@ -16,13 +16,13 @@ const weekMap={
   6:'星期六',
 
 }
-
+// {"service_time":{"begin_time":"1599233400","end_time":"1599233400"}}
 export default function Index(props){
   const continueOrder=Taro.getStorageSync('continueOrder')
   console.log(continueOrder,'sssss')
   const [timeScope,setTimeScope]= useState([dayjs(continueOrder.service_time.begin_time*1000).format('HH:mm'),dayjs(continueOrder.service_time.end_time*1000).format('HH:mm')])
   const [canTime, setCanTime]=useState({})
-  const [date,setDate]=useState(continueOrder.service_time.begin_time)
+  const [date,setDate]=useState(continueOrder.service_time.end_time)
   const router=useRouter()
   const validateTime=(time2)=>{
       const time1=timeScope[0]
@@ -62,8 +62,8 @@ export default function Index(props){
     network.Fetch({
       "obj":"user",
       "act":"list_tea_home_time",
-      "shop_id": router.params.shop_id||'o15956078815923459529',
-      "tea_zone_id": router.params.tea_zone_id||'o15956083697860679626',
+      "shop_id": router.params.shop_id||'o15979071007186889648',
+      "tea_zone_id": router.params.tea_zone_id||'o15979080246510219573',
       "data": dayjs(dayjs(time*1000).format('YYYY-MM-DD')).unix()
     }).then((res)=>{
         Taro.hideLoading({})
@@ -99,10 +99,20 @@ export default function Index(props){
     }
     return flag
   }
+  const isKuaTian=()=>{
+    return dayjs(continueOrder.service_time.begin_time*1000).format('YYYY-MM-DD')!==dayjs(continueOrder.service_time.end_time*1000).format('YYYY-MM-DD')
+  }
   const isInner=(time)=>{
+
     if(timeScope.length===2){
+      if(dayjs(continueOrder.service_time.begin_time*1000).format('YYYY-MM-DD')!==dayjs(continueOrder.service_time.end_time*1000).format('YYYY-MM-DD')){//判断有没跨天
+        return time<timeScope[1]
+    }
       return timeScope[0]<time&&time<timeScope[1]
     }else if(timeScope.length===3){
+      if(dayjs(continueOrder.service_time.begin_time*1000).format('YYYY-MM-DD')!==dayjs(continueOrder.service_time.end_time*1000).format('YYYY-MM-DD')){//判断有没跨天
+        return time<timeScope[2]
+    }
       return timeScope[0]<time&&time<timeScope[2]
     }else{
       return false
@@ -129,7 +139,7 @@ export default function Index(props){
       Taro.navigateBack({})
   }
   useEffect(()=>{
-    getCanTime(date)
+    getCanTime(continueOrder.service_time.end_time)
   },[])
   return (
 
@@ -137,30 +147,19 @@ export default function Index(props){
     <View className='tip'>续约时段以订单结束时刻为开始，重新选定的时刻为结束</View>
     <View className='dates'>
       <View className={classNames(['date','active'])} >
-      <View className='num'>{dayjs().format('MM月DD日')}</View>
-      <View className='week'>{weekMap[dayjs(date*1000).day()]}</View>
+      <View className='num'>{dayjs(continueOrder.service_time.end_time*1000).format('MM月DD日')}</View>
+      <View className='week'>{weekMap[dayjs(continueOrder.service_time.end_time*1000).day()]}</View>
       </View>
-      {/*<View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(1,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(1,'d').unix())}>*/}
-      {/*  <View className='num'>{dayjs().add(1,'d').format('MM月DD日')}</View>*/}
-      {/*  <View className='week'>{weekMap[dayjs().add(1,'d').day()]}</View>*/}
-      {/*</View>*/}
-      {/*<View className={classNames(['date',dayjs(date*1000).format('YYYY-MM-DD')==dayjs().add(2,'d').format('YYYY-MM-DD')&&'active'])}  onClick={()=>choiceDate(dayjs().add(2,'d').unix())}>*/}
-      {/*  <View className='num'>{dayjs().add(2,'d').format('MM月DD日')}</View>*/}
-      {/*  <View className='week'> {weekMap[dayjs().add(2,'d').day()]}</View>*/}
-      {/*</View>*/}
-      {/* <View className='date'>
-        <View className='week'>其他日期</View>
-      </View> */}
     </View>
     <View className='time'>
       {timeArr.map((time)=>{
             return (
-              <View className={classNames(['item',isInner(time)&&'inner',disabled(time)&&'disabled', timeScope.indexOf(time)!==-1&&'active'])} onClick={()=>{
+              <View className={classNames(['item',isInner(time)&&'inner',disabled(time)&&'disabled', ((timeScope.indexOf(time)!==-1&&!isKuaTian())||timeScope[1]==time||timeScope[2]==time)&&'active'])} onClick={()=>{
                let startTime=(parseInt(timeScope[0].split(':')[0])*60+ parseInt(timeScope[0].split(':')[1]))* 60
                let endTime=(parseInt(timeScope[1].split(':')[0])*60+ parseInt(timeScope[1].split(':')[1]))* 60
                let finalTime=(parseInt(time.split(':')[0])*60+ parseInt(time.split(':')[1]))* 60
 
-                console.log(endTime,finalTime)
+                console.log(endTime,finalTime,'dasdasdff')
                 if(disabled(time)){
                   return
                 }

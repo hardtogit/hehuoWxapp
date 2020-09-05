@@ -280,7 +280,11 @@ page {
       .text{
         color: #A6A6A6;
         font-size: 30px;
-
+      } 
+      .yuan{
+        color:#a6a6a6;
+        font-size:30px;
+        margin-left:-10px
       }
     }
     .btn{
@@ -322,7 +326,11 @@ page {
     .text{
       color: #A6A6A6;
       font-size: 20px;
-
+    }
+    .yuan{
+      // color: #F0B80D;
+      color: #A6A6A6;
+      font-size: 24px;
     }
   }
 }

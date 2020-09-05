@@ -182,7 +182,7 @@ export default function Index() {
           <View className='box'>
           <View className='price'>
             <View className='unit'>¥</View>
-        {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
+        {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}<Text className='yuan'>元</Text> </View>}
         {room.room.price.type==='时段价'&&<View className='text'>起</View>}
           </View>
           </View>
@@ -234,12 +234,14 @@ export default function Index() {
           <Image className='arrow' src={require('../../../assets/img/home/right_one.png')}></Image>
         </View>
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',room.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
-        <View className='bar two' onClick={()=>setVisibletwo(true)}>
+
+        {room.room.price.type==='时段价'&&  <View className='bar two' onClick={()=>setVisibletwo(true)}>
           <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
           <View className='center'>次卡优惠购买</View>
           <View className='text'>够买优惠次数</View>
           <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
-        </View>
+        </View>}
+
 
       <View className='discription'>
           <View className='sub_title'>
@@ -260,7 +262,7 @@ export default function Index() {
           </View>
           <View className='price'>
             <View className='unit'>¥</View>
-        {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money}</View>}
+        {room.room.price.type==='时段价'?<View className='num'>{timeScope?room.room.price.money*2*(timeScope.endTime-timeScope.startTime)/3600:room.room.price.money*2}</View>:<View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>}
         <Text style={{width:'4px'}}> </Text>
         {room.room.price.type==='时段价'&&<View className='text'>{timeScope?`${parseInt((timeScope.endTime-timeScope.startTime)/3600)}小时${(timeScope.endTime-timeScope.startTime)%3600!=0?((timeScope.endTime-timeScope.startTime)%3600)/60+'分钟':''}`:'起'}</View>}
           </View>
