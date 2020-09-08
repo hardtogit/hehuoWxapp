@@ -22,7 +22,20 @@ export default function Index(props) {
         </View>
         <View className='right'>
           <View className='name'>{order.room_name}</View>
-          <View className='text'>
+          {order.room_type==='一口价'?
+              <View>
+              <View className='text'>
+                    {dayjs(
+                      order.create_time * 1000
+                    ).format("MM月DD日 HH:mm")}
+                  </View>
+                  <View className='text'>
+                    一口价时段
+                  </View>
+                  </View>
+          :
+          <View>
+      <View className='text'>
             {dayjs(
               order.service_time && order.service_time.begin_time * 1000
             ).format("MM月DD日 HH:mm")}{" "}
@@ -34,6 +47,10 @@ export default function Index(props) {
           <View className='text'>
             共计{order.service_time && order.service_time.total_time}小时
           </View>
+          </View>
+
+          }
+
         </View>
       </View>
       <View className='bottom'>

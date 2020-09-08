@@ -51,14 +51,17 @@
     .center{
         flex: 1;
         color: #383838;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         padding-left: 20px;
         .title{
             font-size: 30px;
-            margin-top: 40px
+            // margin-top: 40px
         }
         .time{
             font-size: 20px;
-            margin-top: 10px
+            margin-top: 6px
         }
     }
     .right{

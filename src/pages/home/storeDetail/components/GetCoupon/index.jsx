@@ -90,6 +90,10 @@ export default (props) => {
                   <View className='center'>
                     <View className='title'> {coupon.disc_name}</View>
                     <View className='time'> 有效期：{dayjs(coupon.effective_time * 1000).format('YYYY.MM.DD')}-{dayjs(coupon.expire_time * 1000).format('YYYY.MM.DD')}</View>
+                    <View className='time'> 类型：{coupon.create_type==='admin'?'平台':'商户'}</View>
+                        <View className='time'>
+                            限{coupon.shop_name}店使用
+                        </View>
                   </View>
                   <View className='right'>
                     <View className='btn' onClick={() => getCouponFn(coupon._id)}>领取</View>
@@ -111,6 +115,10 @@ export default (props) => {
                   <View className='center'>
                     <View className='title'> {coupon.disc_name}</View>
                     <View className='time'> 有效期：{dayjs(coupon.effective_time * 1000).format('YYYY.MM.DD')}-{dayjs(coupon.expire_time * 1000).format('YYYY.MM.DD')}</View>
+                    <View className='time'> 类型：{coupon.create_type==='admin'?'平台':'商户'}</View>
+                        <View className='time'>
+                            限{coupon.shop_name}店使用
+                        </View>
                   </View>
                   <View className='right'>
                     <View className='btn default'>已领取</View>

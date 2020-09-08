@@ -67,7 +67,7 @@ export default function Index() {
           <View className='item'>
             <View className='left'>有效期</View>
   <View className='right'>
-   {order.service_time?
+   {order.room_type=='时段价'?
     <Text>  {
     dayjs(order.service_time.begin_time*1000).format('YYYY.MM.DD HH:mm')
   }-{dayjs(order.service_time.end_time*1000).format('YYYY.MM.DD HH:mm')}
