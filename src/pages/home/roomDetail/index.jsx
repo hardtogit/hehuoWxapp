@@ -118,6 +118,16 @@ export default function Index() {
      payment_type
     }).then((data)=>{
       setVisibleThree(false)
+      if(payment_type=='balance'){
+        Taro.showToast({
+          title:'购买成功',
+          icon:'none'
+        })
+        setTimeout(()=>{
+          Taro.navigateBack({})
+        },1000)
+        return
+      }
       Taro.requestPayment({
         ...data.pay_info,
         success:function(){
@@ -136,7 +146,7 @@ export default function Index() {
     setTimeCard(selectTimeCard)
     setVisibleThree(true)
   }
-  console.log(timeScope)
+  // console.log(timeScope)
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>

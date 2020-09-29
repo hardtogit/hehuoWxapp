@@ -120,6 +120,16 @@ export default function Index() {
      payment_type
     }).then((data)=>{
       setVisibleThree(false)
+      if(payment_type=='balance'){
+        Taro.showToast({
+          title:'购买成功',
+          icon:'none'
+        })
+        setTimeout(()=>{
+          Taro.navigateBack({})
+        },1000)
+        return
+      }
       Taro.requestPayment({
         ...data.pay_info,
         success:function(){
@@ -132,8 +142,6 @@ export default function Index() {
           },1000)
         }
       })
-
-
     })
   }
   useShareAppMessage((options)=>{

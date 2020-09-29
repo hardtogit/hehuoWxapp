@@ -30,7 +30,7 @@ export default function Index(props){
     {/* <AtModalHeader>选择支付方式</AtModalHeader> */}
     <AtModalContent>
     <View className='title'>选择支付方式</View>
-    <View className='item one' onClick={()=>setType('payment')}>
+    <View className='item one' >
        <View className='label'> 支付金额</View>
          <Text className='price'>¥{price}</Text>
        </View>
@@ -38,7 +38,7 @@ export default function Index(props){
        <Image className='icon' src={require('../../assets/img/wx.png')}></Image>
        <View className='label'> 微信支付</View>
        {type==='payment'&&
-         <AtIcon value='check' color="#0096DA" size='24'>
+         <AtIcon value='check' color='#0096DA' size='24'>
 
          </AtIcon>
        }
@@ -47,7 +47,7 @@ export default function Index(props){
        <Image className='icon' src={require('../../assets/img/qian.png')}></Image>
         <View className='label'>余额支付 <Text className='balance'>{userInfo.balance}</Text> </View>
         {type==='balance'&&
-         <AtIcon value='check' color="#0096DA" size='24'>
+         <AtIcon value='check' color='#0096DA' size='24'>
         </AtIcon>
        }
        {

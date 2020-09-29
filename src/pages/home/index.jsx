@@ -24,6 +24,7 @@ class Index extends Component{
       visiblePhone:false,
       typeId:null,
       banner:[],
+      listPop:[],
       type:[],
       location:'定位中...',
       locations:'',
@@ -36,6 +37,18 @@ class Index extends Component{
     const  qqmapsdk = new QQMapWX({
       key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
     });
+    network.Fetch({
+      "obj": "user",
+      "act": "list_popup"
+    }).then((listPop)=>{
+      const arr=listPop.list||[]
+        if(arr.length){
+          this.setState({
+            visibleCoupon:true,
+            listPop:arr
+          })
+        }
+    })
 
       network.Fetch({
         "obj": "user",
@@ -76,8 +89,17 @@ class Index extends Component{
           }
         })
 
-
-
+    })
+  }
+  handleCancel=()=>{
+    let {listPop}=this.state
+    listPop.shift()
+    this.setState({visibleCoupon:false,listPop},()=>{
+      if(listPop.length){
+        this.setState({
+          visibleCoupon:true
+        })
+      }
     })
   }
   onReachBottom(){
@@ -99,6 +121,7 @@ class Index extends Component{
       location,
       locations,
       phone,
+      listPop,
       visiblePhone,
       scrollIntoView,
       type}=this.state
@@ -280,8 +303,8 @@ class Index extends Component{
         </AtActionSheetItem>
       </AtActionSheet>
           {visibleCoupon&&
-          <CouponModal></CouponModal>
-          }
+          <CouponModal entity={listPop[0]} onCancel={this.handleCancel}></CouponModal>
+         }
       </View>
     )
   }

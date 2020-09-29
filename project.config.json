@@ -21,7 +21,7 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -1226,6 +1226,20 @@
 					"id": -1,
 					"name": "pages/login/index",
 					"pathName": "pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueAppointment/index",
+					"pathName": "pages/home/continueAppointment/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/continueAppointment/index",
+					"pathName": "pages/home/continueAppointment/index",
 					"scene": null
 				}
 			]
