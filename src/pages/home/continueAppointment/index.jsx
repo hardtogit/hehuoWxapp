@@ -97,6 +97,14 @@ export default function Index(props){
         "tea_zone_id": router.params.tea_zone_id||'o15956083697860679626',
         "data": dayjs(dayjs(time*1000).format('YYYY-MM-DD')).unix()
       }).then((res)=>{
+        network.Fetch({
+          "obj":"user",
+          "act":"single_room",
+          "room_id": router.params.tea_zone_id||'o15979078737097969055'
+        }).then(data=>{
+          const arr=data.room.open_time.split('-')
+          res.tea_home_time.start_time=arr[0]
+          res.tea_home_time.end_time=arr[1]
           Taro.hideLoading({})
           if(dayjs(dayjs(time*1000).format('YYYY-MM-DD')).unix()==dayjs(dayjs().format('YYYY-MM-DD')).unix()){
               if( (parseInt(dayjs().format('HH:mm').split(':')[0])*60+parseInt(parseInt(dayjs().format('HH:mm').split(':')[1])))>
@@ -118,6 +126,7 @@ export default function Index(props){
             // setCanTime(res.tea_home_time)
           }
           // setCanTime(res.tea_home_time)
+        })
       }).catch(()=>{
         Taro.hideLoading({})
         reject()

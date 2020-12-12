@@ -155,7 +155,13 @@ export default function Index() {
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>
       <View className='navBar' style={{top:`${buttonPosition.top}px`,height:`${buttonPosition.height}px`,paddingRight:`${buttonPosition.width+20}px`}}>
-        <AtIcon value='chevron-left' color='#fff' size={28} onClick={()=>Taro.navigateBack({})}></AtIcon>
+        <AtIcon value='chevron-left' color='#fff' size={28} onClick={()=>{
+          if(Taro.getCurrentPages().length>1){
+            Taro.navigateBack({})
+          }else{
+            Taro.reLaunch({url:'/pages/home/index'})
+          }
+          }} ></AtIcon>
         <View className='right'>
           <Button  style={{width:`${buttonPosition.height}px`,height:`${buttonPosition.height}px`}} openType='share' className='shareBtn'> <Image className='icon' src={require('../../../assets/img/home/share.png')}></Image></Button>
         </View>
