@@ -42,10 +42,25 @@ class Index extends Component{
       "act": "list_popup"
     }).then((listPop)=>{
       const arr=listPop.list||[]
-        if(arr.length){
+       const showObj=Taro.getStorageSync('showPopObj')||{}
+       let currentObj={...showObj}
+       const popArr= arr.filter((item)=>{
+          currentObj[item._id]=new Date().toDateString()
+          if(!showObj[item._id]){
+            return true
+          }else{
+            if(item.popup_title!=="新人红包"&&showObj[item._id]!==new Date().toDateString()){
+              return true
+            }else{
+              return false
+            }
+          }
+        })
+        Taro.setStorageSync('showPopObj',currentObj)
+        if(popArr.length){
           this.setState({
             visibleCoupon:true,
-            listPop:arr
+            listPop:popArr
           })
         }
     })
