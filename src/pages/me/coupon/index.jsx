@@ -17,6 +17,14 @@ class Index extends Component{
         tabIndex:1
       }
   }
+  componentDidShow(){
+    if(this.listRef){
+      this.listRef.initLoad()
+    }
+  }
+  componentDidMount(){
+    this.listRef.initLoad()
+  }
   onReachBottom(){
     this.listRef.getData()
   }
@@ -32,7 +40,8 @@ class Index extends Component{
                 return(
                   <View className={classNames(['tab' ,tab.id==tabIndex&&'active'])}  key={tab.id} onClick={()=>this.setState({tabIndex:tab.id},()=>{
                     this.listRef.initLoad()
-                  })}>
+                  })}
+                  >
                     {tab.name}
                     <View className='line'></View>
                   </View>
@@ -41,7 +50,7 @@ class Index extends Component{
             }
           </View>
           <View className='container'>
-          <ListTemplate  preLoad listDataKey='couponList'
+          <ListTemplate   listDataKey='couponList'
             ref={(listRef)=>this.listRef=listRef}
             fetchFn={(params) =>
                           network.Fetch({
@@ -51,7 +60,7 @@ class Index extends Component{
                             user_disc_stat:status
                           })
                         }
-           >
+          >
               {couponList.map((coupon)=>{
               return(
                 <View className='item'>

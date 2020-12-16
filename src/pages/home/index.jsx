@@ -49,7 +49,7 @@ class Index extends Component{
           if(!showObj[item._id]){
             return true
           }else{
-            if(item.popup_title!=="新人红包"&&showObj[item._id]!==new Date().toDateString()){
+            if(item.popup_type!=="优惠券"&&showObj[item._id]!==new Date().toDateString()){
               return true
             }else{
               return false

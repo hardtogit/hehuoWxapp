@@ -15,14 +15,19 @@ const Index = (props) => {
        </View>
         <View className='content'>
           <View className='inner'>
-            <Image className='img' onLoad={()=>{setVisible(true)}}  src={`${downUrl}${entity.popup_cover}`} mode={'widthFix'} onClick={()=>{
-              if(entity.popup_jump_link){
-                  onCancel()
-                  Taro.navigateTo({url:entity.popup_jump_link})
+            <Image className='img' onLoad={()=>{setVisible(true)}}  src={`${downUrl}${entity.popup_cover}`} mode='widthFix' onClick={()=>{
+              if(entity.popup_type==='优惠券'){
+                onCancel()
+                Taro.navigateTo({url:'/pages/me/coupon/index'})
               }
-            }} >
+              // if(entity.popup_jump_link){
+              //     onCancel()
+              //     Taro.navigateTo({url:entity.popup_jump_link})
+              // }
+            }}
+            >
             </Image>
-            <Image onClick={onCancel} className='close' src={require('../../../../assets/img/home/closes.png')}></Image>
+            <Image onClick={onCancel} className='close' src={require('../../../../assets/img/home/close2.png')}></Image>
           </View>
         </View>
     </View>
