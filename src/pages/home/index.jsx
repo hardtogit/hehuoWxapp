@@ -157,12 +157,17 @@ class Index extends Component{
               </View>
 
               <View className='store' onClick={()=>{
-                Taro.showModal({
-                  title:'温馨提示',
-                  content:'正在开发中，请耐心等待',
+                // Taro.showModal({
+                //   title:'温馨提示',
+                //   content:'正在开发中，请耐心等待',
 
+                // })
+                Taro.navigateToMiniProgram({
+                  appId: "wxbe533391dbad496b",
+                  path: "/pages/index/index",
                 })
-              }}>
+              }}
+              >
                 <Image className='icon' src={require('../../assets/img/home/store.png')}></Image>
                 <Text className='label'>优选商城</Text>
               </View>
@@ -184,7 +189,8 @@ class Index extends Component{
                       if(item.adv_jump_link){
                         Taro.navigateTo({url:item.adv_jump_link})
                       }
-                    }} ></Image>
+                    }}
+                    ></Image>
                   </SwiperItem>
                 )
               })}
@@ -239,7 +245,8 @@ class Index extends Component{
               this.setState({
                 visibleClassfly:true
               })
-            }}>
+            }}
+            >
             <Image className='icon' src={require('../../assets/img/home/more.png')}></Image>
             </View>
             }
@@ -289,18 +296,19 @@ class Index extends Component{
         <View className='teshu'>
           <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly:false})}>
             <View className='head'>
-              <View className="text">全部服务</View>
+              <View className='text'>全部服务</View>
               <Image className='icon' onClick={()=>this.setState({
                 visibleClassfly:false
-              })} src={require('../../assets/img/close.png')}></Image>
+              })} src={require('../../assets/img/close.png')}
+              ></Image>
             </View>
             <View className='funs  aa'>
               {type.map((item,i) => {
                 return(<View className='pfun'
-                             onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
+                  onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
                                this.listRef.initLoad()
                              })}}
-                  >
+                >
                     <Image className='icon' src={downUrl+item.category_fid}></Image>
                     <Text className='text'>{item.category_name}</Text>
                   </View>

@@ -78,7 +78,14 @@ const Index = () => {
               加盟合作
              </View>
           </View>
-          <View className='fun' onClick={()=>setVisible(true)}>
+          <View className='fun' onClick={()=>{
+              Taro.navigateToMiniProgram({
+                appId: "wxbe533391dbad496b",
+                path: "/pages/index/index",
+              })
+          }
+          }
+          >
             <Image className='img' src={require('../../assets/img/me/me3.png')}></Image>
             <View className='text'>
               商城
