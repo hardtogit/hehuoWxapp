@@ -58,7 +58,7 @@ export default function Index() {
           </View>
           <View className='item'>
             <View className='left'>地址</View>
-  <View className='right'>{order.shop_name}</View>
+  <View className='right'>{order.shop_address}</View>
           </View>
           <View className='item'>
             <View className='left'>电话</View>
