@@ -187,7 +187,14 @@ class Index extends Component{
                   <SwiperItem>
                     <Image className='slide' src={downUrl + item.adv_cover} onClick={()=>{
                       if(item.adv_jump_link){
-                        Taro.navigateTo({url:item.adv_jump_link})
+                        if(item.adv_jump_link.startsWith('http')){
+                          Taro.navigateTo({url:`/pages/home/web/index?url=${item.adv_jump_link}`})
+                        }else{
+                          Taro.navigateTo({url:item.adv_jump_link})
+                        }
+                      }else if(item.adv_jump_info){
+                         Taro.setStorageSync('richText',item.adv_jump_info)
+                         Taro.navigateTo({url:`/pages/home/text/index`})
                       }
                     }}
                     ></Image>
