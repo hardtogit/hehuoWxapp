@@ -16,14 +16,21 @@ const Index = (props) => {
         <View className='content'>
           <View className='inner'>
             <Image className='img' onLoad={()=>{setVisible(true)}}  src={`${downUrl}${entity.popup_cover}`} mode='widthFix' onClick={()=>{
-              if(entity.popup_type==='优惠券'){
-                onCancel()
-                Taro.navigateTo({url:'/pages/me/coupon/index'})
-              }
-              // if(entity.popup_jump_link){
-              //     onCancel()
-              //     Taro.navigateTo({url:entity.popup_jump_link})
-              // }
+                    if(entity.popup_type==='优惠券'){
+                      onCancel()
+                      Taro.navigateTo({url:'/pages/me/coupon/index'})
+                      return
+                    }
+                 if(entity.popup_type==='详情'){
+                    Taro.setStorageSync('richText',entity.popup_jump_info)
+                    Taro.navigateTo({url:`/pages/home/text/index`})
+                  }else if(entity.popup_type==='链接'){
+                    if(entity.popup_jump_link.startsWith('http')){
+                      Taro.navigateTo({url:`/pages/home/web/index?url=${entity.popup_jump_link}`})
+                    }else{
+                      Taro.navigateTo({url:entity.popup_jump_link})
+                    }
+                  }
             }}
             >
             </Image>

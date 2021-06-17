@@ -186,15 +186,15 @@ class Index extends Component{
                 return (
                   <SwiperItem>
                     <Image className='slide' src={downUrl + item.adv_cover} onClick={()=>{
-                      if(item.adv_jump_link){
+                      if(item.adv_type==='详情'){
+                        Taro.setStorageSync('richText',item.adv_jump_info)
+                        Taro.navigateTo({url:`/pages/home/text/index`})
+                      }else if(item.adv_type==='链接'){
                         if(item.adv_jump_link.startsWith('http')){
                           Taro.navigateTo({url:`/pages/home/web/index?url=${item.adv_jump_link}`})
                         }else{
                           Taro.navigateTo({url:item.adv_jump_link})
                         }
-                      }else if(item.adv_jump_info){
-                         Taro.setStorageSync('richText',item.adv_jump_info)
-                         Taro.navigateTo({url:`/pages/home/text/index`})
                       }
                     }}
                     ></Image>
