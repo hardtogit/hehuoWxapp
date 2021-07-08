@@ -10,5 +10,5 @@ const  Index= ()=>{
   )
 }
 Index.config = {
-  navigationBarTitleText: '精归叙',
+  navigationBarTitleText: '名流',
 }

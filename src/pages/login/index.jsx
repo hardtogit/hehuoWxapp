@@ -99,7 +99,7 @@ const Index = () => {
   }
   return (
     <View className='me'>
-      <Image className='logo' src={require('../../assets/img/me/logo.png')}></Image>
+      <Image className='logo' src={require('../../assets/img/me/logo2.png')}></Image>
       <Button className='btn' openType='getUserInfo' onGetUserInfo={handleGetUserInfo}>授权登陆</Button>
     </View>
   )

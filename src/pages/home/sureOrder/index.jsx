@@ -238,7 +238,7 @@ export default function Index(){
                     <View className='left'  onClick={()=>setChecked(!checked)}>
                       {!checked&&<View style={{width:'22px',height:'22px'}} className={classNames(['checkbox', checked&&'active'])}></View>}
                       {checked&&<Icon className='gou' type={'success'} color="#00A0E9" size={22}></Icon>}
-                    请详细阅读精归叙用户协议，同意后付款
+                    请详细阅读名流用户协议，同意后付款
                     </View>
                     <View className='right' onClick={()=>Taro.navigateTo({url:'/pages/home/doc/index'})}>
                         <Image className='icon' src={require('../../../assets/img/me/arrow_right.png')}></Image>

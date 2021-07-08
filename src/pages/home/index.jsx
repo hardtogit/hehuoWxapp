@@ -122,7 +122,7 @@ class Index extends Component{
   }
   onShareAppMessage(options){
       return {
-        title:'精归叙',
+        title:'名流',
         path:'/pages/home/index',
       }
   }

@@ -1,48 +1,6 @@
 {
-  "miniprogramRoot": "dist/",
-  "projectname": "hehuoWxapp",
-  "description": "hehuo小程序模板",
-  "appid": "wxcb1c9dca3282e575",
-  "setting": {
-    "urlCheck": false,
-    "es6": false,
-    "enhance": false,
-    "postcss": false,
-    "minified": false,
-    "newFeature": true,
-    "coverView": true,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": false,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
-  },
-  "compileType": "miniprogram",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
+  "setting": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -1244,6 +1202,19 @@
           "id": -1,
           "name": "pages/home/continueAppointment/index",
           "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/phone/index",
+          "pathName": "pages/phone/index",
+          "query": "",
           "scene": null
         }
       ]

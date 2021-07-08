@@ -36,7 +36,7 @@ const Index = () => {
     }
   return (
     <View className='me'>
-      <Image className='logo' src={require('../../assets/img/me/logo.png')}></Image>
+      <Image className='logo' src={require('../../assets/img/me/logo2.png')}></Image>
       <Button className='btn' openType='getPhoneNumber' onGetPhoneNumber={handleGetUserInfo}>绑定手机号</Button>
     </View>
   )
