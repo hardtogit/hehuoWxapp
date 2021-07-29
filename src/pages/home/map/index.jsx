@@ -33,7 +33,7 @@ const Index = () => {
         ...locations
       }
     ).then((data)=>{
-      const cc=data.shop.map((item)=>{
+      const cc=data.list.map((item)=>{
           return {
               latitude:item.latitude,
               longitude:item.longitude,
@@ -65,6 +65,11 @@ const Index = () => {
     console.log(id)
   }
   useShareAppMessage({})
+  const controltap=()=> {
+    let mpCtx = Taro.createMapContext("map");
+    mpCtx.moveToLocation();
+    getMarks(location)
+  }
   useEffect(()=>{
     network.Fetch({
       "obj": "user",
@@ -105,7 +110,7 @@ const Index = () => {
         <Image className='img' src={userInfo.avatar_fid} onClick={()=>Taro.switchTab({url:'/pages/me/index'})} />
       </View>
       <View className='mapContainer'>
-        <Map className='map' latitude={location.latitude}
+        <Map className='map' id='map' latitude={location.latitude}
           longitude={location.longitude}
           markers={markers}
           scale={scale}
@@ -113,7 +118,10 @@ const Index = () => {
           optimize
           onMarkerTap={handleCalloutTapEventDetail}
         >
-          <CoverImage className='kefu' onClick={()=>setVisible(true)} src={require('../../../assets/img/home/kefu.png')} />
+          <CoverView className='iconC kefu'>   <CoverImage className='icon' onClick={()=>setVisible(true)} src={require('../../../assets/img/home/kefu.png')} /> </CoverView>
+          <CoverView className='iconC location'>    <CoverImage className='icon' onClick={()=>controltap()} src={require('../../../assets/img/home/location.png')} /></CoverView>
+
+
           {/* {visible&& */}
           {/* <CoverView> */}
           {visible&&
@@ -143,8 +151,7 @@ const Index = () => {
             预约空间
         </CoverView>
         </Map>
-      </View>
-
+        </View>
     </View>
   )
 }

@@ -1,0 +1,38 @@
+.label {
+  padding: 48px 24px 0 24px;
+}
+.cityName {
+  padding: 24px 0 0 24px;
+  font-size: 32px;
+}
+.hr {
+  margin-top: 18px;
+  height: 1px;
+  background-color: #ddd;
+}
+.title {
+  display: inline-block;
+  padding: 24px 0 12px 0;
+  margin-left: 24px;
+  color: #00a0e9;
+  border-bottom: 4px solid #00a0e9;
+}
+.citys {
+  padding: 24px 14px;
+  .city {
+    display: inline-block;
+    padding: 0 30px;
+    font-size: 28px;
+    margin: 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    min-width: 160px;
+  }
+}
+page{
+  background-color: #f6f6f6;
+}

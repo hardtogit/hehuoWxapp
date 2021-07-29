@@ -37,6 +37,7 @@ class Index extends Component{
     const  qqmapsdk = new QQMapWX({
       key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
     });
+    //弹窗相关
     network.Fetch({
       "obj": "user",
       "act": "list_popup"
@@ -64,7 +65,7 @@ class Index extends Component{
           })
         }
     })
-
+    //联系方式
       network.Fetch({
         "obj": "user",
         "act": "contact_us"
@@ -74,7 +75,7 @@ class Index extends Component{
               phone:a.platform_phone
             })
       })
-
+    //banenr
     network.Fetch({
       "obj": "user",
       "act": "list_advertising"
@@ -87,22 +88,47 @@ class Index extends Component{
       "obj": "user",
       "act": "list_category"
     }).then((result) => {
-      qqmapsdk.reverseGeocoder({
-        success:function(results){
-              console.log(results)
-              $this.setState({
-                location:results.result.address_component.city+results.result.address_component.district
-              })
-              $this.setState({
-                type:result.list,
-                typeId:result.list[0]._id,
-                locations:results.result.location
-              },()=>{
-                $this.listRef.initLoad()
-              })
-              Taro.setStorageSync('myLocation',results.result.location)
-          }
-        })
+      Taro.authorize({
+        scope: 'scope.userLocation',
+        success(){
+          qqmapsdk.reverseGeocoder({
+            success:function(results){
+                  console.log(results)
+                  $this.setState({
+                    location:results.result.address_component.city+results.result.address_component.district
+                  })
+                  $this.setState({
+                    type:result.list,
+                    typeId:result.list[0]._id,
+                    locations:results.result.location
+                  },()=>{
+                    $this.listRef.initLoad()
+                  })
+                  Taro.setStorageSync('myLocation',results.result.location)
+              }
+            })
+        },
+        fail(){
+          Taro.showModal({
+            title: '提示',
+            content: '由于您拒绝提供位置信息，我们可能无法为您提供相关便捷服务！',
+            confirmText:'去开启',
+            success (res) {
+              if (res.confirm) {
+                Taro.openSetting({
+                  success(e){
+                    Taro.reLaunch({url:'/pages/home/index'})
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+
+
+        }
+      })
 
     })
   }
@@ -145,9 +171,9 @@ class Index extends Component{
       <View className='home'>
         <View className='header'>
           <View className='toolbar'>
-            <View className='left'>
+            <View className='left' onClick={()=>Taro.navigateTo({url:'/pages/home/city/index'})}>
               <Image className='location' src={require('../../assets/img/home/location_one.png')}></Image>
-              <Text className='text'>{location}</Text>
+              <Text className='text'>{Taro.getStorageSync('currentCity')||location}</Text>
               <Image className='arrow_down' src={require('../../assets/img/home/arrow_down.png')}></Image>
             </View>
             <View className='right'>
@@ -266,6 +292,7 @@ class Index extends Component{
               obj: "user",
               act: "list_shops",
               category_id: typeId,
+              city:Taro.getStorageSync('currentCity'),
               latitude:locations.lat,
               longitude:locations.lng
             })

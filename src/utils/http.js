@@ -44,7 +44,7 @@ apiconn.response_received_handler = function(jo) {
 };
 
 const Fetch = params => {
-  params={sess:wx.getStorageSync('sess'),...params}
+  params={sess:wx.getStorageSync('sess2'),...params}
   if (params.xtype === "user") {
     return new Promise((resolve, reject) => {
       if (callBackFn["person_login"]) {

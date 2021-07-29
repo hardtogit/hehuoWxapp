@@ -24,8 +24,8 @@ export default function Index() {
       latitude:router.params.latitude,
       longitude:router.params.longitude,
     }).then((data)=>{
-      setOrders(data.shop)
-      if((!data.shop||data.shop.length===0)){
+      setOrders(data.list)
+      if((!data.list||data.list.length===0)){
         setEmpty(true)
       }
     })

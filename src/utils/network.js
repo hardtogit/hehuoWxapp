@@ -6,7 +6,7 @@ const requestUrl = "https://shanpaokeji.com/ckj2_ga_http";
 let loginFlag=false
 const Fetch = params => {
   console.log('请求参数：',params)
-  params=encodeURI(JSON.stringify({sess:wx.getStorageSync('sess'),...params}))
+  params=encodeURI(JSON.stringify({sess:wx.getStorageSync('sess2'),...params}))
   console.log(params)
   return new Promise((resolve, reject) => {
       Taro.request({

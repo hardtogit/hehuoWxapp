@@ -1216,6 +1216,24 @@
           "pathName": "pages/phone/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page",
+          "pathName": "pages/home/city/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
