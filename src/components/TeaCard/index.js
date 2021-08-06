@@ -9,6 +9,7 @@ export default function Index(props){
 return(
    <View className='card' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}`})}>
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
+     {tea.buyinfo&&<View className='buyinfo'>{tea.buyinfo}</View>}
      <View className='coverBg'>
 
      </View>

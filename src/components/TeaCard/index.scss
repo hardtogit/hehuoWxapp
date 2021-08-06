@@ -1,70 +1,81 @@
-.card{
+.card {
   height: 320px;
   position: relative;
-  border-radius:16px;
+  border-radius: 16px;
   padding-top: 150px;
-
-  .price{
+  .buyinfo {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px;
+    background-color: rgba(0, 160, 233, 1);
+    top:10px;
+    right: 100px;
+  }
+  .price {
     position: absolute;
     right: 15px;
     bottom: 10px;
     color: #fff;
     display: flex;
     align-items: baseline;
-    .unit{
-      color: #D0D0D0;
+    .unit {
+      color: #d0d0d0;
       font-size: 24px;
     }
-    .num{
+    .num {
       font-size: 40px;
       margin: 0 4px;
       color: #fff;
     }
-    .text{
+    .text {
       font-size: 28px;
-      color: #D0D0D0;
+      color: #d0d0d0;
     }
   }
-  .cover{
+  .cover {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     bottom: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    border-radius:16px;
+    border-radius: 16px;
   }
-  .coverBg{
+  .coverBg {
     position: absolute;
     left: 0;
-    top:100px;
+    top: 100px;
     bottom: 0;
     right: 0;
     width: 100%;
     z-index: 1;
-    border-radius:16px;
-    background:linear-gradient(0deg,rgba(0,0,0,0.86),rgba(0,0,0,0));
+    border-radius: 16px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0));
   }
-  .tag{
+  .tag {
     width: 49px;
     height: 91px;
     display: block;
     position: absolute;
     right: 30px;
-    top:-8px
+    top: -8px;
   }
-  .time{
+  .time {
     position: absolute;
-    background:rgba(0,0,0,.4);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 16px 0 16px 0;
-    padding:8px 14px;
+    padding: 8px 14px;
     left: 0;
     top: 0;
     font-size: 20px;
     color: #fff;
   }
-  .content{
+  .content {
     padding: 10px;
     z-index: 10;
     height: 100%;
@@ -74,32 +85,32 @@
     // background-color: rgba($color: #000000, $alpha: .1);
 
     // border-radius:16px;
-    .title{
+    .title {
       font-size: 32px;
       color: #fff;
     }
-    .labels{
+    .labels {
       display: flex;
       margin-top: 14px;
-      .label{
+      .label {
         font-size: 17px;
         color: #fff;
-        height:26px;
+        height: 26px;
         line-height: 26px;
         padding: 0 10px;
-        background:rgba(0,160,233,1);
-        border-radius:13px;
+        background: rgba(0, 160, 233, 1);
+        border-radius: 13px;
         margin-right: 8px;
       }
     }
-    .dis{
-      color: #D0D0D0;
+    .dis {
+      color: #d0d0d0;
       margin-top: 8px;
       font-size: 22px;
     }
-    .address{
+    .address {
       font-size: 22px;
-      color: #D0D0D0;
+      color: #d0d0d0;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;

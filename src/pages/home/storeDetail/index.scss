@@ -81,6 +81,14 @@ page {
     background-color: #fff;
     .title {
       font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .buyinfo{
+        color: #EF8F0D;
+        font-weight: normal;
+        font-size: 28px;
+      }
     }
     .address {
       font-size: 22px;
@@ -259,5 +267,13 @@ page {
         min-height: 320px!important;
       }
     }
+  }
+}
+.richText{
+  img{
+    width: 100%;
+  }
+  image{
+    width: 100%;
   }
 }

@@ -1,0 +1,102 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/action-sheet.scss";
+page {
+  background-color: #f0f1f3;
+}
+
+.header {
+  padding: 30px;
+  background-color: #fff;
+
+  .top {
+    display: flex;
+
+    .cover {
+      width: 120px;
+      position: relative;
+
+      .img {
+        width: 120px;
+        height: 120px;
+        display: block;
+        border-radius: 50%;
+        background-color: #ddd;
+      }
+
+      .edit {
+        position: absolute;
+        width: 70px;
+        height: 40px;
+        background: rgba(0, 159, 233, 1);
+        border-radius: 20px;
+        bottom: 0;
+        right: 0;
+        font-size: 22px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .name {
+      float: 1;
+      font-size: 46px;
+      font-family: PingFang SC;
+      font-weight: bold;
+      padding-left: 30px;
+      color: rgba(52, 52, 52, 1);
+    }
+  }
+
+  .bottom {
+    display: flex;
+    margin-top: 50px;
+
+    .item {
+      flex: 1;
+      text-align: center;
+
+      .num {
+        font-size: 38px;
+        color: #343434;
+      }
+
+      .text {
+        font-size: 24px;
+        color: #6d6d6d;
+      }
+    }
+  }
+}
+
+.funs {
+  padding: 30px;
+  background-color: #fff;
+  margin-top: 20px;
+
+  .item {
+    display: flex;
+    justify-content: space-around;
+
+    &.two {
+      margin-top: 30px;
+    }
+
+    .fun {
+      flex: 1;
+      text-align: center;
+
+      .img {
+        width: 72px;
+        height: 72px;
+        display: inline-block;
+      }
+
+      .text {
+        font-size: 26px;
+        color: #343434;
+      }
+    }
+  }
+}

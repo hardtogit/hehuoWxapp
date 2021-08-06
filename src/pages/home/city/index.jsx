@@ -1,4 +1,4 @@
-import Taro, { useEffect,useState} from "@tarojs/taro";
+import Taro, { useEffect,useState,useRouter} from "@tarojs/taro";
 import network from '@/utils/network'
 import {
   View,
@@ -7,6 +7,8 @@ import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js';
 import "./index.scss"
 
 export default function Index(){
+  const {params} =useRouter()
+  console.log(params,'params')
   const [citys,setCitys]=useState([])
   const [currentCity,setCurrentCity]=useState('定位中...')
   useEffect(()=>{
@@ -36,7 +38,7 @@ export default function Index(){
       <View className='label'>当前定位城市:</View>
       <View className='cityName' onClick={()=>{
         Taro.removeStorageSync('currentCity')
-        Taro.reLaunch({url:'/pages/home/index'})
+          Taro.navigateBack()
       }}
       >
           {currentCity}
@@ -50,10 +52,10 @@ export default function Index(){
           return (
             <View className='city' onClick={()=>{
               Taro.setStorageSync('currentCity',item)
-              Taro.reLaunch({url:'/pages/home/index'})
+                Taro.navigateBack()
             }}
             >
-                {item}
+                {item.city}
             </View>
           )
         })}

@@ -1,0 +1,27 @@
+.tabs{
+  display: flex;
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  .tab{
+    flex: 1;
+    .img{
+      width: 48px;
+      height: 48px;
+      display: block;
+      margin: 10px auto 4px auto;
+    }
+    .text{
+      font-size: 24px;
+      text-align: center;
+      color: #999;
+      &.active{
+        color: #333;
+      }
+    }
+  }
+
+}

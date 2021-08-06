@@ -1234,6 +1234,36 @@
           "pathName": "pages/home/map/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16279956974141",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16280081859561",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16280587899241",
+          "scene": null
+        },
+        {
+          "name": "pages/me/mine/index",
+          "pathName": "pages/me/mine/index",
+          "query": "__key_=16280808570623",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16280878046761",
+          "scene": null
         }
       ]
     }

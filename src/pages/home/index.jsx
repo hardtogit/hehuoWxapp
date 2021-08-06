@@ -28,11 +28,30 @@ class Index extends Component{
       type:[],
       location:'定位中...',
       locations:'',
+      currentLocation:'',
       phone:'',
       scrollIntoView:'',
     }
   }
-  componentDidMount(){
+  componentDidShow(){
+      console.log(this.state.currentLocation,Taro.getStorageSync('currentCity').city,'jajjsjsjjsjjs')
+      if(this.state.currentLocation){
+        if(Taro.getStorageSync('currentCity') ){
+          if(this.state.currentLocation!==Taro.getStorageSync('currentCity').city){
+            console.log('kkkkkkkkkkkkkk')
+            this.setState({
+              currentLocation:Taro.getStorageSync('currentCity').city
+            })
+            this.initData()
+          }
+        }else {
+          if(this.state.currentLocation!==this.state.location){
+            this.initData()
+          }
+        }
+      }
+  }
+  initData=()=>{
     const $this=this
     const  qqmapsdk = new QQMapWX({
       key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
@@ -95,8 +114,10 @@ class Index extends Component{
             success:function(results){
                   console.log(results)
                   $this.setState({
-                    location:results.result.address_component.city+results.result.address_component.district
+                    location:results.result.address_component.city,
+                    currentLocation:(Taro.getStorageSync('currentCity')&&Taro.getStorageSync('currentCity').city)?Taro.getStorageSync('currentCity').city :results.result.address_component.city
                   })
+
                   $this.setState({
                     type:result.list,
                     typeId:result.list[0]._id,
@@ -131,6 +152,17 @@ class Index extends Component{
       })
 
     })
+
+  }
+  componentDidMount(){
+    if(Taro.getStorageSync('currentCity')){
+      this.setState(
+        {
+          currentLocation:Taro.getStorageSync('currentCity').city
+        }
+      )
+    }
+    this.initData()
   }
   handleCancel=()=>{
     let {listPop}=this.state
@@ -173,7 +205,7 @@ class Index extends Component{
           <View className='toolbar'>
             <View className='left' onClick={()=>Taro.navigateTo({url:'/pages/home/city/index'})}>
               <Image className='location' src={require('../../assets/img/home/location_one.png')}></Image>
-              <Text className='text'>{Taro.getStorageSync('currentCity')||location}</Text>
+              <Text className='text'>{Taro.getStorageSync('currentCity')? Taro.getStorageSync('currentCity').city:location}</Text>
               <Image className='arrow_down' src={require('../../assets/img/home/arrow_down.png')}></Image>
             </View>
             <View className='right'>
@@ -251,7 +283,7 @@ class Index extends Component{
             <View className='function' onClick={() => { Taro.navigateTo({ url: '/pages/home/map/index' }) }}>
               <Image className='icon' src={require('../../assets/img/home/fn_four.png')}></Image>
               <Text className='text'>
-                地图找店
+                地图模式
          </Text>
             </View>
           </View>
@@ -292,7 +324,7 @@ class Index extends Component{
               obj: "user",
               act: "list_shops",
               category_id: typeId,
-              city:Taro.getStorageSync('currentCity'),
+              city:Taro.getStorageSync('currentCity')?Taro.getStorageSync('currentCity').city:'',
               latitude:locations.lat,
               longitude:locations.lng
             })

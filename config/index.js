@@ -15,7 +15,9 @@ const config = {
     "@/utils": path.resolve(__dirname, "..", "src/utils"),
     "@/package": path.resolve(__dirname, "..", "package.json"),
     "@/project": path.resolve(__dirname, "..", "project.config.json"),
-    "@/config": path.resolve(__dirname, "..", "src/config")
+    "@/config": path.resolve(__dirname, "..", "src/config"),
+    "@/assets": path.resolve(__dirname, "..", "src/assets")
+
 
   },
   plugins:[

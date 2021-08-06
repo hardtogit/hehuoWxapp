@@ -19,7 +19,7 @@ const weekMap={
 }
 
 export default (props) => {
-  const {onOk,onCancel,visible,shop_id,tea_zone_id,setTimeScopeFn}=props
+  const {onOk,onCancel,visible,shop_id,tea_zone_id,setTimeScopeFn,room}=props
   const [timeScope,setTimeScope]= useState([])
   const [current,setCurrent]=useState(0)
   const [canTime, setCanTime]=useState({})
@@ -31,10 +31,10 @@ export default (props) => {
       const long1= timeScope[0]
       const long2= time2
       // console.log(long1,long2,'ss')
-      if(Math.abs(long1-long2)<60*60) {
+      if(Math.abs(long1-long2)<room.room.price.fromhour*60*60) {
         return {
           pass: false,
-          msg:'一小时起订'
+          msg: `${room.room.price.fromhour}小时起订`
         }
       }
     const flag=canTime.uses_time.some((item)=>{
@@ -288,7 +288,7 @@ export default (props) => {
        <View className='title'>
        选择时间
          </View>
-      <View className='tip'> <Image className='clock' src={require('../../assets/img/home/clock.png')}></Image> 1小时起订，灰色为已被预订。预约成功后，可提前15分钟入场</View>
+      <View className='tip'> <Image className='clock' src={require('../../assets/img/home/clock.png')}></Image> {room.room.price.fromhour}小时起订，灰色为已被预订。预约成功后，可提前15分钟入场</View>
     <View className='dates'>
       <View className={classNames(['date',current==0&&'active'])} onClick={()=>setCurrent(0)}>
       <View className='num'>{dayjs().format('MM月DD日')}</View>

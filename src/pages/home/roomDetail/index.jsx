@@ -150,7 +150,7 @@ export default function Index() {
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
-      <TimePicker  shop_id={room.room.shop_id||'o15979071007186889648'} tea_zone_id={room.room._id||'o15979078737097969055'}  visible={visibleTimeScope} setTimeScopeFn={setTimeScope} onCancel={()=>{setVisibleTimeScope(false)}}></TimePicker>
+      <TimePicker room={room}  shop_id={room.room.shop_id||'o15979071007186889648'} tea_zone_id={room.room._id||'o15979078737097969055'}  visible={visibleTimeScope} setTimeScopeFn={setTimeScope} onCancel={()=>{setVisibleTimeScope(false)}}></TimePicker>
        {visibleThree&&<ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={()=>{setVisibleThree(false)}}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id||'o15937049856544559001'} onCancel={()=>setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id||'o15937049856544559001'}  visible={visibleTwo} onCancel={()=>setVisibletwo(false)}></GetCard></View>

@@ -1,59 +1,60 @@
 
 
-import Taro, { Component,useEffect,useState,useShareAppMessage} from "@tarojs/taro";
+import Taro, { Component, useEffect, useState, useShareAppMessage, useRouter } from "@tarojs/taro";
 import network from '@/utils/network'
 import {
-    View,
-    Button,
-    Text,
-    Image,
-    Swiper,
-    SwiperItem
+  View,
+  Button,
+  Text,
+  Image,
+  Swiper,
+  SwiperItem
 } from "@tarojs/components";
 import GoHome from '@/components/GoHome'
 import OrderItem from "../../../components/OrderItem";
 import "./index.scss";
 
 export default function Index() {
-  const [empty,setEmpty]=useState(false)
-  const [orders,setOrders]=useState([])
+  const [empty, setEmpty] = useState(false)
+  const [orders, setOrders] = useState([])
+  const { params } = useRouter()
   useShareAppMessage({})
-  useEffect(()=>{
+  useEffect(() => {
     network.Fetch({
-      "obj":"user",
-      "act":"list_order",
-      status:'续单',
-      "page":1,
-      "limit":100
-    }).then((data)=>{
+      "obj": "user",
+      "act": "list_order",
+      status: '续单',
+      "page": 1,
+      "limit": 100
+    }).then((data) => {
       setOrders(data.list)
-      if((!data.list||data.list.length===0)){
+      if ((!data.list || data.list.length === 0)) {
         setEmpty(true)
       }
     })
 
-  },[])
-    return (
-        <View className='openCode'>
-          <GoHome />
-           {
-        empty&&
+  }, [])
+  return (
+    <View className='openCode'>
+      {params.from !== 'map' && <GoHome />}
+      {
+        empty &&
         <View className='empty'>
-        <Image  className='emptyImg' src={require('../../../assets/img/no_data.png')}></Image>
-        <View className='emptyText'>
-          您没有可续约的订单
+          <Image className='emptyImg' src={require('../../../assets/img/no_data.png')}></Image>
+          <View className='emptyText'>
+            您没有可续约的订单
+          </View>
         </View>
-      </View>
       }
-          {orders.map((order)=>{
-              return(
-                <View className='item'>
-                <OrderItem order={order} type='continue' />
-            </View>
-              )
-          })}
-        </View>)
+      {orders.map((order) => {
+        return (
+          <View className='item'>
+            <OrderItem order={order} type='continue' />
+          </View>
+        )
+      })}
+    </View>)
 }
 Index.config = {
-    navigationBarTitleText: '我要续单'
-  }
+  navigationBarTitleText: '我要续单'
+}

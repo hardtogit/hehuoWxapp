@@ -239,7 +239,7 @@ export default function Index() {
           <View className='sub_title'>
               使用说明：
           </View>
-          <RichText nodes={room.room.details_desc} >
+          <RichText className='richText' nodes={room.room.details_desc} >
 
           </RichText>
         </View>
