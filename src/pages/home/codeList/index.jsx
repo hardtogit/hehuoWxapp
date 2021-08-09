@@ -36,7 +36,7 @@ export default function Index() {
   }, [])
   return (
     <View className='openCode'>
-      {params.from !== 'map' && <GoHome />}
+      <GoHome />
       {
         empty &&
         <View className='empty'>

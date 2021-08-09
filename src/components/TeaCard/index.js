@@ -5,9 +5,9 @@ import {countDistance} from '@/utils'
 import './index.scss'
 
 export default function Index(props){
-  const {tea}=props
+  const {tea,from}=props
 return(
-   <View className='card' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}`})}>
+   <View className='card' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}&from=${from}`})}>
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
      {tea.buyinfo&&<View className='buyinfo'>{tea.buyinfo}</View>}
      <View className='coverBg'>

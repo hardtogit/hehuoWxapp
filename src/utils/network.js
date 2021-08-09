@@ -29,7 +29,7 @@ const Fetch = params => {
               return
             }
           }
-          Taro.showToast({ icon: "none", title: data.data.ustr });
+          Taro.showToast({ icon: "none", title: data.data.ustr,duration:5000 });
         }
           resolve(data.data)
       })

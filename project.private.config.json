@@ -1264,6 +1264,24 @@
           "pathName": "pages/home/map/index",
           "query": "__key_=16280878046761",
           "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16282567682311",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16284195268101",
+          "scene": null
+        },
+        {
+          "name": "pages/home/city/index",
+          "pathName": "pages/home/city/index",
+          "query": "from=map&__key_=16284255949521",
+          "scene": null
         }
       ]
     }

@@ -39,7 +39,7 @@ export default function Index() {
       {orders.map((order) => {
         return (
           <View className='item'>
-            <OrderItem tea={order} />
+            <OrderItem tea={order} from='map' />
           </View>
         )
       })}

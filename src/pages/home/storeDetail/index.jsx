@@ -252,7 +252,13 @@ export default function Index() {
       </View>
 
       <View className='bottom'>
-        <View className='fn' onClick={() => Taro.switchTab({ url: '/pages/home/index' })}>
+        <View className='fn' onClick={() => {
+          if (router.params.from === 'map') {
+            Taro.reLaunch({ url: '/pages/home/map/index' })
+          } else {
+            Taro.switchTab({ url: '/pages/home/index' })
+          }
+        }} >
           <Image className='img' src={require('../../../assets/img/home/sd1.png')}></Image>
           <View className='text'>
             首页
@@ -297,7 +303,7 @@ export default function Index() {
           呼叫
         </AtActionSheetItem>
       </AtActionSheet>
-    </View>
+    </View >
   );
 }
 

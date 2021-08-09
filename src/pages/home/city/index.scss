@@ -4,11 +4,12 @@
 .cityName {
   padding: 24px 0 0 24px;
   font-size: 32px;
+  height: 68px;
 }
 .hr {
   margin-top: 18px;
   height: 1px;
-  background-color: #ddd;
+  background-color: #ccc;
 }
 .title {
   display: inline-block;
@@ -16,6 +17,14 @@
   margin-left: 24px;
   color: #00a0e9;
   border-bottom: 4px solid #00a0e9;
+}
+.search{
+  padding-left: 24px;
+  .item{
+    line-height: 80px;
+    font-size: 28px;
+    color: #666;
+  }
 }
 .citys {
   padding: 24px 14px;

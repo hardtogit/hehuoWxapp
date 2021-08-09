@@ -5,7 +5,9 @@ import { downUrl } from '../../../config'
 import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js';
 import "./index.scss";
 
-
+const qqmapsdk = new QQMapWX({
+  key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
+});
 const Index = () => {
   const [location, setLocation] = useState({})
   const [markers, setMarkers] = useState([])
@@ -16,6 +18,7 @@ const Index = () => {
   const [visible, setVisible] = useState(false)
   const [currentCity, setCurrentCity] = useState('定位中...')
   const [banner, setBanner] = useState(true)
+  const [currentLocation, setCurrentLocation] = useState('')
   const mapRef = useRef({})
 
 
@@ -45,7 +48,7 @@ const Index = () => {
     network.Fetch(
       {
         "obj": "user",
-        "act": "find_nearby_shop",
+        "act": "map_shop",
         ...locations
       }
     ).then((data) => {
@@ -73,7 +76,7 @@ const Index = () => {
       setMarkers(
         cc
       )
-      setScale(13)
+      setScale(14)
     })
   }
   const resetDate = useCallback((local) => {
@@ -86,7 +89,7 @@ const Index = () => {
     console.log(id)
   }
   const handleRegionChange = (e) => {
-    if (e.type === 'end'&&e.causedBy==='drag') {
+    if (e.type === 'end' && e.causedBy === 'drag') {
       mapRef.current.getCenterLocation({
         success: (local) => {
           resetDate(local)
@@ -96,11 +99,51 @@ const Index = () => {
   }
   useShareAppMessage({})
   const controltap = () => {
-    mapRef.current.moveToLocation();
-    getMarks(location)
+    const currentScale = mapRef.current.getScale()
+    setScale(currentScale)
+    setTimeout(() => {
+      setScale(14)
+      setTimeout(() => {
+        mapRef.current.moveToLocation();
+      }, 200)
+      mapRef.current.getCenterLocation({
+        success: (centerLocation) => {
+          resetDate(centerLocation)
+        }
+      })
+    }, 0)
   }
   useDidShow(() => {
 
+
+    if (currentLocation) {
+      if (Taro.getStorageSync('currentCity')) {
+        if (currentLocation !== Taro.getStorageSync('currentCity').city) {
+          setCurrentLocation(Taro.getStorageSync('currentCity').city)
+          resetDate(Taro.getStorageSync('currentCity'))
+        }
+      } else {
+        if (currentLocation !== Taro.getStorageSync('localCity').city) {
+          setCurrentLocation(Taro.getStorageSync('localCity').city)
+          qqmapsdk.reverseGeocoder({
+            success: function (results) {
+              console.log(results)
+              setCurrentCity(
+                results.result.address_component.city
+              )
+              resetDate({
+                latitude: results.result.location.lat,
+                longitude: results.result.location.lng,
+              })
+            }
+          })
+        }
+      }
+      return
+    }
+    //设置系统模式
+
+    Taro.setStorageSync('systemMode', 'map')
     mapRef.current = Taro.createMapContext("map");
     console.log(mapRef.current)
     network.Fetch({
@@ -109,13 +152,10 @@ const Index = () => {
     }).then((a) => {
       setPhone(a.platform_phone)
     })
-    console.log(Taro.getStorageSync('currentCity'))
     if (Taro.getStorageSync('currentCity')) {//以选择的城市为中心
+
       resetDate(Taro.getStorageSync('currentCity'))
     } else {
-      const qqmapsdk = new QQMapWX({
-        key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
-      });
       qqmapsdk.reverseGeocoder({
         success: function (results) {
           console.log(results)
@@ -145,7 +185,9 @@ const Index = () => {
       <View className='topBar'>
         <View className='city' onClick={() => Taro.navigateTo({ url: '/pages/home/city/index?from=map' })}>
           <Image className='location' src={require('../../../assets/img/home/map_location.png')} />
-          {Taro.getStorageSync('currentCity') ? Taro.getStorageSync('currentCity').city : currentCity}</View>
+          {Taro.getStorageSync('currentCity') ? Taro.getStorageSync('currentCity').city : currentCity}
+          <Image className='arrow' src={require('../../../assets/img/home/map_arrow.png')} />
+        </View>
         <View className='input'><Image className='search' src={require('../../../assets/img/home/map_search.png')} /><Input className='inner' onClick={chooseLocation} placeholder='搜索位置查找附近空间' value={name} /> </View>
         <Image className='img' src={require('../../../assets/img/home/map_car.png')} onClick={() => {
           // Taro.showModal({
@@ -175,7 +217,7 @@ const Index = () => {
               <CoverImage className='close' onClick={(e) => { setBanner(false); e.stopPropagation() }} src={require('../../../assets/img/home/closes.png')} />
               <CoverImage className='icon' onClick={() => Taro.navigateTo({ url: '/pages/me/apply/index' })}
                 // src='http://47.114.62.134/cgi-bin/download.pl?fid=f16280909775733239650001&proj=ckj2_ga'
-                src={downUrl + 'f16280909775733239650001'}
+                src={downUrl + 'f16282595990667181015001'}
               /> </CoverView>
           }
           <CoverView className='iconC kefu'>   <CoverImage className='icon' onClick={() => setVisible(true)} src={require('../../../assets/img/home/map_kefu.png')} /> </CoverView>
@@ -185,7 +227,7 @@ const Index = () => {
           <CoverImage className='iconC open' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index?from=map' })} src={require('../../../assets/img/home/map_open.png')} />
           <CoverImage className='iconC cont' onClick={() => Taro.navigateTo({ url: '/pages/home/continueList/index?from=map' })} src={require('../../../assets/img/home/map_cont.png')} />
           <CoverView className='distance'>距离最近茶室{distanceStr}</CoverView>
-          <CoverImage className='my' onClick={() => controltap()} src={require('../../../assets/img/home/map_my.png')} />
+          <CoverImage className='my'  src={require('../../../assets/img/home/map_my.png')} />
 
           <CoverImage className='iconC sell' onClick={() => Taro.navigateTo({ url: '/pages/me/coupon/index' })} src={require('../../../assets/img/home/map_sell.png')} />
           <CoverImage className='iconC person' onClick={() => Taro.navigateTo({ url: '/pages/me/mine/index' })} src={require('../../../assets/img/home/map_person.png')} />
@@ -210,19 +252,16 @@ const Index = () => {
               </CoverView>
             </CoverView>
           </CoverView>}
-
-          {/* </CoverView> */}
-          {/* } */}
-          <CoverView className='btn' onClick={() => Taro.navigateTo({ url: `/pages/home/storeList/index?longitude=${location.longitude}&latitude=${location.latitude}` })}>
-            预约空间
-          </CoverView>
+          <CoverImage className='btn' onClick={() => Taro.navigateTo({ url: `/pages/home/storeList/index?longitude=${location.longitude}&latitude=${location.latitude}` })} src={require('../../../assets/img/home/map_btn.png')}>
+          </CoverImage>
+          <CoverImage className='mengceng' src={require('../../../assets/img/home/map_bg.png')}></CoverImage>
         </Map>
       </View>
     </View>
   )
 }
 Index.config = {
-  navigationBarTitleText: '名流共享空间',
+  navigationBarTitleText: '名流共享茶室',
   navigationBarBackgroundColor: '#00A0E9',
   navigationBarTextStyle: 'white'
 }

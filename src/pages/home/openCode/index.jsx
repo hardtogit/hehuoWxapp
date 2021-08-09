@@ -78,7 +78,7 @@ export default function Index() {
 
       </View>
 
-      <View className='btn' onClick={()=>Taro.switchTab({url:'/pages/home/index'})}>
+      <View className='btn' onClick={()=>{Taro.getStorageSync('systemMode')==='map'?Taro.reLaunch({url:'/pages/home/map/index'}):Taro.switchTab({url:'/pages/home/index'})}} >
         回到首页
       </View>
     </View>)

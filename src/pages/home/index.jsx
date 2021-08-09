@@ -1,8 +1,8 @@
-import Taro, { Component, useState, useEffect, createRef,useDidShow } from "@tarojs/taro";
-import { View, Button, Text, Image, Swiper, SwiperItem,ScrollView, } from "@tarojs/components";
-import { AtFloatLayout,AtActionSheet, AtActionSheetItem  } from 'taro-ui'
+import Taro, { Component, useState, useEffect, createRef, useDidShow } from "@tarojs/taro";
+import { View, Button, Text, Image, Swiper, SwiperItem, ScrollView, } from "@tarojs/components";
+import { AtFloatLayout, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import classNames from 'classnames'
-import {inject,observer} from '@tarojs/mobx'
+import { inject, observer } from '@tarojs/mobx'
 import TeaCard from '@/components/TeaCard'
 import network from '@/utils/network'
 import QQMapWX from '../../assets/js/qqmap-wx-jssdk.min.js'
@@ -14,93 +14,93 @@ import "./index.scss";
 
 @inject('listDataStore')
 @observer
-class Index extends Component{
-  constructor(props){
+class Index extends Component {
+  constructor(props) {
     super(props)
-    this.state={
-      visibleHelp:false,
-      visibleCoupon:false,
-      visibleClassfly:false,
-      visiblePhone:false,
-      typeId:null,
-      banner:[],
-      listPop:[],
-      type:[],
-      location:'定位中...',
-      locations:'',
-      currentLocation:'',
-      phone:'',
-      scrollIntoView:'',
+    this.state = {
+      visibleHelp: false,
+      visibleCoupon: false,
+      visibleClassfly: false,
+      visiblePhone: false,
+      typeId: null,
+      banner: [],
+      listPop: [],
+      type: [],
+      location: '定位中...',
+      locations: '',
+      currentLocation: '',
+      phone: '',
+      scrollIntoView: '',
     }
   }
-  componentDidShow(){
-      console.log(this.state.currentLocation,Taro.getStorageSync('currentCity').city,'jajjsjsjjsjjs')
-      if(this.state.currentLocation){
-        if(Taro.getStorageSync('currentCity') ){
-          if(this.state.currentLocation!==Taro.getStorageSync('currentCity').city){
-            console.log('kkkkkkkkkkkkkk')
-            this.setState({
-              currentLocation:Taro.getStorageSync('currentCity').city
-            })
-            this.initData()
-          }
-        }else {
-          if(this.state.currentLocation!==this.state.location){
-            this.initData()
-          }
-        }
-      }
+  componentDidShow() {
+    // if(this.state.currentLocation){
+    //   if(Taro.getStorageSync('currentCity') ){
+    //     if(this.state.currentLocation!==Taro.getStorageSync('currentCity').city){
+    //       this.setState({
+    //         currentLocation:Taro.getStorageSync('currentCity').city
+    //       })
+    //       this.initData()
+    //     }
+    //   }else {
+    //     if(this.state.currentLocation!==this.state.location){
+    //       this.initData()
+    //     }
+    //   }
+    // }
+    Taro.setStorageSync('systemMode', 'default')
+    this.initData()
   }
-  initData=()=>{
-    const $this=this
-    const  qqmapsdk = new QQMapWX({
+  initData = () => {
+    const $this = this
+    const qqmapsdk = new QQMapWX({
       key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
     });
     //弹窗相关
     network.Fetch({
       "obj": "user",
       "act": "list_popup"
-    }).then((listPop)=>{
-      const arr=listPop.list||[]
-       const showObj=Taro.getStorageSync('showPopObj')||{}
-       let currentObj={...showObj}
-       const popArr= arr.filter((item)=>{
-          currentObj[item._id]=new Date().toDateString()
-          if(!showObj[item._id]){
+    }).then((listPop) => {
+      const arr = listPop.list || []
+      const showObj = Taro.getStorageSync('showPopObj') || {}
+      let currentObj = { ...showObj }
+      const popArr = arr.filter((item) => {
+        currentObj[item._id] = new Date().toDateString()
+        if (!showObj[item._id]) {
+          return true
+        } else {
+          if (item.popup_type !== "优惠券" && showObj[item._id] !== new Date().toDateString()) {
             return true
-          }else{
-            if(item.popup_type!=="优惠券"&&showObj[item._id]!==new Date().toDateString()){
-              return true
-            }else{
-              return false
-            }
+          } else {
+            return false
           }
-        })
-        Taro.setStorageSync('showPopObj',currentObj)
-        if(popArr.length){
-          this.setState({
-            visibleCoupon:true,
-            listPop:popArr
-          })
         }
+      })
+      Taro.setStorageSync('showPopObj', currentObj)
+      if (popArr.length) {
+        this.setState({
+          visibleCoupon: true,
+          listPop: popArr
+        })
+      }
     })
     //联系方式
-      network.Fetch({
-        "obj": "user",
-        "act": "contact_us"
-      }).then((a) => {
-          this.setState(
-            {
-              phone:a.platform_phone
-            })
-      })
+    network.Fetch({
+      "obj": "user",
+      "act": "contact_us"
+    }).then((a) => {
+      this.setState(
+        {
+          phone: a.platform_phone
+        })
+    })
     //banenr
     network.Fetch({
       "obj": "user",
       "act": "list_advertising"
     }).then((data) => {
       this.setState({
-        banner:data.list
+        banner: data.list
       })
     })
     network.Fetch({
@@ -109,36 +109,37 @@ class Index extends Component{
     }).then((result) => {
       Taro.authorize({
         scope: 'scope.userLocation',
-        success(){
+        success() {
           qqmapsdk.reverseGeocoder({
-            success:function(results){
-                  console.log(results)
-                  $this.setState({
-                    location:results.result.address_component.city,
-                    currentLocation:(Taro.getStorageSync('currentCity')&&Taro.getStorageSync('currentCity').city)?Taro.getStorageSync('currentCity').city :results.result.address_component.city
-                  })
+            success: function (results) {
+              console.log(results)
+              $this.setState({
+                location: results.result.address_component.city,
+                currentLocation: (Taro.getStorageSync('currentCity') && Taro.getStorageSync('currentCity').city) ? Taro.getStorageSync('currentCity').city : results.result.address_component.city
+              })
 
-                  $this.setState({
-                    type:result.list,
-                    typeId:result.list[0]._id,
-                    locations:results.result.location
-                  },()=>{
-                    $this.listRef.initLoad()
-                  })
-                  Taro.setStorageSync('myLocation',results.result.location)
-              }
-            })
+              $this.setState({
+                type: result.list,
+                typeId: result.list[0]._id,
+                locations: results.result.location
+              }, () => {
+                $this.listRef.initLoad()
+              })
+              Taro.setStorageSync('myLocation', results.result.location)
+              Taro.setStorageSync('localCity', { city: results.result.address_component.city, ...results.result.location })
+            }
+          })
         },
-        fail(){
+        fail() {
           Taro.showModal({
             title: '提示',
             content: '由于您拒绝提供位置信息，我们可能无法为您提供相关便捷服务！',
-            confirmText:'去开启',
-            success (res) {
+            confirmText: '去开启',
+            success(res) {
               if (res.confirm) {
                 Taro.openSetting({
-                  success(e){
-                    Taro.reLaunch({url:'/pages/home/index'})
+                  success(e) {
+                    Taro.reLaunch({ url: '/pages/home/index' })
                   }
                 })
               } else if (res.cancel) {
@@ -154,39 +155,39 @@ class Index extends Component{
     })
 
   }
-  componentDidMount(){
-    if(Taro.getStorageSync('currentCity')){
+  componentDidMount() {
+    if (Taro.getStorageSync('currentCity')) {
       this.setState(
         {
-          currentLocation:Taro.getStorageSync('currentCity').city
+          currentLocation: Taro.getStorageSync('currentCity').city
         }
       )
     }
     this.initData()
   }
-  handleCancel=()=>{
-    let {listPop}=this.state
+  handleCancel = () => {
+    let { listPop } = this.state
     listPop.shift()
-    this.setState({visibleCoupon:false,listPop},()=>{
-      if(listPop.length){
+    this.setState({ visibleCoupon: false, listPop }, () => {
+      if (listPop.length) {
         this.setState({
-          visibleCoupon:true
+          visibleCoupon: true
         })
       }
     })
   }
-  onReachBottom(){
+  onReachBottom() {
     this.listRef.getData()
   }
-  onShareAppMessage(options){
-      return {
-        title:'名流',
-        path:'/pages/home/index',
-      }
+  onShareAppMessage(options) {
+    return {
+      title: '名流',
+      path: '/pages/home/index',
+    }
   }
 
-  render(){
-    const {  visibleHelp,
+  render() {
+    const { visibleHelp,
       visibleCoupon,
       visibleClassfly,
       typeId,
@@ -197,24 +198,24 @@ class Index extends Component{
       listPop,
       visiblePhone,
       scrollIntoView,
-      type}=this.state
-      const {teaList}=this.props.listDataStore
+      type } = this.state
+    const { teaList } = this.props.listDataStore
     return (
       <View className='home'>
         <View className='header'>
           <View className='toolbar'>
-            <View className='left' onClick={()=>Taro.navigateTo({url:'/pages/home/city/index'})}>
+            <View className='left' onClick={() => Taro.navigateTo({ url: '/pages/home/city/index' })}>
               <Image className='location' src={require('../../assets/img/home/location_one.png')}></Image>
-              <Text className='text'>{Taro.getStorageSync('currentCity')? Taro.getStorageSync('currentCity').city:location}</Text>
+              <Text className='text'>{Taro.getStorageSync('currentCity') ? Taro.getStorageSync('currentCity').city : location}</Text>
               <Image className='arrow_down' src={require('../../assets/img/home/arrow_down.png')}></Image>
             </View>
             <View className='right'>
-              <View className='cooperation' onClick={()=>Taro.navigateTo({url:'/pages/me/apply/index'})}>
+              <View className='cooperation' onClick={() => Taro.navigateTo({ url: '/pages/me/apply/index' })}>
                 <Image className='icon' src={require('../../assets/img/home/cooperation.png')}></Image>
                 <Text className='label'>加盟合作</Text>
               </View>
 
-              <View className='store' onClick={()=>{
+              <View className='store' onClick={() => {
                 // Taro.showModal({
                 //   title:'温馨提示',
                 //   content:'正在开发中，请耐心等待',
@@ -243,15 +244,15 @@ class Index extends Component{
               {banner.map((item) => {
                 return (
                   <SwiperItem>
-                    <Image className='slide' src={downUrl + item.adv_cover} onClick={()=>{
-                      if(item.adv_type==='详情'){
-                        Taro.setStorageSync('richText',item.adv_jump_info)
-                        Taro.navigateTo({url:`/pages/home/text/index`})
-                      }else if(item.adv_type==='链接'){
-                        if(item.adv_jump_link.startsWith('http')){
-                          Taro.navigateTo({url:`/pages/home/web/index?url=${item.adv_jump_link}`})
-                        }else{
-                          Taro.navigateTo({url:item.adv_jump_link})
+                    <Image className='slide' src={downUrl + item.adv_cover} onClick={() => {
+                      if (item.adv_type === '详情') {
+                        Taro.setStorageSync('richText', item.adv_jump_info)
+                        Taro.navigateTo({ url: `/pages/home/text/index` })
+                      } else if (item.adv_type === '链接') {
+                        if (item.adv_jump_link.startsWith('http')) {
+                          Taro.navigateTo({ url: `/pages/home/web/index?url=${item.adv_jump_link}` })
+                        } else {
+                          Taro.navigateTo({ url: item.adv_jump_link })
                         }
                       }
                     }}
@@ -262,11 +263,11 @@ class Index extends Component{
             </Swiper>
           </View>
           <View className='functions' >
-            <View className='function' onClick={()=>Taro.navigateTo({url:'/pages/home/continueList/index'})}>
+            <View className='function' onClick={() => Taro.navigateTo({ url: '/pages/home/continueList/index' })}>
               <Image className='icon' src={require('../../assets/img/home/fn_one.png')}></Image>
               <Text className='text'>
                 我要续单
-            </Text>
+              </Text>
             </View>
             <View className='function' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index' })}>
               <Image className='icon' src={require('../../assets/img/home/fn_two.png')}></Image>
@@ -274,7 +275,7 @@ class Index extends Component{
                 开门码
               </Text>
             </View>
-            <View className='function' onClick={() => this.setState({ visibleHelp:true})}>
+            <View className='function' onClick={() => this.setState({ visibleHelp: true })}>
               <Image className='icon' src={require('../../assets/img/home/fn_three.png')}></Image>
               <Text className='text'>
                 有事找我
@@ -284,75 +285,77 @@ class Index extends Component{
               <Image className='icon' src={require('../../assets/img/home/fn_four.png')}></Image>
               <Text className='text'>
                 地图模式
-         </Text>
+              </Text>
             </View>
           </View>
         </View>
         <View className='body'>
           <View className='scrollContainer'>
-          <ScrollView scrollX enhanced 	 className='tabs'>
-            {type.map((item,i) => {
-                return(
-                  <View id={item._id} className={classNames(['tab',item._id==typeId&&'active'])} onClick={()=>{this.setState({typeId:item._id},()=>{
-                    this.listRef.initLoad()
-                    this.setState({
-                      scrollIntoView:item._id
+            <ScrollView scrollX enhanced className='tabs'>
+              {type.map((item, i) => {
+                return (
+                  <View id={item._id} className={classNames(['tab', item._id == typeId && 'active'])} onClick={() => {
+                    this.setState({ typeId: item._id }, () => {
+                      this.listRef.initLoad()
+                      this.setState({
+                        scrollIntoView: item._id
+                      })
                     })
-              })}}>
-                {item.category_name}
-                <View className='bar'></View>
+                  }}>
+                    {item.category_name}
+                    <View className='bar'></View>
+                  </View>
+                )
+              })}
+            </ScrollView>
+            {type.length > 1 &&
+              <View className='more' onClick={() => {
+                this.setState({
+                  visibleClassfly: true
+                })
+              }}
+              >
+                <Image className='icon' src={require('../../assets/img/home/more.png')}></Image>
               </View>
-              )
-            })}
-          </ScrollView>
-          {type.length>1&&
-            <View className='more' onClick={()=>{
-              this.setState({
-                visibleClassfly:true
-              })
-            }}
-            >
-            <Image className='icon' src={require('../../assets/img/home/more.png')}></Image>
-            </View>
             }
           </View>
-          <ListTemplate ref={(listRef)=>{this.listRef=listRef}} preLoad={false}
+          <ListTemplate ref={(listRef) => { this.listRef = listRef }} preLoad={false}
             listDataKey='teaList'
             fetchFn={(params) =>
-            network.Fetch({
-              ...params,
-              obj: "user",
-              act: "list_shops",
-              category_id: typeId,
-              city:Taro.getStorageSync('currentCity')?Taro.getStorageSync('currentCity').city:'',
-              latitude:locations.lat,
-              longitude:locations.lng
-            })
-          }
+              network.Fetch({
+                ...params,
+                obj: "user",
+                act: "list_shops",
+                category_id: typeId,
+                city: Taro.getStorageSync('currentCity') ? Taro.getStorageSync('currentCity').city : '',
+                latitude: locations.lat,
+                longitude: locations.lng
+              })
+            }
           >
-          {teaList.map((tea)=>{
-            return(
-              <View className='teaContainer'>
-              <TeaCard tea={tea} key={tea._id} />
-              </View>
-            )
+            {teaList.map((tea) => {
+              return (
+                <View className='teaContainer'>
+                  <TeaCard tea={tea} key={tea._id} />
+                </View>
+              )
             })
             }
           </ListTemplate>
         </View>
         <View className='normal'>
-          <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp:false})}>
+          <AtFloatLayout isOpened={visibleHelp} onClose={() => this.setState({ visibleHelp: false })}>
             <View className='title'>服务中心</View>
             <View className='funs'>
-              <View className='fun' onClick={()=>{this.setState({visiblePhone:true})}}>
+              <View className='fun' onClick={() => { this.setState({ visiblePhone: true }) }}>
                 <Image className='icon' src={require("../../assets/img/home/help1.png")}></Image>
                 <Text className='text'>联系我们</Text>
               </View>
-              <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/about/index'})}>
+              <View className='fun' onClick={() => Taro.navigateTo({ url: '/pages/me/about/index' })}>
                 <Image className='icon two' src={require("../../assets/img/home/help2.png")}></Image>
                 <Text className='text'>关于我们</Text>
               </View>
-              <View className='fun ' onClick={()=>Taro.navigateTo({url:'/pages/me/problem/index'})}>
+              <View className='fun ' onClick={() => Taro.navigateTo({ url: '/pages/me/problem/index' })}>
                 <Image className='icon three' src={require("../../assets/img/home/help3.png")}></Image>
                 <Text className='text'> 常见问题</Text>
               </View>
@@ -360,40 +363,42 @@ class Index extends Component{
           </AtFloatLayout>
         </View>
         <View className='teshu'>
-          <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly:false})}>
+          <AtFloatLayout isOpened={visibleClassfly} onClose={() => this.setState({ visibleClassfly: false })}>
             <View className='head'>
               <View className='text'>全部服务</View>
-              <Image className='icon' onClick={()=>this.setState({
-                visibleClassfly:false
+              <Image className='icon' onClick={() => this.setState({
+                visibleClassfly: false
               })} src={require('../../assets/img/close.png')}
               ></Image>
             </View>
             <View className='funs  aa'>
-              {type.map((item,i) => {
-                return(<View className='pfun'
-                  onClick={()=>{this.setState({typeId:item._id,visibleClassfly:false},()=>{
-                               this.listRef.initLoad()
-                             })}}
+              {type.map((item, i) => {
+                return (<View className='pfun'
+                  onClick={() => {
+                    this.setState({ typeId: item._id, visibleClassfly: false }, () => {
+                      this.listRef.initLoad()
+                    })
+                  }}
                 >
-                    <Image className='icon' src={downUrl+item.category_fid}></Image>
-                    <Text className='text'>{item.category_name}</Text>
-                  </View>
+                  <Image className='icon' src={downUrl + item.category_fid}></Image>
+                  <Text className='text'>{item.category_name}</Text>
+                </View>
                 )
               })}
             </View>
           </AtFloatLayout>
         </View>
-        <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={()=>this.setState({visiblePhone:false})}>
-        <AtActionSheetItem>
-          {phone}
-        </AtActionSheetItem>
-        <AtActionSheetItem onClick={()=>{Taro.makePhoneCall({phoneNumber:''+phone})}}>
-          呼叫
-        </AtActionSheetItem>
-      </AtActionSheet>
-          {visibleCoupon&&
+        <AtActionSheet isOpened={visiblePhone} cancelText='取消' onClose={() => this.setState({ visiblePhone: false })}>
+          <AtActionSheetItem>
+            {phone}
+          </AtActionSheetItem>
+          <AtActionSheetItem onClick={() => { Taro.makePhoneCall({ phoneNumber: '' + phone }) }}>
+            呼叫
+          </AtActionSheetItem>
+        </AtActionSheet>
+        {visibleCoupon &&
           <CouponModal entity={listPop[0]} onCancel={this.handleCancel}></CouponModal>
-         }
+        }
       </View>
     )
   }
