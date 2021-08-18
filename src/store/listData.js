@@ -7,6 +7,8 @@ const listDataStore = observable({
   orderList:[],
   couponList:[],
   cardList:[],
+  codeList:[],
+  continueList:[],
   updateListData(payload) {
     this[payload.key] = payload.listData;
   }

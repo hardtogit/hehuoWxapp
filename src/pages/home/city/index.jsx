@@ -2,7 +2,7 @@ import Taro, { useEffect, useState, useRouter } from "@tarojs/taro";
 import network from '@/utils/network'
 import debounce from 'lodash.debounce'
 import {
-  View, Input
+  View, Input, Image
 } from "@tarojs/components";
 import cityData from '../../../assets/js/cityData'
 import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js';
@@ -91,7 +91,10 @@ export default function Index() {
   return (
     <View>
       <View className='label'>当前定位城市:</View>
-      <Input className='cityName' value={value} onInput={handleSearch} placeholder='输入城市名' />
+      <View className='inputGroup'>
+        <Image className='icon' src={require('../../../assets/img/home/map_search.png')} />
+        <Input className='cityName' value={value} onInput={handleSearch} placeholder='输入城市名' />
+      </View>
       <View className='hr'></View>
       {
         searchVisible ?

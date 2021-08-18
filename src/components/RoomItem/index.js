@@ -24,7 +24,7 @@ export default function Index(props) {
           <Image className='icon' src={require('../../assets/img/home/star.png')}></Image>
           <Image className='icon' src={require('../../assets/img/home/star.png')}></Image>
         </View>
-  <View className='sale'>{room.sold_cnt}已售</View>
+  <View className='sale'><View className='number'> {room.sold_cnt}已售 </View>{room.price.type=='时段价'?<Text className='text '>{room.price.fromhour}小时起订</Text>:<Text className='text hour'>实时特惠</Text>}</View>
   <View className='dis'>{room.room_size}平  推荐{room.number}人</View>
       </View>
       <View className='right'>

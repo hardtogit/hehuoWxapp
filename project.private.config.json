@@ -1282,6 +1282,30 @@
           "pathName": "pages/home/city/index",
           "query": "from=map&__key_=16284255949521",
           "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16285053066201",
+          "scene": null
+        },
+        {
+          "name": "pages/home/city/index",
+          "pathName": "pages/home/city/index",
+          "query": "from=map&__key_=16285149600701",
+          "scene": null
+        },
+        {
+          "name": "pages/home/continueOrder/index",
+          "pathName": "pages/home/continueOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "__key_=16286037626191",
+          "scene": null
         }
       ]
     }

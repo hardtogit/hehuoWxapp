@@ -15,7 +15,7 @@ export default (props) => {
   const [coupons,setCoupons]=useState([])
   return (
     <View className='getCard'>
-    <AtFloatLayout isOpened={visible} >
+    <AtFloatLayout isOpened={visible} onClose={onCancel}>
       <View className='modal'>
        <View className='header' onClick={onCancel}>
          <View className='left'>优惠次卡</View>

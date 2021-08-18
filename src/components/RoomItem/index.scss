@@ -36,6 +36,25 @@
     .sale{
       color: #626262;
       font-size: 24px;
+      display: flex;
+      align-items: center;
+      // justify-content: space-between;
+      .number{
+        min-width: 120px;
+      }
+      .text{
+        font-size: 16px;
+        color: #fff;
+        // margin-left: 20px;
+        // margin-right: 120px;
+        padding: 2px 8px;
+        background: rgba(0, 160, 233, 1);
+        border-radius: 14px;
+        background-color: rgba(0,160,233,1);
+        &.hour{
+          background-color: #F0B80D;
+        }
+      }
     }
     .dis{
       font-size: 24px;

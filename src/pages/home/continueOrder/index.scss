@@ -355,10 +355,11 @@ page {
   }
 }
 .richText{
+  display: block;
   img{
-    width: 100%;
+    width: 100% !important;
   }
   image{
-    width: 100%;
+    width: 100% !important;
   }
 }

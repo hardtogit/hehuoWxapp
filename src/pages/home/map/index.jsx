@@ -12,7 +12,7 @@ const Index = () => {
   const [location, setLocation] = useState({})
   const [markers, setMarkers] = useState([])
   const [name, setName] = useState('')
-  const [scale, setScale] = useState(14)
+  const [scale, setScale] = useState(16)
   const [phone, setPhone] = useState('')
   const [distance, setDistance] = useState(0)
   const [visible, setVisible] = useState(false)
@@ -76,14 +76,14 @@ const Index = () => {
       setMarkers(
         cc
       )
-      setScale(14)
+      setScale(16)
     })
   }
-  const resetDate = useCallback((local) => {
+  const resetDate = (local) => {
     setLocation(local)
     getDistance(local)
     getMarks(local)
-  })
+  }
   const handleCalloutTapEventDetail = (id) => {
     Taro.navigateTo({ url: `/pages/home/storeDetail/index?id=${id.markerId}` })
     console.log(id)
@@ -101,50 +101,86 @@ const Index = () => {
   const controltap = () => {
     const currentScale = mapRef.current.getScale()
     setScale(currentScale)
-    setTimeout(() => {
-      setScale(14)
-      setTimeout(() => {
-        mapRef.current.moveToLocation();
-      }, 200)
-      mapRef.current.getCenterLocation({
-        success: (centerLocation) => {
-          resetDate(centerLocation)
-        }
-      })
-    }, 0)
+    qqmapsdk.reverseGeocoder({
+      success: function (results) {
+        console.log(results)
+        Taro.setStorageSync('localCity', {
+          city: results.result.address_component.city, latitude: results.result.location.lat,
+          longitude: results.result.location.lng
+        })
+        resetDate({
+          city: results.result.address_component.city, latitude: results.result.location.lat,
+          longitude: results.result.location.lng
+        })
+      }
+    })
+
+    mapRef.current.moveToLocation({
+      success: () => {
+        qqmapsdk.reverseGeocoder({
+          success: function (results) {
+            console.log(results)
+            Taro.setStorageSync('localCity', {
+              city: results.result.address_component.city, latitude: results.result.location.lat,
+              longitude: results.result.location.lng
+            })
+            resetDate({
+              city: results.result.address_component.city, latitude: results.result.location.lat,
+              longitude: results.result.location.lng
+            })
+          }
+        })
+      }
+    })
+
+
+    // setTimeout(() => {
+    //   setTimeout(() => {
+    //     resetDate(Taro.getStorageSync('localCity'))
+    //   }, 100)
+    // }, 0)
   }
   useDidShow(() => {
 
 
-    if (currentLocation) {
-      if (Taro.getStorageSync('currentCity')) {
-        if (currentLocation !== Taro.getStorageSync('currentCity').city) {
-          setCurrentLocation(Taro.getStorageSync('currentCity').city)
-          resetDate(Taro.getStorageSync('currentCity'))
-        }
-      } else {
-        if (currentLocation !== Taro.getStorageSync('localCity').city) {
-          setCurrentLocation(Taro.getStorageSync('localCity').city)
-          qqmapsdk.reverseGeocoder({
-            success: function (results) {
-              console.log(results)
-              setCurrentCity(
-                results.result.address_component.city
-              )
-              resetDate({
-                latitude: results.result.location.lat,
-                longitude: results.result.location.lng,
-              })
-            }
-          })
-        }
-      }
-      return
-    }
+    // if (currentLocation) {
+    //   if (Taro.getStorageSync('currentCity')) {
+    //     if (currentLocation !== Taro.getStorageSync('currentCity').city) {
+    //       setCurrentLocation(Taro.getStorageSync('currentCity').city)
+    //       resetDate(Taro.getStorageSync('currentCity'))
+    //     }
+    //   } else {
+    //     if (currentLocation !== Taro.getStorageSync('localCity').city) {
+    //       setCurrentLocation(Taro.getStorageSync('localCity').city)
+    //       qqmapsdk.reverseGeocoder({
+    //         success: function (results) {
+    //           console.log(results)
+    //           setCurrentCity(
+    //             results.result.address_component.city
+    //           )
+    //           resetDate({
+    //             latitude: results.result.location.lat,
+    //             longitude: results.result.location.lng,
+    //           })
+    //         }
+    //       })
+    //     }
+    //   }
+    //   return
+    // }
+    //
+
+
     //设置系统模式
 
     Taro.setStorageSync('systemMode', 'map')
     mapRef.current = Taro.createMapContext("map");
+
+    // const currentScale = mapRef.current.getScale()
+    // setScale(currentScale)
+    // setTimeout(() => {
+    //   setScale(14)
+    // }, 0)
     console.log(mapRef.current)
     network.Fetch({
       "obj": "user",
@@ -152,13 +188,25 @@ const Index = () => {
     }).then((a) => {
       setPhone(a.platform_phone)
     })
-    if (Taro.getStorageSync('currentCity')) {//以选择的城市为中心
-
+    if (Taro.getStorageSync('currentCity') && Taro.getStorageSync('localCity').city !== Taro.getStorageSync('currentCity').city) {//以选择的城市为中心
       resetDate(Taro.getStorageSync('currentCity'))
+      qqmapsdk.reverseGeocoder({
+        success: function (results) {
+          console.log(results)
+          Taro.setStorageSync('localCity', {
+            city: results.result.address_component.city, latitude: results.result.location.lat,
+            longitude: results.result.location.lng
+          })
+        }
+      })
     } else {
       qqmapsdk.reverseGeocoder({
         success: function (results) {
           console.log(results)
+          Taro.setStorageSync('localCity', {
+            city: results.result.address_component.city, latitude: results.result.location.lat,
+            longitude: results.result.location.lng
+          })
           setCurrentCity(
             results.result.address_component.city
           )
@@ -168,7 +216,6 @@ const Index = () => {
           })
         }
       })
-
     }
   })
   let distanceStr = '...'
@@ -227,7 +274,7 @@ const Index = () => {
           <CoverImage className='iconC open' onClick={() => Taro.navigateTo({ url: '/pages/home/codeList/index?from=map' })} src={require('../../../assets/img/home/map_open.png')} />
           <CoverImage className='iconC cont' onClick={() => Taro.navigateTo({ url: '/pages/home/continueList/index?from=map' })} src={require('../../../assets/img/home/map_cont.png')} />
           <CoverView className='distance'>距离最近茶室{distanceStr}</CoverView>
-          <CoverImage className='my'  src={require('../../../assets/img/home/map_my.png')} />
+          <CoverImage className='my' src={require('../../../assets/img/home/map_my.png')} />
 
           <CoverImage className='iconC sell' onClick={() => Taro.navigateTo({ url: '/pages/me/coupon/index' })} src={require('../../../assets/img/home/map_sell.png')} />
           <CoverImage className='iconC person' onClick={() => Taro.navigateTo({ url: '/pages/me/mine/index' })} src={require('../../../assets/img/home/map_person.png')} />

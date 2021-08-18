@@ -60,7 +60,7 @@ export default (props) => {
   console.log(coupons)
   return (
     <View className='getCoupon'>
-      <AtFloatLayout isOpened={visible} >
+      <AtFloatLayout isOpened={visible} onClose={onCancel}>
         <View className='modal'>
           <View className='header' onClick={onCancel}>
             <View className='left'>优惠券</View>

@@ -3,58 +3,65 @@
 import Taro, { Component, useEffect, useState, useShareAppMessage, useRouter } from "@tarojs/taro";
 import network from '@/utils/network'
 import {
-  View,
-  Button,
-  Text,
-  Image,
-  Swiper,
-  SwiperItem
+  View
 } from "@tarojs/components";
 import GoHome from '@/components/GoHome'
+import { inject, observer } from '@tarojs/mobx'
+import ListTemplate from '@/components/ListTemplate'
 import OrderItem from "../../../components/OrderItem";
 import "./index.scss";
 
-export default function Index() {
-  const [empty, setEmpty] = useState(false)
-  const [orders, setOrders] = useState([])
-  const { params } = useRouter()
-  useShareAppMessage({})
-  useEffect(() => {
-    network.Fetch({
-      "obj": "user",
-      "act": "list_order",
-      status: '续单',
-      "page": 1,
-      "limit": 100
-    }).then((data) => {
-      setOrders(data.list)
-      if ((!data.list || data.list.length === 0)) {
-        setEmpty(true)
-      }
-    })
+@inject('listDataStore')
+@observer
+class Index extends Component {
+  constructor() {
 
-  }, [])
-  return (
-    <View className='openCode'>
-      <GoHome />
-      {
-        empty &&
-        <View className='empty'>
-          <Image className='emptyImg' src={require('../../../assets/img/no_data.png')}></Image>
-          <View className='emptyText'>
-            您没有可续约的订单
-          </View>
-        </View>
-      }
-      {orders.map((order) => {
-        return (
-          <View className='item'>
-            <OrderItem order={order} type='continue' />
-          </View>
-        )
-      })}
-    </View>)
+  }
+  onShareAppMessage() { }
+  componentDidShow() {
+
+    this.listRef && this.listRef.initLoad()
+  }
+  componentDidMount() {
+    this.listRef.initLoad()
+  }
+  onReachBottom() {
+    this.listRef.getData()
+  } s
+  render() {
+    const { continueList } = this.props.listDataStore
+    return (
+      <View className='openCode' >
+        <GoHome />
+        <ListTemplate preLoad={false} listDataKey='continueList'
+          ref={(listRef) => this.listRef = listRef}
+          emptyText="您没有可续约的订单"
+          fetchFn={(params) =>
+            network.Fetch({
+              "obj": "user",
+              "act": "list_order",
+              status: '续单',
+              ...params
+            })
+          }
+        >
+          {continueList.map((order) => {
+            return (
+              <View className='item'>
+                <OrderItem order={order} type='continue' />
+              </View>
+            )
+          })}
+
+        </ListTemplate>
+      </View>)
+  }
+
+
 }
+
+
+
 Index.config = {
   navigationBarTitleText: '我要续单'
 }

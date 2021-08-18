@@ -34,21 +34,35 @@ class Index extends Component {
     }
   }
   componentDidShow() {
-    // if(this.state.currentLocation){
-    //   if(Taro.getStorageSync('currentCity') ){
-    //     if(this.state.currentLocation!==Taro.getStorageSync('currentCity').city){
-    //       this.setState({
-    //         currentLocation:Taro.getStorageSync('currentCity').city
-    //       })
-    //       this.initData()
-    //     }
-    //   }else {
-    //     if(this.state.currentLocation!==this.state.location){
-    //       this.initData()
-    //     }
-    //   }
-    // }
+    if (this.state.currentLocation) {
+      if (Taro.getStorageSync('currentCity')) {
+        if (this.state.currentLocation !== Taro.getStorageSync('currentCity').city) {
+          this.setState({
+            currentLocation: Taro.getStorageSync('currentCity').city
+          })
+          this.initData()
+        } else {
+          this.listRef.initLoad()
+        }
+      } else {
+        if (this.state.currentLocation !== this.state.location) {
+          this.initData()
+        } else {
+          this.listRef.initLoad()
+        }
+      }
+    }
     Taro.setStorageSync('systemMode', 'default')
+    // this.initData()
+  }
+  componentDidMount() {
+    // if (Taro.getStorageSync('currentCity')) {
+    //   this.setState(
+    //     {
+    //       currentLocation: Taro.getStorageSync('currentCity').city
+    //     }
+    //   )
+    // }
     this.initData()
   }
   initData = () => {
@@ -107,6 +121,10 @@ class Index extends Component {
       "obj": "user",
       "act": "list_category"
     }).then((result) => {
+      $this.setState({
+        type: result.list,
+        typeId: result.list[0]._id,
+      })
       Taro.authorize({
         scope: 'scope.userLocation',
         success() {
@@ -117,16 +135,16 @@ class Index extends Component {
                 location: results.result.address_component.city,
                 currentLocation: (Taro.getStorageSync('currentCity') && Taro.getStorageSync('currentCity').city) ? Taro.getStorageSync('currentCity').city : results.result.address_component.city
               })
-
               $this.setState({
-                type: result.list,
-                typeId: result.list[0]._id,
                 locations: results.result.location
               }, () => {
                 $this.listRef.initLoad()
               })
               Taro.setStorageSync('myLocation', results.result.location)
-              Taro.setStorageSync('localCity', { city: results.result.address_component.city, ...results.result.location })
+              Taro.setStorageSync('localCity', {
+                city: results.result.address_component.city, latitude: results.result.location.lat,
+                longitude: results.result.location.lng
+              })
             }
           })
         },
@@ -147,24 +165,13 @@ class Index extends Component {
               }
             }
           })
-
-
         }
       })
 
     })
 
   }
-  componentDidMount() {
-    if (Taro.getStorageSync('currentCity')) {
-      this.setState(
-        {
-          currentLocation: Taro.getStorageSync('currentCity').city
-        }
-      )
-    }
-    this.initData()
-  }
+
   handleCancel = () => {
     let { listPop } = this.state
     listPop.shift()
@@ -281,7 +288,7 @@ class Index extends Component {
                 有事找我
               </Text>
             </View>
-            <View className='function' onClick={() => { Taro.navigateTo({ url: '/pages/home/map/index' }) }}>
+            <View className='function' onClick={() => { Taro.reLaunch({ url: '/pages/home/map/index' }) }}>
               <Image className='icon' src={require('../../assets/img/home/fn_four.png')}></Image>
               <Text className='text'>
                 地图模式

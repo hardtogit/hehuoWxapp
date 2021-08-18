@@ -12,9 +12,10 @@ class Index extends Taro.Component {
     super(props);
     this.state = {
       noMore: false,
-      empty: false
+      empty: false,
+      loading:false
     };
-    this.limit = 10;
+    this.limit = 20;
     this.page = 1;
   }
   componentDidMount() {
@@ -26,15 +27,20 @@ class Index extends Taro.Component {
   onReachBottom() {
     console.log("onReachBottom");
   }
-  getData = () => {
+  getData = (type) => {
+    const {loading,noMore}=this.state
+    if(loading||noMore){
+      return
+    }
     const {listDataStore,fetchFn,listDataKey}=this.props
     Taro.showLoading({
       title:'加载中...'
     })
+    this.setState({loading:true})
     fetchFn({ page: this.page, limit: this.limit }).then(data => {
       Taro.hideLoading({})
       let arr = [];
-      if (this.page === 1) {
+      if (this.page === 1&&type==='init') {
         arr = data.list;
         if(data.list.length===0){
             this.setState({
@@ -43,10 +49,17 @@ class Index extends Taro.Component {
         }
       } else {
         arr = [...listDataStore[listDataKey], ...data.list];
+        if(data.list.length===0){
+          this.setState({
+            noMore:true
+          })
+        }
       }
       this.page+=1;
       listDataStore.updateListData({key:listDataKey,listData:[...arr]})
+      this.setState({loading:false})
     }).catch(()=>{
+      this.setState({loading:false})
       Taro.hideLoading({})
     });
   };
@@ -55,8 +68,9 @@ class Index extends Taro.Component {
     this.setState({
       noMore: false,
       empty: false
+    },()=>{
+      this.getData('init');
     });
-    this.getData();
   };
 
   render() {

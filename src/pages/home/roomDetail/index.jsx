@@ -243,7 +243,7 @@ export default function Index() {
         </View>
         }
         {/* <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${room.room.shop_id||'o15937049856544559001'}`})}> */}
-        <View className='bar one' onClick={()=>setVisibleOne(true)}>
+        <View className='bar one' onClick={() => { setVisibletwo(false); setVisibleOne(true) }}>
           <Image className='left' src={require('../../../assets/img/home/item_one.png')}></Image>
           <View className='center'>限时优惠折扣</View>
           <View className='text'>我要领取</View>
@@ -251,7 +251,7 @@ export default function Index() {
         </View>
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',room.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
 
-        {room.room.price.type==='时段价'&&  <View className='bar two' onClick={()=>setVisibletwo(true)}>
+        {room.room.price.type==='时段价'&&  <View className='bar two' onClick={() => { setVisibleOne(false); setVisibletwo(true) }}>
           <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
           <View className='center'>次卡优惠购买</View>
           <View className='text'>够买优惠次数</View>
