@@ -1,8 +1,8 @@
 import Taro from "@tarojs/taro"
 import qs from "qs"
 
-const requestUrl = "https://shanpaokeji.com/ckj2_ga_http";
-// const requestUrl = "http://47.114.62.134:51718/ckj2_http";
+// const requestUrl = "https://shanpaokeji.com/ckj2_ga_http";
+const requestUrl = "http://47.114.62.134:51718/ckj2_http";
 let loginFlag=false
 const Fetch = params => {
   console.log('请求参数：',params)

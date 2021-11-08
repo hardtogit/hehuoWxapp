@@ -1306,6 +1306,48 @@
           "pathName": "pages/home/map/index",
           "query": "__key_=16286037626191",
           "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15985231365872778892",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15985231365872778892&from=undefined&__key_=16359462903751",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o15985238883394010066&shop_id=o15985231365872778892&__key_=16362635616482",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o15985238883394010066&type=2&__key_=16362635616483",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15922100133319540023&from=undefined&__key_=16362670313424",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o15922140420696270465&shop_id=o15922100133319540023&__key_=16362685020701",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o15922140420696270465&type=2&__key_=16362733700434",
+          "scene": null
         }
       ]
     }

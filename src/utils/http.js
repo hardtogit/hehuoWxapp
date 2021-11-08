@@ -5,8 +5,8 @@ import apiModel from "../assets/js/APIConnectionWX.min";
 let callBackFn = {};
 let apiconn = new apiModel.APIConnection();
 let loginFlag=false;
-// apiconn.wsUri = "ws://47.114.62.134:51718/ckj2";
-apiconn.wsUri = "wss://shanpaokeji.com/ckj2_ga";
+apiconn.wsUri = "ws://47.114.62.134:51718/ckj2";
+// apiconn.wsUri = "wss://shanpaokeji.com/ckj2_ga";
 apiconn.state_changed_handler = function() {
   console.log("state: " + apiconn.from_state + " => " + apiconn.conn_state);
 };

@@ -14,6 +14,8 @@ import {
 import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import classNames from 'classnames'
 import ChoicePayType from '@/components/ChoicePayType'
+import GetTeaArt from '@/components/GetTeaArt'
+import GetPackage from '@/components/GetPackage'
 import RoomItem from "../../../components/RoomItem";
 import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js'
 import GetCoupon from "./components/GetCoupon";
@@ -33,6 +35,10 @@ export default function Index() {
   const [visibleOne, setVisibleOne] = useState(false)
   const [visibleTwo, setVisibletwo] = useState(false)
   const [visibleThree, setVisibleThree] = useState(false)
+  const [visibleFour, setVisibleFour] = useState(false)
+  const [visibleFive, setVisibleFive] = useState(false)
+
+  const [teaArtList, setTeaArtList] = useState([])
   const [timeCard, setTimeCard] = useState({})
   const [current, setCurrent] = useState(0)
   const [type, setType] = useState('img')
@@ -72,6 +78,16 @@ export default function Index() {
     })
   }
   const getData = () => {
+    //获取本店铺茶艺师
+    network.Fetch({
+      "obj": "user",
+      "act": "list_teaarts",
+      "shop_id": router.params.id || 'o15956078815923459529'
+    }).then((res) => {
+      setTeaArtList(res.list||[])
+      // console.log(res, 'gfakjsgfjkasgfasg')
+    })
+
     if (Taro.getStorageSync('myLocation')) {
       network.Fetch({
         "obj": "user",
@@ -160,6 +176,8 @@ export default function Index() {
   return (
     <View className='store_detail'>
       {visibleThree && <ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={() => { setVisibleThree(false) }}></ChoicePayType>}
+      <View className='getPackage'><GetPackage visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
+      <View className='getTeaArt'><GetTeaArt visible={visibleFour} shop_id={router.params.id || 'o15937049856544559001'} teaArtList={teaArtList} onCancel={() => setVisibleFour(false)} ></GetTeaArt> </View>
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.id || 'o15937049856544559001'} visible={visibleTwo} onCancel={() => setVisibletwo(false)}></GetCard></View>
       <View className='swiper_container'>
@@ -214,9 +232,15 @@ export default function Index() {
             )
           })}
         </View>
+        <View className='bar three' onClick={e => { e.stopPropagation(); setVisibleFour(true) }} style={{ backgroundImage: `url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16362688122967460155001")`, backgroundSize: '100% 100%' }}>
+          <Image className='left' src={require('../../../assets/img/home/item_three.png')}></Image>
+          <View className='center'>本店铺茶艺师</View>
+          <View className='text'>点击查看</View>
+          <Image className='arrow' src={require('../../../assets/img/home/right_three.png')}></Image>
 
+        </View>
         {/* <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${router.params.id||'o15937049856544559001'}`})}> */}
-        <View className='bar one' onClick={(e) => {e.stopPropagation(); setVisibletwo(false); setVisibleOne(true) }}>
+        <View className='bar one' onClick={(e) => { e.stopPropagation(); setVisibletwo(false); setVisibleOne(true) }}>
 
           <Image className='left' src={require('../../../assets/img/home/item_one.png')}></Image>
           <View className='center'>限时优惠折扣</View>
@@ -224,7 +248,7 @@ export default function Index() {
           <Image className='arrow' src={require('../../../assets/img/home/right_one.png')}></Image>
         </View>
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',entity.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
-        <View className='bar two' onClick={(e) => {e.stopPropagation(); setVisibleOne(false); setVisibletwo(true) }}>
+        <View className='bar two' onClick={(e) => { e.stopPropagation(); setVisibleOne(false); setVisibletwo(true) }}>
           <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
           <View className='center'>次卡优惠购买</View>
           <View className='text'>够买优惠次数</View>
