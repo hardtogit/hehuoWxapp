@@ -39,7 +39,7 @@ page{
     align-items: center;
     .price{
       font-size: 50px;
-      flex: 1;
+      flex: 3;
       color: #F0B80D;
       &::before{
         color: #F0B80D;
@@ -48,6 +48,11 @@ page{
         content: '¥';
         margin-right: 6px;
       }
+    }
+    .days{
+      flex: 5;
+      font-size: 26px;
+      color: #999;
     }
     .btn{
       width:160px;

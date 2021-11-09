@@ -1306,6 +1306,30 @@
           "pathName": "pages/home/map/index",
           "query": "__key_=16286037626191",
           "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15956078815923459529&from=undefined&__key_=16363757035841",
+          "scene": null
+        },
+        {
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "__key_=163637741242812",
+          "scene": null
+        },
+        {
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15956078815923459529&from=undefined&__key_=16363814620971",
+          "scene": null
         }
       ]
     }
