@@ -18,7 +18,7 @@ export default (props) => {
     <AtFloatLayout isOpened={visible} onClose={onCancel}>
       <View className='modal'>
        <View className='header' onClick={onCancel}>
-         <View className='left'>优惠次卡</View>
+         <View className='left'>VIP活动</View>
           <Image className='right' src={require('../../../../../assets/img/home/close.png')} ></Image>
        </View>
             {

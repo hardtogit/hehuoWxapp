@@ -69,7 +69,7 @@ const Index = () => {
           <View className='fun' onClick={()=>Taro.navigateTo({url:'/pages/me/timesCard/index'})}>
             <Image className='img' src={require('../../assets/img/me/me1.png')} ></Image>
             <View className='text'>
-              优惠次卡
+              VIP次卡
              </View>
           </View>
           <View className='fun two' onClick={()=>Taro.navigateTo({url:'/pages/me/apply/index'})}>

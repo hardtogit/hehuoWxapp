@@ -67,7 +67,7 @@ class Index extends Component{
 
 }
 Index.config = {
-  navigationBarTitleText: '我的优惠次卡'
+  navigationBarTitleText: '我的VIP次卡'
 }
 
 

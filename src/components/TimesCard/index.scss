@@ -24,6 +24,12 @@ page{
         .title{
           font-size: 38px;
           font-weight: bold;
+          display: flex;
+          align-items: baseline;
+          .time{
+            font-weight: normal;
+            margin-left: 10px;
+          }
         }
         .time{
           font-size: 24px;
