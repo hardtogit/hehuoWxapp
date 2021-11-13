@@ -1348,6 +1348,78 @@
           "pathName": "pages/home/sureOrder/index",
           "query": "id=o15922140420696270465&type=2&__key_=16362733700434",
           "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o15956083697860679626&type=2&__key_=16364592005554",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15956078815923459529&from=undefined&__key_=16365526232953",
+          "scene": null
+        },
+        {
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "shop_id=o15956078815923459529&tea_zone_id=o15956083697860679626&__key_=16366843727517",
+          "scene": null
+        },
+        {
+          "name": "pages/home/continueOrder/index",
+          "pathName": "pages/home/continueOrder/index",
+          "query": "id=o15956083697860679626&shop_id=o15956078815923459529&type=continue&__key_=16366850851472",
+          "scene": null
+        },
+        {
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129209922249317&type=1&__key_=16367230251966",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o15956083697860679626&type=2&__key_=16367236346993",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15956078815923459529&from=undefined&__key_=16367288662542",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o15956083697860679626&shop_id=o15956078815923459529&__key_=16367318752682",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15922100133319540023&from=undefined&__key_=16367343769912",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o15956083697860679626&type=2&__key_=16367346654673",
+          "scene": null
+        },
+        {
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id=o15956078815923459529&from=undefined&__key_=16368093742101",
+          "scene": null
         }
       ]
     }

@@ -12,12 +12,17 @@ import "./index.scss";
 
 
 export default (props) => {
-  const { onCancel, visible, teaArtList, type } = props
+  const { onCancel, visible, teaArtList, type, teaart, setTeaart } = props
   const [coupons, setCoupons] = useState([])
   const handleOk = () => {
     if (type === 'choice') {
-
+      if (!teaart) {
+        Taro.showToast({ title: '请选择茶艺师', icon: 'none' })
+        return
+      }
+      onCancel()
     } else {
+
       onCancel()
     }
   }
@@ -40,7 +45,7 @@ export default (props) => {
           <ScrollView scrollY={true} className='all'>
             {teaArtList.map((teaArt) => {
               return (
-                <TeaArtCard entity={teaArt} key={teaArt._id} />
+                <TeaArtCard entity={teaArt} key={teaArt._id} teaart={teaart} setTeaart={setTeaart} />
               )
 
             })}
@@ -48,7 +53,7 @@ export default (props) => {
           <View className='btns'>
             {
               type === 'choice' &&
-              <View className='btn cancel' onClick={onCancel}>
+              <View className='btn cancel' onClick={() => { setTeaart && setTeaart(''); onCancel() }}>
                 不用，谢谢
               </View>
             }

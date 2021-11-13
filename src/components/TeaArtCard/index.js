@@ -2,14 +2,18 @@ import Taro from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import classNames from 'classnames'
 import { countDistance } from "@/utils";
+import teaStar from '@/assets/img/home/teaStar.png'
 import { downUrl } from "../../config";
 import "./index.scss";
 
 export default function Index(props) {
-  const { teaArt = {}, from,entity } = props;
+  const {teaart={}, setTeaart,entity } = props;
   return (
     <View
-      className='card'
+      className={classNames(['card',entity._id===teaart._id&&'active',entity.remarks&&'mark'])}
+      onClick={()=>{if(setTeaart){setTeaart(teaart._id===entity._id?'':entity)}else{
+          Taro.showToast({title:'请先下单并预约',icon:'none'})
+      }}}
     >
       <View className='top'>
         <Image className='cover' src={downUrl + entity.avatar_fid}></Image>
@@ -25,10 +29,16 @@ export default function Index(props) {
           <View className='price'>
             <View className='unit'>¥</View>
             <View className='num'>{entity.cost}</View>
-            <View className='text'>/小时</View>
+            <View className='text'>{entity.costinfo.indexOf('一口价')!==-1?'元':'/小时'}</View>
           </View>
-          <View className='time'>服务时间：8:00-22:00</View>
-          <View className='star'></View>
+          <View className='time'>服务时间：{entity.time}</View>
+          <View className='star'>
+            <Image className='icon' src={teaStar} />
+            <Image className='icon' src={teaStar} />
+            <Image className='icon' src={teaStar} />
+            <Image className='icon' src={teaStar} />
+            <Image className='icon' src={teaStar} />
+          </View>
         </View>
 
         <View className={classNames(['status',entity.status==='在线'&&'online',entity.status==='休息中'&&'rest',entity.status==='服务中'&&'service',])}>
@@ -37,7 +47,7 @@ export default function Index(props) {
       </View>
       {entity.remarks&&
       <View className='bottom'>
-      备注：{entity.remarks}
+      个性签名：{entity.remarks}
       </View>
       }
 

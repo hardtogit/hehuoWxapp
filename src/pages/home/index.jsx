@@ -188,7 +188,7 @@ class Index extends Component {
   }
   onShareAppMessage(options) {
     return {
-      title: '名流',
+      title: '一起开启您的美好时光…',
       path: '/pages/home/index',
     }
   }

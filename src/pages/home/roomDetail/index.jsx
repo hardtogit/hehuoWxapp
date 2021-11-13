@@ -252,12 +252,14 @@ export default function Index() {
         </View>
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',room.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
 
-        {room.room.price.type === '时段价' && <View className='bar two' onClick={() => { setVisibleOne(false); setVisibletwo(true) }}>
-          <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
-          <View className='center'>VIP会员活动</View>
-          <View className='text'>购买优惠详情</View>
-          <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
-        </View>}
+        {/* {room.room.price.type === '时段价' && */}
+          <View className='bar two' onClick={() => { setVisibleOne(false); setVisibletwo(true) }}>
+            <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
+            <View className='center'>VIP会员活动</View>
+            <View className='text'>购买优惠详情</View>
+            <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
+          </View>
+        {/* } */}
 
 
         <View className='discription'>

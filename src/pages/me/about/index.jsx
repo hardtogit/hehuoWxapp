@@ -27,7 +27,7 @@ const Index = () => {
   )
 }
 Index.config = {
-  navigationBarTitleText: '登陆'
+  navigationBarTitleText: '关于我们'
 }
 
 

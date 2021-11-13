@@ -35,7 +35,7 @@ class Index extends Component {
         <GoHome />
         <ListTemplate preLoad={false} listDataKey='continueList'
           ref={(listRef) => this.listRef = listRef}
-          emptyText="您没有可续约的订单"
+          emptyText="您没有可续订的订单"
           fetchFn={(params) =>
             network.Fetch({
               "obj": "user",

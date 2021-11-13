@@ -4,13 +4,27 @@
   border: 2px solid #d8d8d8;
   box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.18);
   border-radius: 20px;
-  padding: 20px 24px;
+  padding: 30px 24px;
   margin: 0 auto 20px auto;
+  background-image: url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16365536264273140430001");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 199px 160px;
+  &.mark {
+    background-image: url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16365532406329410076001");
+    background-size: 199px 214px;
+  }
+  &.active {
+    background: #cfedff;
+    border: 2px solid #02a1fd;
+  }
   .top {
     display: flex;
+    position: relative;
     .cover {
       width: 190px;
       height: 190px;
+      border-radius: 50%;
     }
     .center {
       padding-left: 36px;
@@ -22,7 +36,7 @@
       }
       .labels {
         display: flex;
-        margin-top: 15px;
+        margin-top: 20px;
         .label {
           height: 30px;
           display: flex;
@@ -42,7 +56,7 @@
         color: #f60b0b;
         display: flex;
         align-items: baseline;
-        margin-top: 15px;
+        margin-top: 6px;
         .unit {
           font-size: 26px;
         }
@@ -57,12 +71,23 @@
         font-size: 24px;
         color: #333;
       }
+      .star{
+        display: flex;
+        .icon{
+          width: 32px;
+          height: 32px;
+          display: block;
+        }
+      }
     }
     .status {
       width: 124px;
       height: 44px;
       border-radius: 30px 22px 22px 0;
       // background-color: #02a1fd;
+      position: absolute;
+      right: 0;
+      top: 0;
       display: flex;
       align-items: center;
       justify-content: center;

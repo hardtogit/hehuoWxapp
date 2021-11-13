@@ -2,6 +2,7 @@ import Taro, { Component, useEffect, useState, useRouter } from "@tarojs/taro";
 import classNames from 'classnames'
 import network from '@/utils/network'
 import dayjs from 'dayjs'
+import laba from '@/assets/img/home/laba.png'
 import { AtFloatLayout } from 'taro-ui'
 import { View, ScrollView, Text, Image } from "@tarojs/components";
 import "./index.scss";
@@ -63,7 +64,7 @@ export default (props) => {
       <AtFloatLayout isOpened={visible} onClose={onCancel}>
         <View className='modal'>
           <View className='header' onClick={onCancel}>
-            <View className='left'>优惠券</View>
+            <View className='left'><Image className='icon' src={laba} />优惠券中心</View>
             <Image className='right' src={require('../../../../../assets/img/home/close.png')} ></Image>
           </View>
           {
@@ -72,7 +73,7 @@ export default (props) => {
               <Image className='emptyImg' src={require('../../../../../assets/img/no_data.png')}></Image>
               <View className='emptyText'>
                 暂无优惠活动
-        </View>
+              </View>
             </View>
           }
           <ScrollView scrollY className='all'>
@@ -84,16 +85,16 @@ export default (props) => {
                       <View className='unit'>¥</View> {coupon.disc_off_price}
                     </View>
                     <View className='text'>
-                      {coupon.disc_use_price?`满${coupon.disc_use_price}可用` : '无门槛'}
+                      {coupon.disc_use_price ? `满${coupon.disc_use_price}可用` : '无门槛'}
                     </View>
                   </View>
                   <View className='center'>
                     <View className='title'> {coupon.disc_name}</View>
                     <View className='time'> 领取后有效期：{coupon.days}天</View>
-                    <View className='time'> 类型：{coupon.create_type==='admin'?'平台':'商户'}</View>
-                        <View className='time'>
-                            限{coupon.shop_name}店使用
-                        </View>
+                    <View className='time'> 类型：{coupon.create_type === 'admin' ? '平台' : '商户'}</View>
+                    <View className='time'>
+                      限{coupon.shop_name}使用
+                    </View>
                   </View>
                   <View className='right'>
                     <View className='btn' onClick={() => getCouponFn(coupon._id)}>领取</View>
@@ -115,10 +116,10 @@ export default (props) => {
                   <View className='center'>
                     <View className='title'> {coupon.disc_name}</View>
                     <View className='time'> 有效期：{dayjs(coupon.effective_time * 1000).format('YYYY.MM.DD')}-{dayjs(coupon.expire_time * 1000).format('YYYY.MM.DD')}</View>
-                    <View className='time'> 类型：{coupon.create_type==='admin'?'平台':'商户'}</View>
-                        <View className='time'>
-                            限{coupon.shop_name}店使用
-                        </View>
+                    <View className='time'> 类型：{coupon.create_type === 'admin' ? '平台' : '商户'}</View>
+                    <View className='time'>
+                      限{coupon.shop_name}使用
+                    </View>
                   </View>
                   <View className='right'>
                     <View className='btn default'>已领取</View>
@@ -129,8 +130,10 @@ export default (props) => {
             <View className='tip'>*不可与次卡叠加使用</View>
           </ScrollView>
           <View className='btns' onClick={onCancel}>
-            确认
-      </View>
+            <View className='btn'>
+              确认
+            </View>
+          </View>
         </View>
       </AtFloatLayout>
     </View>

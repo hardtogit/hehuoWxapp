@@ -1,90 +1,127 @@
 @import "~taro-ui/dist/style/components/flex.scss";
-.order_item{
-  width:690px;
-height:306px;
-background:rgba(255,255,255,1);
-border-radius:10px;
-.top{
-  padding: 0 24px;
-  height: 70px;
-  align-items: center;
-  border-bottom: 1px solid #EFEFEF;
-  .left{
-    font-size: 26px;
-    color: #4E4E4E;
+.order_item {
+  width: 690px;
+  // height: 306px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  .top {
+    padding: 0 24px;
+    height: 70px;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    .left {
+      font-size: 26px;
+      color: #4e4e4e;
+    }
+    .right {
+      text-align: right;
+      font-size: 26px;
+      color: #7a7a7a;
+    }
   }
-  .right{
-    text-align: right;
-    font-size: 26px;
-    color: #7A7A7A;
-  }
-}
-.body{
-  display: flex;
-  padding: 24px 30px;
-  .left{
-    width: 100px;
-    .cover{
+  .body {
+    display: flex;
+    padding: 24px 30px 0 24px;
+    .left {
       width: 100px;
-      height: 100px;
+      .cover {
+        width: 100px;
+        height: 100px;
+        border-radius: 12px;
+      }
+    }
+    .right {
+      flex: 1;
+      padding-left: 18px;
+      .name {
+        font-size: 26px;
+        font-weight: bold;
+      }
+      .text {
+        color: #8d8d8d;
+        font-size: 22px;
+      }
     }
   }
-  .right{
-    flex: 1;
-    padding-left: 18px;
-    .name{
-      font-size: 26px;
-      font-weight: bold;
-
-    }
-    .text{
-      color: #8D8D8D;
-      font-size: 22px;
-
-    }
-  }
-}
-
-.bottom{
-  padding: 0 30px;
-  display: flex;
-  height: 80px;
-  align-items: center;
-  border-top: 1px solid #EFEFEF;
-  .left{
-    flex: 1;
-    display: flex;
-    align-items: baseline;
-    .label{
-      font-size: 20px;
-      color: #7A7A7A;
-    }
-    .unit{
-      font-size: 26px;
-      color: #C70001;
-    }
-    .num{
-      font-size: 30px;
-      color: #C70001;
-    }
-  }
-  .right{
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    .btn{
-      // width:156px;
-      padding: 0 30px;
-      height:60px;
-      background:rgba(0,160,233,1);
-      box-shadow:0px 7px 16px 0px rgba(15,88,177,0.18);
-      border-radius:30px;
+  .items {
+    .item {
       display: flex;
+      padding: 0 30px;
+      font-size: 26px;
       align-items: center;
-      color: #fff;
-      font-size: 24px;
-      justify-content: center;
+      margin-top: 20px;
+      .left {
+        flex: 1;
+        color: #333;
+      }
+      .right {
+        flex: 2;
+        color: #999;
+        text-align: right;
+        &.num {
+          color: #f30d0d;
+        }
+      }
     }
   }
-}
+  .trigger {
+    display: flex;
+    height: 90px;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 400;
+    color: #02a1fd;
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+      margin-left: 18px;
+      &.flip {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .bottom {
+    padding: 0 30px;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    border-top: 1px solid #efefef;
+    .left {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      .label {
+        font-size: 20px;
+        color: #7a7a7a;
+      }
+      .unit {
+        font-size: 26px;
+        color: #c70001;
+      }
+      .num {
+        font-size: 30px;
+        color: #c70001;
+      }
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      .btn {
+        // width:156px;
+        padding: 0 30px;
+        height: 60px;
+        background: rgba(0, 160, 233, 1);
+        box-shadow: 0px 7px 16px 0px rgba(15, 88, 177, 0.18);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-size: 24px;
+        justify-content: center;
+      }
+    }
+  }
 }

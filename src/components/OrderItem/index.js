@@ -1,11 +1,14 @@
-import Taro from "@tarojs/taro";
+import Taro,{useState} from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
-import {downUrl} from '../../config'
+import classNames from 'classnames'
 import dayjs from "dayjs";
+import arrow from '@/assets/img/home/arrow_down_icon.png'
+import {downUrl} from '../../config'
 import "./index.scss";
 
 export default function Index(props) {
   const { order ,type} = props;
+  const [visible,setVisible]=useState(false)
   const status = 1;
   return (
     <View className='order_item'>
@@ -52,6 +55,46 @@ export default function Index(props) {
           }
 
         </View>
+      </View>
+      {
+        visible&&
+        <View className='items'>
+        <View className='item'>
+          <View className='left'>优惠券：</View>
+          <View className='right'>
+          {(order.discount&&order.discount.type==='优惠券')?
+              order.discount.discount_name:'未使用'
+            }
+          </View>
+        </View>
+        <View className='item'>
+          <View className='left'>次卡：</View>
+          <View className='right'>
+            {(order.discount&&order.discount.type==='次卡')?
+              order.discount.discount_name:'未使用'
+            }
+          </View>
+        </View>
+        {
+          (order.teaart_info&&order.teaart_info._id)&&
+          <View className='item'>
+          <View className='left'>茶艺师跟单：</View>
+        </View>
+        }
+        {
+           (order.teaart_info&&order.teaart_info._id)&&
+           <View className='item'>
+          <View className='left'>{order.teaart_info.name}</View>
+          <View className='right num'>{order.teaart_info.total_cost}元</View>
+        </View>
+        }
+
+      </View>
+      }
+
+      <View className='trigger' onClick={()=>setVisible(!visible)}>
+            查看详情
+            <Image className={classNames(['icon',visible&&'flip'])} src={arrow}></Image>
       </View>
       <View className='bottom'>
         <View className='left'>

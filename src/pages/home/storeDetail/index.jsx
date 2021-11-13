@@ -84,7 +84,7 @@ export default function Index() {
       "act": "list_teaarts",
       "shop_id": router.params.id || 'o15956078815923459529'
     }).then((res) => {
-      setTeaArtList(res.list||[])
+      setTeaArtList(res.list || [])
       // console.log(res, 'gfakjsgfjkasgfasg')
     })
 
@@ -232,13 +232,14 @@ export default function Index() {
             )
           })}
         </View>
-        <View className='bar three' onClick={e => { e.stopPropagation(); setVisibleFour(true) }} style={{ backgroundImage: `url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16362688122967460155001")`, backgroundSize: '100% 100%' }}>
-          <Image className='left' src={require('../../../assets/img/home/item_three.png')}></Image>
-          <View className='center'>本店铺茶艺师</View>
-          <View className='text'>点击查看</View>
-          <Image className='arrow' src={require('../../../assets/img/home/right_three.png')}></Image>
-
-        </View>
+        {(entity.shop.teaarts && entity.shop.teaarts === '开启') &&
+          <View className='bar three' onClick={e => { e.stopPropagation(); setVisibleFour(true) }} style={{ backgroundImage: `url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16362688122967460155001")`, backgroundSize: '100% 100%' }}>
+            <Image className='left' src={require('../../../assets/img/home/item_three.png')}></Image>
+            <View className='center'>本店铺茶艺师</View>
+            <View className='text'>点击查看</View>
+            <Image className='arrow' src={require('../../../assets/img/home/right_three.png')}></Image>
+          </View>
+        }
         {/* <View className='bar one' onClick={()=>Taro.navigateTo({url:`/pages/home/buyCoupon/index?id=${router.params.id||'o15937049856544559001'}`})}> */}
         <View className='bar one' onClick={(e) => { e.stopPropagation(); setVisibletwo(false); setVisibleOne(true) }}>
 
@@ -250,7 +251,7 @@ export default function Index() {
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',entity.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
         <View className='bar two' onClick={(e) => { e.stopPropagation(); setVisibleOne(false); setVisibletwo(true) }}>
           <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
-          <View className='center' style={{paddingLeft:'4px'}}>VIP会员活动</View>
+          <View className='center' style={{ paddingLeft: '4px' }}>VIP会员活动</View>
           <View className='text'>购买优惠详情</View>
           <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
         </View>

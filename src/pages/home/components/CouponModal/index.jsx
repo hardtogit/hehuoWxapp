@@ -41,7 +41,7 @@ const Index = (props) => {
   )
 }
 Index.config = {
-  navigationBarTitleText: '登陆'
+  navigationBarTitleText: '登录'
 }
 
 

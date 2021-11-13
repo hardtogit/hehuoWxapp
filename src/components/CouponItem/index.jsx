@@ -48,7 +48,7 @@ const Index = (props) => {
         </View>
         <View className='time'> {status == '未使用' && <Text style={{ marginRight: '10px' }}> 剩余次数：{coupon.owned_number}</Text>}类型：{coupon.create_type === 'admin' ? '平台' : '商户'}</View>
         <View className='time'>
-          限{coupon.shop_name}店使用
+          限{coupon.shop_name}使用
         </View>
       </View>
       <View className='right'>

@@ -292,7 +292,7 @@ export default (props) => {
     <AtFloatLayout isOpened={visible} onClick={() => this.setState({ visibleHelp: false })} onClose={onCancel}>
       <View className='content'>
         <View className='header' onClick={onCancel}>
-          <View className='left'><Image className='icon' src={laba} /> 为你推荐套餐，蓝色为已选中</View>
+          <View className='left'><Image className='icon' src={laba} /> {room.room.price.fromhour}小时起订，灰色为已被预订</View>
         </View>
         <View className='main'>
           <View className='dates'>

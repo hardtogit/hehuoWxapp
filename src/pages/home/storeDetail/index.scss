@@ -156,9 +156,19 @@ page {
       }
       &.three {
         height: 100px;
+        .center{
+          font-weight: bold;
+        }
+        .text{
+          position: relative;
+          right: -7px;
+        }
         .arrow {
           width: 25px;
           height: 25px;
+          margin-left: 0;
+          position: relative;
+          right: -7px;
         }
       }
       .left {
@@ -248,13 +258,15 @@ page {
 }
 .getCoupon {
   .at-float-layout__container {
-    max-height: 80% !important;
+    max-height: 90% !important;
     border-radius: 16px 16px 0 0;
     height: auto;
     min-height: 320px !important;
+    background-color: transparent !important;
     .layout-body {
       max-height: 80% !important;
       min-height: 320px !important;
+      padding: 0;
       .layout-body__content {
         max-height: 80% !important;
         min-height: 320px !important;
@@ -264,11 +276,13 @@ page {
 }
 .getCard {
   .at-float-layout__container {
-    max-height: 80% !important;
+    max-height: 90% !important;
     border-radius: 16px 16px 0 0;
     height: auto;
     min-height: 320px !important;
+    background-color: transparent !important;
     .layout-body {
+      padding: 0;
       max-height: 80% !important;
       min-height: 320px !important;
       .layout-body__content {

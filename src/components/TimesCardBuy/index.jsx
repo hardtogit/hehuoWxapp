@@ -44,7 +44,7 @@ const Index = (props) => {
             <View className='left'>
               <View className='title'>{timeCard.memb_name}</View>
               <View className='time' style={{ display: 'flex', }}>
-                <View style={{ flexShrink: 0 }}>活动说明：</View><View >{timeCard.comment ? timeCard.comment : '一起开启您的美好时光'}</View>
+                <View style={{ flexShrink: 0 }}>活动说明：</View><View >{timeCard.comment ? timeCard.comment : '一起开启您的美好时光...'}</View>
               </View>
             </View>
           </View>

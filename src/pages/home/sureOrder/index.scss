@@ -6,13 +6,19 @@ page {
   background-color: #f0f1f3;
 }
 .sureOrder {
-  padding-bottom: 120px;
+  padding-bottom: 220px;
   .card {
     padding: 40px 30px;
     background-color: #fff;
     &.two {
       padding: 0 30px;
       margin-top: 20px;
+    }
+    &.fixed {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 100px;
     }
     &.three {
       margin-top: 20px;
@@ -74,9 +80,19 @@ page {
       }
       &.three {
         height: 100px;
+        .center {
+          font-weight: bold;
+        }
+        .text {
+          position: relative;
+          right: -4px;
+        }
         .arrow {
           width: 25px;
           height: 25px;
+          margin-left: 0;
+          position: relative;
+          right: -6px;
         }
       }
       .left {

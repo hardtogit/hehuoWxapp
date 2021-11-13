@@ -195,12 +195,12 @@ const Index = () => {
   return (
     <View className='me'>
       <Image className='logo' src={require('../../assets/img/me/logo2.png')}></Image>
-      <Button className='btn'  onClick={handleGetUserInfo}>授权登陆</Button>
+      <Button className='btn'  onClick={handleGetUserInfo}>授权登录</Button>
     </View>
   )
 }
 Index.config = {
-  navigationBarTitleText: '登陆'
+  navigationBarTitleText: '登录'
 }
 
 
