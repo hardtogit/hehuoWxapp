@@ -1420,6 +1420,24 @@
           "pathName": "pages/home/storeDetail/index",
           "query": "id=o15956078815923459529&from=undefined&__key_=16368093742101",
           "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366113927116160392&type=2&__key_=16368598677274",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366113927116160392&type=2&__key_=16368600028193",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366113927116160392&type=2&__key_=16368724872846",
+          "scene": null
         }
       ]
     }

@@ -275,7 +275,7 @@ export default function Index() {
               Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=2&way=xy` })
             }}
             >去结算</View> : <View onClick={() => Taro.navigateTo({ url: `/pages/home/continueAppointment/index?shop_id=${room.room.shop_id || 'o15937049856544559001'}&tea_zone_id=${room.room._id || 'o15937054688063290119'}` })}>去续订</View> :
-            <View onClick={() => Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=1` })}>去结算</View>
+            <View onClick={() => Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=1&way=xy` })}>去结算</View>
           }
         </View>
       </View>

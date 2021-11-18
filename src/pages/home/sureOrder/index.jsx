@@ -37,8 +37,15 @@ export default function Index() {
   if (teaart) {
     if (router.params.type == 2) {//时段价房间
       let serviceTime = sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime
-      if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realendtime)) {//表示茶艺师已下班
-        serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realendtime - sureOrderData.timeScope.startTime
+      if (sureOrderData.timeScope.startTime < (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realstarttime)) {
+        //说明预约的昨天的时间段
+        if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).subtract(1, 'd').format('YYYY-MM-DD')).unix() + teaart.realendtime)) {//表示茶艺师已下班
+          serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).subtract(1, 'd').format('YYYY-MM-DD')).unix() + teaart.realendtime - sureOrderData.timeScope.startTime
+        }
+      } else {
+        if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realendtime)) {//表示茶艺师已下班
+          serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realendtime - sureOrderData.timeScope.startTime
+        }
       }
       money = computeNumber(teaart.cost, '*', serviceTime / 3600).next('+', money).result
       realMoney = computeNumber(teaart.cost, '*', serviceTime / 3600).next('+', realMoney).result
@@ -74,7 +81,7 @@ export default function Index() {
       "begin_time": router.params.type == 2 ? sureOrderData.timeScope.startTime : '',
       "end_time": router.params.type == 2 ? sureOrderData.timeScope.endTime : ''
     }
-    if (continueOrder && continueOrder._id) {
+    if (continueOrder && continueOrder._id && router.params.way) {
       params.order_id = continueOrder._id
     }
     //获取本店铺茶艺师
@@ -162,7 +169,7 @@ export default function Index() {
         }
       }
     }
-    if (continueOrder && continueOrder._id) {
+    if (continueOrder && continueOrder._id && router.params.way) {
       params.order_id = continueOrder._id
     }
     //茶艺师
@@ -217,10 +224,65 @@ export default function Index() {
     }
 
   }
+  const combSetTeaart = (currentTeaart) => {
+    console.log(currentTeaart)
+    if (!currentTeaart || router.params.type != 2) {
+      setTeaart(currentTeaart)
+      return
+    }
+    let serviceTime = sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime
+    let isOut = false;
+    if (sureOrderData.timeScope.startTime < (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + currentTeaart.realstarttime)) {
+      //说明预约的昨天的时间段
+      if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).subtract(1, 'd').format('YYYY-MM-DD')).unix() + currentTeaart.realendtime)) {//表示茶艺师已下班
+        isOut = true
+        serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).subtract(1, 'd').format('YYYY-MM-DD')).unix() + currentTeaart.realendtime - sureOrderData.timeScope.startTime
+      }
+    } else {
+      if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + currentTeaart.realendtime)) {//表示茶艺师已下班
+        isOut = true
+        serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + currentTeaart.realendtime - sureOrderData.timeScope.startTime
+      }
+    }
+    if (router.params.way) {//来自续单
+      if (continueOrder.teaart_info && (continueOrder.teaart_info._id == currentTeaart._id)) {//之前订单有预约茶艺师
+        if (isOut) {//茶艺师服务时长不能覆盖预约时长
+          // const afterWork=
+          Taro.showToast({ title: `茶艺师${currentTeaart.time.split('-')[1]}点下班，可服务时长${serviceTime / 3600}小时（消费${computeNumber((serviceTime / 3600), '*', currentTeaart.cost).result}元）`, icon: 'none', duration: 2000 })
+        }
+      } else {
+        if (serviceTime / 3600 < 1) {
+          if (isOut) {
+            return Taro.showToast({ title: '即将下班不可预约', icon: 'none' })
+          }
+          return Taro.showToast({ title: '1小时起预约', icon: 'none' })
+        }
+        if (isOut) {//茶艺师服务时长不能覆盖预约时长
+          // const afterWork=
+          Taro.showToast({ title: `茶艺师${currentTeaart.time.split('-')[1]}点下班，可服务时长${serviceTime / 3600}小时（消费${computeNumber((serviceTime / 3600), '*', currentTeaart.cost).result}元）`, icon: 'none', duration: 2000 })
+        }
+      }
+    } else {
+      if (serviceTime / 3600 < 1) {
+        if (isOut) {
+          return Taro.showToast({ title: '即将下班不可预约', icon: 'none' })
+        }
+        return Taro.showToast({ title: '1小时起预约', icon: 'none' })
+      }
+      if (isOut) {//茶艺师服务时长不能覆盖预约时长
+        // const afterWork=
+        Taro.showToast({ title: `茶艺师${currentTeaart.time.split('-')[1]}点下班，可服务时长${serviceTime / 3600}小时（消费${computeNumber((serviceTime / 3600), '*', currentTeaart.cost).result}元）`, icon: 'none', duration: 2000 })
+      }
+    }
+
+
+
+    setTeaart(currentTeaart)
+  }
   return (
     <View className='sureOrder'>
       {visible && <ChoicePayType onOk={buy} price={realMoney} onCancel={() => { setVisible(false) }}></ChoicePayType>}
-      <View className='getTeaArt'><GetTeaArt type='choice' teaArtList={teaArtList} teaart={teaart} setTeaart={setTeaart} visible={visibleTwo} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleTwo(false)} ></GetTeaArt> </View>
+      <View className='getTeaArt'><GetTeaArt type='choice' teaArtList={teaArtList} teaart={teaart} setTeaart={combSetTeaart} visible={visibleTwo} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleTwo(false)} ></GetTeaArt> </View>
       <View className='card'>
         <View className='top'>
           <Image className='img' src={downUrl + room.room.shop_fids[0]}></Image>
