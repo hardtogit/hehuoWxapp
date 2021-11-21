@@ -4,6 +4,7 @@ import { AtIcon, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import dayjs from 'dayjs'
 import { countDistance } from '@/utils'
 import ChoicePayType from '@/components/ChoicePayType'
+import GetPackage from '@/components/GetPackage'
 import { downUrl } from '@/config'
 import {
   View,
@@ -33,7 +34,9 @@ export default function Index() {
   const [visibleTwo, setVisibletwo] = useState(false)
   const [timeScope, setTimeScope] = useState()
   const [visibleThree, setVisibleThree] = useState(false)
+  const [visibleFive, setVisibleFive] = useState(false)
   const [timeCard, setTimeCard] = useState({})
+  const [packageList, setPackageList] = useState([])
   const [current, setCurrent] = useState(0)
   const buttonPosition = Taro.getMenuButtonBoundingClientRect()
   // useDidShow(()=>{
@@ -146,11 +149,48 @@ export default function Index() {
     setTimeCard(selectTimeCard)
     setVisibleThree(true)
   }
+  const setTimeScopeFn = (currentTimeScope) => {
+    network.Fetch({
+      "obj": "user",
+      "act": "combo_room",
+      "room_id": router.params.id || 'o15979078737097969055',
+      "hour": 2,
+      "begin_time": currentTimeScope.startTime,
+      "end_time": currentTimeScope.endTime
+    }).then((data) => {
+      if (data.list.length !== 0) {
+        const result = data.list.map((item, i) => {
+          return {
+            ...item,
+            products: item.products.map((value, j) => {
+              return {
+                ...value,
+                selected: j === 0 ? true : false
+              }
+            }),
+            selected: false,
+            visible: i === 0 ? true : false
+          }
+        })
+
+
+
+        setPackageList(result)
+        setVisibleFive(true)
+      }
+      console.log(data, 'gfkasgfkasgf')
+    })
+
+
+
+    setTimeScope(currentTimeScope)
+  }
   // console.log(timeScope)
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
-      <View className='getTime'> <TimePicker room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScope} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
+      <View className='getTime'> <TimePicker room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScopeFn} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
+      <View className='getPackage'><GetPackage room={room.room} timeScope={timeScope} packageList={packageList} onPackageList={setPackageList} visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
       {visibleThree && <ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={() => { setVisibleThree(false) }}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id || 'o15937049856544559001'} onCancel={() => setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id || 'o15937049856544559001'} visible={visibleTwo} onCancel={() => setVisibletwo(false)}></GetCard></View>
@@ -253,12 +293,12 @@ export default function Index() {
         {/* <View className='bar two' onClick={()=>{Taro.setStorageSync('timeCards',room.memb_card); Taro.navigateTo({url:`/pages/home/buyTimesCard/index?shop_id=${router.params.id||'o15937049856544559001'}`})}}> */}
 
         {/* {room.room.price.type === '时段价' && */}
-          <View className='bar two' onClick={() => { setVisibleOne(false); setVisibletwo(true) }}>
-            <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
-            <View className='center'>VIP会员活动</View>
-            <View className='text'>购买优惠详情</View>
-            <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
-          </View>
+        <View className='bar two' onClick={() => { setVisibleOne(false); setVisibletwo(true) }}>
+          <Image className='left' src={require('../../../assets/img/home/item_two.png')}></Image>
+          <View className='center'>VIP会员活动</View>
+          <View className='text'>购买优惠详情</View>
+          <Image className='arrow' src={require('../../../assets/img/home/right_two.png')}></Image>
+        </View>
         {/* } */}
 
 

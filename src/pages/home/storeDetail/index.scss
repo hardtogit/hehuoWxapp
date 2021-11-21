@@ -310,24 +310,7 @@ page {
     }
   }
 }
-.getPackage {
-  .at-float-layout__container {
-    max-height: 90% !important;
-    border-radius: 16px 16px 0 0;
-    background-color: transparent !important;
-    height: auto;
-    min-height: 320px !important;
-    .layout-body {
-      max-height: 80% !important;
-      min-height: 320px !important;
-      padding: 0;
-      .layout-body__content {
-        max-height: 80% !important;
-        min-height: 320px !important;
-      }
-    }
-  }
-}
+
 .richText {
   img {
     width: 100%;

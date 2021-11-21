@@ -52,8 +52,10 @@
   }
 }
 .btns {
-  padding: 20px 0;
+  padding: 20px 0 30px 0;
   background-color: #fff;
+  display: flex;
+  align-items: center;
   .btn {
     bottom: 0;
     left: 0;
@@ -68,6 +70,11 @@
     background: #02a1fd;
     border-radius: 43px;
     margin: 0 auto;
+    &.cancel {
+      background: #def3ff;
+      border-radius: 43px;
+      color: #999;
+    }
   }
 }
 .modal {
@@ -76,7 +83,7 @@
   flex-direction: column;
 }
 .all {
-  max-height: 800px;
+  height: 800px;
   overflow-y: auto;
   position: relative;
   flex: 1;

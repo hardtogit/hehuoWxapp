@@ -6,6 +6,7 @@ import Index from "./pages/index";
 import counterStore from "./store/counter";
 import userInfoStore from "./store/userInfo"
 import listDataStore from "./store/listData"
+import goodsListStore from './store/goodsList'
 
 
 import "./app.scss";
@@ -22,12 +23,13 @@ network.apiconn.connect();
 const store = {
   counterStore,
   userInfoStore,
-  listDataStore
+  listDataStore,
+  goodsListStore
 };
 
 class App extends Component {
   config = {
-    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index","pages/phone/index","pages/home/buyTimesCard/index","pages/home/selectTimeCard/index","pages/home/selectCoupon/index","pages/home/appointment/index","pages/home/appointmentCopy/index","pages/home/buyCoupon/index","pages/home/storeDetail/index","pages/home/roomDetail/index", "pages/home/map/index","pages/home/codeList/index","pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index","pages/me/about/index","pages/me/problem/index","pages/me/apply/index","pages/me/timesCard/index","pages/me/record/index","pages/home/sureOrder/index","pages/home/success/index","pages/home/storeList/index","pages/home/continueList/index","pages/home/continueOrder/index","pages/home/continueAppointment/index","pages/home/doc/index","pages/home/web/index","pages/home/text/index","pages/home/city/index","pages/me/mine/index","pages/order/order/index","pages/col/col/index"],
+    pages: ["pages/home/index", "pages/col/index", "pages/order/index", "pages/me/index", "pages/login/index", "pages/phone/index", "pages/home/buyTimesCard/index", "pages/home/selectTimeCard/index", "pages/home/selectCoupon/index", "pages/home/appointment/index", "pages/home/appointmentCopy/index", "pages/home/buyCoupon/index", "pages/home/storeDetail/index", "pages/home/roomDetail/index", "pages/home/map/index", "pages/home/codeList/index", "pages/home/openCode/index", "pages/me/wallet/index", "pages/me/recharge/index", "pages/me/coupon/index", "pages/me/info/index", "pages/me/bindPhone/index", "pages/me/about/index", "pages/me/problem/index", "pages/me/apply/index", "pages/me/timesCard/index", "pages/me/record/index", "pages/home/sureOrder/index", "pages/home/success/index", "pages/home/storeList/index", "pages/home/continueList/index", "pages/home/continueOrder/index", "pages/home/continueAppointment/index", "pages/home/doc/index", "pages/home/web/index", "pages/home/text/index", "pages/home/city/index", "pages/home/goods/index", "pages/me/mine/index", "pages/order/order/index", "pages/col/col/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
@@ -75,7 +77,7 @@ class App extends Component {
   componentDidMount() {
     Taro.requestSubscribeMessage({
       tmplIds: ['IJpLmPETjSPBTBqPoZMmg_At0iqsFRPWYWgRHr0A86M'],
-      success (res) {
+      success(res) {
         console.log(res)
       }
     })

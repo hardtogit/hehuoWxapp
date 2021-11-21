@@ -1,11 +1,12 @@
 import Taro, { Component, useState, useRouter, useEffect, useDidShow } from "@tarojs/taro";
 import classNames from 'classnames'
 import dayjs from 'dayjs'
-import { View, Button, Text, Image, Icon } from "@tarojs/components";
+import { View, Text, Image, Icon, ScrollView } from "@tarojs/components";
 import ChoicePayType from '@/components/ChoicePayType'
 import GetTeaArt from '@/components/GetTeaArt'
 import network from '@/utils/network'
 import { computeNumber } from '@/utils'
+import GoodsContainer from './components/goodsContainer'
 import { downUrl } from '../../../config/index'
 
 import "./index.scss";
@@ -17,10 +18,12 @@ export default function Index() {
   const [visibleTwo, setVisibleTwo] = useState(false)
   const [teaart, setTeaart] = useState()
   const [teaArtList, setTeaArtList] = useState([])
+  const [goodsList, setGoodsList] = useState([])
   const router = useRouter()
   const [room, setRoom] = useState({})
   const [discount, setDiscount] = useState()
   const sureOrderData = Taro.getStorageSync('sureOrderData')
+  const surePackageOrderData = Taro.getStorageSync('surePackageOrderData')
   const continueOrder = Taro.getStorageSync('continueOrder')
   let money = 0;
   let realMoney = 0;
@@ -29,8 +32,13 @@ export default function Index() {
     money = sureOrderData.price;
     realMoney = sureOrderData.price
   } else {
-    money = room.room ? room.room.price.money : 0
-    realMoney = room.room ? room.room.price.money : 0
+    if (sureOrderData.package) {
+      money = sureOrderData.price;
+      realMoney = sureOrderData.price
+    } else {
+      money = room.room ? room.room.price.money : 0
+      realMoney = room.room ? room.room.price.money : 0
+    }
   }
   console.log(dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix())
   //有茶艺师
@@ -90,13 +98,31 @@ export default function Index() {
       // console.log(res, 'gfakjsgfjkasgfasg')
     })
   }
+  const getGooods = () => {
+    network.Fetch({
+      "obj": "user",
+      "act": "list_goods",
+      "room_id": router.params.id || 'o15956083697860679626'
+    }).then((data) => {
+      const result = data.list.map((item) => {
+        return {
+          ...item,
+          count: 0, //默认选择0件
+          selected: false,//是否选择
+        }
+
+      })
+      // initListData(result)
+      // console.log(data, '商品数据')
+    })
+  }
   useEffect(() => {
     network.Fetch({
       "obj": "user",
       "act": "single_room",
       "room_id": router.params.id || 'o15956083697860679626'
     }).then(data => setRoom(data))
-
+    // getGooods()
   }, [])
   const buy = (payment_type) => {
     Taro.showLoading({
@@ -176,6 +202,13 @@ export default function Index() {
     if (teaart) {
       params.teaartid = teaart._id
     }
+    //套餐
+    if (sureOrderData && sureOrderData.package) {
+      params.combo = {
+        combo_id: sureOrderData.package._id,
+        product: sureOrderData.package.products.filter((item) => item.selected)[0]
+      }
+    }
     network.Fetch(params).then((res) => {
       Taro.removeStorageSync('appointmentTimeScope');
       Taro.hideLoading({})
@@ -212,8 +245,14 @@ export default function Index() {
     let startTime = sureOrderData ? sureOrderData.timeScope.startTime : ''
     let endTime = sureOrderData ? sureOrderData.timeScope.endTime : ''
 
-    if (router.params.type == 2) {
+    if (router.params.type == 2) {//时段
       total = sureOrderData.price
+      if (sureOrderData.package) {
+        return Taro.showToast({ title: '套餐不可使用优惠券', icon: 'none' })
+      }
+
+
+
     } else {
       total = room.room && room.room.price.money
     }
@@ -283,21 +322,60 @@ export default function Index() {
     <View className='sureOrder'>
       {visible && <ChoicePayType onOk={buy} price={realMoney} onCancel={() => { setVisible(false) }}></ChoicePayType>}
       <View className='getTeaArt'><GetTeaArt type='choice' teaArtList={teaArtList} teaart={teaart} setTeaart={combSetTeaart} visible={visibleTwo} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleTwo(false)} ></GetTeaArt> </View>
-      <View className='card'>
+      <View className='card top'>
         <View className='top'>
           <Image className='img' src={downUrl + room.room.shop_fids[0]}></Image>
-          <View className='name'>{room.room.room_name}</View>
+          <View className='content'>
+            <View className='name'>{room.room.room_name}</View>
+            <View className='timeLabel'>服务时间:</View>
+            <View className='times'>
+              {router.params.type == 2 ? <View>
+                {dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')}-{dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}
+              </View> : <View>一口价时段</View>}
+            </View>
+          </View>
         </View>
-        <View className='item'>
+      </View>
+      <View className='card main'>
+        {/* <View className='item'>
           <View className='left'>服务时间：</View>
           <View className='right'>{router.params.type == 2 ? `${dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')} - ${dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}` : '商家一口价时段'}</View>
         </View>
         <View className='item'>
           <View className='left'>服务时长：</View>
           <View className='right'>{router.params.type == 2 ? `${parseInt((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600)}小时${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) % 3600 != 0 ? ((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '商家一口价时长'} </View>
-        </View>
+        </View> */}
+        {
+          sureOrderData.package &&
+          <View className="package">
+            <View className='name'>套餐详情</View>
+            <View className='item'>
+              <View className='left'>
+                <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
+                <View className='text'>茶点</View>
+              </View>
+              <View className='center'>{sureOrderData.package.dessert_number + sureOrderData.package.dessert_unit}</View>
+              <View className='right'>¥{sureOrderData.package.dessert_price}</View>
+            </View>
+            <View className='item'>
+              <View className='left'>
+                <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />
+                <View className='text'>果盘</View>
+              </View>
+              <View className='center'>{sureOrderData.package.fruit_number + sureOrderData.package.fruit_unit}</View>
+              <View className='right'>¥{sureOrderData.package.fruit_price}</View>
+            </View>
+          </View>
+        }
+        {
+          sureOrderData.package &&
+          <View className='item'>
+            <View className='left'>套餐优惠金额：</View>
+            <View className='right'>{sureOrderData.package.preferential}元</View>
+          </View>
+        }
         <View className='item'>
-          <View className='left'>优惠金额：</View>
+          <View className='left'>服务优惠金额：</View>
           <View className='right'>{(discount && discount.type == '优惠券') ? <Text style={{ color: 'red' }}>{discount.coupon.disc_off_price}</Text> : '-'}</View>
         </View>
         <View className='item'>
@@ -306,12 +384,12 @@ export default function Index() {
         </View>
         <View className='item'>
           <View className='left'>应付金额：</View>
-          <View className='right'>{money}</View>
+          <View className='right money'>{money}元</View>
         </View>
-        <View className='item'>
+        {/* <View className='item'>
           <View className='left'>实付金额：</View>
           <View className='right'>{realMoney}</View>
-        </View>
+        </View> */}
         {
           (room.teaarts && room.teaarts === '开启') &&
           <View className='bar three' onClick={e => {
@@ -336,7 +414,14 @@ export default function Index() {
           </View>
         </View>
         {router.params.type == 2 &&
-          <View className='cell' onClick={() => Taro.navigateTo({ url: `/pages/home/selectTimeCard/index?id=${room.room.shop_id}&startTime=${sureOrderData.timeScope.startTime}&endTime=${sureOrderData.timeScope.endTime}` })}>
+          <View className='cell' onClick={() => {
+
+            if (sureOrderData.package) {
+              return Taro.showToast({ title: '套餐不可使用次卡', icon: 'none' })
+            }
+            Taro.navigateTo({ url: `/pages/home/selectTimeCard/index?id=${room.room.shop_id}&startTime=${sureOrderData.timeScope.startTime}&endTime=${sureOrderData.timeScope.endTime}` })
+          }
+          } >
             <View className='left'>
               <Image className='icona' src={require('../../../assets/img/home/card.png')}></Image>
               次卡选择
@@ -346,15 +431,21 @@ export default function Index() {
             </View>
           </View>
         }
-
       </View>
+      {/* 为你推荐   */}
+      {
+        goodsList.length !== 0 &&
+        <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
+
+      }
+
+
       <View className='three card'>
         <View className='title'>温馨提示</View>
         <View className='text'>1.如空间无占用情况，可提前15分钟扫描进入</View>
         <View className='text'>2.空间设有自动售货机，如有需要可自行扫描购买</View>
         <View className='text'>3.请把握好使用时间，空间将在时间结束后断开电源</View>
         <View className='text'>4.空间一旦预订成功后不支持退单</View>
-
       </View>
       <View className='card two fixed'>
         <View className='cell' >

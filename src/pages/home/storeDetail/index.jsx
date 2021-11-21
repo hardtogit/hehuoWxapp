@@ -15,7 +15,6 @@ import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import classNames from 'classnames'
 import ChoicePayType from '@/components/ChoicePayType'
 import GetTeaArt from '@/components/GetTeaArt'
-import GetPackage from '@/components/GetPackage'
 import RoomItem from "../../../components/RoomItem";
 import QQMapWX from '../../../assets/js/qqmap-wx-jssdk.min.js'
 import GetCoupon from "./components/GetCoupon";
@@ -176,7 +175,6 @@ export default function Index() {
   return (
     <View className='store_detail'>
       {visibleThree && <ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={() => { setVisibleThree(false) }}></ChoicePayType>}
-      <View className='getPackage'><GetPackage visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
       <View className='getTeaArt'><GetTeaArt visible={visibleFour} shop_id={router.params.id || 'o15937049856544559001'} teaArtList={teaArtList} onCancel={() => setVisibleFour(false)} ></GetTeaArt> </View>
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.id || 'o15937049856544559001'} visible={visibleTwo} onCancel={() => setVisibletwo(false)}></GetCard></View>

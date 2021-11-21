@@ -1,0 +1,107 @@
+.goods {
+  width: 690px;
+  height: 267px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 22px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
+  .cover {
+    width: 224px;
+    height: 224px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .content {
+    padding-left: 19px;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 33px;
+      font-weight: bold;
+      color: #333333;
+    }
+    .dis {
+      font-size: 26px;
+      font-weight: 400;
+      color: #999999;
+      flex: 1;
+    }
+    .price {
+      display: flex;
+      align-items: baseline;
+      .currentPrice {
+        color: #f10909;
+        display: flex;
+        align-items: baseline;
+        .unit {
+          font-size: 33px;
+        }
+        .num {
+          font-size: 53px;
+        }
+        margin-right: 9px;
+      }
+      .originPrice {
+        font-size: 24px;
+        font-weight: 400;
+        text-decoration: line-through;
+        color: #999999;
+      }
+    }
+  }
+  .contr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    .sub {
+      width: 42px;
+      height: 42px;
+      box-sizing: border-box;
+      background: #ffffff;
+      border: 2px solid #d7d7d7;
+      border-radius: 4px;
+      font-size: 32px;
+      line-height: 32px;
+      text-align: center;
+    }
+    .count {
+      font-size: 36px;
+      font-weight: 400;
+      color: #333333;
+      min-width: 48px;
+      text-align: center;
+    }
+    .add {
+      width: 42px;
+      height: 42px;
+      background: #02a1fd;
+      border-radius: 4px;
+      font-size: 32px;
+      color: #fff;
+      box-sizing: border-box;
+      line-height: 32px;
+      text-align: center;
+    }
+  }
+  .radio {
+    width: 56px;
+    height: 56px;
+    display: block;
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    .icon {
+      display: block;
+      width: 56px;
+      height: 56px;
+    }
+  }
+}
