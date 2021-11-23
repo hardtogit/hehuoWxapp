@@ -101,6 +101,9 @@ export default function Index() {
       const regex = new RegExp('<img', 'gi');
       data.room.details_desc = data.room.details_desc && data.room.details_desc.replace(regex, '<img style="width:100%;display:block"')
       setRoom(data)
+      if (data.room.price.type === '一口价') {
+        getPackage({})
+      }
     })
   }, [])
   const goCount = () => {
@@ -149,7 +152,7 @@ export default function Index() {
     setTimeCard(selectTimeCard)
     setVisibleThree(true)
   }
-  const setTimeScopeFn = (currentTimeScope) => {
+  const getPackage = (currentTimeScope) => {
     network.Fetch({
       "obj": "user",
       "act": "combo_room",
@@ -180,9 +183,9 @@ export default function Index() {
       }
       console.log(data, 'gfkasgfkasgf')
     })
-
-
-
+  }
+  const setTimeScopeFn = (currentTimeScope) => {
+    getPackage(currentTimeScope)
     setTimeScope(currentTimeScope)
   }
   // console.log(timeScope)

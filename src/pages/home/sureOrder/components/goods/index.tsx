@@ -11,6 +11,7 @@ const Index = (props) => {
       if(copy.count< copy.number){
         copy.count=copy.count+1
         goodsListStore.updateListData(copy)
+        props.onUpdateListData(copy)
       }else{
         Taro.showToast({title:'库存不足',icon:'none'})
       }
@@ -21,6 +22,7 @@ const Index = (props) => {
         }else{
           copy.count=copy.count+1
           goodsListStore.updateListData(copy)
+          props.onUpdateListData(copy)
         }
       }else{
         Taro.showToast({title:'库存不足',icon:'none'})
@@ -32,6 +34,7 @@ const Index = (props) => {
     if(copy.count!==0){
       copy.count=copy.count-1
       goodsListStore.updateListData(copy)
+      props.onUpdateListData(copy)
     }
   }
 
@@ -39,6 +42,7 @@ const Index = (props) => {
     const copy={...entity}
       copy.selected=!copy.selected
       goodsListStore.updateListData(copy)
+      props.onUpdateListData(copy)
   }
 
 

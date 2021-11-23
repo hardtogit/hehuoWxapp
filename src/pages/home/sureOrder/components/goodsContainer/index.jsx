@@ -31,14 +31,28 @@ class Index extends Component {
   }
   componentDidMount() {
     this.getGooods()
+    this.timer = setInterval(() => {
+      const { goodsList } = this.props.goodsListStore
+      this.props.onGoodsList([...goodsList])
+    }, 2000)
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('sgfkasgfsagfksgfkkkkkk')
-    // console.log(nextProps,'faaaaaa')
-    // this.props.onGoodsList(nextProps.goodsListStore.goodsList)//只是同步
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
+
   updateListData = (entity) => {
-    this.props.goodsListStore.updateListData(entity)
+    // this.props.goodsListStore.updateListData(entity)
+    const { goodsList } = this.props.goodsListStore
+    const newGoodsList = goodsList.map((item) => {
+      if (item._id === entity._id) {
+        return {
+          ...entity
+        }
+      }
+      return item
+    })
+    console.log('his发酒疯')
+    this.props.onGoodsList([...newGoodsList])
   }
   render() {
     const { goodsList } = this.props.goodsListStore
@@ -51,28 +65,34 @@ class Index extends Component {
       }
     }, 0)
     return (
-      <View className='four card'>
-        <View className='title'>
-          <View className='left'>
-            <Image className='icon' src={require('../../../../../assets/img/home/goods_yes.png')}></Image>
-            <View className='name'>为您推荐</View>
-            <View className='subName'>
-              (商品为您节省{saveMoney}元)
+      <View>
+        {
+          goodsList.length !== 0 &&
+          <View className='four card'>
+            <View className='title'>
+              <View className='left'>
+                <Image className='icon' src={require('../../../../../assets/img/home/goods_yes.png')}></Image>
+                <View className='name'>为您推荐</View>
+                <View className='subName'>
+                  (商品为您节省{saveMoney}元)
+                </View>
+              </View>
+              <View className='right' onClick={() => Taro.navigateTo({ url: '/pages/home/goods/index' })}>
+                更多商品<Image className='icon' src={require('../../../../../assets/img/home/goods_arrow.png')}></Image>
+              </View>
             </View>
+            <ScrollView scrollX className='goodsContainer'>
+              <View className='inner'>
+                {goodsList.map((item) => {
+                  return (
+                    <Goods entity={item} onUpdateListData={this.updateListData} goodsListStore={this.props.goodsListStore} />
+                  )
+                })}
+              </View>
+            </ScrollView>
           </View>
-          <View className='right' onClick={() => Taro.navigateTo({ url: '/pages/home/goods/index' })}>
-            更多商品<Image className='icon' src={require('../../../../../assets/img/home/goods_arrow.png')}></Image>
-          </View>
-        </View>
-        <ScrollView scrollX className='goodsContainer'>
-          <View className='inner'>
-            {goodsList.map((item) => {
-              return (
-                <Goods entity={item} goodsListStore={this.props.goodsListStore} />
-              )
-            })}
-          </View>
-        </ScrollView>
+        }
+
       </View>
     )
   }

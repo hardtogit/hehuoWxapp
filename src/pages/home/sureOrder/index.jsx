@@ -62,6 +62,13 @@ export default function Index() {
       realMoney = computeNumber(realMoney, '+', teaart.cost).result
     }
   }
+  //有商品
+  const selectGoods = goodsList.filter((item) => item.selected)
+  console.log(selectGoods, '死噶分开过谁说')
+  if (selectGoods.length !== 0) {
+    const goodsPrice = selectGoods.reduce((total, current) => { return computeNumber(current.price, '*', current.count).next('+', total).result }, 0)
+    realMoney = computeNumber(realMoney, '+', goodsPrice).result
+  }
 
   if (discount) {
     if (discount.type == '优惠券') {
@@ -208,6 +215,16 @@ export default function Index() {
         combo_id: sureOrderData.package._id,
         product: sureOrderData.package.products.filter((item) => item.selected)[0]
       }
+    }
+    //有商品
+    if (selectGoods.length !== 0) {
+      params.goods = selectGoods.map((item) => {
+        return {
+          goods_id: item._id,
+          number: item.count,
+          name: item.name
+        }
+      })
     }
     network.Fetch(params).then((res) => {
       Taro.removeStorageSync('appointmentTimeScope');
@@ -433,11 +450,11 @@ export default function Index() {
         }
       </View>
       {/* 为你推荐   */}
-      {
-        goodsList.length !== 0 &&
-        <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
+      {/* {
+        goodsList.length !== 0 && */}
+      <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
 
-      }
+      {/* } */}
 
 
       <View className='three card'>

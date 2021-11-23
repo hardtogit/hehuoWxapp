@@ -1486,6 +1486,30 @@
           "pathName": "pages/home/sureOrder/index",
           "query": "id=o15956083697860679626&type=2&__key_=16374209962153",
           "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o15956083697860679626&shop_id=o15956078815923459529&__key_=163759146249510",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129209922249317&shop_id=o16366113264119119644&__key_=16375965640517",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366113927116160392&type=2&__key_=16376802027626",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=163768037874315",
+          "scene": null
         }
       ]
     }

@@ -58,6 +58,7 @@ export default function Index(props) {
       }
     }
   }
+  const seleProduct = entity.products.filter((item) => item.selected)[0]
   return (
     <View
       className='card'
@@ -72,30 +73,50 @@ export default function Index(props) {
             {entity.remark ? entity.remark : '一起开启您的美好时光'}
           </View>
           <View className='rights'>
-            <View className='left'>
+            <View className='left' style={{whiteSpace:'nowrap'}}>
               <Image className='icon' src={roomIcon} />
               <View className='text'>空间费</View>
             </View>
-            <View className='center'>
-              {entity.hour}小时
-            </View>
-            <View className='right'>
-              <Image className='icon' src={fruit} />
-              <View className='text'>果盘</View>
-            </View>
+            {entity.sub_type === '时段价' ?
+              <View className='center' style={{whiteSpace:'nowrap'}}>
+                {entity.hour}小时
+                {/* ：{computeNumber(room.price.money, '*', entity.hour).next('*', 2).result} */}
+              </View> :
+              <View className='center'  style={{whiteSpace:'nowrap'}}>
+                一口价时段
+              </View>
+            }
+
+            {
+              entity.fruit_number &&
+              <View className='right' style={{whiteSpace:'nowrap'}}>
+                <Image className='icon' src={fruit} />
+                <View className='text'>果盘</View>
+              </View>
+            }
           </View>
           <View className='rights'>
-            <View className='left'>
-              <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
-              <View className='text'>N选一</View>
-            </View>
-            <View className='center'>
-              十里岩
-            </View>
-            <View className='right'>
-              <Image className='icon' src={tea} />
-              <View className='text'>茶点</View>
-            </View>
+            {
+              entity.products.length !== 0 &&
+              <View className='left' style={{whiteSpace:'nowrap'}}>
+                <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
+                <View className='text'>{entity.products.length}选一</View>
+              </View>
+            }
+            {
+              entity.products.length !== 0 &&
+              <View className='center' style={{whiteSpace:'nowrap'}}>
+                {seleProduct.name}
+              </View>
+            }
+            {
+              entity.dessert_number &&
+              <View className='right' style={{whiteSpace:'nowrap'}}>
+                <Image className='icon' src={tea} />
+                <View className='text'>茶点</View>
+              </View>
+            }
+
           </View>
           <View className='price'>
             <View className='orginPrice'>
@@ -115,22 +136,29 @@ export default function Index(props) {
             <View className='text'>套餐详情</View>
             <View className='line'></View>
           </View>
-          <View className='item'>
-            <View className='left'>
-              <Image className='icon' src={tea} />
-              <View className='text'>茶点</View>
+          {entity.dessert_number &&
+            <View className='item'>
+              <View className='left'>
+                <Image className='icon' src={tea} />
+                <View className='text'>茶点</View>
+              </View>
+              <View className={classNames(entity.dessert_price ? 'center' : 'right')}>{entity.dessert_number + entity.dessert_unit}</View>
+              {entity.dessert_price && <View className='right'>¥{entity.dessert_price}</View>}
             </View>
-            <View className='center'>{entity.dessert_number + entity.dessert_unit}</View>
-            <View className='right'>¥{entity.dessert_price}</View>
-          </View>
-          <View className='item'>
-            <View className='left'>
-              <Image className='icon' src={fruit} />
-              <View className='text'>果盘</View>
+          }
+          {
+            entity.fruit_number &&
+            <View className='item'>
+              <View className='left'>
+                <Image className='icon' src={fruit} />
+                <View className='text'>果盘</View>
+              </View>
+              <View className={classNames(entity.fruit_price ? 'center' : 'right')}>{entity.fruit_number + entity.fruit_unit}</View>
+              {entity.fruit_price && <View className='right'>¥{entity.fruit_price}</View>}
             </View>
-            <View className='center'>{entity.fruit_number + entity.fruit_unit}</View>
-            <View className='right'>¥{entity.fruit_price}</View>
-          </View>
+          }
+
+
           <View className='title'>
             <View className='line'></View>
             <View className='text'>以下项目任意选择一份</View>
