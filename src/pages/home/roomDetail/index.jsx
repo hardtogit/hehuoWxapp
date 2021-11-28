@@ -3,6 +3,8 @@ import network from '@/utils/network'
 import { AtIcon, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import dayjs from 'dayjs'
 import { countDistance } from '@/utils'
+import arrow from '@/assets/img/me/arrow_right.png'
+import classNames from 'classnames'
 import ChoicePayType from '@/components/ChoicePayType'
 import GetPackage from '@/components/GetPackage'
 import { downUrl } from '@/config'
@@ -20,6 +22,7 @@ import GetCard from "../storeDetail/components/GetCard";
 import TimePicker from "../../../components/TimePicker";
 import "./index.scss";
 import QQMapWX from "../../../assets/js/qqmap-wx-jssdk.min";
+import { timeStamp } from "console";
 
 const qqmapsdk = new QQMapWX({
   key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
@@ -32,11 +35,12 @@ export default function Index() {
   const [visibleTimeScope, setVisibleTimeScope] = useState(false)
   const [visibleOne, setVisibleOne] = useState(false)
   const [visibleTwo, setVisibletwo] = useState(false)
-  const [timeScope, setTimeScope] = useState()
+  let [timeScope, setTimeScope] = useState()
   const [visibleThree, setVisibleThree] = useState(false)
   const [visibleFive, setVisibleFive] = useState(false)
   const [timeCard, setTimeCard] = useState({})
   const [packageList, setPackageList] = useState([])
+  const [selectPackage, setSelectPackage] = useState(null)
   const [current, setCurrent] = useState(0)
   const buttonPosition = Taro.getMenuButtonBoundingClientRect()
   // useDidShow(()=>{
@@ -60,6 +64,7 @@ export default function Index() {
     }
   })
   useEffect(() => {
+    Taro.removeStorageSync('sureOrderData')
     if (Taro.getStorageSync('myLocation')) {
       network.Fetch({
         "obj": "user",
@@ -157,30 +162,30 @@ export default function Index() {
       "obj": "user",
       "act": "combo_room",
       "room_id": router.params.id || 'o15979078737097969055',
-      "hour": 2,
+      "hour": (currentTimeScope.endTime - currentTimeScope.startTime) / 3600,
       "begin_time": currentTimeScope.startTime,
       "end_time": currentTimeScope.endTime
     }).then((data) => {
-      if (data.list.length !== 0) {
-        const result = data.list.map((item, i) => {
-          return {
-            ...item,
-            products: item.products.map((value, j) => {
-              return {
-                ...value,
-                selected: j === 0 ? true : false
-              }
-            }),
-            selected: false,
-            visible: i === 0 ? true : false
-          }
-        })
+      setTimeout(() => {
+        if (data.list.length !== 0) {
+          const result = data.list.map((item, i) => {
+            return {
+              ...item,
+              products: item.products.map((value, j) => {
+                return {
+                  ...value,
+                  selected: j === 0 ? true : false
+                }
+              }),
+              selected: false,
+              visible: false
+            }
+          })
+          setPackageList(result)
+          setVisibleFive(true)
+        }
+      }, 500)
 
-
-
-        setPackageList(result)
-        setVisibleFive(true)
-      }
       console.log(data, 'gfkasgfkasgf')
     })
   }
@@ -188,12 +193,40 @@ export default function Index() {
     getPackage(currentTimeScope)
     setTimeScope(currentTimeScope)
   }
+  //选择了套餐
+  let price = 0
+  let orginPrice = 0
+  let showTimeScope = { ...timeScope }
+  console.log(selectPackage, '选中的套餐')
+  if (selectPackage) {
+    if (room.room.price.type === '时段价') {
+      price = selectPackage.money
+      orginPrice = selectPackage.originPrice
+      showTimeScope = {
+        startTime: showTimeScope.startTime,
+        endTime: showTimeScope.startTime + 3600 * selectPackage.hour
+      }
+    } else {
+      price = selectPackage.money
+      orginPrice = selectPackage.originPrice
+    }
+  }
   // console.log(timeScope)
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
       <View className='getTime'> <TimePicker room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScopeFn} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
-      <View className='getPackage'><GetPackage room={room.room} timeScope={timeScope} packageList={packageList} onPackageList={setPackageList} visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
+      <View className='getPackage'><GetPackage onSelectPackage={(pack) => {
+        if (pack) {
+          if (room.room.price.type === '时段价') {
+            // setTimeScope({
+            //   startTime: timeScope.startTime,
+            //   endTime: timeScope.startTime + 3600 * pack.hour
+            // })
+          }
+        }
+        setSelectPackage(pack)
+      }} room={room.room} timeScope={timeScope} packageList={packageList} onPackageList={setPackageList} visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
       {visibleThree && <ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={() => { setVisibleThree(false) }}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id || 'o15937049856544559001'} onCancel={() => setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id || 'o15937049856544559001'} visible={visibleTwo} onCancel={() => setVisibletwo(false)}></GetCard></View>
@@ -322,24 +355,70 @@ export default function Index() {
             电话
           </View>
         </View>
-        <View className='price'>
-          <View className='unit'>¥</View>
-          {room.room.price.type === '时段价' ? <View className='num'>{timeScope ? room.room.price.money * 2 * (timeScope.endTime - timeScope.startTime) / 3600 : room.room.price.money * 2}</View> : <View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>}
-          <Text style={{ width: '4px' }}> </Text>
-          {room.room.price.type === '时段价' && <View className='text'>{timeScope ? `${parseInt((timeScope.endTime - timeScope.startTime) / 3600)}小时${(timeScope.endTime - timeScope.startTime) % 3600 != 0 ? ((timeScope.endTime - timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '起'}</View>}
-        </View>
+        {
+          selectPackage ?
+            <View className="packagePrice">
+              <View className='price'>
+                <View className='unit'>¥</View>
+                <View className='num'>
+                  {price}
+                </View>
+                <View style={{ color: '#999', textDecoration: 'line-through', marginLeft: '2px', fontSize: '24rpx' }}>¥{orginPrice}</View>
+                {/* {room.room.price.type === '时段价' ? <View className='num'>{timeScope ? room.room.price.money * 2 * (timeScope.endTime - timeScope.startTime) / 3600 : room.room.price.money * 2}</View> : <View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>} */}
+                {/* <Text style={{ width: '4px' }}> </Text> */}
+                {/* {room.room.price.type === '时段价' && <View className='text'>{timeScope ? `${parseInt((timeScope.endTime - timeScope.startTime) / 3600)}小时${(timeScope.endTime - timeScope.startTime) % 3600 != 0 ? ((timeScope.endTime - timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '起'}</View>} */}
+              </View>
+              <View className='trigger' onClick={() => { setVisibleFive(true) }}>
+                查看详情
+                <Image className={classNames(['icon', entity.visible && 'flip'])} src={arrow}></Image>
+              </View>
+            </View> :
+            <View className='price'>
+              <View className='unit'>¥</View>
+              {room.room.price.type === '时段价' ? <View className='num'>{timeScope ? room.room.price.money * 2 * (timeScope.endTime - timeScope.startTime) / 3600 : room.room.price.money * 2}</View> : <View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>}
+              <Text style={{ width: '4px' }}> </Text>
+              {room.room.price.type === '时段价' && <View className='text'>{timeScope ? `${parseInt((timeScope.endTime - timeScope.startTime) / 3600)}小时${(timeScope.endTime - timeScope.startTime) % 3600 != 0 ? ((timeScope.endTime - timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '起'}</View>}
+            </View>
+        }
         <View className='btn' onClick={goCount}>
           {/* {timeScope.length!==0?<View onClick={()=>Taro.navigateTo({url:`/pages/home/sureOrder/index?id=${room.room._id}&type=1`})}>去结算</View>:<View onClick={()=>Taro.navigateTo({url:`/pages/home/appointment/index?shop_id=${room.room.shop_id||'o15937049856544559001'}&tea_zone_id=${router.params.id||'o15937054688063290119'}`})}>去预约</View>} */}
           {room.room.price.type === '时段价' ?
             timeScope ? <View onClick={() => {
-              Taro.setStorageSync('sureOrderData', {
-                timeScope,
-                price: room.room.price.money * (timeScope.endTime - timeScope.startTime) / 3600 * 2
-              });
+              if (selectPackage) {
+                Taro.setStorageSync('sureOrderData', {
+                  timeScope: {
+                    startTime: timeScope.startTime,
+                    endTime: timeScope.startTime + 3600 * selectPackage.hour
+                  },
+                  price: selectPackage.money,
+                  package: selectPackage
+                });
+              } else {
+                Taro.setStorageSync('sureOrderData', {
+                  timeScope,
+                  price: room.room.price.money * (timeScope.endTime - timeScope.startTime) / 3600 * 2
+                });
+              }
               Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=2` })
             }}
             >去结算</View> : <View onClick={() => setVisibleTimeScope(true)}>去预约</View> :
-            <View onClick={() => Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=1` })}>去结算</View>
+            <View onClick={() => {
+              if (selectPackage) {
+                Taro.setStorageSync('sureOrderData', {
+                  timeScope: {
+                    startTime: 0,
+                    endTime: 0
+                  },
+                  price: selectPackage.money,
+                  package: selectPackage
+                });
+              }
+
+
+
+
+              Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=1` })
+            }}>去结算</View>
           }
         </View>
       </View>

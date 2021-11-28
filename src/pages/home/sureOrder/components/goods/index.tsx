@@ -31,10 +31,12 @@ const Index = (props) => {
   }
   const sub=()=>{
     const copy={...entity}
-    if(copy.count!==0){
+    if(copy.count!==1){
       copy.count=copy.count-1
       goodsListStore.updateListData(copy)
       props.onUpdateListData(copy)
+    }else{
+      Taro.showToast({title:'至少购买一件',icon:'none'})
     }
   }
 

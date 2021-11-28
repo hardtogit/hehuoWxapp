@@ -26,25 +26,34 @@ export default function Index() {
   const surePackageOrderData = Taro.getStorageSync('surePackageOrderData')
   const continueOrder = Taro.getStorageSync('continueOrder')
   let money = 0;
+  let showOriginMoney = 0;
   let realMoney = 0;
   console.log(router.params.type)
   if (router.params.type == 2) {
+    if (sureOrderData.package) {
+      showOriginMoney = computeNumber(sureOrderData.price, '+', sureOrderData.package.preferential).result;
+    } else {
+      showOriginMoney = sureOrderData.price
+    }
     money = sureOrderData.price;
     realMoney = sureOrderData.price
   } else {
     if (sureOrderData.package) {
-      money = sureOrderData.price;
+      showOriginMoney = computeNumber(sureOrderData.price, '+', sureOrderData.package.preferential).result;
+      money = sureOrderData.price
       realMoney = sureOrderData.price
     } else {
+      showOriginMoney = room.room ? room.room.price.money : 0
       money = room.room ? room.room.price.money : 0
       realMoney = room.room ? room.room.price.money : 0
     }
   }
-  console.log(dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix())
+  // console.log(dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix())
   //有茶艺师
+  let serviceTime = sureOrderData ? sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime : 0
+  let teaartMoney = 0
   if (teaart) {
     if (router.params.type == 2) {//时段价房间
-      let serviceTime = sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime
       if (sureOrderData.timeScope.startTime < (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realstarttime)) {
         //说明预约的昨天的时间段
         if (sureOrderData.timeScope.endTime > (dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).subtract(1, 'd').format('YYYY-MM-DD')).unix() + teaart.realendtime)) {//表示茶艺师已下班
@@ -55,18 +64,41 @@ export default function Index() {
           serviceTime = dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix() + teaart.realendtime - sureOrderData.timeScope.startTime
         }
       }
+      teaartMoney = computeNumber(teaart.cost, '*', serviceTime / 3600).result
+      showOriginMoney = computeNumber(teaart.cost, '*', serviceTime / 3600).next('+', showOriginMoney).result
+
       money = computeNumber(teaart.cost, '*', serviceTime / 3600).next('+', money).result
       realMoney = computeNumber(teaart.cost, '*', serviceTime / 3600).next('+', realMoney).result
     } else {
+      teaartMoney = teaart.cost
+      showOriginMoney = computeNumber(showOriginMoney, '+', teaart.cost).result
       money = computeNumber(money, '+', teaart.cost).result
+
       realMoney = computeNumber(realMoney, '+', teaart.cost).result
     }
   }
   //有商品
   const selectGoods = goodsList.filter((item) => item.selected)
   console.log(selectGoods, '死噶分开过谁说')
+  let discountGoods;
   if (selectGoods.length !== 0) {
+    discountGoods = selectGoods.reduce((total, current) => {
+      if (current.ori_price) {
+        return computeNumber(current.ori_price, '-', current.price).next('*', current.count).next('+', total).result
+      } else {
+        return total
+      }
+    }, 0)
+  }
+  if (selectGoods.length !== 0) {
+    const oriPrice = selectGoods.reduce((total, current) => { return computeNumber((current.ori_price || current.price), '*', current.count).next('+', total).result }, 0)
+
     const goodsPrice = selectGoods.reduce((total, current) => { return computeNumber(current.price, '*', current.count).next('+', total).result }, 0)
+    showOriginMoney = computeNumber(showOriginMoney, '+', oriPrice).result
+
+
+    money = computeNumber(money, '+', goodsPrice).result
+
     realMoney = computeNumber(realMoney, '+', goodsPrice).result
   }
 
@@ -81,6 +113,8 @@ export default function Index() {
       }
     }
   }
+  showOriginMoney = parseFloat(showOriginMoney).toFixed(2)
+
   money = parseFloat(money).toFixed(2)
   realMoney = parseFloat(realMoney).toFixed(2)
   useDidShow(() => {
@@ -267,9 +301,6 @@ export default function Index() {
       if (sureOrderData.package) {
         return Taro.showToast({ title: '套餐不可使用优惠券', icon: 'none' })
       }
-
-
-
     } else {
       total = room.room && room.room.price.money
     }
@@ -344,7 +375,7 @@ export default function Index() {
           <Image className='img' src={downUrl + room.room.shop_fids[0]}></Image>
           <View className='content'>
             <View className='name'>{room.room.room_name}</View>
-            <View className='timeLabel'>服务时间:</View>
+            <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : ''}</View>
             <View className='times'>
               {router.params.type == 2 ? <View>
                 {dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')}-{dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}
@@ -368,6 +399,14 @@ export default function Index() {
             <View className='name'>套餐详情</View>
             <View className='item'>
               <View className='left'>
+                <Image className='icon' src={require('../../../assets/img/home/room_icon.png')} />
+                <View className='text'>空间费</View>
+              </View>
+              <View className='center'>{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : `一口价时段`}</View>
+              <View className='right'>¥{router.params.type == 2 ? computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800, '*', room.room.price.money).result : room.room.price.money}</View>
+            </View>
+            <View className='item'>
+              <View className='left'>
                 <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
                 <View className='text'>茶点</View>
               </View>
@@ -382,6 +421,50 @@ export default function Index() {
               <View className='center'>{sureOrderData.package.fruit_number + sureOrderData.package.fruit_unit}</View>
               <View className='right'>¥{sureOrderData.package.fruit_price}</View>
             </View>
+            {sureOrderData.package.products.filter((item) => item.selected).map((product, i) => {
+              return (
+                <View className='item' key={i}>
+                  <View className='left'>
+                    <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />
+                    <View className='text'>{product.name}</View>
+                  </View>
+                  <View className='center'>{product.number + product.unit}</View>
+                  <View className='right'>¥{product.price}</View>
+                </View>
+              )
+            })}
+          </View>
+        }
+        {
+          teaart &&
+          <View className="package two">
+            <View className='name'>茶艺师</View>
+            <View className='item'>
+              <View className='left'>
+                <View className='text'>{teaart.name}</View>
+              </View>
+              <View className='center'>{router.params.type == 2 ? `${serviceTime / 3600}小时` : '一口价'}</View>
+              <View className='right'>¥{teaartMoney}</View>
+            </View>
+          </View>
+        }
+        {
+          goodsList.filter((item) => item.selected).length !== 0 &&
+          <View className="package two">
+            <View className='name'>商品详情</View>
+            {
+              goodsList.filter((item) => item.selected).map((goods, i) => {
+                return (
+                  <View className='item' key={i}>
+                    <View className='left'>
+                      {/* <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} /> */}
+                      <View className='text'>{goods.name}</View>
+                    </View>
+                    <View className='center'>x{goods.count}</View>
+                    <View className='right'>¥{computeNumber(goods.ori_price || goods.price, '*', goods.count).result}</View>
+                  </View>
+                )
+              })}
           </View>
         }
         {
@@ -391,22 +474,29 @@ export default function Index() {
             <View className='right'>{sureOrderData.package.preferential}元</View>
           </View>
         }
+        {
+          discountGoods &&
+          <View className='item'>
+            <View className='left'>商品优惠金额：</View>
+            <View className='right'>{discountGoods}元</View>
+          </View>
+        }
         <View className='item'>
           <View className='left'>服务优惠金额：</View>
-          <View className='right'>{(discount && discount.type == '优惠券') ? <Text style={{ color: 'red' }}>{discount.coupon.disc_off_price}</Text> : '-'}</View>
+          <View className='right'>{(discount && discount.type == '优惠券') ? <Text style={{ color: 'red' }}>{discount.coupon.disc_off_price}元</Text> : '-'}</View>
         </View>
         <View className='item'>
           <View className='left'>次卡抵用：</View>
-          <View className='right'>{(discount && discount.type == '次卡') ? <Text style={{ color: 'red' }}>{`${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time * room.room.price.money * 2}`}</Text> : '-'}</View>
+          <View className='right'>{(discount && discount.type == '次卡') ? <Text style={{ color: 'red' }}>{`${discount.coupon.memb_off_time}小时/${discount.coupon.memb_off_time * room.room.price.money * 2}元`}</Text> : '-'}</View>
         </View>
         <View className='item'>
           <View className='left'>应付金额：</View>
-          <View className='right money'>{money}元</View>
+          <View className='right'>{showOriginMoney}元</View>
         </View>
-        {/* <View className='item'>
+        <View className='item'>
           <View className='left'>实付金额：</View>
-          <View className='right'>{realMoney}</View>
-        </View> */}
+          <View className='right money'>{realMoney}元</View>
+        </View>
         {
           (room.teaarts && room.teaarts === '开启') &&
           <View className='bar three' onClick={e => {

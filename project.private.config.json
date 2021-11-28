@@ -1510,6 +1510,108 @@
           "pathName": "pages/home/sureOrder/index",
           "query": "id=o16375018655802710056&type=2&__key_=163768037874315",
           "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375019402392170429&shop_id=o15956078815923459529&__key_=16378432062044",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16378443087052",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16378458636322",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16378469471794",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375020038455719947&shop_id=o15956078815923459529&__key_=16378483255382",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16379328266264",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16379329533371",
+          "scene": null
+        },
+        {
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16379903087173",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16379914768643",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16379942858252",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16379947020531",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129209922249317&shop_id=o16366113264119119644&__key_=16379964773968",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129209922249317&shop_id=o16366113264119119644&__key_=16379964773968",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129209922249317&type=1&__key_=16380698897201",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16380707999686",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16380726983224",
+          "scene": null
         }
       ]
     }

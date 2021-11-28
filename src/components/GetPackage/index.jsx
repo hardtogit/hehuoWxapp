@@ -12,7 +12,7 @@ import "./index.scss";
 
 
 export default (props) => {
-  const { onCancel, visible, packageList, onPackageList, room, timeScope } = props
+  const { onCancel, visible, packageList, onPackageList, room, timeScope, onSelectPackage } = props
   const [coupons, setCoupons] = useState([])
   const setPackageListFn = useCallback(
     (pack) => {
@@ -25,7 +25,7 @@ export default (props) => {
         if (type === 'select') {
           return { ...item, selected: false }
         }
-        return { item }
+        return { ...item }
       })
       onPackageList(newPackageList)
     },
@@ -36,6 +36,7 @@ export default (props) => {
       return { ...item, selected: false }
     })
     onPackageList(newPackageList)
+    onSelectPackage(null)
     onCancel()
   }
   const handleOk = () => {
@@ -45,30 +46,33 @@ export default (props) => {
     if (selectedArr.length === 0) {
       Taro.showToast({ title: '请先选择套餐', icon: 'none' })
     } else {
-      //去结算
-      if (room.price.type === '时段价') {
-        Taro.setStorageSync('sureOrderData', {
-          timeScope: {
-            startTime: timeScope.startTime,
-            endTime: timeScope.startTime + 3600 * selectedArr[0].hour
-          },
-          price: selectedArr[0].money,
-          package: selectedArr[0]
-        });
-        Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room._id}&type=2` })
-      } else {
-        Taro.setStorageSync('sureOrderData', {
-          timeScope: {
-            startTime: timeScope.startTime,
-            endTime: timeScope.startTime + 3600 * selectedArr[0].hour
-          },
-          price: selectedArr[0].money,
-          package: selectedArr[0]
-        });
-        Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room._id}&type=1` })
-      }
+      onSelectPackage(selectedArr[0])
+      // //去结算
+      // if (room.price.type === '时段价') {
+      //   Taro.setStorageSync('sureOrderData', {
+      //     timeScope: {
+      //       startTime: timeScope.startTime,
+      //       endTime: timeScope.startTime + 3600 * selectedArr[0].hour
+      //     },
+      //     price: selectedArr[0].money,
+      //     package: selectedArr[0]
+      //   });
+      //   // Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room._id}&type=2` })
+      // } else {
+      //   Taro.setStorageSync('sureOrderData', {
+      //     timeScope: {
+      //       startTime: 0,
+      //       endTime: 0
+      //     },
+      //     price: selectedArr[0].money,
+      //     package: selectedArr[0]
+      //   });
+      //   // Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room._id}&type=1` })
+      //   onCancel()
+      // }
       onCancel()
     }
+
   }
   return (
     <View className='getTeaArt'>
@@ -81,7 +85,7 @@ export default (props) => {
             {
               packageList.map((item) => {
                 return (
-                  <PackageCard entity={item} onPackageListFn={setPackageListFn} room={room} timeScope={timeScope} />
+                  <PackageCard key={item._id} entity={item} onPackageListFn={setPackageListFn} room={room} timeScope={timeScope} />
                 )
               })
             }

@@ -20,7 +20,7 @@ class Index extends Component {
       const result = data.list.map((item) => {
         return {
           ...item,
-          count: 0, //默认选择0件
+          count: 1, //默认选择0件
           selected: false,//是否选择
         }
 
