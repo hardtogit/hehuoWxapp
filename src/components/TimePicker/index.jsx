@@ -68,8 +68,11 @@ export default (props) => {
         return (long2 < a && a < long1)
       }
     })
-
-    if (flag || flag2 || flag3) {
+    let flag4 = false//不是24小时营业店铺不能跨天预约
+    if ((dayjs(long2 * 1000).format('YYYY-MM-DD') !== dayjs(long1 * 1000).format('YYYY-MM-DD')) && (canTimeTwo.start_time !== '00:00' || canTimeTwo.end_time !== '23:59')) {
+      flag4 = true
+    }
+    if (flag || flag2 || flag3 || flag4) {
       return {
         pass: false,
         msg: '请选择连续时间段'
@@ -312,19 +315,20 @@ export default (props) => {
         <View className='week'>其他日期</View>
       </View> */}
           </View>
-          <ScrollView className='times' scrollY>
-            <Swiper
-              autoplay={false}
-              current={current}
-              className='swiper'
-              onChange={(e) => {
-                if (canTimeTwo.end_time != '23:59' && canTimeTwo.start_time == '00:00') {
-                  setTimeScope([])
-                }
-                setCurrent(e.detail.current)
-              }}
-            >
-              <SwiperItem>
+          {/* <ScrollView className='times' scrollY> */}
+          <Swiper
+            autoplay={false}
+            current={current}
+            className='swiper'
+            onChange={(e) => {
+              if (canTimeTwo.end_time != '23:59' && canTimeTwo.start_time == '00:00') {
+                setTimeScope([])
+              }
+              setCurrent(e.detail.current)
+            }}
+          >
+            <SwiperItem>
+              <ScrollView className='timesItem' scrollY>
                 <View className='time'>
                   {timeArr.map((time) => {
                     return (
@@ -337,8 +341,10 @@ export default (props) => {
                     )
                   })}
                 </View>
-              </SwiperItem>
-              <SwiperItem>
+              </ScrollView>
+            </SwiperItem>
+            <SwiperItem>
+              <ScrollView className='timesItem' scrollY>
                 <View className='time'>
                   {timeArrTwo.map((time) => {
                     return (
@@ -351,8 +357,10 @@ export default (props) => {
                     )
                   })}
                 </View>
-              </SwiperItem>
-              <SwiperItem>
+              </ScrollView>
+            </SwiperItem>
+            <SwiperItem>
+              <ScrollView className='timesItem' scrollY>
                 <View className='time'>
                   {timeArrThree.map((time) => {
                     return (
@@ -367,9 +375,10 @@ export default (props) => {
                     )
                   })}
                 </View>
-              </SwiperItem>
-            </Swiper>
-          </ScrollView>
+              </ScrollView>
+            </SwiperItem>
+          </Swiper>
+          {/* </ScrollView> */}
         </View>
         <View className='buttom'>
           <View className='left' onClick={onCancel}>

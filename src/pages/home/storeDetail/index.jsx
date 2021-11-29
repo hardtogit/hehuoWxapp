@@ -77,7 +77,7 @@ export default function Index() {
       getData()
     })
   }
-  const getData = () => {
+  const getTeaArt = () => {
     //获取本店铺茶艺师
     network.Fetch({
       "obj": "user",
@@ -87,7 +87,8 @@ export default function Index() {
       setTeaArtList(res.list || [])
       // console.log(res, 'gfakjsgfjkasgfasg')
     })
-
+  }
+  const getData = () => {
     if (Taro.getStorageSync('myLocation')) {
       network.Fetch({
         "obj": "user",
@@ -233,7 +234,7 @@ export default function Index() {
           })}
         </View>
         {(entity.shop.teaarts && entity.shop.teaarts === '开启') &&
-          <View className='bar three' onClick={e => { e.stopPropagation(); setVisibleFour(true) }} style={{ backgroundImage: `url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16362688122967460155001")`, backgroundSize: '100% 100%' }}>
+          <View className='bar three' onClick={e => { e.stopPropagation(); getTeaArt(); setVisibleFour(true) }} style={{ backgroundImage: `url("https://shanpaokeji.com/cgi-bin/download.pl?proj=ckj2_ga&fid=f16362688122967460155001")`, backgroundSize: '100% 100%' }}>
             <Image className='left' src={require('../../../assets/img/home/item_three.png')}></Image>
             <View className='center'>本店铺茶艺师</View>
             <View className='text'>点击查看</View>
