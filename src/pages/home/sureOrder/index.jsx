@@ -443,6 +443,7 @@ export default function Index() {
             <View className='name'>茶艺师</View>
             <View className='item'>
               <View className='left'>
+                <Image className='icon' src={require('../../../assets/img/home/item_three.png')}></Image>
                 <View className='text'>{teaart.name}</View>
               </View>
               <View className='center'>{router.params.type == 2 ? `${serviceTime / 3600}小时` : '一口价'}</View>
@@ -459,7 +460,7 @@ export default function Index() {
                 return (
                   <View className='item' key={i}>
                     <View className='left'>
-                      {/* <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} /> */}
+                      <Image className='icon' src={require('../../../assets/img/home/Leaf@2x.png')} />
                       <View className='text'>{goods.name}</View>
                     </View>
                     <View className='center'>x{goods.count}</View>
@@ -473,14 +474,14 @@ export default function Index() {
           sureOrderData.package &&
           <View className='item'>
             <View className='left'>套餐优惠金额：</View>
-            <View className='right'>{sureOrderData.package.preferential}元</View>
+            <View className='right money'>{sureOrderData.package.preferential}元</View>
           </View>
         }
         {
           discountGoods &&
           <View className='item'>
             <View className='left'>商品优惠金额：</View>
-            <View className='right'>{discountGoods}元</View>
+            <View className='right money'>{discountGoods}元</View>
           </View>
         }
         <View className='item'>
@@ -495,7 +496,7 @@ export default function Index() {
           <View className='left'>应付金额：</View>
           <View className='right'>{showOriginMoney}元</View>
         </View>
-        <View className='item'>
+        <View className='item' style={{ paddingBottom: '12px', borderBottom: '2rpx solid #eee' }}>
           <View className='left'>实付金额：</View>
           <View className='right money'>{realMoney}元</View>
         </View>

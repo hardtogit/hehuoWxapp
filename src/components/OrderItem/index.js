@@ -78,6 +78,12 @@ export default function Index(props) {
           {
             (order.combo_info && order.combo_info.combo_id) &&
             <View className='item'>
+              <View className='left'>套餐详情：</View>
+            </View>
+          }
+          {
+            (order.combo_info && order.combo_info.combo_id) &&
+            <View className='item'>
               <View className='left'>{order.combo_info.name}</View>
               <View className='right num'>{order.combo_info.money}元</View>
             </View>
@@ -94,6 +100,16 @@ export default function Index(props) {
               <View className='left'>{order.teaart_info.name}</View>
               <View className='right num'>{order.teaart_info.total_cost}元</View>
             </View>
+          }
+          {
+            order.goods_info && order.goods_info.map((goods) => {
+              return (
+                <View className='item'>
+                  <View className='left'>商品详情：</View>
+                </View>
+              )
+
+            })
           }
           {
             order.goods_info && order.goods_info.map((goods) => {

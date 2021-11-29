@@ -133,10 +133,10 @@ export default function Index(props) {
           </View>
           <View className='price'>
             <View className='orginPrice'>
-              ￥{entity.money}
+              ￥{entity.money.toFixed(2)}
             </View>
             <View className='defaultPrice'>
-              门市价：{countOriginPrice()}元
+              门市价：{countOriginPrice().toFixed(2)}元
             </View>
           </View>
         </View>
@@ -165,7 +165,7 @@ export default function Index(props) {
                   {
                     entity.dessert_remark &&
                     <View className='item'>
-                      备注：{entity.dessert_remark}
+                      {entity.dessert_remark}
                     </View>
                   }
 
@@ -186,7 +186,7 @@ export default function Index(props) {
                     entity.fruit_remark &&
                     entity.dessert_remark &&
                     <View className='item'>
-                      备注：{entity.fruit_remark}
+                      {entity.fruit_remark}
                     </View>
                   }
                 </View>
@@ -220,7 +220,7 @@ export default function Index(props) {
                     {
                       product.remark &&
                       <View className='item'>
-                        备注：{product.remark}
+                        {product.remark}
                       </View>
                     }
                   </View>
@@ -232,7 +232,7 @@ export default function Index(props) {
         </View>
       }
       <View className='trigger' onClick={handleVisible}>
-        查看详情
+        {entity.visible ? '关闭详情' : '查看详情'}
         <Image className={classNames(['icon', entity.visible && 'flip'])} src={arrow}></Image>
       </View>
 

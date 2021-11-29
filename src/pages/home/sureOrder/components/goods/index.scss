@@ -80,15 +80,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 6px;
       .sub {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
         box-sizing: border-box;
         background: #ffffff;
         border: 2px solid #d7d7d7;
         border-radius: 4px;
         font-size: 32px;
-        line-height: 32px;
+        line-height: 36px;
         text-align: center;
       }
       .count {
@@ -99,26 +100,26 @@
         text-align: center;
       }
       .add {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
         background: #02a1fd;
         border-radius: 4px;
         font-size: 32px;
         color: #fff;
         box-sizing: border-box;
-        line-height: 32px;
+        line-height: 36px;
         text-align: center;
       }
     }
     .radio {
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       display: block;
       margin: 10px auto 0 auto;
       .icon {
         display: block;
-        width: 32px;
-        height: 32px;
+        width: 42px;
+        height: 42px;
       }
     }
   }

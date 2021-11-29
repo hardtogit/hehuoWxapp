@@ -1,4 +1,4 @@
-import Taro, { Component, useRouter, useEffect, useState, useDidShow, useShareAppMessage } from "@tarojs/taro";
+import Taro, { Component, useRouter, useEffect, useState, useDidShow, useShareAppMessage, useRef } from "@tarojs/taro";
 import network from '@/utils/network'
 import { AtIcon, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import dayjs from 'dayjs'
@@ -28,6 +28,7 @@ const qqmapsdk = new QQMapWX({
 });
 export default function Index() {
   const router = useRouter()
+  const timePickerRef = useRef()
   const [room, setRoom] = useState({ room: {} })
   const [entity, setEntity] = useState({ shop: {} })
   const [visiblePhone, setVisiblePhone] = useState(false)
@@ -109,6 +110,8 @@ export default function Index() {
         getPackage({})
       }
     })
+
+    console.log(timePickerRef, '时间选择器实例')
   }, [])
   const goCount = () => {
     //TODO验证
@@ -215,14 +218,20 @@ export default function Index() {
   // `预约时间：${dayjs(timeScope.startTime*1000).format('MM月DD日 HH:ss')} - ${dayjs(timeScope.endTime*1000).format('MM月DD日 HH:ss')}`
   return (
     <View className='store_detail'>
-      <View className='getTime'> <TimePicker room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScopeFn} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
+      <View className='getTime'> <TimePicker ref={timePickerRef} room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScopeFn} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
       <View className='getPackage'>{visibleFive && <GetPackage onSelectPackage={(pack) => {
         if (pack) {
           if (room.room.price.type === '时段价') {
-            // setTimeScope({
-            //   startTime: timeScope.startTime,
-            //   endTime: timeScope.startTime + 3600 * pack.hour
-            // })
+            setTimeScope({
+              startTime: timeScope.startTime,
+              endTime: timeScope.startTime + 3600 * pack.hour
+            })
+            timePickerRef.current.hooks[0].state[1](
+              [
+                timeScope.startTime,
+                timeScope.startTime + 3600 * pack.hour
+              ]
+            )
           }
         }
         setSelectPackage(pack)
@@ -374,10 +383,27 @@ export default function Index() {
               </View>
             </View> :
             <View className='price'>
-              <View className='unit'>¥</View>
-              {room.room.price.type === '时段价' ? <View className='num'>{timeScope ? room.room.price.money * 2 * (timeScope.endTime - timeScope.startTime) / 3600 : room.room.price.money * 2}</View> : <View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>}
-              <Text style={{ width: '4px' }}> </Text>
-              {room.room.price.type === '时段价' && <View className='text'>{timeScope ? `${parseInt((timeScope.endTime - timeScope.startTime) / 3600)}小时${(timeScope.endTime - timeScope.startTime) % 3600 != 0 ? ((timeScope.endTime - timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '起'}</View>}
+              {
+                room.room.price.type === '时段价' ?
+                  <View className='price'>
+                    <View className='unit'>¥</View>
+                    {room.room.price.type === '时段价' ? <View className='num'>{timeScope ? room.room.price.money * 2 * (timeScope.endTime - timeScope.startTime) / 3600 : room.room.price.money * 2}</View> : <View className='num'>{room.room.price.money} <Text className='yuan' >元</Text> </View>}
+                    <Text style={{ width: '4px' }}> </Text>
+                    {room.room.price.type === '时段价' && <View className='text'>{timeScope ? `${parseInt((timeScope.endTime - timeScope.startTime) / 3600)}小时${(timeScope.endTime - timeScope.startTime) % 3600 != 0 ? ((timeScope.endTime - timeScope.startTime) % 3600) / 60 + '分钟' : ''}` : '起'}</View>}
+                  </View> :
+                  <View className="packagePrice">
+                    <View className='price'>
+                      <View className='unit'>¥</View>
+                      <View className='num'>
+                        {room.room.price.money} <Text className='yuan' >元</Text>
+                      </View>
+                    </View>
+                    <View className='trigger' onClick={() => { setVisibleFive(true) }}>
+                      选择套餐
+                      <Image className={classNames(['icon', entity.visible && 'flip'])} src={arrow}></Image>
+                    </View>
+                  </View>
+              }
             </View>
         }
         <View className='btn' onClick={goCount}>
