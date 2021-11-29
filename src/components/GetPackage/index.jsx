@@ -15,8 +15,8 @@ export default (props) => {
   const { onCancel, visible, packageList, onPackageList, room, timeScope, onSelectPackage } = props
   const [coupons, setCoupons] = useState([])
   const setPackageListFn = useCallback(
-    (pack) => {
-      const newPackageList = packageList.map((item, type) => {
+    (pack, type) => {
+      const newPackageList = packageList.map((item) => {
         if (item._id === pack._id) {
           return {
             ...pack

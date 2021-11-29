@@ -22,15 +22,14 @@ import GetCard from "../storeDetail/components/GetCard";
 import TimePicker from "../../../components/TimePicker";
 import "./index.scss";
 import QQMapWX from "../../../assets/js/qqmap-wx-jssdk.min";
-import { timeStamp } from "console";
 
 const qqmapsdk = new QQMapWX({
   key: 'CS7BZ-V2ZWQ-Q7455-G3YYK-5VSCZ-T4BQU'
 });
 export default function Index() {
   const router = useRouter()
-  const [room, setRoom] = useState({})
-  const [entity, setEntity] = useState({})
+  const [room, setRoom] = useState({ room: {} })
+  const [entity, setEntity] = useState({ shop: {} })
   const [visiblePhone, setVisiblePhone] = useState(false)
   const [visibleTimeScope, setVisibleTimeScope] = useState(false)
   const [visibleOne, setVisibleOne] = useState(false)
@@ -166,30 +165,31 @@ export default function Index() {
       "begin_time": currentTimeScope.startTime,
       "end_time": currentTimeScope.endTime
     }).then((data) => {
-      setTimeout(() => {
-        if (data.list.length !== 0) {
-          const result = data.list.map((item, i) => {
-            return {
-              ...item,
-              products: item.products.map((value, j) => {
-                return {
-                  ...value,
-                  selected: j === 0 ? true : false
-                }
-              }),
-              selected: false,
-              visible: false
-            }
-          })
-          setPackageList(result)
-          setVisibleFive(true)
-        }
-      }, 500)
+      // setTimeout(() => {
+      if (data.list.length !== 0) {
+        const result = data.list.map((item, i) => {
+          return {
+            ...item,
+            products: item.products.map((value, j) => {
+              return {
+                ...value,
+                selected: j === 0 ? true : false
+              }
+            }),
+            selected: false,
+            visible: false
+          }
+        })
+        setPackageList(result)
+        setVisibleFive(true)
+      }
+      // }, 500)
 
       console.log(data, 'gfkasgfkasgf')
     })
   }
   const setTimeScopeFn = (currentTimeScope) => {
+    setSelectPackage(null)
     getPackage(currentTimeScope)
     setTimeScope(currentTimeScope)
   }
@@ -216,7 +216,7 @@ export default function Index() {
   return (
     <View className='store_detail'>
       <View className='getTime'> <TimePicker room={room} shop_id={room.room.shop_id || 'o15979071007186889648'} tea_zone_id={room.room._id || 'o15979078737097969055'} visible={visibleTimeScope} setTimeScopeFn={setTimeScopeFn} onCancel={() => { setVisibleTimeScope(false) }}></TimePicker></View>
-      <View className='getPackage'><GetPackage onSelectPackage={(pack) => {
+      <View className='getPackage'>{visibleFive && <GetPackage onSelectPackage={(pack) => {
         if (pack) {
           if (room.room.price.type === '时段价') {
             // setTimeScope({
@@ -226,7 +226,7 @@ export default function Index() {
           }
         }
         setSelectPackage(pack)
-      }} room={room.room} timeScope={timeScope} packageList={packageList} onPackageList={setPackageList} visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage> </View>
+      }} room={room.room} timeScope={timeScope} packageList={packageList} onPackageList={setPackageList} visible={visibleFive} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleFive(false)} ></GetPackage>} </View>
       {visibleThree && <ChoicePayType onOk={buy} price={timeCard.memb_price} onCancel={() => { setVisibleThree(false) }}></ChoicePayType>}
       <View className='getCoupon'> <GetCoupon visible={visibleOne} shop_id={router.params.shop_id || 'o15937049856544559001'} onCancel={() => setVisibleOne(false)} /></View>
       <View className='getCard'><GetCard openPay={openPay} timeCards={entity.memb_card} shop_id={router.params.shop_id || 'o15937049856544559001'} visible={visibleTwo} onCancel={() => setVisibletwo(false)}></GetCard></View>

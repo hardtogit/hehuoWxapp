@@ -23,9 +23,9 @@ class Index extends Component {
             <Goods entity={item} goodsListStore={this.props.goodsListStore} />
           )
         })}
-        <View className='btn' onClick={() => { Taro.navigateBack() }}>
+        {/* <View className='btn' onClick={() => { Taro.navigateBack() }}>
           返回
-        </View>
+        </View> */}
       </View>
     )
   }

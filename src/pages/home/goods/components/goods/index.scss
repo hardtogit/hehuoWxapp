@@ -9,6 +9,30 @@
   display: flex;
   margin: 0 auto;
   margin-top: 20px;
+  border: 1px solid transparent;
+  &.active {
+    border: 1px solid #02a1fd;
+    background: #cfedff;
+  }
+  .coverC {
+    position: relative;
+    .flag {
+      position: absolute;
+      padding: 0 8px;
+      height: 32px;
+      background: #f30d0d;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 18px;
+      top: 18px;
+      font-size: 22px;
+      font-family: SourceHanSansCN;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  }
   .cover {
     width: 224px;
     height: 224px;

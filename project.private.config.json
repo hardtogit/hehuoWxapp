@@ -1612,6 +1612,60 @@
           "pathName": "pages/home/roomDetail/index",
           "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16380726983224",
           "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16380941699253",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16380971900302",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16380983634953",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16380989937531",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16380996993062",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16381006279871",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16381021673594",
+          "scene": null
+        },
+        {
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16381030723173",
+          "scene": null
         }
       ]
     }

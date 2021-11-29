@@ -71,8 +71,12 @@ export default function Index(props) {
       <View onClick={handleSelect} className={classNames(['main', entity.selected && 'active'])}>
         <View className='left'>
           <Image className='cover' src={downUrl + entity.combo_fid} />
+          {
+            entity.flag &&
+            <View className='flag'>{entity.flag}</View>
+          }
         </View>
-        <View className='right'>
+        <View className='right' style={{ flex: 1 }}>
           <View className='name'>{entity.name}</View>
           <View className='discription'>
             {entity.remark ? entity.remark : '一起开启您的美好时光'}
@@ -83,12 +87,12 @@ export default function Index(props) {
               <View className='text'>空间费</View>
             </View>
             {entity.sub_type === '时段价' ?
-              <View className='center' style={{ whiteSpace: 'nowrap' }}>
-                {entity.hour}小时
+              <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex' }}>
+                {entity.hour}小时<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: '2px' }}>¥{entity.hour * room.price.money * 2}</View>
                 {/* ：{computeNumber(room.price.money, '*', entity.hour).next('*', 2).result} */}
               </View> :
-              <View className='center' style={{ whiteSpace: 'nowrap' }}>
-                一口价时段
+              <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex' }}>
+                一口价<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: "2px" }}>¥{room.price.money}</View>
               </View>
             }
 
@@ -102,17 +106,21 @@ export default function Index(props) {
           </View>
           <View className='rights'>
             {
-              entity.products.length !== 0 &&
-              <View className='left' style={{ whiteSpace: 'nowrap' }}>
-                <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
-                <View className='text'>{entity.products.length}选一</View>
-              </View>
+              entity.products.length !== 0 ?
+                <View className='left' style={{ whiteSpace: 'nowrap' }}>
+                  <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
+                  <View className='text'>{entity.products.length}选一</View>
+                </View> :
+                <View className='left' style={{ whiteSpace: 'nowrap' }}>
+                </View>
             }
             {
-              entity.products.length !== 0 &&
-              <View className='center' style={{ whiteSpace: 'nowrap' }}>
-                {seleProduct.name}
-              </View>
+              entity.products.length !== 0 ?
+                <View className='center' style={{ whiteSpace: 'nowrap' }}>
+                  {seleProduct.name}
+                </View> :
+                <View className='center' style={{ whiteSpace: 'nowrap' }}>
+                </View>
             }
             {
               entity.dessert_number &&
@@ -128,7 +136,7 @@ export default function Index(props) {
               ￥{entity.money}
             </View>
             <View className='defaultPrice'>
-              原价：{countOriginPrice()}元
+              门市价：{countOriginPrice()}元
             </View>
           </View>
         </View>
@@ -198,7 +206,7 @@ export default function Index(props) {
                   <View key={product.dessert_number}>
                     <View className='item'>
                       <View className='left'>
-                        <Image className='icon' src={tea} />
+                        <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
                         <View className='text'>{product.name}</View>
                       </View>
                       <View className='center'>{product.number + product.unit}</View>

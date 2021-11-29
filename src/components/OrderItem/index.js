@@ -95,6 +95,19 @@ export default function Index(props) {
               <View className='right num'>{order.teaart_info.total_cost}元</View>
             </View>
           }
+          {
+            order.goods_info && order.goods_info.map((goods) => {
+              return (
+                <View className='item'>
+                  <View className='left'>{goods.name}</View>
+                  {/* <View className='center'>x{goods.number}</View> */}
+
+                  <View className='right num'>{goods.allprice}元</View>
+                </View>
+              )
+
+            })
+          }
 
         </View>
       }

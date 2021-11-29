@@ -89,6 +89,8 @@ export default function Index() {
         return total
       }
     }, 0)
+  } else {
+    discountGoods = null
   }
   if (selectGoods.length !== 0) {
     const oriPrice = selectGoods.reduce((total, current) => { return computeNumber((current.ori_price || current.price), '*', current.count).next('+', total).result }, 0)
@@ -425,7 +427,7 @@ export default function Index() {
               return (
                 <View className='item' key={i}>
                   <View className='left'>
-                    <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />
+                    <Image className='icon' src={require('../../../assets/img/home/Leaf@2x.png')} />
                     <View className='text'>{product.name}</View>
                   </View>
                   <View className='center'>{product.number + product.unit}</View>
@@ -482,7 +484,7 @@ export default function Index() {
           </View>
         }
         <View className='item'>
-          <View className='left'>服务优惠金额：</View>
+          <View className='left'>优惠金额：</View>
           <View className='right'>{(discount && discount.type == '优惠券') ? <Text style={{ color: 'red' }}>{discount.coupon.disc_off_price}元</Text> : '-'}</View>
         </View>
         <View className='item'>
@@ -542,7 +544,10 @@ export default function Index() {
       {/* 为你推荐   */}
       {/* {
         goodsList.length !== 0 && */}
-      <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
+      {
+        (room.goods && room.goods === '开启') &&
+        <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
+      }
 
       {/* } */}
 

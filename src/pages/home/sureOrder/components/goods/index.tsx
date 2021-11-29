@@ -1,11 +1,13 @@
 import Taro from '@tarojs/taro'
 import { View, Button, Text, Map, Input, Image, CoverView, CoverImage } from "@tarojs/components";
 import {downUrl} from '@/config/index'
+import classNames from 'classnames'
 import './index.scss'
 
 const Index = (props) => {
   const {entity,goodsListStore}=props
-  const add=()=>{
+  const add=(e)=>{
+    e.stopPropagation()
     const copy={...entity}
     if(copy.buyone==='false'){
       if(copy.count< copy.number){
@@ -29,7 +31,8 @@ const Index = (props) => {
       }
     }
   }
-  const sub=()=>{
+  const sub=(e)=>{
+    e.stopPropagation()
     const copy={...entity}
     if(copy.count!==1){
       copy.count=copy.count-1
@@ -49,10 +52,17 @@ const Index = (props) => {
 
 
   return (
-    <View className='goods'>
+    <View className={classNames(['goods',entity.selected&&'active'])} onClick={select}>
+        <View className='coverC'>
         <Image className='cover' src={`${downUrl}${entity.goods_fid}`}>
 
-        </Image>
+</Image>
+          {entity.flag&&
+            <View className='flag'>{entity.flag}</View>
+          }
+
+        </View>
+
         <View className='content'>
             <View className='title'>{entity.name}</View>
             <View className='price'>
@@ -64,18 +74,24 @@ const Index = (props) => {
               <View className='originPrice'>¥{entity.ori_price}</View>
               }
             </View>
-            <View className='contr'>
+            {entity.buyone==='true'?
+
+            <View className='radio' >
+            {entity.selected?
+            <Image className='icon' src={require('../../../../../assets/img/home/goods_c.png')} />
+            :
+            <Image className='icon' src={require('../../../../../assets/img/home/goods_noC.png')} />
+            }
+          </View>
+          :
+<View className='contr'>
               <View className='sub' onClick={sub}>-</View>
               <View className='count'>{entity.count}</View>
               <View className='add' onClick={add}>+</View>
             </View>
-            <View className='radio' onClick={select}>
-              {entity.selected?
-              <Image className='icon' src={require('../../../../../assets/img/home/goods_c.png')} />
-              :
-              <Image className='icon' src={require('../../../../../assets/img/home/goods_noC.png')} />
-              }
-            </View>
+          }
+
+
         </View>
     </View>
   )
