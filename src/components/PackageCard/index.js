@@ -84,7 +84,7 @@ export default function Index(props) {
           <View className='rights'>
             <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>
               <Image className='icon' src={roomIcon} />
-              <View className='text'>空间费</View>
+              <View className='text' style={{ width: '80rpx' }}>空间费</View>
               {entity.sub_type === '时段价' ?
                 <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex', marginLeft: '6px' }}>
                   {entity.hour}小时<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: '2px' }}>¥{entity.hour * room.price.money * 2}</View>
@@ -110,7 +110,7 @@ export default function Index(props) {
               entity.products.length !== 0 ?
                 <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>
                   <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
-                  <View className='text'>{entity.products.length}选一</View>
+                  <View className='text' style={{ width: '80rpx' }}>{entity.products.length}选一</View>
                   {
                     entity.products.length !== 0 ?
                       <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
@@ -145,7 +145,7 @@ export default function Index(props) {
             <View className='orginPrice'>
               ￥{entity.money.toFixed(2)}
             </View>
-            <View className='defaultPrice' style={{flex:1,textAlign:'center'}}>
+            <View className='defaultPrice' style={{ flex: 1, textAlign: 'center' }}>
               门市价：{countOriginPrice().toFixed(2)}元
             </View>
           </View>
