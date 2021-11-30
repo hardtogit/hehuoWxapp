@@ -377,11 +377,11 @@ export default function Index() {
           <Image className='img' src={downUrl + room.room.shop_fids[0]}></Image>
           <View className='content'>
             <View className='name'>{room.room.room_name}</View>
-            <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : ''}</View>
+            <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : '一口价时段'}</View>
             <View className='times'>
               {router.params.type == 2 ? <View>
                 {dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')}-{dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}
-              </View> : <View>一口价时段</View>}
+              </View> : <View>请提前与商家联系使用</View>}
             </View>
           </View>
         </View>
@@ -547,7 +547,7 @@ export default function Index() {
         goodsList.length !== 0 && */}
       {
         (room.goods && room.goods === '开启') &&
-        <GoodsContainer onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
+        <GoodsContainer xudan={router.params.way} onGoodsList={setGoodsList} room_id={router.params.id || 'o15956083697860679626'} />
       }
 
       {/* } */}

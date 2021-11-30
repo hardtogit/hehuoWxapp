@@ -17,14 +17,18 @@ class Index extends Component {
       "act": "list_goods",
       "room_id": this.props.room_id || 'o15956083697860679626'
     }).then((data) => {
-      const result = data.list.map((item) => {
+      let result = data.list.map((item) => {
         return {
           ...item,
           count: 1, //默认选择0件
           selected: false,//是否选择
         }
-
       })
+      if (this.props.xudan) {
+        result = result.filter((item) => {
+          return item.buyone !== 'true'
+        })
+      }
       this.props.goodsListStore.initListData(result)
       this.props.onGoodsList(result)//只是同步
     })

@@ -26,8 +26,8 @@ const Index = (props) => {
       "obj": "user",
       "act": "list_user_card_user",
       "shop_id": router.params.id || 'o15956078815923459529',
-      "begin_time": router.startTime || dayjs(dayjs().format('YYYY-MM-DD')).unix(),
-      "end_time": router.endTime || dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
+      "begin_time": router.params.startTime ? parseInt(router.params.startTime) : dayjs().unix(),
+      "end_time": router.params.endTime ? parseInt(router.params.endTime) : dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
       "page": 1,
       "limit": 100
     }).then((data) => {

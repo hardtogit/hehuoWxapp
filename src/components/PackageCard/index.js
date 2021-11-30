@@ -82,19 +82,20 @@ export default function Index(props) {
             {entity.remark ? entity.remark : '一起开启您的美好时光'}
           </View>
           <View className='rights'>
-            <View className='left' style={{ whiteSpace: 'nowrap' }}>
+            <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>
               <Image className='icon' src={roomIcon} />
               <View className='text'>空间费</View>
+              {entity.sub_type === '时段价' ?
+                <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex', marginLeft: '6px' }}>
+                  {entity.hour}小时<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: '2px' }}>¥{entity.hour * room.price.money * 2}</View>
+                  {/* ：{computeNumber(room.price.money, '*', entity.hour).next('*', 2).result} */}
+                </View> :
+                <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex', marginLeft: '6px' }}>
+                  一口价<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: "2px" }}>¥{room.price.money}</View>
+                </View>
+              }
             </View>
-            {entity.sub_type === '时段价' ?
-              <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex' }}>
-                {entity.hour}小时<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: '2px' }}>¥{entity.hour * room.price.money * 2}</View>
-                {/* ：{computeNumber(room.price.money, '*', entity.hour).next('*', 2).result} */}
-              </View> :
-              <View className='center' style={{ whiteSpace: 'nowrap', display: 'flex' }}>
-                一口价<View style={{ textDecoration: 'line-through', color: '#999', marginLeft: "2px" }}>¥{room.price.money}</View>
-              </View>
-            }
+
 
             {
               entity.fruit_number &&
@@ -107,21 +108,30 @@ export default function Index(props) {
           <View className='rights'>
             {
               entity.products.length !== 0 ?
-                <View className='left' style={{ whiteSpace: 'nowrap' }}>
+                <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>
                   <Image className='icon' src={require('../../assets/img/home/Leaf@2x.png')} />
                   <View className='text'>{entity.products.length}选一</View>
+                  {
+                    entity.products.length !== 0 ?
+                      <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
+                        {seleProduct.name}
+                      </View> :
+                      <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
+                      </View>
+                  }
                 </View> :
-                <View className='left' style={{ whiteSpace: 'nowrap' }}>
+                <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>
+                  {
+                    entity.products.length !== 0 ?
+                      <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
+                        {seleProduct.name}
+                      </View> :
+                      <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
+                      </View>
+                  }
                 </View>
             }
-            {
-              entity.products.length !== 0 ?
-                <View className='center' style={{ whiteSpace: 'nowrap' }}>
-                  {seleProduct.name}
-                </View> :
-                <View className='center' style={{ whiteSpace: 'nowrap' }}>
-                </View>
-            }
+
             {
               entity.dessert_number &&
               <View className='right' style={{ whiteSpace: 'nowrap' }}>
@@ -135,7 +145,7 @@ export default function Index(props) {
             <View className='orginPrice'>
               ￥{entity.money.toFixed(2)}
             </View>
-            <View className='defaultPrice'>
+            <View className='defaultPrice' style={{flex:1,textAlign:'center'}}>
               门市价：{countOriginPrice().toFixed(2)}元
             </View>
           </View>
