@@ -24,8 +24,8 @@ export default function Index() {
       "obj": "user",
       "act": "list_user_discounts",
       "shop_id": router.params.id || 'o15937049856544559001',
-      "begin_time": router.params.startTime ? parseInt(router.params.startTime) : dayjs().unix(),
-      "end_time": router.params.endTime ? parseInt(router.params.endTime) : dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
+      "begin_time": router.params.roomType == 2 ? parseInt(router.params.startTime) : dayjs().unix(),
+      "end_time": router.params.roomType == 2 ? parseInt(router.params.endTime) : dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).unix(),
       "page": 1,
       "limit": 20
     }).then((data) => {

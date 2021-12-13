@@ -22,7 +22,7 @@ page {
       width: 100%;
       left: 0;
       bottom: 100px;
-      border-top: 6px solid #FFDBB4;
+      border-top: 6px solid #ffdbb4;
     }
     &.main {
       margin-top: 20px;
@@ -291,6 +291,9 @@ page {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #efefef;
+    &:last-child {
+      border-bottom: none;
+    }
     .left {
       flex: 1;
       font-size: 32px;

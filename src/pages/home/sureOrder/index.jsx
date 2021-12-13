@@ -297,19 +297,18 @@ export default function Index() {
     let total = 0
     let startTime = sureOrderData ? sureOrderData.timeScope.startTime : ''
     let endTime = sureOrderData ? sureOrderData.timeScope.endTime : ''
-
+    if (sureOrderData && sureOrderData.package) {
+      return Taro.showToast({ title: '套餐不可使用优惠券', icon: 'none' })
+    }
     if (router.params.type == 2) {//时段
       total = sureOrderData.price
-      if (sureOrderData.package) {
-        return Taro.showToast({ title: '套餐不可使用优惠券', icon: 'none' })
-      }
     } else {
       total = room.room && room.room.price.money
     }
     if (discount && discount.type == '优惠券') {
-      Taro.navigateTo({ url: `/pages/home/selectCoupon/index?id=${room.room.shop_id}&couponId=${discount.coupon._id}&type=1&price=${total}&startTime=${startTime}&endTime=${endTime}` })
+      Taro.navigateTo({ url: `/pages/home/selectCoupon/index?id=${room.room.shop_id}&couponId=${discount.coupon._id}&type=1&price=${total}&startTime=${startTime}&endTime=${endTime}&roomType=${router.params.type}` })
     } else {
-      Taro.navigateTo({ url: `/pages/home/selectCoupon/index?id=${room.room.shop_id}&price=${total}&type=1&startTime=${startTime}&endTime=${endTime}` })
+      Taro.navigateTo({ url: `/pages/home/selectCoupon/index?id=${room.room.shop_id}&price=${total}&type=1&startTime=${startTime}&endTime=${endTime}&roomType=${router.params.type}` })
     }
 
   }
@@ -407,22 +406,26 @@ export default function Index() {
               <View className='center'>{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : `一口价时段`}</View>
               <View className='right'>¥{router.params.type == 2 ? computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800, '*', room.room.price.money).result : room.room.price.money}</View>
             </View>
-            <View className='item'>
-              <View className='left'>
-                <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
-                <View className='text'>茶点</View>
+            {!!sureOrderData.package.dessert_number &&
+              <View className='item'>
+                <View className='left'>
+                  <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
+                  <View className='text'>茶点</View>
+                </View>
+                <View className='center'>{sureOrderData.package.dessert_number + sureOrderData.package.dessert_unit}</View>
+                <View className='right'>¥{sureOrderData.package.dessert_price}</View>
               </View>
-              <View className='center'>{sureOrderData.package.dessert_number + sureOrderData.package.dessert_unit}</View>
-              <View className='right'>¥{sureOrderData.package.dessert_price}</View>
-            </View>
-            <View className='item'>
-              <View className='left'>
-                <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />
-                <View className='text'>果盘</View>
+            }
+            {!!sureOrderData.package.fruit_number &&
+              <View className='item'>
+                <View className='left'>
+                  <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />
+                  <View className='text'>果盘</View>
+                </View>
+                <View className='center'>{sureOrderData.package.fruit_number + sureOrderData.package.fruit_unit}</View>
+                <View className='right'>¥{sureOrderData.package.fruit_price}</View>
               </View>
-              <View className='center'>{sureOrderData.package.fruit_number + sureOrderData.package.fruit_unit}</View>
-              <View className='right'>¥{sureOrderData.package.fruit_price}</View>
-            </View>
+            }
             {sureOrderData.package.products.filter((item) => item.selected).map((product, i) => {
               return (
                 <View className='item' key={i}>
@@ -529,7 +532,7 @@ export default function Index() {
             if (sureOrderData.package) {
               return Taro.showToast({ title: '套餐不可使用次卡', icon: 'none' })
             }
-            Taro.navigateTo({ url: `/pages/home/selectTimeCard/index?id=${room.room.shop_id}&startTime=${sureOrderData.timeScope.startTime}&endTime=${sureOrderData.timeScope.endTime}` })
+            Taro.navigateTo({ url: `/pages/home/selectTimeCard/index?id=${room.room.shop_id}&startTime=${sureOrderData.timeScope.startTime}&endTime=${sureOrderData.timeScope.endTime}&roomType=${router.params.type}` })
           }
           } >
             <View className='left'>

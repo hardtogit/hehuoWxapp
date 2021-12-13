@@ -79,7 +79,7 @@ export default function Index(props) {
         <View className='right' style={{ flex: 1 }}>
           <View className='name'>{entity.name}</View>
           <View className='discription'>
-            {entity.remark ? entity.remark : '一起开启您的美好时光'}
+            {entity.remark ? entity.remark : '一起开启您的美好时光...'}
           </View>
           <View className='rights'>
             <View className='left' style={{ whiteSpace: 'nowrap', flex: 1 }}>

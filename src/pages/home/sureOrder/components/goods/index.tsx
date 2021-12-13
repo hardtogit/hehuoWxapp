@@ -45,6 +45,9 @@ const Index = (props) => {
 
   const select=()=>{
     const copy={...entity}
+    if(!copy.selected&&copy.buyone==='true'){
+      Taro.showToast({title:'限购一份',icon:'none'})
+    }
       copy.selected=!copy.selected
       goodsListStore.updateListData(copy)
       props.onUpdateListData(copy)
