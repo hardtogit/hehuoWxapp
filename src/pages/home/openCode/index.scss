@@ -42,8 +42,18 @@ page{
                    flex: 1;
                    padding-left: 20px;
                    color: #242424;
-                   font-size: 28px
+                   font-size: 28px;
+                   display: flex;
+                   align-items: center;
+                   .img{
+                       width: 42px;
+                       height: 42px;
+                       display: block;
+                       margin-left: 6px;
+                       margin-right: 20px;
+                   }
                 }
+
             }
         }
     }

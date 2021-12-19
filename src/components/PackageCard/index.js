@@ -95,15 +95,15 @@ export default function Index(props) {
                 </View>
               }
             </View>
-
-
             {
-              entity.fruit_number &&
+              entity.dessert_number &&
               <View className='right' style={{ whiteSpace: 'nowrap' }}>
-                <Image className='icon' src={fruit} />
-                <View className='text'>果盘</View>
+                <Image className='icon' src={tea} />
+                <View className='text'>茶点</View>
               </View>
             }
+
+
           </View>
           <View className='rights'>
             {
@@ -132,11 +132,12 @@ export default function Index(props) {
                 </View>
             }
 
-            {
-              entity.dessert_number &&
+      
+                        {
+              entity.fruit_number &&
               <View className='right' style={{ whiteSpace: 'nowrap' }}>
-                <Image className='icon' src={tea} />
-                <View className='text'>茶点</View>
+                <Image className='icon' src={fruit} />
+                <View className='text'>果盘</View>
               </View>
             }
 
@@ -174,7 +175,7 @@ export default function Index(props) {
                   </View>
                   {
                     entity.dessert_remark &&
-                    <View className='item'>
+                    <View className='item remark'>
                       {entity.dessert_remark}
                     </View>
                   }
@@ -195,7 +196,7 @@ export default function Index(props) {
                   {
                     entity.fruit_remark &&
                     entity.dessert_remark &&
-                    <View className='item'>
+                    <View className='item remark'>
                       {entity.fruit_remark}
                     </View>
                   }
@@ -220,7 +221,7 @@ export default function Index(props) {
                         <View className='text'>{product.name}</View>
                       </View>
                       <View className='center'>{product.number + product.unit}</View>
-                      <View className='right'>¥{product.price}
+                      <View className='right'>{product.price?`¥${product.price}`:''}
                         <View className='checkboxContainer' onClick={() => handleChoice(index)}>
                           {!product.selected && <View className={classNames(['checkbox', product.selected && 'active'])}></View>}
                           {product.selected && <Icon className='gou' type='success' color='#00A0E9' size={16}></Icon>}
@@ -229,7 +230,7 @@ export default function Index(props) {
                     </View>
                     {
                       product.remark &&
-                      <View className='item'>
+                      <View className='item remark'>
                         {product.remark}
                       </View>
                     }

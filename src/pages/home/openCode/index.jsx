@@ -42,6 +42,14 @@ export default function Index() {
       })
     })
   },[])
+  const openLocation = () => {
+    Taro.openLocation({
+      longitude: Number(order.longitude),
+      latitude: Number(order.latitude),
+      name: order.shop_name,
+      address:order.shop_address
+    })
+  }
   return (
     <View className='openCode'>
       <View className='tip'>“开门码”可转发给好友使用 </View>
@@ -58,7 +66,9 @@ export default function Index() {
           </View>
           <View className='item'>
             <View className='left'>地址</View>
-  <View className='right'>{order.shop_address}</View>
+  <View className='right'>{order.shop_address} <View className='icon' onClick={openLocation}>
+            <Image className='img' src={require('../../../assets/img/home/location_icon.png')}></Image>
+          </View></View>
           </View>
           <View className='item'>
             <View className='left'>电话</View>

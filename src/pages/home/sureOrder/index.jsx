@@ -376,7 +376,9 @@ export default function Index() {
           <Image className='img' src={downUrl + room.room.shop_fids[0]}></Image>
           <View className='content'>
             <View className='name'>{room.room.room_name}</View>
-            <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : '一口价时段'}</View>
+            <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : '一口价时段'} <View className='roomPrice'>
+                ￥{router.params.type == 2?`${computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800,'*', room.room.price.money ).result.toFixed(2) }`:room.room.price.money.toFixed(2) } 
+                </View></View>
             <View className='times'>
               {router.params.type == 2 ? <View>
                 {dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')}-{dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}
@@ -406,7 +408,7 @@ export default function Index() {
               <View className='center'>{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : `一口价时段`}</View>
               <View className='right'>¥{router.params.type == 2 ? computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800, '*', room.room.price.money).result : room.room.price.money}</View>
             </View>
-            {!!sureOrderData.package.dessert_number &&
+            {!!(sureOrderData.package&&sureOrderData.package.dessert_number) &&
               <View className='item'>
                 <View className='left'>
                   <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
@@ -416,7 +418,7 @@ export default function Index() {
                 <View className='right'>¥{sureOrderData.package.dessert_price}</View>
               </View>
             }
-            {!!sureOrderData.package.fruit_number &&
+            {!!(sureOrderData.package&&sureOrderData.package.fruit_number) &&
               <View className='item'>
                 <View className='left'>
                   <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />

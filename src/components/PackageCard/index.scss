@@ -76,6 +76,7 @@
             height: 26px;
             display: block;
             margin-right: 9px;
+            flex-shrink: 0;
           }
           .text {
             color: #02a1fd;
@@ -140,15 +141,21 @@
       font-weight: 400;
       color: #333;
       margin-top: 20px;
+      &.remark{
+        color: #999;
+        font-size: 24px !important;
+        padding-left: 42px;
+      }
       .left {
         display: flex;
         align-items: center;
         flex: 1;
         .icon {
-          width: 26px;
-          height: 26px;
+          width: 32px;
+          height: 32px;
           display: block;
-          margin-right: 9px;
+          margin-right: 12px;
+          flex-shrink: 0;
         }
       }
       .center {

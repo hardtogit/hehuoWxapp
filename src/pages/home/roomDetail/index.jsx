@@ -393,8 +393,8 @@ export default function Index() {
                   </View> :
                   <View className="packagePrice">
                     <View className='price'>
-                      <View className='unit' style={packageList.length === 0 && { fontSize: '32rpx !important' }}>¥</View>
-                      <View className='num' style={packageList.length === 0 && { fontSize: '54rpx !important' }}>
+                      <View className='unit' style={packageList.length === 0 ? { fontSize: '32rpx !important' }:{}}>¥</View>
+                      <View className='num' style={packageList.length === 0 ? { fontSize: '54rpx !important' }:{}}>
                         {room.room.price.money} <Text className='yuan' >元</Text>
                       </View>
                     </View>
