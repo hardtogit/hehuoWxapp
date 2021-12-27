@@ -1,1343 +1,1367 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/home/index",
+          "pathName": "pages/text/index",
+          "query": "",
+          "scene": null
         },
-        "game": {
-            "list": []
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
         },
-        "gamePlugin": {
-            "list": []
+        {
+          "id": -1,
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "id": -1,
-                    "name": "pages/home/index",
-                    "pathName": "pages/text/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/order/index",
-                    "pathName": "pages/order/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/order/index",
-                    "pathName": "pages/order/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/index",
-                    "pathName": "pages/me/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "me",
-                    "pathName": "pages/me/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "me",
-                    "pathName": "pages/me/wallet/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "me",
-                    "pathName": "pages/me/recharge/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "me",
-                    "pathName": "pages/login/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "s",
-                    "pathName": "pages/me/coupon/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "s",
-                    "pathName": "pages/me/info/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "s",
-                    "pathName": "pages/me/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "s",
-                    "pathName": "pages/me/bindPhone/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/info/index",
-                    "pathName": "pages/me/info/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/info/index",
-                    "pathName": "pages/me/info/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/info/index",
-                    "pathName": "pages/index/index",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/coupon/index",
-                    "pathName": "pages/me/coupon/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/index",
-                    "pathName": "pages/home/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/col/index",
-                    "pathName": "pages/col/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/login/index",
-                    "pathName": "pages/login/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/about/index",
-                    "pathName": "pages/me/about/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/recharge/index",
-                    "pathName": "pages/me/recharge/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/index",
-                    "pathName": "pages/me/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/problem/index",
-                    "pathName": "pages/me/problem/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/apply/index",
-                    "pathName": "pages/me/apply/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/problem/index",
-                    "pathName": "pages/me/problem/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/record/index",
-                    "pathName": "pages/me/record/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "id= o15922333267360680103",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id= o15922333267360680103",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/record/index",
-                    "pathName": "pages/me/record/index",
-                    "query": "id= o15922333267360680103",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id= o15922333267360680103",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id= o15922333267360680103",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/buyTimesCard/index",
-                    "pathName": "pages/home/buyTimesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/buyTimesCard/index",
-                    "pathName": "pages/home/buyTimesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/buyTimesCard/index",
-                    "pathName": "pages/home/buyTimesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/success/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/wallet/index",
-                    "pathName": "pages/me/wallet/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/record/index",
-                    "pathName": "pages/me/record/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/recharge/index",
-                    "pathName": "pages/me/recharge/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/record/index",
-                    "pathName": "pages/me/record/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/recharge/index",
-                    "pathName": "pages/me/recharge/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/order/index",
-                    "pathName": "pages/order/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/coupon/index",
-                    "pathName": "pages/me/coupon/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/index",
-                    "pathName": "pages/home/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/index",
-                    "pathName": "pages/me/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/wallet/index",
-                    "pathName": "pages/me/wallet/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/buyCoupon/index",
-                    "pathName": "pages/home/buyCoupon/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/col/index",
-                    "pathName": "pages/col/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/coupon/index",
-                    "pathName": "pages/me/coupon/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/buyTimesCard/index",
-                    "pathName": "pages/home/buyTimesCard/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=1",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=1",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/codeList/index",
-                    "pathName": "pages/home/codeList/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/codeList/index",
-                    "pathName": "pages/home/codeList/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/codeList/index",
-                    "pathName": "pages/home/codeList/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/order/index",
-                    "pathName": "pages/phone/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/phone/index",
-                    "pathName": "pages/phone/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/phone/index",
-                    "pathName": "pages/phone/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=1",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "type=2",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/success/index",
-                    "pathName": "pages/home/success/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueList/index",
-                    "pathName": "pages/home/continueList/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueOrder/index",
-                    "pathName": "pages/home/continueOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueOrder/index",
-                    "pathName": "pages/home/continueOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/index",
-                    "pathName": "pages/me/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/about/index",
-                    "pathName": "pages/me/about/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/apply/index",
-                    "pathName": "pages/me/apply/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/appointment/index",
-                    "pathName": "pages/home/appointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/selectTimeCard/index",
-                    "pathName": "pages/home/selectTimeCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/timesCard/index",
-                    "pathName": "pages/me/timesCard/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueOrder/index",
-                    "pathName": "pages/home/continueOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/storeDetail/index",
-                    "pathName": "pages/home/storeDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/login/index",
-                    "pathName": "pages/login/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/map/index",
-                    "pathName": "pages/home/map/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/coupon/index",
-                    "pathName": "pages/me/coupon/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/phone/index",
-                    "pathName": "pages/phone/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/doc/index",
-                    "pathName": "pages/home/doc/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/index",
-                    "pathName": "pages/home/index",
-                    "query": "sure",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "sure",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "sure",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/me/coupon/index",
-                    "pathName": "pages/me/coupon/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/order/index",
-                    "pathName": "pages/order/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/login/index",
-                    "pathName": "pages/login/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/home/continueAppointment/index",
-                    "pathName": "pages/home/continueAppointment/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16375018655802710056&type=2&__key_=16381864478334",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16381866288173",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16366129756488230228&type=1&__key_=16381874115031",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16381882575473",
-                    "scene": null
-                },
-                {
-                    "name": "pages/order/index",
-                    "pathName": "pages/order/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16381890193252",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16375017863912711143&type=2&__key_=16381984984093",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16366129756488230228&type=1&__key_=16381989698966",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16382035262162",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16382395850892",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16382476299514660835&type=1&__key_=16382752704685",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16382475697951710224&type=1&__key_=16382752704688",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16366129756488230228&type=1&__key_=16384485378624",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o15985256293027529716&shop_id=o15985231365872778892&__key_=16389669957813",
-                    "scene": null
-                },
-                {
-                    "name": "pages/me/about/index",
-                    "pathName": "pages/me/about/index",
-                    "query": "__key_=16394925856834",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16394932970882",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16366129756488230228&type=1&__key_=16394944299663",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "id=o16366844132721440792&__key_=16399177861683",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16399213701362",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/sureOrder/index",
-                    "pathName": "pages/home/sureOrder/index",
-                    "query": "id=o16366129756488230228&type=1&__key_=16399215336791",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/roomDetail/index",
-                    "pathName": "pages/home/roomDetail/index",
-                    "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16399217309362",
-                    "scene": null
-                },
-                {
-                    "name": "pages/home/openCode/index",
-                    "pathName": "pages/home/openCode/index",
-                    "query": "id=o16366844132721440792&__key_=16399221267383",
-                    "scene": null
-                }
-            ]
+        {
+          "id": -1,
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "me",
+          "pathName": "pages/me/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "me",
+          "pathName": "pages/me/wallet/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "me",
+          "pathName": "pages/me/recharge/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "me",
+          "pathName": "pages/login/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "s",
+          "pathName": "pages/me/coupon/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "s",
+          "pathName": "pages/me/info/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "s",
+          "pathName": "pages/me/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "s",
+          "pathName": "pages/me/bindPhone/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/me/info/index",
+          "pathName": "pages/me/info/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/me/info/index",
+          "pathName": "pages/me/info/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/me/info/index",
+          "pathName": "pages/index/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/index",
+          "pathName": "pages/home/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/col/index",
+          "pathName": "pages/col/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/about/index",
+          "pathName": "pages/me/about/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/recharge/index",
+          "pathName": "pages/me/recharge/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/problem/index",
+          "pathName": "pages/me/problem/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/apply/index",
+          "pathName": "pages/me/apply/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/problem/index",
+          "pathName": "pages/me/problem/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/record/index",
+          "pathName": "pages/me/record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "id= o15922333267360680103",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id= o15922333267360680103",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/record/index",
+          "pathName": "pages/me/record/index",
+          "query": "id= o15922333267360680103",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id= o15922333267360680103",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id= o15922333267360680103",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/buyTimesCard/index",
+          "pathName": "pages/home/buyTimesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/buyTimesCard/index",
+          "pathName": "pages/home/buyTimesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/buyTimesCard/index",
+          "pathName": "pages/home/buyTimesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/success/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/wallet/index",
+          "pathName": "pages/me/wallet/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/record/index",
+          "pathName": "pages/me/record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/recharge/index",
+          "pathName": "pages/me/recharge/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/record/index",
+          "pathName": "pages/me/record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/recharge/index",
+          "pathName": "pages/me/recharge/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/index",
+          "pathName": "pages/home/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/wallet/index",
+          "pathName": "pages/me/wallet/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/buyCoupon/index",
+          "pathName": "pages/home/buyCoupon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/col/index",
+          "pathName": "pages/col/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/buyTimesCard/index",
+          "pathName": "pages/home/buyTimesCard/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=1",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=1",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/codeList/index",
+          "pathName": "pages/home/codeList/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/codeList/index",
+          "pathName": "pages/home/codeList/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/codeList/index",
+          "pathName": "pages/home/codeList/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/order/index",
+          "pathName": "pages/phone/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/phone/index",
+          "pathName": "pages/phone/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/phone/index",
+          "pathName": "pages/phone/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=1",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "type=2",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/success/index",
+          "pathName": "pages/home/success/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueList/index",
+          "pathName": "pages/home/continueList/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueOrder/index",
+          "pathName": "pages/home/continueOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueOrder/index",
+          "pathName": "pages/home/continueOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/about/index",
+          "pathName": "pages/me/about/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/apply/index",
+          "pathName": "pages/me/apply/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/appointment/index",
+          "pathName": "pages/home/appointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/selectTimeCard/index",
+          "pathName": "pages/home/selectTimeCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/timesCard/index",
+          "pathName": "pages/me/timesCard/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueOrder/index",
+          "pathName": "pages/home/continueOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/storeDetail/index",
+          "pathName": "pages/home/storeDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/map/index",
+          "pathName": "pages/home/map/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/phone/index",
+          "pathName": "pages/phone/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/doc/index",
+          "pathName": "pages/home/doc/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/index",
+          "pathName": "pages/home/index",
+          "query": "sure",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "sure",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "sure",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/me/coupon/index",
+          "pathName": "pages/me/coupon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/home/continueAppointment/index",
+          "pathName": "pages/home/continueAppointment/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375018655802710056&type=2&__key_=16381864478334",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16381866288173",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16381874115031",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16381882575473",
+          "scene": null
+        },
+        {
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16375018655802710056&shop_id=o15956078815923459529&__key_=16381890193252",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16375017863912711143&type=2&__key_=16381984984093",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16381989698966",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16382035262162",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16382395850892",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16382476299514660835&type=1&__key_=16382752704685",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16382475697951710224&type=1&__key_=16382752704688",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16384485378624",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o15985256293027529716&shop_id=o15985231365872778892&__key_=16389669957813",
+          "scene": null
+        },
+        {
+          "name": "pages/me/about/index",
+          "pathName": "pages/me/about/index",
+          "query": "__key_=16394925856834",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16394932970882",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16394944299663",
+          "scene": null
+        },
+        {
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "id=o16366844132721440792&__key_=16399177861683",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16399213701362",
+          "scene": null
+        },
+        {
+          "name": "pages/home/sureOrder/index",
+          "pathName": "pages/home/sureOrder/index",
+          "query": "id=o16366129756488230228&type=1&__key_=16399215336791",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16399217309362",
+          "scene": null
+        },
+        {
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "id=o16366844132721440792&__key_=16399221267383",
+          "scene": null
+        },
+        {
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "id=o16366844132721440792&__key_=16400033305352",
+          "scene": null
+        },
+        {
+          "name": "pages/home/roomDetail/index",
+          "pathName": "pages/home/roomDetail/index",
+          "query": "id=o16366129756488230228&shop_id=o16366113264119119644&__key_=16400085682252",
+          "scene": null
+        },
+        {
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "id=o16366844132721440792&__key_=16400092941522",
+          "scene": null
+        },
+        {
+          "name": "pages/home/openCode/index",
+          "pathName": "pages/home/openCode/index",
+          "query": "id=o16366844132721440792&__key_=16400126987832",
+          "scene": null
         }
+      ]
     }
+  }
 }

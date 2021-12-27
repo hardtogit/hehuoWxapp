@@ -1,3 +1,7 @@
+@import "~taro-ui/dist/style/components/float-layout.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/action-sheet.scss";
 page{
     background-color: #00A0E9
 }
@@ -29,11 +33,21 @@ page{
         .bottom{
             background-color: #F5F5F5;
             .item{
-                height: 80px;
+                // height: 80px;
+                padding: 20px 0;
                 display: flex;
                 align-items: center;
+                &.address{
+                  // align-items: ;
+                  align-items: flex-start;
+
+                  .left{
+                    position: relative;
+                    // top:14px
+                  }
+                }
                 .left{
-                    width: 110px;
+                    width: 140px;
                     color: #8D8D8D;
                     padding-left: 32px;
                     font-size: 24px
@@ -45,12 +59,19 @@ page{
                    font-size: 28px;
                    display: flex;
                    align-items: center;
+                   text-align: justify;
                    .img{
-                       width: 42px;
-                       height: 42px;
+                       width: 64px;
+                       height: 64px;
                        display: block;
-                       margin-left: 6px;
-                       margin-right: 20px;
+                       margin-left: 32px;
+                       margin-right: 32px;
+                   }
+                   .phone{
+                     width: 28px;
+                     height: 28px;
+                     display: block;
+                     margin-left: 20px;
                    }
                 }
 

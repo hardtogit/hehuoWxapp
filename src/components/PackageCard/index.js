@@ -113,7 +113,7 @@ export default function Index(props) {
                   <View className='text' style={{ width: '80rpx' }}>{entity.products.length}选一</View>
                   {
                     entity.products.length !== 0 ?
-                      <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
+                      <View className='center' style={{ whiteSpace:'pre-wrap', marginLeft: '6px', }}>
                         {seleProduct.name}
                       </View> :
                       <View className='center' style={{ whiteSpace: 'nowrap', marginLeft: '6px' }}>
@@ -132,7 +132,7 @@ export default function Index(props) {
                 </View>
             }
 
-      
+
                         {
               entity.fruit_number &&
               <View className='right' style={{ whiteSpace: 'nowrap' }}>
