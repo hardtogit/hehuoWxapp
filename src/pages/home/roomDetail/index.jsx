@@ -393,8 +393,8 @@ export default function Index() {
                   </View> :
                   <View className="packagePrice">
                     <View className='price'>
-                      <View className='unit' style={packageList.length === 0 ? { fontSize: '32rpx !important' }:{}}>¥</View>
-                      <View className='num' style={packageList.length === 0 ? { fontSize: '54rpx !important' }:{}}>
+                      <View className='unit' style={packageList.length === 0 ? { fontSize: '32rpx !important' } : {}}>¥</View>
+                      <View className='num' style={packageList.length === 0 ? { fontSize: '54rpx !important' } : {}}>
                         {room.room.price.money} <Text className='yuan' >元</Text>
                       </View>
                     </View>
@@ -427,6 +427,7 @@ export default function Index() {
                   price: room.room.price.money * (timeScope.endTime - timeScope.startTime) / 3600 * 2
                 });
               }
+
               Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=2` })
             }}
             >去结算</View> : <View onClick={() => setVisibleTimeScope(true)}>去预约</View> :
@@ -441,10 +442,6 @@ export default function Index() {
                   package: selectPackage
                 });
               }
-
-
-
-
               Taro.navigateTo({ url: `/pages/home/sureOrder/index?id=${room.room._id}&type=1` })
             }}>去结算</View>
           }

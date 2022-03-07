@@ -63,7 +63,41 @@ class Index extends Component {
     //     }
     //   )
     // }
+    this.autoLogin()
     this.initData()
+  }
+  autoLogin = () => {
+    Taro.login({
+      success: (res) => {
+        console.log(res)
+        network.Fetch({
+          obj: 'loginInfo',
+          act: 'get',
+          code: res.code
+        }).then((data) => {
+          network.Fetch({
+            act: "login",
+            obj: "person",
+            credential_data: {
+              access_token: data.response.session_key,
+              ctype: "user",
+              level: "user",
+              openid: data.response.openid,
+              sess: "",
+              xtype: "user",
+            },
+            io: "i",
+            perf: 1,
+            sdk_version_webapp: "126",
+            verbose: 1
+          }).then((result) => {
+            if (result.user_info.phone) {
+              Taro.setStorageSync('sess2', result.sess)
+            }
+          })
+        })
+      }
+    })
   }
   initData = () => {
     const $this = this
@@ -343,7 +377,7 @@ class Index extends Component {
             {teaList.map((tea) => {
               return (
                 <View className='teaContainer'>
-                  <TeaCard tea={tea} key={tea._id} />
+                  <TeaCard from='home' tea={tea} key={tea._id} />
                 </View>
               )
             })

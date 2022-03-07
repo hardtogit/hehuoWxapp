@@ -22,6 +22,7 @@ export default function Index() {
   const router = useRouter()
   const [room, setRoom] = useState({})
   const [discount, setDiscount] = useState()
+  const [orderid, setOrderid] = useState()
   const sureOrderData = Taro.getStorageSync('sureOrderData')
   const surePackageOrderData = Taro.getStorageSync('surePackageOrderData')
   const continueOrder = Taro.getStorageSync('continueOrder')
@@ -167,7 +168,7 @@ export default function Index() {
     }).then(data => setRoom(data))
     // getGooods()
   }, [])
-  const buy = (payment_type) => {
+  const buy = () => {
     Taro.showLoading({
       title: '处理中，请稍后...',
       mask: true
@@ -177,7 +178,7 @@ export default function Index() {
       if (discount) {
         params = {
           "obj": "user",
-          "act": "generate_order",
+          "act": "create_order",
           order_type: router.params.way ? '续单' : '首次',
           "room_id": router.params.id || 'o15951435145368449687',
           "service_time": {
@@ -190,13 +191,12 @@ export default function Index() {
             "type": discount.type,
             "discount_id": discount.coupon._id
           },
-          "payment_amount": realMoney,
-          "payment_type": payment_type,
+          "payment_amount": realMoney
         }
       } else {
         params = {
           "obj": "user",
-          "act": "generate_order",
+          "act": "create_order",
           order_type: router.params.way ? '续单' : '首次',
           "room_id": router.params.id || 'o15951435145368449687',
           "service_time": {
@@ -206,14 +206,13 @@ export default function Index() {
           original_amount: money,
           reservation_data: dayjs(dayjs(sureOrderData.timeScope.startTime * 1000).format('YYYY-MM-DD')).unix(),
           "payment_amount": realMoney,
-          "payment_type": payment_type
         }
       }
     } else {
       if (discount) {
         params = {
           "obj": "user",
-          "act": "generate_order",
+          "act": "create_order",
           order_type: '首次',
           "room_id": router.params.id || 'o15942139490885128974',
           original_amount: money,
@@ -222,18 +221,16 @@ export default function Index() {
             "discount_id": discount.coupon._id
           },
           "payment_amount": realMoney,
-          "payment_type": payment_type,
           "reservation_data": dayjs(dayjs().format('YYYY-MM-DD')).unix()
         }
       } else {
         params = {
           "obj": "user",
-          "act": "generate_order",
+          "act": "create_order",
           order_type: '首次',
           "room_id": router.params.id || 'o15942139490885128974',
           original_amount: money,
           "payment_amount": realMoney,
-          "payment_type": payment_type,
           "reservation_data": dayjs(dayjs().format('YYYY-MM-DD')).unix()
         }
       }
@@ -263,6 +260,36 @@ export default function Index() {
       })
     }
     network.Fetch(params).then((res) => {
+      // Taro.removeStorageSync('appointmentTimeScope');
+      Taro.hideLoading({})
+      setVisible(true)
+      setOrderid(res.orderid)
+      // res.order._id
+    })
+  }
+  const createOrder = () => {
+    if (!checked) {
+      Taro.showToast({
+        title: '请先阅读并同意协议',
+        icon: 'none'
+      })
+      return
+    }
+    //消息订阅
+    Taro.requestSubscribeMessage({
+      tmplIds: ['CIbGjlp7meiDCNmBwhv3VZwqbzuJKkao_Jm8f4XejZo', '8SmkQlL7wFnkdXsb0YYenenRNfpSD4ihEZR8C9YfidQ', 'N0WWpU3oROpHu4EY4Mgw2Da3EfAo7TTrYHqFp3t3__A'],
+      success: function () {
+        buy()
+      }
+    })
+  }
+  const payment = (payment_type) => {
+    network.Fetch({
+      "obj": "user",
+      "act": "pay_order",
+      payment_type: payment_type,
+      orderid: orderid
+    }).then((res) => {
       Taro.removeStorageSync('appointmentTimeScope');
       Taro.hideLoading({})
       setVisible(false)
@@ -283,16 +310,7 @@ export default function Index() {
       }
     })
   }
-  const createOrder = () => {
-    if (!checked) {
-      Taro.showToast({
-        title: '请先阅读并同意协议',
-        icon: 'none'
-      })
-      return
-    }
-    setVisible(true)
-  }
+
   const goOne = () => {
     let total = 0
     let startTime = sureOrderData ? sureOrderData.timeScope.startTime : ''
@@ -369,7 +387,7 @@ export default function Index() {
   }
   return (
     <View className='sureOrder'>
-      {visible && <ChoicePayType onOk={buy} price={realMoney} onCancel={() => { setVisible(false) }}></ChoicePayType>}
+      {visible && <ChoicePayType onOk={payment} price={realMoney} onCancel={() => { setVisible(false) }}></ChoicePayType>}
       <View className='getTeaArt'><GetTeaArt type='choice' teaArtList={teaArtList} teaart={teaart} setTeaart={combSetTeaart} visible={visibleTwo} shop_id={router.params.id || 'o15937049856544559001'} onCancel={() => setVisibleTwo(false)} ></GetTeaArt> </View>
       <View className='card top'>
         <View className='top'>
@@ -377,8 +395,8 @@ export default function Index() {
           <View className='content'>
             <View className='name'>{room.room.room_name}</View>
             <View className='timeLabel'>服务时间：{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : '一口价时段'} <View className='roomPrice'>
-                ￥{router.params.type == 2?`${computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800,'*', room.room.price.money ).result.toFixed(2) }`:room.room.price.money.toFixed(2) } 
-                </View></View>
+              ￥{router.params.type == 2 ? `${computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800, '*', room.room.price.money).result.toFixed(2)}` : room.room.price.money.toFixed(2)}
+            </View></View>
             <View className='times'>
               {router.params.type == 2 ? <View>
                 {dayjs(sureOrderData.timeScope.startTime * 1000).format('MM月DD日 HH:mm')}-{dayjs(sureOrderData.timeScope.endTime * 1000).format('MM月DD日 HH:mm')}
@@ -408,7 +426,7 @@ export default function Index() {
               <View className='center'>{router.params.type == 2 ? `${(sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 3600}小时` : `一口价时段`}</View>
               <View className='right'>¥{router.params.type == 2 ? computeNumber((sureOrderData.timeScope.endTime - sureOrderData.timeScope.startTime) / 1800, '*', room.room.price.money).result : room.room.price.money}</View>
             </View>
-            {!!(sureOrderData.package&&sureOrderData.package.dessert_number) &&
+            {!!(sureOrderData.package && sureOrderData.package.dessert_number) &&
               <View className='item'>
                 <View className='left'>
                   <Image className='icon' src={require('../../../assets/img/home/tea_icon.png')} />
@@ -418,7 +436,7 @@ export default function Index() {
                 <View className='right'>¥{sureOrderData.package.dessert_price}</View>
               </View>
             }
-            {!!(sureOrderData.package&&sureOrderData.package.fruit_number) &&
+            {!!(sureOrderData.package && sureOrderData.package.fruit_number) &&
               <View className='item'>
                 <View className='left'>
                   <Image className='icon' src={require('../../../assets/img/home/fruit_icon.png')} />

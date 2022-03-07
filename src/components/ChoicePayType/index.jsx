@@ -11,9 +11,9 @@ export default function Index(props){
   const [type,setType]=useState('payment')
   const {onOk,price,onCancel}=props
   useEffect(()=>{
-    Taro.showLoading({
-      title:'加载中...'
-    })
+    // Taro.showLoading({
+    //   title:'加载中...'
+    // })
     network.Fetch({
       "obj":"user",
       "act":"details"
@@ -26,7 +26,7 @@ export default function Index(props){
   },[])
   // console.log(userInfo,'aa')
   return(
-    <AtModal isOpened onClose={onCancel}>
+    <AtModal isOpened onClose={onCancel} closeOnClickOverlay={false}>
     {/* <AtModalHeader>选择支付方式</AtModalHeader> */}
     <AtModalContent>
     <View className='title'>选择支付方式</View>

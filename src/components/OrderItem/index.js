@@ -1,7 +1,9 @@
 import Taro, { useState } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import classNames from 'classnames'
+import ChoicePayType from '@/components/ChoicePayType'
 import dayjs from "dayjs";
+import network from '@/utils/network'
 import arrow from '@/assets/img/home/arrow_down_icon.png'
 import { downUrl } from '../../config'
 import "./index.scss";
@@ -9,7 +11,45 @@ import "./index.scss";
 export default function Index(props) {
   const { order, type } = props;
   const [visible, setVisible] = useState(false)
+  const [paymentVisible,setPaymentVisible]=useState(false)
   const status = 1;
+  const payment = (payment_type) => {
+       Taro.showLoading({
+      title:'加载中...'
+    })
+    network.Fetch({
+      "obj": "user",
+      "act": "pay_order",
+      payment_type: payment_type,
+      orderid: order._id
+    }).then((res) => {
+      Taro.hideLoading({})
+      setVisible(false)
+      if (payment_type === 'balance') {
+        Taro.showToast({
+          title: '支付成功',
+          icon: 'none'
+        })
+        Taro.setStorageSync('currentOrder', res.order)
+        Taro.redirectTo({ url: `/pages/home/success/index?id=${res.order._id}` })
+      } else {
+        Taro.requestPayment({
+          ...res.pay_info,
+          success: () => {
+            Taro.showToast({
+              title: '支付成功',
+              icon: 'none'
+            })
+            Taro.setStorageSync('currentOrder', res.order)
+            Taro.redirectTo({ url: `/pages/home/success/index?id=${res.order._id}` })
+          },
+          fail: () => {
+
+          }
+        })
+      }
+    })
+  }
   return (
     <View className='order_item'>
       <View className='top at-row'>
@@ -140,15 +180,16 @@ export default function Index(props) {
         </View>
         <View className='right'>
           {order.status == "待支付" && <View className='btn' onClick={() => {
-            Taro.requestPayment({
-              ...order.pay_info,
-              success: function () {
-                Taro.showToast({
-                  title: '支付成功',
-                  icon: 'none'
-                })
-              }
-            })
+            // Taro.requestPayment({
+            //   ...order.pay_info,
+            //   success: function () {
+            //     Taro.showToast({
+            //       title: '支付成功',
+            //       icon: 'none'
+            //     })
+            //   }
+            // })
+            setPaymentVisible(true)
           }}
           >去支付</View>}
           {(type == 'openCode') && (
@@ -174,7 +215,7 @@ export default function Index(props) {
               我要续单
             </View>
           }
-
+  {paymentVisible && <ChoicePayType onOk={payment} price={order.payment_amount} onCancel={() => {  setPaymentVisible(false)}}></ChoicePayType>}
           {/* {order.status == "已使用" && <View className='btn'>续费</View>} */}
           {/* {status == 3 && <View className='btn'>删除订单</View>} */}
         </View>

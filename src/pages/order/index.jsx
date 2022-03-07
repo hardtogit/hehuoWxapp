@@ -19,7 +19,7 @@ class Index extends Component {
     }
   }
   componentDidShow() {
-    this.listRef.initLoad()
+    this.listRef&&this.listRef.initLoad()
   }
   componentDidMount() {
     this.listRef.initLoad()

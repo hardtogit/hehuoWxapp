@@ -18,6 +18,12 @@ class Index extends Component{
       tabIndex:1
     }
   }
+  componentDidShow() {
+    this.listRef&&this.listRef.initLoad()
+  }
+  componentDidMount(){
+    this.listRef.initLoad()
+  }
   onReachBottom(){
     this.listRef.getData()
   }
@@ -43,7 +49,7 @@ class Index extends Component{
           </View>
           <ListTemplate
             ref={(listRef)=>{this.listRef=listRef}}
-            preLoad
+            preLoad={false}
             listDataKey='cardList'
             fetchFn={(params) =>
             network.Fetch({

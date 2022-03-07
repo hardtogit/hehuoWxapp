@@ -7,7 +7,22 @@ import './index.scss'
 export default function Index(props){
   const {tea,from}=props
 return(
-   <View className='card' onClick={()=>Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}&from=${from}`})}>
+   <View className='card' onClick={
+      ()=>{
+        if(from==='home'){
+          //消息订阅
+          Taro.requestSubscribeMessage({
+            tmplIds: ['RBdyC_9KLY9ZMKpg_yYPWmUodHJjnMZhIAjQ0ltUozk','eGsZZUniSWVUTEajl0Pb4jw4g-0clu0w34hZp0m_PdI'],
+            success: function () {
+              Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}&from=${from}`})
+            }
+          })
+          return
+        }
+
+        Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}&from=${from}`})
+      }}
+   >
      <Image className='cover' src={downUrl+tea.home_fid}></Image>
      {tea.buyinfo&&<View className='buyinfo'>{tea.buyinfo}</View>}
      <View className='coverBg'>
