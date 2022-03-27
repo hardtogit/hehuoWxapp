@@ -25,7 +25,7 @@ export default function Index(props) {
     }).then((res) => {
       Taro.hideLoading({})
       setVisible(false)
-      if (payment_type === 'balance') {
+      if (payment_type === 'balance'||order.payment_amount==0) {
         Taro.showToast({
           title: '支付成功',
           icon: 'none'

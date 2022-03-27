@@ -1366,6 +1366,12 @@
           "pathName": "pages/home/sureOrder/index",
           "query": "id=o16375017863912711143&type=2&__key_=16463951973213",
           "scene": null
+        },
+        {
+          "name": "pages/order/index",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

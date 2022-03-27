@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider } from "@tarojs/mobx";
 import network from './utils/http';
+import { checkUpdate } from './utils'
 import Index from "./pages/index";
 
 import counterStore from "./store/counter";
@@ -87,7 +88,9 @@ class App extends Component {
   //   console.log('重连了')
   // }
 
-  componentDidShow() { }
+  componentDidShow() {
+    checkUpdate()
+  }
 
   componentDidHide() { }
 

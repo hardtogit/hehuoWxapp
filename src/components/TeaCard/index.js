@@ -12,7 +12,7 @@ return(
         if(from==='home'){
           //消息订阅
           Taro.requestSubscribeMessage({
-            tmplIds: ['RBdyC_9KLY9ZMKpg_yYPWmUodHJjnMZhIAjQ0ltUozk','eGsZZUniSWVUTEajl0Pb4jw4g-0clu0w34hZp0m_PdI'],
+            tmplIds: ['RBdyC_9KLY9ZMKpg_yYPWmUodHJjnMZhIAjQ0ltUozk','7jChiILJld9TktkM9FbtkLmDKIQmdvhHeh5LFcyz12g','eGsZZUniSWVUTEajl0Pb4jw4g-0clu0w34hZp0m_PdI'],
             success: function () {
               Taro.navigateTo({url:`/pages/home/storeDetail/index?id=${tea._id}&from=${from}`})
             }

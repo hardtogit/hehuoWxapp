@@ -1,3 +1,5 @@
+import Taro from '@tarojs/taro';
+
 export const addZero = str => {
   let strCopy = "" + str;
   if (strCopy.length == 1) {
@@ -83,3 +85,52 @@ export const computeNumber = (a, type, b) => {
     }
   };
 }
+
+
+
+export const checkUpdate = () => {
+  const manager = Taro.getUpdateManager();
+  // Taro.showModal({
+  //   title: '更新提示',
+  //   content: '发现新版本，更新重启小程序？',
+  //   success:function(result){
+  //     if (result.confirm) {
+  //       manager.applyUpdate();
+  //     }else{
+  //       Taro.showModal({
+  //         title:'温馨提示',
+  //         content:'新版本涉及到功能添加，旧版本无法正常访问哦~',
+  //         showCancel:false,
+  //         confirmText:'确定更新',
+  //         // confirmColor:'#05A3EB',
+  //         success:function(res){
+  //           manager.applyUpdate()
+  //         }
+  //       })
+  //     }
+  //   }
+  // })
+  manager.onUpdateReady(() => {
+    Taro.showModal({
+      title: '更新提示',
+      content: '发现新版本，更新重启小程序？',
+      success:function(result){
+        if (result.confirm) {
+          manager.applyUpdate();
+        }else{
+          Taro.showModal({
+            title:'温馨提示',
+            content:'新版本涉及到功能添加，旧版本无法正常访问哦~',
+            showCancel:false,
+            confirmText:'确定更新',
+            // confirmColor:'#05A3EB',
+            success:function(res){
+              manager.applyUpdate()
+            }
+          })
+        }
+      }
+    })
+  });
+  manager.onCheckForUpdate(console.log);
+};
