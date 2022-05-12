@@ -1,6 +1,6 @@
 
 
-import Taro, { Component, useEffect, useState, useShareAppMessage, useRouter } from "@tarojs/taro";
+import Taro, { Component, useEffect, useState, useShareAppMessage, useRouter, useDidShow } from "@tarojs/taro";
 import { AtActionSheet, AtActionSheetItem } from 'taro-ui'
 import dayjs from 'dayjs'
 import drawQrcode from 'weapp-qrcode'
@@ -31,7 +31,7 @@ export default function Index() {
       path: `/pages/home/openCode/index?id=${router.params.id}`,
     }
   })
-  useEffect(() => {
+  useDidShow(() => {
     network.Fetch({
       "obj": "user",
       "act": "details_order",
@@ -55,6 +55,9 @@ export default function Index() {
         }).exec()
       }, 0)
     })
+  })
+  useEffect(() => {
+
   }, [])
   const openLocation = () => {
     Taro.openLocation({
