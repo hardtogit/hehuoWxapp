@@ -3,9 +3,9 @@ import classNames from 'classnames'
 import dayjs from 'dayjs'
 import network from '@/utils/network'
 import { getTimeArr } from '@/utils/index'
-import { AtFloatLayout } from 'taro-ui'
+import { AtFloatLayout, AtIcon } from 'taro-ui'
 import laba from '@/assets/img/home/laba.png'
-import { View, Button, Text, WebView, Image, Swiper, SwiperItem, ScrollView } from "@tarojs/components";
+import { View, Button, Text, WebView, Image, Swiper, SwiperItem, ScrollView, Picker } from "@tarojs/components";
 import './index.scss'
 
 const weekMap = {
@@ -21,6 +21,7 @@ const weekMap = {
 
 export default (props) => {
   const { onOk, onCancel, visible, shop_id, tea_zone_id, setTimeScopeFn, room } = props
+  const [currentStartDate, setCurrentStartDate] = useState(dayjs().format('YYYY-MM-DD'))
   const [timeScope, setTimeScope] = useState([])
   const [current, setCurrent] = useState(0)
   const [canTime, setCanTime] = useState({})
@@ -148,7 +149,7 @@ export default (props) => {
     let times = getCurrentTime(str, currentDate)
     let flag = false
     // console.log(canTime.uses_time)
-    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs().format('YYYY-MM-DD')) {
+    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs(currentStartDate).format('YYYY-MM-DD')) {
       if (canTime.uses_time) {
         flag = canTime.uses_time.some((item) => {
           // console.log(item,times)
@@ -156,7 +157,7 @@ export default (props) => {
         })
       }
     }
-    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs().add(1, 'd').format('YYYY-MM-DD')) {
+    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs(currentStartDate).add(1, 'd').format('YYYY-MM-DD')) {
       if (canTimeTwo.uses_time) {
         flag = canTimeTwo.uses_time.some((item) => {
           // console.log(item,times)
@@ -164,7 +165,7 @@ export default (props) => {
         })
       }
     }
-    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs().add(2, 'd').format('YYYY-MM-DD')) {
+    if (dayjs(currentDate * 1000).format('YYYY-MM-DD') == dayjs(currentStartDate).add(2, 'd').format('YYYY-MM-DD')) {
       if (canTimeThree.uses_time) {
         flag = canTimeThree.uses_time.some((item) => {
           // console.log(item,times)
@@ -275,6 +276,15 @@ export default (props) => {
       }
     }
   }
+  const onDateChange = (e) => {
+    setCurrentStartDate(e.detail.value)
+    getCanTimesArr(e.detail.value)
+  }
+  const getCanTimesArr = (date) => {
+    getCanTimes(dayjs(date).unix()).then((times) => { setCanTime(times) });
+    getCanTimes(dayjs(date).add(1, 'd').unix()).then((times) => { setCanTimeTwo(times) });
+    getCanTimes(dayjs(date).add(2, 'd').unix()).then((times) => { setCanTimeThree(times) });
+  }
   const countTime = useCallback(() => {
     console.log(timeScope, '哈哈哈收到噶咖啡馆')
     // return
@@ -286,9 +296,7 @@ export default (props) => {
 
   }, [timeScope])
   useEffect(() => {
-    getCanTimes(dayjs().unix()).then((times) => { setCanTime(times) });
-    getCanTimes(dayjs().add(1, 'd').unix()).then((times) => { setCanTimeTwo(times) });
-    getCanTimes(dayjs().add(2, 'd').unix()).then((times) => { setCanTimeThree(times) });
+    getCanTimesArr(currentStartDate)
   }, [])
 
   return (
@@ -300,17 +308,24 @@ export default (props) => {
         <View className='main'>
           <View className='dates'>
             <View className={classNames(['date', current == 0 && 'active'])} onClick={() => setCurrent(0)}>
-              <View className='num'>{dayjs().format('MM月DD日')}</View>
-              <View className='week'>{weekMap[dayjs().day()]}</View>
+              <View className='num'>{dayjs(currentStartDate).format('MM月DD日')}</View>
+              <View className='week'>{weekMap[dayjs(currentStartDate).day()]}</View>
             </View>
             <View className={classNames(['date', current == 1 && 'active'])} onClick={() => setCurrent(1)}>
-              <View className='num'>{dayjs().add(1, 'd').format('MM月DD日')}</View>
-              <View className='week'>{weekMap[dayjs().add(1, 'd').day()]}</View>
+              <View className='num'>{dayjs(currentStartDate).add(1, 'd').format('MM月DD日')}</View>
+              <View className='week'>{weekMap[dayjs(currentStartDate).add(1, 'd').day()]}</View>
             </View>
             <View className={classNames(['date', current == 2 && 'active'])} onClick={() => setCurrent(2)}>
-              <View className='num'>{dayjs().add(2, 'd').format('MM月DD日')}</View>
-              <View className='week'> {weekMap[dayjs().add(2, 'd').day()]}</View>
+              <View className='num'>{dayjs(currentStartDate).add(2, 'd').format('MM月DD日')}</View>
+              <View className='week'> {weekMap[dayjs(currentStartDate).add(2, 'd').day()]}</View>
             </View>
+            {/* <View className='date'  > */}
+              <Picker mode="date" className='date' start={dayjs().format('YYYY-MM-DD')} end={dayjs().add(30,'d').format('YYYY-MM-DD')} onChange={onDateChange}>
+                <AtIcon className='at-icon at-icon-calendar'></AtIcon>
+                <View className='num'>其他日期</View>
+              </Picker>
+
+            {/* </View> */}
             {/* <View className='date'>
         <View className='week'>其他日期</View>
       </View> */}
@@ -332,9 +347,9 @@ export default (props) => {
                 <View className='time'>
                   {timeArr.map((time) => {
                     return (
-                      <View key={time} className={classNames(['item', inner(time, dayjs().unix()) && 'inner', active(time, dayjs().unix()) && 'active', disabled(time, dayjs().unix()) && 'disabled'])}
+                      <View key={time} className={classNames(['item', inner(time, dayjs(currentStartDate).unix()) && 'inner', active(time, dayjs(currentStartDate).unix()) && 'active', disabled(time, dayjs(currentStartDate).unix()) && 'disabled'])}
 
-                        onClick={() => handleClick(time, dayjs().unix())}
+                        onClick={() => handleClick(time, dayjs(currentStartDate).unix())}
                       >
                         {time}
                       </View>
@@ -348,9 +363,9 @@ export default (props) => {
                 <View className='time'>
                   {timeArrTwo.map((time) => {
                     return (
-                      <View key={time} className={classNames(['item', inner(time, dayjs().add(1, 'd').unix()) && 'inner', active(time, dayjs().add(1, 'd').unix()) && 'active', disabled(time, dayjs().add(1, 'd').unix()) && 'disabled'])}
+                      <View key={time} className={classNames(['item', inner(time, dayjs(currentStartDate).add(1, 'd').unix()) && 'inner', active(time, dayjs(currentStartDate).add(1, 'd').unix()) && 'active', disabled(time, dayjs(currentStartDate).add(1, 'd').unix()) && 'disabled'])}
 
-                        onClick={() => handleClick(time, dayjs().add(1, 'd').unix())}
+                        onClick={() => handleClick(time, dayjs(currentStartDate).add(1, 'd').unix())}
                       >
                         {time}
                       </View>
@@ -364,10 +379,10 @@ export default (props) => {
                 <View className='time'>
                   {timeArrThree.map((time) => {
                     return (
-                      <View key={time} className={classNames(['item', inner(time, dayjs().add(2, 'd').unix()) && 'inner', active(time, dayjs().add(2, 'd').unix()) && 'active', disabled(time, dayjs().add(2, 'd').unix()) && 'disabled'])}
+                      <View key={time} className={classNames(['item', inner(time, dayjs(currentStartDate).add(2, 'd').unix()) && 'inner', active(time, dayjs(currentStartDate).add(2, 'd').unix()) && 'active', disabled(time, dayjs(currentStartDate).add(2, 'd').unix()) && 'disabled'])}
 
                         onClick={() => {
-                          handleClick(time, dayjs().add(2, 'd').unix())
+                          handleClick(time, dayjs(currentStartDate).add(2, 'd').unix())
                         }}
                       >
                         {time}
